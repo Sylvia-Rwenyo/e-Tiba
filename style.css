@@ -268,3 +268,60 @@
     z-index: 100;
     background: rgba(238, 238, 238, 0.7);
 }
+
+#video-description{
+    display:none;
+}
+#transcript{
+    display: none;
+}
+
+#buttonStyleSignup {
+    color:black;
+    width:100px;
+    height:50px;
+    border:none;
+    margin:20px;
+    background-color:#fbfac2;
+    border-radius:40px;
+}
+#buttonStyleVideo {
+    color:white;
+    width:150px;
+    height:100%;
+    border:none;
+    margin-right:20px;
+    background-color:orange;
+    border-radius:40px;
+}
+#buttonStyleTranscript {
+    color:black;
+    width:150px;
+    height:100%;
+    border:none;
+    margin:20px;
+    background-color:#fbfac2;
+    border-radius:40px;
+}
+.btn-cancel {
+    color:white;
+    width:200px;
+    height:50px;
+    border:none;
+    margin-left:20px;
+    margin-right:20px;
+    margin-top:10px;
+    background-color:red;
+    border-radius:40px;
+}
+.btn-cancel-trasncript{
+    color:white;
+    width:50px;
+    height:50px;
+    border:none;
+    margin-left:20px;
+    margin-right:20px;
+    margin-top:10px;
+    background-color:red;
+    border-radius:40px;
+}
