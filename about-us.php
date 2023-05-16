@@ -19,35 +19,12 @@
           <p>Let us help you track your health and treatment process</p>
       </div>
       <div class="banner">
-        <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
-          <div class="carousel-indicators">
-            <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-            <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>
-            <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>
-          </div>
-          <div class="carousel-inner">
-            <!-- <div class="carousel-item active">
-              <img src="images/" class="d-block w-100" alt="...">
-              <div class="carousel-caption d-none d-md-block">
-                <h5>Connect directly to your doctor</h5>
-                <p>Call and direct messaging enabled</p>
-              </div>
-            </div> -->
-            <div class="carousel-item active">
-              <img src="images/vitals.jpg" class="d-block w-100" alt="...">
-              <div class="carousel-caption d-none d-md-block" id="carousel1">
-                <h5 class="top-text">Track your health status</h5>
-                <p class="top-text">Log in how you feel at any time</p>
-              </div>
-            </div>
-            <div class="carousel-item">
-              <img src="images/pills.jpg" class="d-block w-100" alt="...">
-              <div class="carousel-caption d-none d-md-block" id="carousel2">
-                <h5 class="top-text">Be on top of your medication intake</h5>
-                <p class="top-text">Reminders are autoscheduled for you</p>
-              </div>
-            </div>
-          </div>
+        <div id="video-description" style="position:relative">
+          <video width="100%" height="100%" style="border:1px 1px 1px" controls>
+              <source src="images/CERA.mp4" type="video/mp4"/>
+              Your browser does not support video tag
+          </video><br/>
+        </div>
           <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
             <span class="visually-hidden">Previous</span>
@@ -59,18 +36,8 @@
         </div>
       </div>
   </div>
-  <a href="#video-description"><button onclick = "openVideo();" id = "buttonStyleVideo">Open Video</button></a>
-  <a href="#transcript"><button onclick = "openTranscript();" id = "buttonStyleTranscript">Read Transcript</button><br/></a>
-  <div id="video-description" style="position:relative">
-      <video width="550" height="400" style="border:1px 1px 1px" controls>
-          <source src="img/CERA.mp4" type="video/mp4"/>
-          Your browser does not support video tag
-      </video><br/>
-      <a href="#activities"><button type = "button" class="btn-cancel" onclick="closeVideo();">Close Video</button></a>
-  </div>
-  <div id="transcript" style="position:relative">
+  <div id="transcript" style="position:relative" class="transcript">
       <div>
-          <button type = "button" class="btn-cancel-trasncript" width="20px" onclick="closeTranscript();"><strong>X</strong></button>
           <p><strong>Cera</strong>, an all encompassing app for full cancer care. It will enable oncologists and healthcare 
             providers to work together with the patient to coordinate their care and ensure they receive the appropriate 
             treatment in the comfort of their homes. The app ensures remote access to oncologists ,monitoring of treatment,
@@ -103,27 +70,7 @@
           </ul>
           -Data from the app can be used to add to help in medical research and inform policies concerning cancer patients.
       </div>
-      <a href="#activities"><button type = "button" class="btn-cancel" onclick="closeTranscript();">Close Transcript</button></a>
+      
   </div>
-  <script type="text/javascript">
-    function openVideo()
-    {
-      document.getElementById("video-description").style.display="block";
-        document.getElementById("transcript").style.display="none";
-    }
-    function closeVideo()
-    {
-      document.getElementById("video-description").style.display="none";
-    }
-    function openTranscript()
-    {
-      document.getElementById("transcript").style.display="block";
-        document.getElementById("video-description").style.display="none";
-    }
-    function closeTranscript()
-    {
-      document.getElementById("transcript").style.display="none";
-    }
-  </script>
 </body>
 </html>
