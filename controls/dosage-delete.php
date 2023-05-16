@@ -1,12 +1,12 @@
 <?php
-include_once 'database.php';
+include_once '../conn.php';
 {
 	$id = $_GET['id'];
-     $sql = "DELETE FROM item WHERE i_id=$id";
+     $sql = "DELETE FROM dosage WHERE dosageId=$id";
 	 if (mysqli_query($conn, $sql))
 	  {echo "<script>
 		alert(\"Item deleted\");
-		window.location.href=\"ItemView.php\";
+		window.location.href=\"../dosage-registration.php\";
 		</script>";	
      } 
 	 else 

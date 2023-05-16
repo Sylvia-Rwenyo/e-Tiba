@@ -1,6 +1,6 @@
 <?php
 extract($_POST);
-include("database.php");
+include("../conn.php");
 $sql=mysqli_query($conn,"SELECT * FROM patient-info where name='$name' AND national-id='$nationalId'");
 if(mysqli_num_rows($sql)>0)
 {
@@ -11,7 +11,7 @@ else
 {
     $query="INSERT INTO patient-info(name, illness, date-diagnosed, national-id) VALUES ('$name', '$illness','$dateDiagnosed', '$nationalId')";
     $sql=mysqli_query($conn,$query)or die("Could Not Perform the Query");
-    header ("Location: ItemView.php?status=success");
+    header ("Location: ../index.php?status=success");
 }
 
 ?>

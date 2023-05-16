@@ -20,6 +20,8 @@
             <li><a href="">New log</a></li>
             <li><a href="">Your reports</a></li>
             <li><a href="about-us.php">About Us</a></li>
+            <!--Dosage registration test link. To be removed-->
+            <li><a href="dosage-registration.php">Dosage</a></li>
         </ul>
     </div> 
     <?php 
@@ -31,10 +33,25 @@
             <!-- <li><a href="">New log</a></li>
             <li><a href="">Your reports</a></li> -->
             <li><a href="about-us.php">About Us</a></li>
+
+            <!--Dosage registration test link. To be removed-->
+            <li><a href="dosage-registration.php">Dosage</a></li>
         </ul>
     </div>
      <?php
      } 
     ?> 
+    <script>
+        var element = document.querySelectorAll(".menu a");
+        var length = element.length;
+        for(var i=0; i<length;i++){
+            element[i].onclick=function()
+            {
+                var b=document.querySelector(".menu a.active");
+                if(b) b.classList.remove("active");
+                this.classList.add('active');
+            };
+        }
+    </script>
 </body>
 </html>
