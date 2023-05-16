@@ -91,6 +91,7 @@
 .pos-btn:hover{
     background-color: white;
     border: 2px solid black;
+}
 /* home page */
 
 .home, .reg-body{
@@ -220,9 +221,6 @@
     border-radius: 5px;
     padding: 0;
     margin-left: 40%;
-}
-    
-
 }
 .neg-btn{
     background-color: white;
