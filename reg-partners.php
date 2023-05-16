@@ -11,10 +11,10 @@
 <body class="reg-body">
     <div class="welcome-msg">
         <h3>Welcome to CERA</h3>
-        <p>Please fill the form below with accurate information as this is imporant for future identification with your doctors.</p>
+        <p>Please fill the form below with accurate information as this is imporant for future identification with your patients.</p>
     </div>
     <form method="POST" action="processing.php">
-        <input type="text" name="firstName" placeholder="First name"/>
+    <input type="text" name="firstName" placeholder="First name"/>
         <input type="text" name="lastName" placeholder="Last name"/>
          <input type="number" name="age" placeholder="Your age"/>
          <select name="gender">
@@ -24,21 +24,17 @@
             <option>Prefer not to say</option>
         </select>
         <input type="text" name="emailAddress" placeholder="Email Address"/>
-        <input type="text" name="address" placeholder="Your address"/>
-        <select name="institution">
-            <option selected disabled> Select your Hospital</option>
-            <option>Institution A</option>
-            <option>Institution B</option>
-            <option>Institution C</option>
-        </select>
-        <select name="condition">
-            <option selected disabled> Select your condition</option>
+        <input type="text" name="location" placeholder="location"/>
+        <input type="number" name="phoneNumber" placeholder="Phone number"/>
+        <select name="conditions[]">
+            <option selected disabled> Which of the following conditions do you cater to?</option>
             <option>Condition A</option>
             <option>Condition B</option>
             <option>Condition C</option>
         </select>
         <input type="password" id="reg-pw"  name="password" placeholder="password"/>
-        <input type="submit" value="submit" name="register" class="pos-btn"/>
+        <input type="hidden"  name="institution" value="<?php echo $_SESSION['username'];?>"/>
+        <input type="submit" value="submit" name="reg-partners" class="pos-btn"/>
     </form>
 </body>
 </html>
