@@ -37,40 +37,58 @@
       </div>
   </div>
   <div id="transcript" style="position:relative" class="transcript">
+    <p><strong>Cera</strong>, an all encompassing app for full cancer care. It will enable oncologists and healthcare 
+      providers to work together with the patient to coordinate their care and ensure they receive the appropriate 
+      treatment in the comfort of their homes. The app ensures remote access to oncologists ,monitoring of treatment,
+      adherence to medication, early detection of side effects and treatment failure ,offers education on their 
+      conditions and preserves the patient’s mental health.
+      This mobile and web application that will be installed in healthcare facilities as well as the patient’s phone 
+      to facilitate connection between cancer patients and cancer specialists.</p>
+    <h3>Through Cera...</h3>
+    <ul>
+      <li>
+        The oncologists can set up appointments with the patients where treatment is prescribed. The patient will receive reminders for follow-up.
+      </li>   
+      <li>
+        The patient can view nearby cancer care centres offering treatment where their vitals and test results during chemo can be uploaded.
+      </li>
+    </ul>
+    <div class="transcript-mini-div" style="display:flex">
       <div>
-          <p><strong>Cera</strong>, an all encompassing app for full cancer care. It will enable oncologists and healthcare 
-            providers to work together with the patient to coordinate their care and ensure they receive the appropriate 
-            treatment in the comfort of their homes. The app ensures remote access to oncologists ,monitoring of treatment,
-            adherence to medication, early detection of side effects and treatment failure ,offers education on their 
-            conditions and preserves the patient’s mental health.
-            This mobile and web application that will be installed in healthcare facilities as well as the patient’s phone 
-            to facilitate connection between cancer patients and cancer specialists.</p>
-          <h2>Through Cera</h2>
-          <ul>
-            <li>
-              The oncologists can set up appointments with the patients where treatment is prescribed. The patient will receive reminders for follow-up.
-            </li>   
-            <li>
-              The patient can view nearby cancer care centres offering treatment where their vitals and test results during chemo can be uploaded.
-            </li>
-          </ul>
-          <h4>ELECTRONIC HEALTH RECORDS</h4> 
-          The patient’s information such as test results and history are uploaded and made available to the oncologist. 
-          <h4>TELEMEDICINE</h4>
-          The oncologists can set up appointments with the patients. Patients can communicate with healthcare providers remotely through secure video calls or messaging. This would enable patients to receive timely care and support without the need to travel to a healthcare facility
-          <h4>PATIENT DIARY</h4> 
-          The patient can log in their medication intake, symptoms, and how they feel daily. The patient receives reminders to take their medication and fill in their daily logs. 
-          <h4>REMOTE MONITORING</h4> 
-          The patient’s symptoms and response to treatment is monitored through their daily logs. The app intelligently tracks the patient's symptoms and automatically alerts the doctor of any red flags so that timely intervention can take place.
-          <h4>TELE COUNSELLING</h4> 
-          The patient is able to set up meetings with a therapist or a counsellor to improve their mental health. In addition, they can be connected to nearby cancer patients to form support groups.
-          <ul>
-              <li>One on one counselling sessions with therapist</li>
-              <li>Group sessions with therapist and other cancer patients</li>
-          </ul>
-          -Data from the app can be used to add to help in medical research and inform policies concerning cancer patients.
+        <div>
+          <h4>Electronic Health Records</h4> 
+          <p>The patient’s information such as test results and history are uploaded and made available to the oncologist. </p>
+        </div>
+        
+        <div>
+          <h4>Telemedicine</h4>
+          <p>The oncologists can set up appointments with the patients. Patients can communicate with healthcare 
+            providers remotely through secure video calls or messaging. This would enable patients to 
+            receive timely care and support without the need to travel to a healthcare facility</p>
+        </div>
+        
+        <div>
+          <h4>Patient Diary</h4> 
+          <p>The patient can log in their medication intake, symptoms, and how they feel daily. The patient receives reminders to take their medication and fill in their daily logs. </p>
+        </div>
       </div>
-      
+      <div>
+        <div>
+          <h4>Remote Monitoring</h4> 
+          <p>The patient’s symptoms and response to treatment is monitored through their daily logs. The app intelligently tracks the patient's symptoms and automatically alerts the doctor of any red flags so that timely intervention can take place.</p>
+        </div>
+        <div>
+          <h4>Tele-counselling</h4> 
+          <p>The patient is able to set up meetings with a therapist or a counsellor to improve their mental health. In addition, they can be connected to nearby cancer patients to form support groups.</p>
+        
+        <ul>
+            <li>One on one counselling sessions with therapist</li>
+            <li>Group sessions with therapist and other cancer patients</li>
+        </ul>
+        <p>Data from the app can be used to add to help in medical research and inform policies concerning cancer patients.</p>
+        </div>
+      </div>
+    </div>
   </div>
 </body>
 </html>
