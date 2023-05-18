@@ -11,6 +11,11 @@
     <title>CERA</title>
 </head>
 <body class="home">
+    <div class="partners-CTA">
+       <a href="reg-partner.php"> 
+        <p>Join us as a partner hospital</p>
+       </a>
+    </div>
     <?php include_once "menu.php" ?>
     <div class="intro">
         <div class="c-phrase-section">

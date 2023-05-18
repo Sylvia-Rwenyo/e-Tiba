@@ -12,7 +12,7 @@
 <body>
     <?php 
     session_start();
-    if($_SESSION['loggedIN']){
+    if(isset($_SESSION['loggedIN']) || isset($_SESSION['signedIn']) ){
         ?>
     <div class="menu">
         <ul>

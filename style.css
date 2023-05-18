@@ -1,6 +1,6 @@
 /* home page */
 
-.home, .reg-body{
+.home, .reg-body, .dash-body{
     display: flex;
     flex-direction: column;
     background-color: rgba(190, 252, 254, 0.25);
@@ -12,6 +12,9 @@
     color:black;
     height: 7.5%;
     background-color: white;
+}
+.home .menu{
+    margin-top: 0;
 }
 .menu ul{
     list-style-type: none;
@@ -28,6 +31,18 @@
 }
 .menu ul .active{
     color: #35b6be;
+}
+.partners-CTA{
+    font-size: 1.25em;
+    padding-right: 5%;
+    height: 5%;
+}
+.partners-CTA a{
+    text-decoration: none;
+    color: black;
+}
+.partners-CTA p{
+    float: right;
 }
 .intro{
     display: flex;
@@ -113,10 +128,10 @@
     padding: 1em;
     font-size: 1.25em;
     background-color: rgba(190, 252, 254, 0.5);
-    margin-top: 5%;
+    margin-top: 2%;
 }
 .reg-body input, .reg-body select{
-    padding: 1.5em;
+    padding: 1em;
     margin: 0.5em;
     border: none;
     border-radius: 5px;
@@ -128,17 +143,6 @@
     padding: 0;
     margin-left: 40%;
 }
-.neg-btn{
-    background-color: white;
-    border: 2px solid black;
-    font-size: 1.25em;
-}
-.neg-btn:hover{
-    background-color: #35b6be;
-    border: none;
-}
-
-/* registration page */
 
 .reg-body form{
     margin-left: 20%;
