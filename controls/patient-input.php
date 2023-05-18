@@ -9,7 +9,7 @@ if(mysqli_num_rows($sql)>0)
 }
 else
 {
-    $query="INSERT INTO patient-info(name, illness, date-diagnosed, national-id) VALUES ('$name', '$illness','$dateDiagnosed', '$nationalId')";
+    $query="INSERT INTO patient-info(name, illness, date_diagnosed, national-id) VALUES ('$name', '$illness','$dateDiagnosed', '$nationalId')";
     $sql=mysqli_query($conn,$query)or die("Could Not Perform the Query");
     header ("Location: ../index.php?status=success");
 }
