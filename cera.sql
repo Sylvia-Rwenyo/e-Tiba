@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 16, 2023 at 07:51 PM
+-- Generation Time: Jun 21, 2023 at 06:40 PM
 -- Server version: 10.4.24-MariaDB
--- PHP Version: 7.4.29
+-- PHP Version: 8.1.6
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -24,247 +24,112 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `dosage`
+-- Table structure for table `regdoctors`
 --
 
-CREATE TABLE `dosage` (
-  `dosageId` int(11) NOT NULL,
-  `dosageName` varchar(100) NOT NULL,
-  `tablets` int(11) NOT NULL,
-  `times_a_day` int(11) NOT NULL,
-  `number_of_days` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `illness`
---
-
-CREATE TABLE `illness` (
-  `illnessId` int(11) NOT NULL,
-  `illnessName` varchar(200) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `institution`
---
-
-CREATE TABLE `institution` (
-  `institutionId` int(11) NOT NULL,
-  `institution_name` varchar(200) NOT NULL,
-  `location` varchar(200) NOT NULL,
-  `address` varchar(200) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `registration`
---
-
-CREATE TABLE `registration` (
-  `firstName` varchar(15) NOT NULL,
-  `lastName` varchar(15) NOT NULL,
-  `emailAddress` varchar(15) NOT NULL,
-  `institution` int(11) NOT NULL,
-  `password` varchar(20) NOT NULL,
+CREATE TABLE `regdoctors` (
   `id` int(11) NOT NULL,
-<<<<<<< HEAD
-  `illness` int(11) NOT NULL
-=======
-  `age` int(3) NOT NULL,
-  `address` varchar(30) NOT NULL,
-  `gender` varchar(15) NOT NULL
->>>>>>> f6e886d0d95242bb68846dc7bc5c9d799458da54
+  `firstName` varchar(50) NOT NULL,
+  `lastName` varchar(50) NOT NULL,
+  `emailAddress` varchar(100) NOT NULL,
+  `institution` varchar(100) NOT NULL,
+  `password` varchar(50) NOT NULL,
+  `specialty` varchar(200) NOT NULL,
+  `address` varchar(200) NOT NULL,
+  `age` int(11) NOT NULL,
+  `gender` varchar(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `symptoms`
+-- Table structure for table `reginstitutions`
 --
 
-<<<<<<< HEAD
-CREATE TABLE `symptoms` (
-  `symptomId` int(11) NOT NULL,
-  `symptomDescription` varchar(200) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-=======
-INSERT INTO `registration` (`firstName`, `lastName`, `emailAddress`, `institution`, `illness`, `password`, `id`, `age`, `address`, `gender`) VALUES
-('person', '123', 'person@123.com', 'Institution A', '', '', 1, 0, '', ''),
-('person', 'person@mail.com', '', 'Select your Hospital', '', '', 2, 0, '', ''),
-('o', 'o', 'o', 'Select your Hospital', '', '', 3, 0, '', ''),
-('', '', '', 'Select your Hospital', '', 'p', 4, 0, '', ''),
-('', '', '', 'Institution A', 'Condition B', '', 5, 0, '', ''),
-('', '', '', '', '', '', 6, 0, '', ''),
-('Person', '2', 'person@2.com', 'Institution B', 'Condition B', '123', 7, 30, 'Nairobi', 'Female');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `regpartners`
---
-
-CREATE TABLE `regpartners` (
-  `institutionName` varchar(60) NOT NULL,
-  `location` varchar(30) NOT NULL,
-  `phoneNumber` int(14) NOT NULL,
-  `emailAddress` varchar(20) NOT NULL,
-  `postalAddress` varchar(30) NOT NULL,
+CREATE TABLE `reginstitutions` (
+  `id` int(11) NOT NULL,
+  `institutionName` varchar(100) NOT NULL,
+  `location` varchar(100) NOT NULL,
+  `emailAddress` varchar(100) NOT NULL,
+  `phoneNumber` varchar(20) NOT NULL,
+  `password` varchar(50) NOT NULL,
   `illnesses` varchar(200) NOT NULL,
-  `password` varchar(20) NOT NULL,
-  `id` int(11) NOT NULL
+  `postalAddress` varchar(200) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `regpartners`
---
-
-INSERT INTO `regpartners` (`institutionName`, `location`, `phoneNumber`, `emailAddress`, `postalAddress`, `illnesses`, `password`, `id`) VALUES
-('New Hospital', 'Nairobi, Kenya', 2147483647, 'new@hospital.com', '13051', 'Array', '20', 1),
-('New Hospital', 'Nairobi, Kenya', 2147483647, 'new@hospital.com', '13051', 'Condition A', '20', 2),
-('New Hospital', 'Nairobi, Kenya', 2147483647, 'new@hospital.com', '13051', 'Condition A', '20', 3),
-('New Hospital', 'Nairobi, Kenya', 2147483647, 'new@hospital.com', '13051', 'Condition A', '20', 4),
-('New Hospital', 'Nairobi, Kenya', 2147483647, 'new@hospital.com', '13051', 'Condition A', '78', 5);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `regpartners2`
+-- Table structure for table `regpatients`
 --
 
-CREATE TABLE `regpartners2` (
-  `firstName` varchar(15) NOT NULL,
-  `lastName` varchar(15) NOT NULL,
-  `emailAddress` varchar(20) NOT NULL,
-  `institution` varchar(30) NOT NULL,
-  `password` varchar(20) NOT NULL,
-  `specialty` varchar(20) NOT NULL,
-  `address` varchar(20) NOT NULL,
-  `age` int(3) NOT NULL,
-  `gender` varchar(15) NOT NULL,
-  `id` int(11) NOT NULL
+CREATE TABLE `regpatients` (
+  `id` int(11) NOT NULL,
+  `firstName` varchar(50) NOT NULL,
+  `lastName` varchar(50) NOT NULL,
+  `emailAddress` varchar(50) NOT NULL,
+  `institution` varchar(100) NOT NULL,
+  `password` varchar(50) NOT NULL,
+  `illness` varchar(200) NOT NULL,
+  `address` varchar(200) NOT NULL,
+  `age` int(11) NOT NULL,
+  `gender` varchar(10) NOT NULL,
+  `phoneNumber` int(14) NOT NULL,
+  `profilePhoto` blob NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `regpartners2`
+-- Dumping data for table `regpatients`
 --
 
-INSERT INTO `regpartners2` (`firstName`, `lastName`, `emailAddress`, `institution`, `password`, `specialty`, `address`, `age`, `gender`, `id`) VALUES
-('person', '2', 'person@2.com', '<br />\r\n<b>Warning</b>:  Undef', '123', '', '', 45, 'Male', 1);
->>>>>>> f6e886d0d95242bb68846dc7bc5c9d799458da54
+INSERT INTO `regpatients` (`id`, `firstName`, `lastName`, `emailAddress`, `institution`, `password`, `illness`, `address`, `age`, `gender`, `phoneNumber`, `profilePhoto`) VALUES
+(3, '1', '1', '1@mail.com', 'Institution A', '123', 'Condition A', '123', 23, 'Prefer not', 0, '');
 
 --
 -- Indexes for dumped tables
 --
 
 --
--- Indexes for table `dosage`
+-- Indexes for table `regdoctors`
 --
-ALTER TABLE `dosage`
-  ADD PRIMARY KEY (`dosageId`);
+ALTER TABLE `regdoctors`
+  ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `illness`
+-- Indexes for table `reginstitutions`
 --
-ALTER TABLE `illness`
-  ADD PRIMARY KEY (`illnessId`);
+ALTER TABLE `reginstitutions`
+  ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `institution`
+-- Indexes for table `regpatients`
 --
-ALTER TABLE `institution`
-  ADD PRIMARY KEY (`institutionId`);
-
---
--- Indexes for table `registration`
---
-ALTER TABLE `registration`
+ALTER TABLE `regpatients`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `institution` (`institution`),
-  ADD KEY `illness` (`illness`);
-
---
--- Indexes for table `symptoms`
---
-ALTER TABLE `symptoms`
-  ADD PRIMARY KEY (`symptomId`);
-
---
--- Indexes for table `regpartners`
---
-ALTER TABLE `regpartners`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `regpartners2`
---
-ALTER TABLE `regpartners2`
-  ADD PRIMARY KEY (`id`);
+  ADD UNIQUE KEY `phoneNumber` (`phoneNumber`),
+  ADD UNIQUE KEY `emailAddress` (`emailAddress`);
 
 --
 -- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT for table `dosage`
+-- AUTO_INCREMENT for table `regdoctors`
 --
-ALTER TABLE `dosage`
-  MODIFY `dosageId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+ALTER TABLE `regdoctors`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `illness`
+-- AUTO_INCREMENT for table `reginstitutions`
 --
-ALTER TABLE `illness`
-  MODIFY `illnessId` int(11) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `reginstitutions`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `institution`
+-- AUTO_INCREMENT for table `regpatients`
 --
-ALTER TABLE `institution`
-  MODIFY `institutionId` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `registration`
---
-ALTER TABLE `registration`
-<<<<<<< HEAD
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
-
---
--- AUTO_INCREMENT for table `symptoms`
---
-ALTER TABLE `symptoms`
-  MODIFY `symptomId` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- Constraints for dumped tables
---
-
---
--- Constraints for table `registration`
---
-ALTER TABLE `registration`
-  ADD CONSTRAINT `registration_ibfk_1` FOREIGN KEY (`illness`) REFERENCES `illness` (`illnessId`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `registration_ibfk_2` FOREIGN KEY (`institution`) REFERENCES `institution` (`institutionId`) ON DELETE CASCADE ON UPDATE CASCADE;
-=======
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
-
---
--- AUTO_INCREMENT for table `regpartners`
---
-ALTER TABLE `regpartners`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
-
---
--- AUTO_INCREMENT for table `regpartners2`
---
-ALTER TABLE `regpartners2`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
->>>>>>> f6e886d0d95242bb68846dc7bc5c9d799458da54
+ALTER TABLE `regpatients`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
