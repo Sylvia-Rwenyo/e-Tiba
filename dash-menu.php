@@ -1,11 +1,3 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
 <div class="dash-menu">
     <ul>
         <?php
@@ -21,11 +13,12 @@
             <a href="reg-partners.php" class="<?php echo isActive('reg-partners.php'); ?>"><li><i class="fa fa-plus"></i></li></a>
             <a href="doctor-records.php" class="<?php echo isActive('doctor-records.php'); ?>"><li><i class="fa-solid fa-folder"></i></li></a>
             <a href="patient-records.php" class="<?php echo isActive('patient-records.php'); ?>"><li><i class="fa-solid fa-folder"></i></li></a>
-            <a href="settings" class="<?php echo isActive('settings.php'); ?>"><li><i class="fa-solid fa-gears"></i></li></a>
+            <a href="settings.php" class="<?php echo isActive('settings.php'); ?>"><li><i class="fa-solid fa-gears"></i></li></a>
             <?php
         } else if ($_SESSION['category'] == 'doctor') {
             ?>
-            <a href="add-patient.php" class="<?php echo isActive('add-patient.php'); ?>"><li><i class="fa fa-plus"></i></li></a>
+            <a href="calendar.php" class="<?php echo isActive('calendar.php'); ?>"><li><i class="fa fa-calendar"></i></li></a>
+            <a href="add-patient.php" class="<?php echo isActive('register.php'); ?>"><li><i class="fa fa-plus"></i></li></a>
             <a href="patient-records.php" class="<?php echo isActive('patient-records.php'); ?>"><li><i class="fa-solid fa-folder"></i></li></a>
             <a href="settings.php" class="<?php echo isActive('settings.php'); ?>"><li><i class="fa-solid fa-gears"></i></li></a>
             <?php
@@ -40,5 +33,4 @@
         ?>
     </ul>
 </div>
-</body>
-</html>
+

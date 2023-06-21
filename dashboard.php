@@ -12,6 +12,10 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body class="dash-body">
+  <div class="header">
+    <h1>Dashboard</h1>
+  </div>
+  <div class="mainBody">
 <?php
 session_start();
 if(!isset($_SESSION["loggedIN"])){
@@ -47,6 +51,7 @@ if(isset($_GET['charts'])){
     }}
     ?>   
 </section>
+</div>
 </body>
 <script>
   var currentDate = new Date();

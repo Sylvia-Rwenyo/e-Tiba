@@ -11,21 +11,29 @@ if(isset($_POST['register']))
 	 $firstName = $_POST['firstName'];
      $lastName = $_POST['lastName'];
 	 $emailAddress = $_POST['emailAddress'];
+     $phoneNumber = $_POST['phoneNumber'];
      $institution = $_POST['institution'];
-     $condition = $_POST['condition'];
-	 $password = $_POST['password'];
+     $conditionsArr= array();
+     for($i=0; $i < count($_POST['condition']); $i++){
+        $conditionsArr[] = $_POST['condition'][$i];
+         }
+    $conditions = implode('*', $conditionsArr);	 $password = $_POST['password'];
      $age = $_POST['age'];
      $address = $_POST['address'];
 	 $gender = $_POST['gender'];
     
      
      //statement to enter values into the registration table in the database
-	 $sql = "INSERT INTO regPatients (firstName, lastName, emailAddress, institution,  password, illness, address, age, gender)
-	 VALUES ('$firstName','$lastName', '$emailAddress','$institution', '$password', '$condition', '$address', '$age', '$gender')";
+	 $sql = "INSERT INTO regPatients (firstName, lastName, emailAddress, institution,  password, illness, address, age, gender,phoneNumber )
+	 VALUES ('$firstName','$lastName', '$emailAddress','$institution', '$password', '$conditions', '$address', '$age', '$gender', '$phoneNumber')";
 
      //if sql query is executed...
 	 if (mysqli_query($conn, $sql)) {
+        if(!isset($_SESSION['category'])){
         login($conn);
+        }else{
+            header('location:dashboard.php');
+        }
 			 } else {	
                 //show error
 		echo "Error: " . $sql . "
@@ -101,7 +109,7 @@ if(isset($_POST['reg-partners']))
 
      //if sql query is executed...
 	 if (mysqli_query($conn, $sql)) {
-        login($conn);
+        header('location:dashboard.php');
 			 } else {	
                 //show error
 		echo "Error: " . $sql . "
@@ -131,12 +139,13 @@ function login($conn){
     $sql=mysqli_query($conn, $stmt);
     $row  = mysqli_fetch_array($sql);
     if(is_array($row)){
-        $_SESSION['category'] = 'patient';
-        $_SESSION["email"]=$row['emailAddress'];
-        $_SESSION["username"] = $row['firstName'];
-        $_SESSION["id"]=$row['id'];
-        $_SESSION["loggedIN"] = true;
-        header('location:dashboard.php');
+       
+            $_SESSION['category'] = 'patient';
+            $_SESSION["email"]=$row['emailAddress'];
+            $_SESSION["username"] = $row['firstName'];
+            $_SESSION["id"]=$row['id'];
+            $_SESSION["loggedIN"] = true;
+            header('location:dashboard.php');
     }else{
         $stmt = "SELECT * FROM regDoctors where emailAddress='$emailAddress' and password='$password'"; 
         $sql=mysqli_query($conn, $stmt);
@@ -155,7 +164,7 @@ function login($conn){
         if(is_array($row)){
             $_SESSION['category'] = 'hospital';
             $_SESSION["email"]=$row['emailAddress'];
-            $_SESSION["username"] = $row['institution'];
+            $_SESSION["username"] = $row['institutionName'];
             $_SESSION["id"]=$row['id'];
             $_SESSION["loggedIN"] = true;
             header('location:dashboard.php');

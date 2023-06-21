@@ -50,6 +50,7 @@
                 <option>Prefer not to say</option>
             </select>
             <input type="text" name="emailAddress" placeholder="Email Address" required/>
+            <input type="number" name="phoneNumber" placeholder="Your phone number" required/>
             <input type="text" name="address" placeholder="Your address" required/>
             <select name="institution" required>
                 <option selected disabled> Select your Hospital</option>
@@ -57,7 +58,7 @@
                 <option>Institution B</option>
                 <option>Institution C</option>
             </select>
-            <select name="condition" required>
+            <select name="condition[]" multiple required>
                 <option selected disabled> Select your condition</option>
                 <option>Condition A</option>
                 <option>Condition B</option>

@@ -28,13 +28,20 @@
         <div class="header">
             <h1>Your profile</h1>
         </div>
-       <div id="editProfileSection">
+        <div id="editProfileSection">
         <?php 
             // get user info
                 include_once 'dash-menu.php';
                 $id = $_SESSION['id'];
+                $records;
+                if( $_SESSION['category'] == 'patient'){
                 $records = mysqli_query($conn,"SELECT * FROM  regPatients where id='$id'");
-            if (mysqli_num_rows($records) > 0) {
+                }else if ( $_SESSION['category'] == 'doctor') {
+                $records = mysqli_query($conn,"SELECT * FROM regDoctors where id='$id'");
+            }else if( $_SESSION['category'] == 'hospital') {
+                $records = mysqli_query($conn,"SELECT * FROM regInstitutions where id='$id'");
+            }
+             if(mysqli_num_rows($records) > 0){
             $i=0;
             while($result = mysqli_fetch_array($records)) {
         ?>
@@ -47,9 +54,14 @@
                            ?>"
                         alt="profile photo"/>
                     <div class="name">
-                    <h4><?php echo $result['firstName'] . ' ' . $result['lastName'];?></h4>
+                    <h4><?php 
+                    if(isset($result['institutionName'])){
+                        echo $result['institutionName'];
+                    }else if(isset($result['firstName']) && isset($result['lastName'])){
+                    echo $result['firstName'] . ' ' . $result['lastName'];
+                    }
+                    ?></h4>
                     </div>
-
                 </div>
                 <div class="contactInfo">
                 <p><a href='mailto:<?php echo $result['emailAddress']?>'><i class="fa-solid fa-envelope"></i>&nbsp;&nbsp;&nbsp;<?php echo $result['emailAddress']?></a></p>
@@ -63,11 +75,18 @@
                 <p onclick="editProfile()"><i class="fa-solid fa-pencil"></i></p>
             </div>
             </div>
-                <?php 
-            $records = mysqli_query($conn,"SELECT * FROM  regPatients where id='$id' ");
-            if (mysqli_num_rows($records) > 0) {
-            $i=0;
-            while($result = mysqli_fetch_array($records)) {
+            <?php 
+            $records;
+            if( $_SESSION['category'] == 'patient'){
+                $records = mysqli_query($conn,"SELECT * FROM  regPatients where id='$id'");
+                }else if ( $_SESSION['category'] == 'doctor') {
+                $records = mysqli_query($conn,"SELECT * FROM regDoctors where id='$id'");
+                }else if( $_SESSION['category'] == 'hospital') {
+                $records = mysqli_query($conn,"SELECT * FROM regInstitutions where id='$id'");
+                }  
+                if (mysqli_num_rows($records) > 0) {
+                $i=0;
+                while($result = mysqli_fetch_array($records)) {
         ?>
         <!-- show form for editing user info -->
                 <form action="processing.php" method="POST" enctype="multipart/form-data" id="editingProfile">
@@ -85,8 +104,15 @@
                 <!-- edit name and password -->
                 <div class="name">
                     <label>Your name: </label>
-                    <input  name="name" value="<?php  echo $result['firstName'] . ' ' . $result['lastName'];?>" />
-                </div>
+                    <input  name="name" value="<?php
+                        if(isset($result['institutionName'])){
+                            echo $result['institutionName'];
+                        }else if(isset($result['firstName']) && isset($result['lastName'])){
+                        echo $result['firstName'] . ' ' . $result['lastName'];
+                        };
+                        ?>"
+                       />
+                    </div>
                 <div class="pw">
                     <label>Your current password: </label>
                     <span><input  name="password" value="<?php echo $result['password']?>" placeholder="password" id="password" type="password"/>
@@ -132,7 +158,7 @@
                 </div>
              </div>
          </section>
-       </div>
+        </div>
     </body>
     </html>
     <script>

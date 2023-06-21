@@ -6,6 +6,7 @@
     background-color: rgba(190, 252, 254, 0.25);
     margin: 0;
 }
+
 .menu{
     width: 100%;
     margin-top: 2.5%;
@@ -265,7 +266,7 @@
     text-decoration: none;
 }
 /* dashboard */
-.dash-body, #editProfileSection{
+.mainBody, #editProfileSection{
     display: flex;
     flex-direction: row;
 }
@@ -282,6 +283,11 @@
 /* settings page */
 .header{
     margin-left: 5%;
+    margin-top: 1.5%;
+}
+#editingProfileSection section{
+    display: flex;
+    flex-direction: column;
 }
 #editingProfile div span{
     margin-top: 0;
@@ -362,7 +368,7 @@
 
 /* dashboard menu */
 .dash-menu {
-    height: 100vh;
+    height: 80vh;
     width: 10%;
     position: -webkit-sticky;
     position: sticky;

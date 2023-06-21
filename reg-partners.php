@@ -14,27 +14,51 @@
         <p>Please fill the form below with accurate information as this is imporant for future identification with your patients.</p>
     </div>
     <form method="POST" action="processing.php">
-    <input type="text" name="firstName" placeholder="First name"/>
-        <input type="text" name="lastName" placeholder="Last name"/>
-         <input type="number" name="age" placeholder="Your age"/>
-         <select name="gender">
+    <input type="text" name="firstName" placeholder="First name" required/>
+        <input type="text" name="lastName" placeholder="Last name" required/>
+         <input type="number" name="age" placeholder="Your age" required/>
+         <select name="gender" required>
             <option selected disabled> Select your gender</option>
             <option>Female</option>
             <option>Male</option>
             <option>Prefer not to say</option>
         </select>
-        <input type="text" name="emailAddress" placeholder="Email Address"/>
-        <input type="text" name="location" placeholder="location"/>
-        <input type="number" name="phoneNumber" placeholder="Phone number"/>
-        <select name="conditions[]">
+        <input type="text" name="emailAddress" placeholder="Email Address" required/>
+        <input type="text" name="location" placeholder="location" required/>
+        <input type="number" name="phoneNumber" placeholder="Phone number" required/>
+        <select name="conditions[]" required multiple>
             <option selected disabled> Which of the following conditions do you cater to?</option>
             <option>Condition A</option>
             <option>Condition B</option>
             <option>Condition C</option>
         </select>
-        <input type="password" id="reg-pw"  name="password" placeholder="password"/>
-        <input type="hidden"  name="institution" value="<?php echo $_SESSION['username'];?>"/>
+        <div id="pswdDiv">
+            <input type="password" id="reg-pw"  name="password" placeholder="password" required/>
+            <span id="showPswd" onclick="pswdDisplay()">
+            <i class="fa fa-eye-slash"></i>
+            </span>
+        </div>
+        <input type="hidden"  name="institution" value="<?php session_start(); if(isset($_SESSION['category']))
+        {echo $_SESSION['username'];}else{ echo 'none';}
+        ?>"/>
         <input type="submit" value="submit" name="reg-partners" class="pos-btn"/>
     </form>
 </body>
+<script>
+      function pswdDisplay(){
+    let showPswd = document.getElementById('showPswd');
+    let pswd = document.getElementById("reg-pw");
+    if(pswd.type == "text"){
+        pswd.type = "password";
+        showPswd.innerHTML = '<i class="fa fa-eye-slash"></i>';
+    }else{
+        pswd.type = "text";
+        showPswd.innerHTML = "<i class='fa fa-eye'></i>";
+        pswd.style.border = "none";
+    }
+}
+document.getElementById("pswdDiv").onclick = () => {
+    document.getElementById("pswdDiv").style.border = '2px solid black';
+}
+</script>
 </html>
