@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 21, 2023 at 10:00 PM
+-- Generation Time: Jun 23, 2023 at 04:56 PM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 8.1.6
 
@@ -20,6 +20,57 @@ SET time_zone = "+00:00";
 --
 -- Database: `cera`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `patientmedlog`
+--
+
+CREATE TABLE `patientmedlog` (
+  `userID` int(10) NOT NULL,
+  `medName` varchar(100) NOT NULL,
+  `medTime` datetime NOT NULL,
+  `entryID` int(20) NOT NULL,
+  `recordDate` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `patientsleeplog`
+--
+
+CREATE TABLE `patientsleeplog` (
+  `userID` int(10) NOT NULL,
+  `sleepTime` int(2) NOT NULL,
+  `entryID` int(20) NOT NULL,
+  `recordDate` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `patientsleeplog`
+--
+
+INSERT INTO `patientsleeplog` (`userID`, `sleepTime`, `entryID`, `recordDate`) VALUES
+(6, 3600, 1, '2023-06-23 14:31:39'),
+(6, 3600, 2, '2023-06-23 14:31:56'),
+(6, 1, 3, '2023-06-23 14:32:12'),
+(6, 1, 4, '2023-06-23 14:35:14');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `patientsmeallog`
+--
+
+CREATE TABLE `patientsmeallog` (
+  `userID` int(10) NOT NULL,
+  `mealName` varchar(100) NOT NULL,
+  `mealTime` datetime NOT NULL,
+  `entryID` int(20) NOT NULL,
+  `recordDate` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -111,6 +162,24 @@ INSERT INTO `regpatients` (`id`, `firstName`, `lastName`, `emailAddress`, `insti
 --
 
 --
+-- Indexes for table `patientmedlog`
+--
+ALTER TABLE `patientmedlog`
+  ADD PRIMARY KEY (`entryID`);
+
+--
+-- Indexes for table `patientsleeplog`
+--
+ALTER TABLE `patientsleeplog`
+  ADD PRIMARY KEY (`entryID`);
+
+--
+-- Indexes for table `patientsmeallog`
+--
+ALTER TABLE `patientsmeallog`
+  ADD PRIMARY KEY (`entryID`);
+
+--
 -- Indexes for table `regdoctors`
 --
 ALTER TABLE `regdoctors`
@@ -133,6 +202,24 @@ ALTER TABLE `regpatients`
 --
 -- AUTO_INCREMENT for dumped tables
 --
+
+--
+-- AUTO_INCREMENT for table `patientmedlog`
+--
+ALTER TABLE `patientmedlog`
+  MODIFY `entryID` int(20) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `patientsleeplog`
+--
+ALTER TABLE `patientsleeplog`
+  MODIFY `entryID` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT for table `patientsmeallog`
+--
+ALTER TABLE `patientsmeallog`
+  MODIFY `entryID` int(20) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `regdoctors`

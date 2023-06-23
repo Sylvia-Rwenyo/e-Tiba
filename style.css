@@ -271,7 +271,7 @@
     flex-direction: row;
 }
 .dash-body section, #editProfileSection section{
-    margin-top: 5%;
+    margin-top: 2.5%;
     width: 90%;
 }
 /* dashboard */
@@ -319,8 +319,7 @@
 #profilePhoto{
     display: none;
 }
- #editProfileSection .profile{
-    margin-left: 10%;
+ #editProfileSection .profile, #patient-log .input-div{
     margin-right: 0;
     margin-bottom:2.5%;
     background-color: rgba(190, 252, 254, 0.5);
@@ -394,4 +393,62 @@
 }
 .dash-menu ul a:hover{
     border: 2px solid #408DCE;
+}
+
+/* patient log page */
+#patient-log .welcome-msg{
+    margin-top: 0;
+    margin-left: 10%;
+}
+#patient-log .input{
+    margin-top: 2.5%;
+}
+#patient-log .input .input-div{
+    padding: 1em;
+    padding-left: 5%;
+    margin-top: 3.5%;
+}
+#patient-log .input .input-div form{
+    padding: 1em;
+    padding-left: 0;
+    width: 60%;
+    display: flex;
+    flex-direction: row;
+}
+#patient-log .input .input-div form div{
+    margin-right: 2.5%;
+}
+#patient-log .input .input-div form input, #patient-log .input .input-div form button{
+    height: 2.5em;
+}
+#patient-log .input .input-div form button{
+    margin-top: 6.5%;
+    height: 2.5em;
+}
+#patient-log .input .input-div div{
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+}
+#patient-log .input .input-div {
+    display: none;
+}
+#patient-log .prompts{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-top: 3.5%;
+    margin-right: 2%;
+}
+#patient-log .prompts .prompt{
+    background-color: rgba(190, 252, 254, 0.5);
+    border: none;
+    border-right: 2px solid  rgba(64, 141, 206, 0.5);
+    border-bottom: 2px solid  rgba(64, 141, 206, 0.5);
+    padding: 1em;
+    width: 30%;
+    height: 45vh;
+}
+#patient-log .prompts .prompt i{
+    size: 3em;
 }

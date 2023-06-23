@@ -1,5 +1,6 @@
 <?php
 include_once "conn.php";
+// define global variables
 
 // register patients 
 if(isset($_POST['register']))
@@ -122,8 +123,6 @@ if(isset($_POST['reg-partners']))
 
 if(isset($_POST['logIn']))
 {
-    //create session
-    session_start();
     login($conn);
 }
 
@@ -252,5 +251,92 @@ if(isset($_GET['action'])){
 " . mysqli_error($conn);
     }
     mysqli_close($conn);
+}
+
+// handle data submitted by user
+if (isset($_POST["record-sleep"])) {
+    // Start a session
+    session_start();
+
+    // Get the form values
+    $start = $_POST['start-time'];
+    $end = $_POST['end-time'];
+    $id = $_SESSION['id'];
+
+    // Calculate sleep time based on the difference between start time and end time
+    $startTime = strtotime($start);
+    $endTime = strtotime($end);
+    $sleepTime = ($endTime - $startTime)/3600 ; // Convert to hours
+
+    // Insert the sleep log into the database
+    $sql = "INSERT INTO patientSleepLog (userID, sleepTime) VALUES ('$id', '$sleepTime')";
+
+    // Connect to your database and execute the SQL query
+    if (!$conn) {
+        die("Connection failed: " . mysqli_connect_error());
+    }
+
+    if (mysqli_query($conn, $sql)) {
+        echo $sleepTime;
+    }else{
+        // Show error if the SQL query is not executed
+        echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+        }
+
+    // Close the database connection
+    mysqli_close($conn);
+}
+
+if(isset($_POST["record-meal"]))
+{	
+    //create session
+    session_start();
+    
+    //store values submitted in the signup form in variables
+	 $mealName = $_POST['meal-name'];
+     $mealTime = $_POST['meal-time'];
+     $id = $_SESSION['id'];
+     //statement to enter values into the registration table in the database
+	 $sql = "INSERT INTO patientsMealLog (userID, mealName, mealTime)
+	 VALUES ('$id','$mealName','$mealTime')";
+
+     //if sql query is not executed...
+	 if (mysqli_query($conn, $sql)) {
+        echo 'Meal recorded';	
+         }else{
+                //show error
+		echo "Error: " . $sql . "
+" . mysqli_error($conn);
+	     }
+     //close connection
+	 mysqli_close($conn);
+
+}
+if(isset($_POST["record-medTime"]))
+{	
+    //create session
+    session_start();
+    
+    //store values submitted in the  form in variables
+	 $medName = $_POST['med-name'];
+     $medTime = $_POST['med-time'];
+     $id = $_SESSION['id'];
+     //statement to enter values into a table in the database
+	 $sql = "INSERT INTO patientMedLog (userID, medName, medTime)
+	 VALUES ('$id','$medName','$medTime')";
+
+     //if sql query is not executed...
+	 if (mysqli_query($conn, $sql)) {
+        echo 'Medicine intake recorded';	
+
+    }else{
+                //show error
+		echo "Error: " . $sql . "
+" . mysqli_error($conn);
+	
+     }
+     //close connection
+	 mysqli_close($conn);
+
 }
 ?>
