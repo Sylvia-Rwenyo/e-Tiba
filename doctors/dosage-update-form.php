@@ -14,13 +14,13 @@
     <div>
     <h1>Update Item Details</h1>
         <div style="display:inline-block">
-            <form id="form"  action="dosage-update.php?id=<?php echo $_GET['id'] ?>" method="POST">
+            <form id="form"  action="../controls/processing.php?id=<?php echo $_GET['id'] ?>" method="POST">
                 <input type="text" id="dosageName" name="dosageName"  size="30" placeholder="Enter Name">
                 <input type="number" id="tablets" name="tablets"  size="10"  placeholder="Tablets">
                 <input type="number" id="timesADay" name="timesADay"  size="10"  placeholder="Times in a day">
                 <input type="number" id="numberOfDays" name="numberOfDays"  size="10"  placeholder="Prescribed Duration in Days">
                 <br/>
-                <input id = "itemsubmit" type="submit" value="Submit" name="save" class="btn">
+                <input id = "itemsubmit" type="submit" value="Submit" name="dosage-update" class="btn">
             </form>
         </div>
     </div>

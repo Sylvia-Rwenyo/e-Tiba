@@ -13,7 +13,7 @@
         <h3>Welcome to CERA</h3>
         <p>Please fill the form below with accurate information as this is imporant for future identification with your patients.</p>
     </div>
-    <form method="POST" action="processing.php">
+    <form method="POST" action="../controls/processing.php">
         <input type="text" name="institutionName" placeholder="Your institution's name"/>
         <input type="text" name="location" placeholder="location"/>
         <input type="number" name="phoneNumber" placeholder="Phone number"/>

@@ -112,4 +112,59 @@ if(isset($_POST['reg-partners']))
 	 mysqli_close($conn);
 
 }
+if(isset($_POST['add-patient'])){
+    $sql=mysqli_query($conn,"SELECT * FROM patient-info where name='$name' AND national-id='$nationalId'");
+    if(mysqli_num_rows($sql)>0)
+    {
+        echo "User Already Registered"; 
+        exit;
+    }
+    else
+    {
+        $query="INSERT INTO patient-info(name, illness, date_diagnosed, national-id) VALUES ('$name', '$illness','$dateDiagnosed', '$nationalId')";
+        $sql=mysqli_query($conn,$query)or die("Could Not Perform the Query");
+        header ("Location: ../index.php?status=success");
+    }
+}
+
+if(isset($_POST['dosage-registration'])){
+	$dosageName = $_POST['dosageName'];
+	$tablets = $_POST['tablets'];
+	$numberOfDays = $_POST['numberOfDays'];
+	$timesADay = $_POST['timesADay'];
+    $sql=mysqli_query($conn,"SELECT * FROM dosage where dosageName='$dosageName'");
+    if(mysqli_num_rows($sql)>0)
+    {
+        echo "Medicine Dosage Already Exists For This Patient"; 
+        exit;
+    }
+    else
+    {
+        $query="INSERT INTO dosage(dosageName, tablets, times_a_day, number_of_days) VALUES ('$dosageName', '$tablets', '$timesADay', '$numberOfDays')";
+        $sql=mysqli_query($conn,$query)or die("Could Not Perform the Query");
+        header ("Location: ../dosage-registration.php?status=success");
+    }
+}
+
+if(isset($_POST['dosage-update']))
+{
+	$id = $_GET['id'];
+	$dosageName = $_POST['dosageName'];
+	$tablets = $_POST['tablets'];
+	$numberOfDays = $_POST['numberOfDays'];
+	$timesADay = $_POST['timesADay'];
+
+     $sql = "UPDATE dosage SET dosageName = '$dosageName', tablets = '$tablets', number_of_days = '$numberOfDays', times_a_day = '$timesADay' WHERE dosageId=$id";
+    
+	 if (mysqli_query($conn, $sql)) 
+     {
+		echo "<script> alert(\"Item updated\");window.location.href=\"../dosage-registration.php\"; </script>";	 
+    } 
+    else 
+    {
+        echo "Error: " . $sql . "" . mysqli_error($conn);
+	 }
+	 mysqli_close($conn);
+}
+
 ?>

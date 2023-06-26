@@ -11,26 +11,20 @@
     <title>CERA</title>
 </head>
 <body class="home">
-    <div class="partners-CTA">
-       <a href="partners/reg-partner.php"> 
-        <p>Join us as a partner hospital</p>
-       </a>
-    </div>
-    <div class="partners-CTA">
-        <!--Dosage registration test link. To be removed-->
-        <a href="doctors/independent-reg-doc.php"><p>Join us as independent medical practitioner</p></a>
-    </div>
     <?php include_once "menu.php" ?>
     <div class="intro">
         <div class="c-phrase-section">
             <div class="c-phrase">
                 <h3>Cancer care made seamless,&nbsp;<b>for you</b></h3>
             </div>
-            <p>Let us help you track your health and treatment process</p>
+            <p>Let us help you track your patients' health and treatment process</p>
         </div>
         <div class="CTA">
-            <a href="register.php"><button class="pos-btn">Join us</button></a>
-            <a href="about-us.php"><button class="neg-btn">Learn More</button></a>
+            <a href="add-patient.php"><button class="neg-btn">Add Patient</button></a>
+            <a href="dosage-registration.php"><button class="neg-btn">Dosage</button></a>
+            <a href="view-patient-records.php"><button class="neg-btn">Records</button></a>
+            <a href="patient-progress.php"><button class="neg-btn">Progress</button></a>
+            <a href="patient-doctor-chat.php"><button class="neg-btn">Chat</button></a>
         </div>
     </div>
 </body>

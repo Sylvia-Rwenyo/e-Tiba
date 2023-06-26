@@ -13,16 +13,7 @@
 
 <body>
     <div>
-        <h2>Dosage Entry, by Patient or Doctor</h2>
         <div style="display:inline-block">
-            <form id="dosage-form"  action="controls/dosage-entry.php" method="POST">
-                <input type="text" id="dosageName" name="dosageName"  size="30" placeholder="Enter Name">
-                <input type="number" id="tablets" name="tablets"  size="10"  placeholder="Tablets">
-                <input type="number" id="timesADay" name="timesADay"  size="10"  placeholder="Times in a day">
-                <input type="number" id="numberOfDays" name="numberOfDays"  size="10"  placeholder="Prescribed Duration in Days">
-                <br/>
-                <input id = "itemsubmit" type="submit" value="Submit" name="save" class="btn">
-            </form>
             <h1>Dosage Details</h1>
             <table>
                 <tr class="table_field_names">
@@ -50,13 +41,13 @@
                     <?php echo $row["NDays"]; ?>
                     </td>
                     <td>
-                    <a  href="controls/dosage-update-form.php?id=<?php echo $row["Id"]; ?>" method="POST">
-                        <button id = "dosage-update" type="button" name="update" class="btn">Update</button>
+                    <a  href="dosage-update-form.php?id=<?php echo $row["Id"]; ?>" method="POST">
+                        <button id = "dosage-update" type="button" name="dosage-update" class="btn">Update</button>
                     </a>
                     </td>   
                     <td>
-                    <form id="form"  action="controls/dosage-delete.php?id=<?php echo $row["Id"]; ?>" method="POST">
-                        <input id = "dosage-submit" type="submit" value="Delete" name="delete" class="btn">
+                    <form id="form"  action="../controls/dosage-delete.php?id=<?php echo $row["Id"]; ?>" method="POST">
+                        <input id = "dosage-delete" type="submit" value="Delete" name="delete" class="btn">
                     </form>
                     </td>                        
                 </tr>    
