@@ -12,28 +12,23 @@
 <body>
     <?php 
     session_start();
-    if(isset($_SESSION['loggedIN']) || isset($_SESSION['signedIn']) ){
+    if(isset($_SESSION['loggedIN'])){
         ?>
     <div class="menu">
         <ul>
-            <li><a class="active" href="index.php">Home</a></li>
+            <li><a href="index.php">Home</a></li>
             <li><a href="">New log</a></li>
             <li><a href="">Your reports</a></li>
             <li><a href="about-us.php">About Us</a></li>
         </ul>
     </div> 
     <?php 
-        }else{
+       }else{
     ?>
     <div class="menu">
         <ul>
-            <li><a class="active" href="index.php">Home</a></li>
-            <!-- <li><a href="">New log</a></li>
-            <li><a href="">Your reports</a></li> -->
+            <li><a href="register.php?login=1">Log In</a></li>
             <li><a href="about-us.php">About Us</a></li>
-
-            <!--Dosage registration test link. To be removed-->
-            <li><a href="dosage-registration.php">Dosage</a></li>
         </ul>
     </div>
      <?php
