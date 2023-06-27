@@ -227,14 +227,26 @@
 .transcript {
     text-align: center;
     font-size: large;
-    margin: 30px;
-    margin-top: 50px;
+    margin: 50px;
+    padding: 20px;
     background-color: white;
 }
-.transcript-mini-div {
-    background-color: aliceblue;
+.transcript-small-div {
+    background-color: white;
     margin: 20px;
 }
+
+.transcript-mini-div {
+    background-color: aliceblue;
+    border: 5px solid aliceblue;
+    margin: 20px;
+}
+
+.transcript-mini-div:hover {
+    border: 5px solid blue;
+    color: #fbfac2;
+}
+
 .transcript h3 {
     text-align: left;
     margin-left: 40px;

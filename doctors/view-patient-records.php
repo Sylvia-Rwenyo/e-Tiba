@@ -46,8 +46,8 @@
                     </a>
                     </td>   
                     <td>
-                    <form id="form"  action="../controls/dosage-delete.php?id=<?php echo $row["Id"]; ?>" method="POST">
-                        <input id = "dosage-delete" type="submit" value="Delete" name="delete" class="btn">
+                    <form id="form"  action="../controls/processing.php?id=<?php echo $row["Id"]; ?>" method="POST">
+                        <input id = "dosage-delete" type="submit" value="Delete" name="dosage-delete" class="btn">
                     </form>
                     </td>                        
                 </tr>    

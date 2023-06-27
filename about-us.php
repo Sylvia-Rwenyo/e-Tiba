@@ -54,31 +54,31 @@
         The patient can view nearby cancer care centres offering treatment where their vitals and test results during chemo can be uploaded.
       </li>
     </ul>
-    <div class="transcript-mini-div" style="display:flex">
-      <div>
-        <div>
+    <div class="transcript-small-div" style="display:flex;padding:20px;">
+      <div style="margin:20px;">
+        <div class="transcript-mini-div">
           <h4>Electronic Health Records</h4> 
           <p>The patient’s information such as test results and history are uploaded and made available to the oncologist. </p>
         </div>
         
-        <div>
+        <div class="transcript-mini-div">
           <h4>Telemedicine</h4>
           <p>The oncologists can set up appointments with the patients. Patients can communicate with healthcare 
             providers remotely through secure video calls or messaging. This would enable patients to 
             receive timely care and support without the need to travel to a healthcare facility</p>
         </div>
         
-        <div>
+        <div class="transcript-mini-div">
           <h4>Patient Diary</h4> 
           <p>The patient can log in their medication intake, symptoms, and how they feel daily. The patient receives reminders to take their medication and fill in their daily logs. </p>
         </div>
       </div>
-      <div>
-        <div>
+      <div style="margin:20px;">
+        <div class="transcript-mini-div">
           <h4>Remote Monitoring</h4> 
           <p>The patient’s symptoms and response to treatment is monitored through their daily logs. The app intelligently tracks the patient's symptoms and automatically alerts the doctor of any red flags so that timely intervention can take place.</p>
         </div>
-        <div>
+        <div class="transcript-mini-div">
           <h4>Tele-counselling</h4> 
           <p>The patient is able to set up meetings with a therapist or a counsellor to improve their mental health. In addition, they can be connected to nearby cancer patients to form support groups.</p>
         

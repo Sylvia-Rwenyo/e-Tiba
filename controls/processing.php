@@ -121,7 +121,21 @@ if(isset($_POST['reg-partners']))
 
 }
 if(isset($_POST['add-patient'])){
-    $sql=mysqli_query($conn,"SELECT * FROM patient-info where name='$name' AND national-id='$nationalId'");
+    $firstName = $_POST['firstName'];
+     $lastName = $_POST['lastName'];
+     $age = $_POST['age'];
+     $gender = $_POST['gender'];
+	 $emailAddress = $_POST['emailAddress'];
+     $phoneNumber = $_POST['phoneNumber'];
+     $address = $_POST['address'];
+     $institution = $_POST['institution'];
+     $conditionsArr= array();
+     for($i=0; $i < count($_POST['condition']); $i++){
+        $conditionsArr[] = $_POST['condition'][$i];
+         }
+    $conditions = implode('*', $conditionsArr);    
+	 
+    $sql=mysqli_query($conn,"SELECT * FROM patient_info where email='$emailAddress' AND phone_number='$phoneNumber'");
     if(mysqli_num_rows($sql)>0)
     {
         echo "User Already Registered"; 
@@ -129,7 +143,7 @@ if(isset($_POST['add-patient'])){
     }
     else
     {
-        $query="INSERT INTO patient-info(name, illness, date_diagnosed, national-id) VALUES ('$name', '$illness','$dateDiagnosed', '$nationalId')";
+        $query="INSERT INTO patient_info(fname, lname, age, gender, email, phone, address, institution, condition) VALUES ('$firstName' ,'$lastName' ,'$age' ,'$gender' ,'$emailAddress' ,'$phoneNumber' ,'$address' ,'$institution' ,'$conditions')";
         $sql=mysqli_query($conn,$query)or die("Could Not Perform the Query");
         header ("Location: ../index.php?status=success");
     }
@@ -171,6 +185,21 @@ if(isset($_POST['dosage-update']))
     else 
     {
         echo "Error: " . $sql . "" . mysqli_error($conn);
+	 }
+	 mysqli_close($conn);
+}
+if(isset($_POST['dosage-delete'])){
+	$id = $_GET['id'];
+     $sql = "DELETE FROM dosage WHERE dosageId=$id";
+	 if (mysqli_query($conn, $sql))
+	  {echo "<script>
+		alert(\"Item deleted\");
+		window.location.href=\"../dosage-registration.php\";
+		</script>";	
+     } 
+	 else 
+     {
+		echo "Error: " . $sql . "" . mysqli_error($conn);
 	 }
 	 mysqli_close($conn);
 }

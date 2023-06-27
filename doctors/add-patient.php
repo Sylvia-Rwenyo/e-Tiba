@@ -14,31 +14,31 @@
         <p>Please fill the form below with accurate information as this is imporant for future identification of your patients.</p>
     </div>
     <form method="POST" action="../controls/processing.php">
-        <input type="text" name="firstName" placeholder="First name"/>
-        <input type="text" name="lastName" placeholder="Last name"/>
-         <input type="number" name="age" placeholder="Your age"/>
-         <select name="gender">
-            <option selected disabled> Select your gender</option>
-            <option>Female</option>
-            <option>Male</option>
-            <option>Prefer not to say</option>
-        </select>
-        <input type="text" name="emailAddress" placeholder="Email Address"/>
-        <input type="text" name="address" placeholder="Your address"/>
-        <select name="institution">
-            <option selected disabled> Select your Hospital</option>
-            <option>Institution A</option>
-            <option>Institution B</option>
-            <option>Institution C</option>
-        </select>
-        <select name="condition">
-            <option selected disabled> Select your condition</option>
-            <option>Condition A</option>
-            <option>Condition B</option>
-            <option>Condition C</option>
-        </select>
-        <input type="password" id="reg-pw"  name="password" placeholder="password"/>
-        <input type="submit" value="submit" name="add-patient" class="pos-btn"/>
+    <input type="text" name="firstName" placeholder="Patient first name" required/>
+            <input type="text" name="lastName" placeholder="Patient last name" required/>
+            <input type="number" name="age" placeholder="Patient age" required/>
+            <select name="gender" required>
+                <option selected disabled> Select Patient gender</option>
+                <option>Female</option>
+                <option>Male</option>
+                <option>Other</option>
+            </select>
+            <input type="text" name="emailAddress" placeholder="Patient Email Address" required/>
+            <input type="number" name="phoneNumber" placeholder="Patient phone number" required/>
+            <input type="text" name="address" placeholder="Patient address" required/>
+            <select name="institution" required>
+                <option selected disabled> Select Patient Hospital</option>
+                <option>Institution A</option>
+                <option>Institution B</option>
+                <option>Institution C</option>
+            </select>
+            <select name="condition[]" multiple required>
+                <option selected disabled> Select Patient condition</option>
+                <option>Condition A</option>
+                <option>Condition B</option>
+                <option>Condition C</option>
+            </select>
+            <input type="submit" value="submit" name="add-patient" class="pos-btn"/>
     </form>
 </body>
 </html>
