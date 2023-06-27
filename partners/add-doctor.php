@@ -24,8 +24,8 @@
             <option>None</option>
         </select>
         <input type="text" name="emailAddress" placeholder="Email Address"/>
+        <input type="text" name="phoneNumber" placeholder="Phone Number"/>
         <input type="text" name="address" placeholder="Your address"/>
-        <input type="password" id="reg-pw"  name="password" placeholder="password"/>
         <input type="submit" value="submit" name="register-doc-by-partner" class="pos-btn"/>
     </form>
 </body>

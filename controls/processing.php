@@ -150,6 +150,9 @@ if(isset($_POST['add-patient'])){
 }
 
 if(isset($_POST['register-doc'])){
+    //create session
+    session_start();
+
     $firstName = $_POST['firstName'];
     $lastName = $_POST['lastName'];
     $gender = $_POST['gender'];
@@ -159,7 +162,7 @@ if(isset($_POST['register-doc'])){
     $years = $_POST['years'];
     $password = $_POST['password'];
 	 
-    $sql=mysqli_query($conn,"SELECT * FROM independent_doc where email='$emailAddress' AND phone_number='$phoneNumber'");
+    $sql=mysqli_query($conn,"SELECT * FROM doctors where email='$emailAddress' AND phone_number='$phoneNumber'");
     if(mysqli_num_rows($sql)>0)
     {
         echo "Doctor Already Registered"; 
@@ -167,7 +170,35 @@ if(isset($_POST['register-doc'])){
     }
     else
     {
-        $query="INSERT INTO independent_doc(fname, lname, gender, email, phone, address, years, password) VALUES ('$firstName' ,'$lastName' ,'$gender' ,'$emailAddress' ,'$phoneNumber' ,'$address' ,'$years' ,'$password')";
+        $query="INSERT INTO doctors(fname, lname, gender, email, phone, address, years, password) VALUES ('$firstName' ,'$lastName' ,'$gender' ,'$emailAddress' ,'$phoneNumber' ,'$address' ,'$years' ,'$password')";
+        $sql=mysqli_query($conn,$query)or die("Could Not Perform the Query");
+        header ("Location: ../index.php?status=success");
+    }
+}
+
+if(isset($_POST['register-doc-by-partner'])){
+    //create session
+    session_start();
+
+    $firstName = $_POST['firstName'];
+    $lastName = $_POST['lastName'];
+    $gender = $_POST['gender'];
+    $emailAddress = $_POST['emailAddress'];
+    $phoneNumber = $_POST['phoneNumber'];
+    $address = $_POST['address'];
+    $years = $_POST['years'];
+    $password = substr($emailAddress, 0, strpos($emailAddress, "@"));
+
+	 
+    $sql=mysqli_query($conn,"SELECT * FROM doctors where email='$emailAddress' AND phone_number='$phoneNumber'");
+    if(mysqli_num_rows($sql)>0)
+    {
+        echo "Doctor Already Registered"; 
+        exit;
+    }
+    else
+    {
+        $query="INSERT INTO doctors(fname, lname, gender, email, phone, address, years, password) VALUES ('$firstName' ,'$lastName' ,'$gender' ,'$emailAddress' ,'$phoneNumber' ,'$address' ,'$years' ,'$password')";
         $sql=mysqli_query($conn,$query)or die("Could Not Perform the Query");
         header ("Location: ../index.php?status=success");
     }
