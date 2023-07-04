@@ -34,6 +34,9 @@
 .menu ul .active{
     color: #35b6be;
 }
+.menu ul .active-meet{
+    border-bottom: 2px solid #408DCE;
+}
 .partners-CTA{
     font-size: 1em;
     padding-right: 5%;
@@ -270,10 +273,10 @@
     display: flex;
     flex-direction: row;
 }
-.dash-body section, #editProfileSection section{
-    margin-top: 2.5%;
+.mainBody section{
     width: 90%;
 }
+
 /* dashboard */
 .progress-charts{
     display: grid;
@@ -284,6 +287,20 @@
 .header{
     margin-left: 5%;
     margin-top: 1.5%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.header h1{
+   margin-left: 5%;
+}
+.header i{
+    font-size: 1em;
+    color: rgba(0, 0, 0, 0.75)
+}
+.header i:hover{
+    font-size: 1em;
+    color: rgb(0, 0, 0)
 }
 #editingProfileSection section{
     display: flex;
@@ -387,7 +404,7 @@
 .dash-menu ul a{
     flex-grow: 1;
     padding: 20%;
-    padding-top: 60%;
+    padding-top: 30%;
     text-decoration: none;
     color: #408DCE;
 }
@@ -439,6 +456,7 @@
     justify-content: space-between;
     margin-top: 3.5%;
     margin-right: 2%;
+    margin-left: 2.5%;
 }
 #patient-log .prompts .prompt{
     background-color: rgba(190, 252, 254, 0.5);
@@ -451,4 +469,70 @@
 }
 #patient-log .prompts .prompt i{
     size: 3em;
+}
+/* meet-menu */
+.meet-menu{
+    margin-top: 0;
+    background: transparent;
+}
+
+/* video chat /'meet' page */
+#localVideo, #remoteVideo {
+    border: 1px solid #ccc;
+}
+#videoChat section{
+    position: relative;
+}
+#remoteVideo{
+    width: 100%;
+    height: 100%;
+    position: relative;
+    z-index: 1;
+}
+#localVideo{
+    width: 200px;
+    height: 150px;
+    padding: 0;
+    position: absolute;
+    top: 80%;
+    left: 85%;
+    transform: translate(-50%, -50%);
+    z-index: 2;
+    font-size: 1.5em;
+}
+#videoChat section .video-stream{
+    padding-top: 5%;
+    width: 80%;
+    height: 100%;
+    margin-left: 10%;
+    display: flex;
+    flex-direction: row;
+    position: relative;
+    z-index: 1;
+}
+#videoChat section .buttons{
+    position: absolute;
+    top: 90%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 2;
+    font-size: 1.5em;
+}
+#startButton{
+    color: #59BF7E;
+    background: transparent;
+    border: none;
+}
+#endButton{
+    color: #882100;
+    background: transparent;
+    border: none;
+}
+#muteButton, #stopVideoButton{
+    color: rgb(53, 182, 190);
+    border: none;
+    background: transparent;
+}
+#muteButton:hover, #stopVideoButton:hover{
+    color: rgb(136, 33, 0);
 }

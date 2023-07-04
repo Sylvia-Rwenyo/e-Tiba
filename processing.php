@@ -277,7 +277,10 @@ if (isset($_POST["record-sleep"])) {
     }
 
     if (mysqli_query($conn, $sql)) {
-        echo $sleepTime;
+        echo ' 
+        <script> 
+            window.location.href = "patient-log.php"
+        </script>';
     }else{
         // Show error if the SQL query is not executed
         echo "Error: " . $sql . "<br>" . mysqli_error($conn);
@@ -302,8 +305,11 @@ if(isset($_POST["record-meal"]))
 
      //if sql query is not executed...
 	 if (mysqli_query($conn, $sql)) {
-        echo 'Meal recorded';	
-         }else{
+        echo ' 
+        <script> 
+            window.location.href = "patient-log.php"
+        </script>';
+      }else{
                 //show error
 		echo "Error: " . $sql . "
 " . mysqli_error($conn);
@@ -327,8 +333,10 @@ if(isset($_POST["record-medTime"]))
 
      //if sql query is not executed...
 	 if (mysqli_query($conn, $sql)) {
-        echo 'Medicine intake recorded';	
-
+        echo ' 
+        <script> 
+            window.location.href = "patient-log.php"
+        </script>';
     }else{
                 //show error
 		echo "Error: " . $sql . "
@@ -338,5 +346,55 @@ if(isset($_POST["record-medTime"]))
      //close connection
 	 mysqli_close($conn);
 
+}
+
+// video chat back end
+
+if (isset($_POST['action']) && $_POST['action'] === 'offer') {
+    session_start();
+    // Retrieve the offer SDP from the client
+    $offerSdp = $_POST['offerSdp'];
+
+    // Store the offer SDP in the session
+    $_SESSION['offerSdp'] = $offerSdp;
+
+    // Send the offer SDP to the other peer or save it for later use
+
+    // Prepare the response
+    $response = array('status' => 'success');
+
+    // Send the response back to the client
+    echo json_encode($response);
+    exit();
+}
+
+if (isset($_POST['action']) && $_POST['action'] === 'answer') {
+    session_start();
+    // Retrieve the answer SDP from the client
+    $answerSdp = $_POST['answerSdp'];
+
+    // Send the answer SDP to the other peer or save it for later use
+
+    // Prepare the response
+    $response = array('status' => 'success');
+
+    // Send the response back to the client
+    echo json_encode($response);
+    exit();
+}
+
+if (isset($_POST['action']) && $_POST['action'] === 'candidate') {
+    session_start();
+    // Retrieve the ICE candidate from the client
+    $candidate = json_decode($_POST['candidate']);
+
+    // Send the ICE candidate to the other peer or save it for later use
+
+    // Prepare the response
+    $response = array('status' => 'success');
+
+    // Send the response back to the client
+    echo json_encode($response);
+    exit();
 }
 ?>

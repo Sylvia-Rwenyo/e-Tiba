@@ -14,6 +14,9 @@
 <body class="dash-body">
   <div class="header">
     <h1>Dashboard</h1>
+    <?php
+      include_once 'notif-menu.php';
+    ?>
   </div>
   <div class="mainBody">
 <?php
