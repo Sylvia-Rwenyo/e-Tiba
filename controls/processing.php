@@ -517,5 +517,4 @@ if(isset($_POST['enter-message']))
 	 mysqli_close($conn);
 
 }
-
 ?>
