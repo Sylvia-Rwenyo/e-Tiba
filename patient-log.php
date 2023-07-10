@@ -13,7 +13,10 @@
 </head>
 <body class="dash-body" id="patient-log">
   <div class="header">
-    <h1>Your Diary</h1>
+    <h1>Records</h1>
+    <?php
+      include_once 'notif-menu.php';
+    ?>
   </div>
   <div class="mainBody">
     <?php
@@ -24,10 +27,10 @@
         //show dashboard menu
         include_once 'dash-menu.php';
     ?>
-    <section>
+    <section style=' margin-top: 2.5%;'>
         <?php
             echo "
-            <div class='welcome-msg'>
+            <div class='welcome-msg' style='margin-left: 2.5%'>
                 <h5>How're you feeling today, ".$_SESSION["username"]."?</h5>
                 <p>Keep track of your progress.</p>
             </div>
@@ -35,22 +38,28 @@
             ?>
             <div class="prompts" id="prompts">
                 <div class="prompt" id="rec-sleepPrompt">
-                    <h6>Record how much you've slept today?</h6>
-                   <i class="fa fa-face-sleeping"></i>
+                    <h6>Record how much you've slept today</h6>
+                    <!-- sleep animation or sth similar 
+                    along with the average hours of sleep in the last week
+                  -->
                 </div>
                 <div class="prompt" id="rec-mealPrompt">
                     <h6>Keep track of your meals too</h6>
-                    <i class="fa  fa-pot-food"></i>
+                     <!-- eating animation or sth similar 
+                    along with a fun fact about recommended foods or sth similar
+                  -->
                 </div>
                 <div class="prompt" id="rec-medPrompt">
                     <h6>Record the last time you took your medicine</h6>
-                    <i class="fa fa-prescription-bottle-pill"></i>
+                     <!-- medicine intake animation or sth similar 
+                    along with sth idk
+                  -->
                 </div>
             </div>
             <div class="input">
-                <div class="input-div input-sleep" id="input-sleep">
+                <div class="input-div input-sleep" id="input-sleep" >
                     <h6>Sleep Tracker</h6>
-                    <form id="sleep-form">
+                    <form id="sleep-form" action="processing.php" method="POST">
                         <div>
                             <label>Start time</label>
                             <input type="time" name="start-time" />
@@ -66,7 +75,7 @@
                 </div>
                 <div class="input-div input-meals" id="input-meals">
                     <h6>What have you eaten today</h6>
-                    <form id="meal-form">
+                    <form id="meal-form" action="processing.php" method="POST" >
                         <div>
                             <label>Meal name:</label>
                             <input type="text" name="meal-name" />
@@ -82,7 +91,7 @@
                 </div>
                 <div class="input-div input-medication" id="input-medication">
                     <h6>What time did you take you medicine</h6>
-                    <form id="meds-form">
+                    <form id="meds-form" action="processing.php" method="POST" >
                         <div>
                             <label>Medicine name:</label>
                             <input type="text" name="med-name" />
@@ -103,55 +112,55 @@
     ?>
   </div>
   <script>
-//   // Sleep Form submission
-$('#sleep-form').on('submit', function(event) {
-    event.preventDefault(); // Prevent the form from submitting normally
-    // Perform the AJAX request
-    $.ajax({
-      url: 'processing.php',
-      type: 'POST',
-      data: $(this).serialize(),
-      success: function(response) {
-         alert("Sleep time: " + response); // Display the calculated sleep time as an alert
-      },
-      error: function(xhr, status, error) {
-        console.log(error); // Handle any errors
-      }
-    });
-  });
+// //   // Sleep Form submission
+// $('#sleep-form').on('submit', function(event) {
+//     event.preventDefault(); // Prevent the form from submitting normally
+//     // Perform the AJAX request
+//     $.ajax({
+//       url: 'processing.php',
+//       type: 'POST',
+//       data: $(this).serialize(),
+//       success: function(response) {
+//          alert("Sleep time: " + response); // Display the calculated sleep time as an alert
+//       },
+//       error: function(xhr, status, error) {
+//         console.log(error); // Handle any errors
+//       }
+//     });
+//   });
 
-  // Meal Form submission
-  $('#meal-form').on('submit', function(event) {
-    event.preventDefault(); // Prevent the form from submitting normally
-    // Perform the AJAX request
-    $.ajax({
-      url: 'processing.php',
-      type: 'POST',
-      data: $(this).serialize(),
-      success: function(response) {
-         alert(response); 
-      },
-      error: function(xhr, status, error) {
-        console.log(error); // Handle any errors
-      }
-    });
-  });
-  // Medication Form submission
-  $('#meds-form').on('submit', function(event) {
-    event.preventDefault(); // Prevent the form from submitting normally
-    // Perform the AJAX request
-    $.ajax({
-      url: 'processing.php',
-      type: 'POST',
-      data: $(this).serialize(),
-      success: function(response) {
-        alert(response); 
-      },
-      error: function(xhr, status, error) {
-        console.log(error); // Handle any errors
-      }
-    });
-  });
+//   // Meal Form submission
+//   $('#meal-form').on('submit', function(event) {
+//     event.preventDefault(); // Prevent the form from submitting normally
+//     // Perform the AJAX request
+//     $.ajax({
+//       url: 'processing.php',
+//       type: 'POST',
+//       data: $(this).serialize(),
+//       success: function(response) {
+//          alert(response); 
+//       },
+//       error: function(xhr, status, error) {
+//         console.log(error); // Handle any errors
+//       }
+//     });
+//   });
+//   // Medication Form submission
+//   $('#meds-form').on('submit', function(event) {
+//     event.preventDefault(); // Prevent the form from submitting normally
+//     // Perform the AJAX request
+//     $.ajax({
+//       url: 'processing.php',
+//       type: 'POST',
+//       data: $(this).serialize(),
+//       success: function(response) {
+//         alert(response); 
+//       },
+//       error: function(xhr, status, error) {
+//         console.log(error); // Handle any errors
+//       }
+//     });
+//   });
   document.getElementById('rec-sleepPrompt').onclick = () =>{
     document.getElementById('input-sleep').style.display ='flex';
     document.getElementById('prompts').style.display ='none';
