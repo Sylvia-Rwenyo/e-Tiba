@@ -24,9 +24,9 @@
     ?>
     <tr>
         <td>
-            <a  href="individual-chats.php?id=<?php echo $row["userId"]; ?>" method="POST">
-                <span style="display:inline-block; overflow:hidden; max-width:10ch;"><?php echo $row["message"]; ?></span>
-                <p>from <?php echo $row["message"]; ?></p>
+            <a href="individual-chats.php?id=<?php echo $row["userId"]; ?>" method="POST">
+                <span style="display:inline-block; overflow:hidden; max-width:20ch;"><?php echo $row["message"]; ?></span>
+                <p style="font-size:5px;">from <?php echo $row["message"]; ?></p>
             </a>
         </td>                        
     </tr>
