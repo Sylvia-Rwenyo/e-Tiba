@@ -23,7 +23,7 @@
                     <td>Number of Times a Day</td>
                 </tr>
                 <?php
-                include_once "conn.php";
+                include_once "../conn.php";
                 $resultPost = mysqli_query($conn,"SELECT dosageId as Id, dosageName as DName, tablets as Tablets, times_a_day as TimesADay, number_of_days as NDays FROM  dosage");
                 while($row = mysqli_fetch_array($resultPost)) {
                 ?>

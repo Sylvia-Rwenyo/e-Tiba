@@ -26,6 +26,7 @@
             <option>None</option>
         </select>
         <input type="text" name="emailAddress" placeholder="Email Address"/>
+        <input type="text" name="institution" placeholder="Institution Name"/>
         <input type="text" name="phoneNumber" placeholder="Phone Number"/>
         <input type="text" name="address" placeholder="Your address"/>
         <input type="submit" value="submit" name="register-doc-by-partner" class="pos-btn"/>

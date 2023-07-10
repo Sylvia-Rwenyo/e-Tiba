@@ -18,20 +18,23 @@
     <div>
     <?php
     include_once "../conn.php";
-    $current_user = $_SESSION['id'];
-    $resultPost = mysqli_query($conn,"SELECT LAST userId, emailAddress, readStatus FROM chat WHERE userId != '$current_user' GROUP BY userId");
+    $resultPost = mysqli_query($conn,"SELECT emailAddress, userId, message FROM chat");
+    ?>
+    <div>
+        <p><?php echo $row["emailAddress"]; ?></p>
+    </div>
+    <?php
     while($row = mysqli_fetch_array($resultPost)) {
     ?>
-    <tr>
-        <td>
-            <a  href="individual-chats.php?id=<?php echo $row["userId"]; ?>" method="POST">
-                <span style="display:inline-block; overflow:hidden; max-width:10ch;"><?php echo $row["message"]; ?></span>
-                <p>from <?php echo $row["message"]; ?></p>
-            </a>
-        </td>                        
-    </tr>
-    <?php }?> 
+    <p style="<?php session_start(); if($_SESSION['email'] == $row["emailAddress"]){echo 'text-align:right';}else{echo  'text-align:left';}?>">
+        <?php echo $row["message"]; ?>
+    </p> 
+    <?php }?>
     </div>
-    
+    <form method="POST" action="../controls/processing.php">
+        <input type="text" name="message" placeholder="Enter Message" required/>
+        <input type="hidden"  name="readStatus" value="<?php session_start(); echo 'unread';?>"/>
+        <input type="submit" value="submit" name="enter-message" class="pos-btn"/>
+    </form>
 </body>
 </html>

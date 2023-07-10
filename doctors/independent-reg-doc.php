@@ -28,7 +28,21 @@
         <input type="text" name="emailAddress" placeholder="Email Address"/>
         <input type="text" name="phoneNumber" placeholder="Phone Number"/>
         <input type="text" name="address" placeholder="Your address"/>
-        <input type="password" id="reg-pw"  name="password" placeholder="password"/>
+        <select name="conditions[]" required multiple>
+            <option selected disabled> Which of the following conditions do you cater to?</option>
+            <option>Condition A</option>
+            <option>Condition B</option>
+            <option>Condition C</option>
+        </select>
+        <div id="pswdDiv">
+            <input type="password" id="reg-pw"  name="password" placeholder="password" required/>
+            <span id="showPswd" onclick="pswdDisplay()">
+            <i class="fa fa-eye-slash"></i>
+            </span>
+        </div>
+        <input type="hidden"  name="institution" value="<?php session_start(); if(isset($_SESSION['category']))
+        {echo $_SESSION['username'];}else{ echo 'none';}
+        ?>"/>
         <input type="submit" value="submit" name="register-doc" class="pos-btn"/>
     </form>
 </body>

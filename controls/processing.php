@@ -33,7 +33,7 @@ if(isset($_POST['register']))
         if(!isset($_SESSION['category'])){
         login($conn);
         }else{
-            header('location:dashboard.php');
+            header('location:../dashboard.php');
         }
 			 } else {	
                 //show error
@@ -83,43 +83,6 @@ if(isset($_POST['reg-partner']))
 
 }
 
-// register private practice doctors 
-if(isset($_POST['reg-partners']))
-{	
-    //create session
-    session_start();
-    
-    //store values submitted in the signup form in variables
-	 $firstName = $_POST['firstName'];
-     $lastName = $_POST['lastName'];
-	 $emailAddress = $_POST['emailAddress'];
-     $institution = $_POST['institution'];
-     $conditionsArr= array();
-     for($i=0; $i < count($_POST['conditions']); $i++){
-        $conditionsArr[] = $_POST['conditions'][$i];
-         }
-    $conditions = implode('*', $conditionsArr);	 $password = $_POST['password'];
-     $age = $_POST['age'];
-     $address = $_POST['address'];
-	 $gender = $_POST['gender'];
-    
-     
-     //statement to enter values into the registration table in the database
-	 $sql = "INSERT INTO regDoctors (firstName, lastName, emailAddress, institution,  password, specialty, address, age, gender)
-	 VALUES ('$firstName','$lastName', '$emailAddress','$institution', '$password', '$condition', '$address', '$age', '$gender')";
-
-     //if sql query is executed...
-	 if (mysqli_query($conn, $sql)) {
-        header('location:dashboard.php');
-			 } else {	
-                //show error
-		echo "Error: " . $sql . "
-" . mysqli_error($conn);
-	 }
-     //close connection
-	 mysqli_close($conn);
-
-}
 if(isset($_POST['add-patient'])){
     $firstName = $_POST['firstName'];
      $lastName = $_POST['lastName'];
@@ -135,7 +98,7 @@ if(isset($_POST['add-patient'])){
          }
     $conditions = implode('*', $conditionsArr);    
 	 
-    $sql=mysqli_query($conn,"SELECT * FROM patient_info where email='$emailAddress' AND phone_number='$phoneNumber'");
+    $sql=mysqli_query($conn,"SELECT * FROM regpatients where email='$emailAddress' AND phone_number='$phoneNumber'");
     if(mysqli_num_rows($sql)>0)
     {
         echo "User Already Registered"; 
@@ -143,10 +106,22 @@ if(isset($_POST['add-patient'])){
     }
     else
     {
-        $query="INSERT INTO patient_info(fname, lname, age, gender, email, phone, address, institution, condition) VALUES ('$firstName' ,'$lastName' ,'$age' ,'$gender' ,'$emailAddress' ,'$phoneNumber' ,'$address' ,'$institution' ,'$conditions')";
-        $sql=mysqli_query($conn,$query)or die("Could Not Perform the Query");
-        header ("Location: ../index.php?status=success");
+        $query="INSERT INTO regpatients(firstName, lastName, age, gender, emailAddress, phoneNumber, address, institution, condition) VALUES ('$firstName' ,'$lastName' ,'$age' ,'$gender' ,'$emailAddress' ,'$phoneNumber' ,'$address' ,'$institution' ,'$conditions')";
     }
+    //if sql query is executed...
+	 if (mysqli_query($conn, $query)) {
+        if(!isset($_SESSION['category'])){
+        login($conn);
+        }else{
+            header('location:../dashboard.php?status=success');
+        }
+			 } else {	
+                //show error
+		echo "Error: " . $sql . "
+" . mysqli_error($conn);
+	 }
+     //close connection
+	 mysqli_close($conn);
 }
 
 if(isset($_POST['register-doc'])){
@@ -158,11 +133,18 @@ if(isset($_POST['register-doc'])){
     $gender = $_POST['gender'];
     $emailAddress = $_POST['emailAddress'];
     $phoneNumber = $_POST['phoneNumber'];
+    $institution = $_POST['institution'];
+    $conditionsArr= array();
+     for($i=0; $i < count($_POST['conditions']); $i++){
+        $conditionsArr[] = $_POST['conditions'][$i];
+         }
+    $conditions = implode('*', $conditionsArr);	 $password = $_POST['password'];
     $address = $_POST['address'];
-    $years = $_POST['years'];
+    $years = $_POST['years'];//years experience
     $password = $_POST['password'];
+
 	 
-    $sql=mysqli_query($conn,"SELECT * FROM doctors where email='$emailAddress' AND phone_number='$phoneNumber'");
+    $sql=mysqli_query($conn,"SELECT * FROM regdoctors where email='$emailAddress' AND phone_number='$phoneNumber'");
     if(mysqli_num_rows($sql)>0)
     {
         echo "Doctor Already Registered"; 
@@ -170,10 +152,22 @@ if(isset($_POST['register-doc'])){
     }
     else
     {
-        $query="INSERT INTO doctors(fname, lname, gender, email, phone, address, years, password) VALUES ('$firstName' ,'$lastName' ,'$gender' ,'$emailAddress' ,'$phoneNumber' ,'$address' ,'$years' ,'$password')";
-        $sql=mysqli_query($conn,$query)or die("Could Not Perform the Query");
-        header ("Location: ../index.php?status=success");
+        $query="INSERT INTO regdoctors(firstName, lastName, gender, emailAddress, institution, specialty, phoneNumber, address, password) VALUES ('$firstName' ,'$lastName' ,'$gender' ,'$emailAddress', '$institution', '$conditions' ,'$phoneNumber' ,'$address' ,'$password')";
     }
+    //if sql query is executed...
+	 if (mysqli_query($conn, $query)) {
+        if(!isset($_SESSION['category'])){
+        login($conn);
+        }else{
+            header('location:doctors-dashboard.php?status=success');
+        }
+			 } else {	
+                //show error
+		echo "Error: " . $sql . "
+" . mysqli_error($conn);
+	 }
+     //close connection
+	 mysqli_close($conn);
 }
 
 if(isset($_POST['register-doc-by-partner'])){
@@ -184,13 +178,19 @@ if(isset($_POST['register-doc-by-partner'])){
     $lastName = $_POST['lastName'];
     $gender = $_POST['gender'];
     $emailAddress = $_POST['emailAddress'];
+    $institution = $_POST['institution'];
+    $conditionsArr= array();
+     for($i=0; $i < count($_POST['conditions']); $i++){
+        $conditionsArr[] = $_POST['conditions'][$i];
+         }
+    $conditions = implode('*', $conditionsArr);	 $password = $_POST['password'];
     $phoneNumber = $_POST['phoneNumber'];
     $address = $_POST['address'];
     $years = $_POST['years'];
     $password = substr($emailAddress, 0, strpos($emailAddress, "@"));
 
 	 
-    $sql=mysqli_query($conn,"SELECT * FROM doctors where email='$emailAddress' AND phone_number='$phoneNumber'");
+    $sql=mysqli_query($conn,"SELECT * FROM regdoctors where email='$emailAddress' AND phone_number='$phoneNumber'");
     if(mysqli_num_rows($sql)>0)
     {
         echo "Doctor Already Registered"; 
@@ -198,10 +198,22 @@ if(isset($_POST['register-doc-by-partner'])){
     }
     else
     {
-        $query="INSERT INTO doctors(fname, lname, gender, email, phone, address, years, password) VALUES ('$firstName' ,'$lastName' ,'$gender' ,'$emailAddress' ,'$phoneNumber' ,'$address' ,'$years' ,'$password')";
-        $sql=mysqli_query($conn,$query)or die("Could Not Perform the Query");
-        header ("Location: ../index.php?status=success");
+        $query="INSERT INTO regdoctors(firstName, lastName, gender, institution, emailAddress, specialty, phoneNumber, address, password) VALUES ('$firstName' ,'$lastName' ,'$gender' , $institution ,'$emailAddress', '$conditions', '$phoneNumber' ,'$address' ,'$password')";
     }
+    //if sql query is executed...
+	 if (mysqli_query($conn, $query)) {
+        if(!isset($_SESSION['category'])){
+        login($conn);
+        }else{
+            header('location:partner-dashboard.php?status=success');
+        }
+			 } else {	
+                //show error
+		echo "Error: " . $sql . "
+" . mysqli_error($conn);
+	 }
+     //close connection
+	 mysqli_close($conn);
 }
 
 
@@ -220,7 +232,7 @@ if(isset($_POST['dosage-registration'])){
     {
         $query="INSERT INTO dosage(dosageName, tablets, times_a_day, number_of_days) VALUES ('$dosageName', '$tablets', '$timesADay', '$numberOfDays')";
         $sql=mysqli_query($conn,$query)or die("Could Not Perform the Query");
-        header ("Location: ../dosage-registration.php?status=success");
+        header ("Location: ../doctors/dosage-registration.php?status=success");
     }
 }
 
@@ -234,14 +246,14 @@ if(isset($_POST['dosage-update']))
 
      $sql = "UPDATE dosage SET dosageName = '$dosageName', tablets = '$tablets', number_of_days = '$numberOfDays', times_a_day = '$timesADay' WHERE dosageId=$id";
     
-	 if (mysqli_query($conn, $sql)) 
-     {
-		echo "<script> alert(\"Item updated\");window.location.href=\"../dosage-registration.php\"; </script>";	 
+    if (mysqli_query($conn, $sql)) 
+    {
+        echo "<script> alert(\"Item updated\");window.location.href=\"../doctors/dosage-registration.php\"; </script>";	 
     } 
     else 
     {
         echo "Error: " . $sql . "" . mysqli_error($conn);
-	 }
+    }
 	 mysqli_close($conn);
 }
 if(isset($_POST['dosage-delete'])){
@@ -250,7 +262,7 @@ if(isset($_POST['dosage-delete'])){
 	 if (mysqli_query($conn, $sql))
 	  {echo "<script>
 		alert(\"Item deleted\");
-		window.location.href=\"../dosage-registration.php\";
+		window.location.href=\"../doctors/dosage-registration.php\";
 		</script>";	
      } 
 	 else 
@@ -274,7 +286,7 @@ function login($conn){
     $password = $_POST ["password"];
     $stmt;
      //statement to select values from the registration table in the database
-    $stmt = "SELECT * FROM regPatients where emailAddress='$emailAddress' and password='$password'";
+    $stmt = "SELECT * FROM regpatients where emailAddress='$emailAddress' and password='$password'";
     $sql=mysqli_query($conn, $stmt);
     $row  = mysqli_fetch_array($sql);
     if(is_array($row)){
@@ -286,7 +298,7 @@ function login($conn){
             $_SESSION["loggedIN"] = true;
             header('location:dashboard.php');
     }else{
-        $stmt = "SELECT * FROM regDoctors where emailAddress='$emailAddress' and password='$password'"; 
+        $stmt = "SELECT * FROM regdoctors where emailAddress='$emailAddress' and password='$password'"; 
         $sql=mysqli_query($conn, $stmt);
         $row  = mysqli_fetch_array($sql);
         if(is_array($row)){
@@ -297,7 +309,7 @@ function login($conn){
             $_SESSION["loggedIN"] = true;
             header('location:dashboard.php');
         }else{
-        $stmt = "SELECT * FROM regInstitutions where emailAddress='$emailAddress' and password='$password'"; 
+        $stmt = "SELECT * FROM reginstitutions where emailAddress='$emailAddress' and password='$password'"; 
         $sql=mysqli_query($conn, $stmt);
         $row  = mysqli_fetch_array($sql);
         if(is_array($row)){
@@ -343,7 +355,7 @@ if(isset($_GET['action'])){
               {     
                 session_unset();      
                 echo ' <script> 
-                         window.location.href = "index.php";
+                         window.location.href = "../index.php";
                        </script>';
              } 
         
@@ -479,4 +491,31 @@ if(isset($_POST["record-medTime"]))
 	 mysqli_close($conn);
 
 }
+
+if(isset($_POST['enter-message']))
+{	
+    //create session
+    session_start();
+    //store values submitted in the chat form in variables 
+    $message = $_POST['message'];
+    $userId = $_SESSION['id'];
+    $emailAddress = $_SESSION['email'];
+    $readStatus = $_POST['readStatus'];
+     
+     //statement to messages and userId in the database
+	$query = "INSERT INTO chat (message, userId, emailAddress, readStatus) VALUES ('$message','$userId', '$emailAddress', '$readStatus')";
+
+    if (mysqli_query($conn,$query)) 
+    {
+        //add notifications here
+        echo "<script> alert(\"One New Message\");window.location.href=\"../doctors/patient-doctor-chat.php\"; </script>";	 
+    } 
+    else 
+    {
+        echo "Error: " . $sql . "" . mysqli_error($conn) . "Could Not Send Message";
+    }
+	 mysqli_close($conn);
+
+}
+
 ?>
