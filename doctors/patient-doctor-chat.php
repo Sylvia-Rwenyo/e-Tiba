@@ -11,6 +11,10 @@
     <script src="https://use.fontawesome.com/1d95bf24b3.js"></script>
 </head>
 <body class="reg-body">
+<div class="welcome-msg">
+        <h3>Patient Doctor Chat</h3>
+        <p>Get to know your patient</p>
+    </div>
 <div class="search-bar-top">
     <div class="search-bar">
     <div id = "mt-auto container position-relative" data-parallax = "scroll">

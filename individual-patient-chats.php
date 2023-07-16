@@ -12,16 +12,13 @@
 </head>
 <body class="reg-body">
     <div class="welcome-msg">
-        <h3>Patient Doctor Chat</h3>
-        <p>Ask your doctor anything</p>
+        <h3></h3>
+        <p></p>
     </div>
     <div>
     <?php
     include_once "../conn.php";
     session_start();
-    if(isset($_GET['id'])){
-        $requested_patient = $_GET['id'];
-    }
     $current_user_email = $_SESSION['email'];
     $resultPost = mysqli_query($conn,"SELECT sent_to, emailAddress, userId, message FROM chat WHERE emailAddress = '$current_user_email' OR sent_to = '$current_user_email'");
     while($row = mysqli_fetch_array($resultPost)) {
