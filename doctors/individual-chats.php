@@ -18,22 +18,23 @@
     <div>
     <?php
     include_once "../conn.php";
-    $resultPost = mysqli_query($conn,"SELECT emailAddress, userId, message FROM chat");
-    ?>
-    <div>
-        <p><?php echo $row["emailAddress"]; ?></p>
-    </div>
-    <?php
+    session_start();
+    if(isset($_GET['id'])){
+        $requested_patient = $_GET['id'];
+    }
+    $current_user_email = $_SESSION['email'];
+    $resultPost = mysqli_query($conn,"SELECT sent_to, emailAddress, userId, message FROM chat WHERE emailAddress = '$current_user_email' OR sent_to = '$current_user_email'");
     while($row = mysqli_fetch_array($resultPost)) {
     ?>
-    <p style="<?php session_start(); if($_SESSION['email'] == $row["emailAddress"]){echo 'text-align:right';}else{echo  'text-align:left';}?>">
+    <p style="<?php if($current_user_email == $row["emailAddress"]){echo 'text-align:right';}else{echo  'text-align:left'; $sent_to = $row["emailAddress"];}?>">
         <?php echo $row["message"]; ?>
     </p> 
     <?php }?>
     </div>
     <form method="POST" action="../controls/processing.php">
         <input type="text" name="message" placeholder="Enter Message" required/>
-        <input type="hidden"  name="readStatus" value="<?php session_start(); echo 'unread';?>"/>
+        <input type="hidden"  name="sent_to" value="<?php echo $sent_to;?>"/>
+        <input type="hidden"  name="readStatus" value="<?php echo 'unread';?>"/>
         <input type="submit" value="submit" name="enter-message" class="pos-btn"/>
     </form>
 </body>

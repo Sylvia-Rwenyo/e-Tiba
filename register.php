@@ -20,7 +20,7 @@
                 <h3>Welcome back</h3>
                 <p>CERA, your healthcare companion</p>
             </div>
-            <form method="POST" action="processing.php">
+            <form method="POST" action="controls/processing.php">
                 <input type="text" name="emailAddress" placeholder="Email Address" required/>
                 <div id="pswdDiv">
                     <input type="password" id="reg-pw"  name="password" placeholder="password" required/>
@@ -39,7 +39,7 @@
             <h3>Welcome to CERA</h3>
             <p>Please fill the form below with accurate information as this is imporant for future identification with your doctors.</p>
         </div>
-        <form method="POST" action="processing.php">
+        <form method="POST" action="controls/processing.php">
             <input type="text" name="firstName" placeholder="First name" required/>
             <input type="text" name="lastName" placeholder="Last name" required/>
             <input type="number" name="age" placeholder="Your age" required/>

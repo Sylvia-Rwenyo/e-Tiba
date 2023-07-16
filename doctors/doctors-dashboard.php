@@ -11,7 +11,7 @@
     <title>CERA</title>
 </head>
 <body class="home">
-    <?php include_once "menu.php" ?>
+    <?php include_once "../menu.php" ?>
     <div class="intro">
         <div class="c-phrase-section">
             <div class="c-phrase">
