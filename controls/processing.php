@@ -307,7 +307,7 @@ function login($conn){
             $_SESSION["username"] = $row['firstName'];
             $_SESSION["id"]=$row['id'];
             $_SESSION["loggedIN"] = true;
-            header('location:../doctors/doctors-dashboard.php');
+            header('location:../dashboard.php');
         }else{
         $stmt = "SELECT * FROM reginstitutions where emailAddress='$emailAddress' and password='$password'"; 
         $sql=mysqli_query($conn, $stmt);
@@ -542,7 +542,7 @@ if (isset($_POST['action']) && $_POST['action'] === 'candidate') {
     exit();
 }
 
-if(isset($_POST['enter-message']))
+if(isset($_POST['enter-message-as-doc']))
 {	
     //create session
     session_start();
@@ -552,14 +552,23 @@ if(isset($_POST['enter-message']))
     $emailAddress = $_SESSION['email'];
     $readStatus = $_POST['readStatus'];
     $sent_to = $_POST['sent_to'];
+    $sent_to_id = 0;
      
+
+    $query2 = "SELECT id FROM regpatients WHERE emailAddress ='$sent_to'";
+    $result = mysqli_query($conn, $query2) or die(mysqli_error($conn));
+    while($row = mysqli_fetch_array($result))
+    {
+        $sent_to_id = $row['id'];	
+    }
+
      //statement to messages and userId in the database
-	$query = "INSERT INTO chat (message, userId, emailAddress, sent_to, readStatus) VALUES ('$message','$userId', '$emailAddress', '$sent_to', '$readStatus')";
+	$query = "INSERT INTO chat (message, sent_from_id, emailAddress, sent_to_id, sent_to, readStatus) VALUES ('$message','$userId', '$emailAddress', '$sent_to_id', '$sent_to', '$readStatus')";
 
     if (mysqli_query($conn,$query)) 
     {
-        //add notifications here
-        echo "<script> alert(\"One New Message\");window.location.href=\"../doctors/individual-chats.php\"; </script>";	 
+        echo "<script> window.location.href= '../doctors/individual-chats.php?id=$sent_to_id'; </script>";	
+        //add notifications here 
     } 
     else 
     {
@@ -568,4 +577,79 @@ if(isset($_POST['enter-message']))
 	 mysqli_close($conn);
 
 }
+
+if(isset($_POST['enter-message-as-patient']))
+{	
+    //create session
+    session_start();
+    //store values submitted in the chat form in variables 
+    $message = $_POST['message'];
+    $userId = $_SESSION['id'];
+    $emailAddress = $_SESSION['email'];
+    $readStatus = $_POST['readStatus'];
+    $sent_to = $_POST['sent_to'];
+    $sent_to_id = 0;
+     
+
+    $query2 = "SELECT id FROM regdoctors WHERE emailAddress ='$sent_to'";
+    $result = mysqli_query($conn, $query2) or die(mysqli_error($conn));
+    while($row = mysqli_fetch_array($result))
+    {
+        $sent_to_id = $row['id'];	
+    }
+
+     //statement to messages and userId in the database
+	$query = "INSERT INTO chat (message, sent_from_id, emailAddress, sent_to_id, sent_to, readStatus) VALUES ('$message','$userId', '$emailAddress', '$sent_to_id', '$sent_to', '$readStatus')";
+
+    if (mysqli_query($conn,$query)) 
+    {
+        echo "<script> window.location.href= '../doctors/individual-patient-chats.php'; </script>";	
+        //add notifications here 
+    } 
+    else 
+    {
+        echo "Error: " . $query . "" . mysqli_error($conn) . "Could Not Send Message";
+    }
+	 mysqli_close($conn);
+
+}
+
+if(isset($_POST['message-delete-doc'])){
+	$id = $_GET['id'];
+    $sent_to = $_POST['sent_to'];
+    $query = "DELETE FROM chat WHERE id=$id";
+    if (mysqli_query($conn, $query))
+    {
+        $query2 = "SELECT id FROM regpatients WHERE emailAddress ='$sent_to'";
+        $result = mysqli_query($conn, $query2) or die(mysqli_error($conn));
+        while($row = mysqli_fetch_array($result))
+        {
+            $sent_to_id = $row['id'];
+            echo "<script> window.location.href= '../doctors/individual-chats.php?id=$sent_to_id'; </script>";	
+        }
+     } 
+	 else 
+     {
+		echo "Error: " . $query . "" . mysqli_error($conn);
+	 }
+	 mysqli_close($conn);
+}
+
+if(isset($_POST['message-delete'])){
+	$id = $_GET['id'];
+     $sql = "DELETE FROM chat WHERE id=$id";
+	 if (mysqli_query($conn, $sql))
+	  {
+        echo "<script>
+		    window.location.href= '../individual-patient-chats.php';
+		</script>";	
+     } 
+	 else 
+     {
+		echo "Error: " . $sql . "" . mysqli_error($conn);
+	 }
+	 mysqli_close($conn);
+}
+
+
 ?>

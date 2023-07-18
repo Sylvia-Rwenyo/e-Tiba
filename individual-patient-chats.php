@@ -10,29 +10,40 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">    <title>Join CERA</title>
     <script src="https://use.fontawesome.com/1d95bf24b3.js"></script>
 </head>
-<body class="reg-body">
-    <div class="welcome-msg">
-        <h3></h3>
-        <p></p>
+<body class="reg-body" id="chat-body">
+<div class="welcome-msg">
+        <h2>Patient Doctor Chat</h2>
+        <h3>Ask your doctor anything</h3>
     </div>
     <div>
     <?php
-    include_once "../conn.php";
+    include_once "conn.php";
     session_start();
     $current_user_email = $_SESSION['email'];
-    $resultPost = mysqli_query($conn,"SELECT sent_to, emailAddress, userId, message FROM chat WHERE emailAddress = '$current_user_email' OR sent_to = '$current_user_email'");
-    while($row = mysqli_fetch_array($resultPost)) {
+
+    $resultPost = mysqli_query($conn,"SELECT id, sent_to, emailAddress, sent_to_id, sent_from_id, message FROM chat WHERE (sent_to = '$current_user_email') OR (emailAddress = '$current_user_email')");
+    if($resultPost == null){
+        echo "You Have No Chats Yet";
+    }
+    else
+    {while($row = mysqli_fetch_array($resultPost)) {
     ?>
-    <p style="<?php if($current_user_email == $row["emailAddress"]){echo 'text-align:right';}else{echo  'text-align:left'; $sent_to = $row["emailAddress"];}?>">
-        <?php echo $row["message"]; ?>
-    </p> 
-    <?php }?>
+    <div class="message-box" style="<?php if($current_user_email == $row["emailAddress"]){echo 'text-align:right;margin-left:40%;margin-right:20%;';}else{echo  'text-align:left;margin-right:40%;margin-left:20%;';$sent_to = $row["emailAddress"];}?>">
+        <p><?php echo $row["message"]; ?></p> 
+        <form id="#message-form"  action="controls/processing.php?id=<?php echo $row["id"]; ?>" method="POST" style="<?php if($current_user_email == $row["emailAddress"]){echo 'display:block;';}else{echo  'display:none;';}?>">
+            <input type="hidden"  name="sent_to" value="<?php echo $sent_to;?>"/>
+            <button id = "message-delete" type="submit" name="message-delete" class="btn">Delete</button>
+        </form>
     </div>
-    <form method="POST" action="../controls/processing.php">
-        <input type="text" name="message" placeholder="Enter Message" required/>
-        <input type="hidden"  name="sent_to" value="<?php echo $sent_to;?>"/>
-        <input type="hidden"  name="readStatus" value="<?php echo 'unread';?>"/>
-        <input type="submit" value="Send" name="enter-message" class="pos-btn"/>
-    </form>
+    <?php }}?>
+    </div>
+    <div class = "message-input-box">
+        <form method="POST" action="controls/processing.php">
+            <input type="hidden"  name="sent_to" value="<?php echo $sent_to;?>"/>
+            <input type="hidden"  name="readStatus" value="<?php echo 'unread';?>"/>
+            <input type="text" name="message" placeholder="Enter Message" required/>
+            <button type="submit" name="enter-message-as-patient" class="pos-btn">Send</button>
+        </form>
+    </div>
 </body>
 </html>
