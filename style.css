@@ -596,10 +596,7 @@
     width: fit-content;
     display: flex;
     flex-direction: row;
-    padding: 1em;
     font-size: 1.25em;
-    background-color: rgba(190, 252, 254, 0.5);
-    margin-top: 2.5%;
 }
 
 #chat-body form  input {
