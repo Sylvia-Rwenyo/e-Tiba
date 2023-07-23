@@ -16,6 +16,7 @@
                     echo "individual-patient-chat.php";
                 }?>>
                 <?php
+                $current_user_email = $_SESSION['email'];
                 $resultPost = mysqli_query($conn,"SELECT readStatus FROM chat WHERE sent_to = '$current_user_email'");
                 $count = 0;
                 while($row = mysqli_fetch_array($resultPost)) 
