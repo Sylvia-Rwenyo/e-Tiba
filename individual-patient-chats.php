@@ -41,15 +41,19 @@
                         </form>
                     </div><?php
                 }
-                $id = $row['id'];
-                $sql = "UPDATE chat SET readStatus = 'read' WHERE id='$id'";
-                if (mysqli_query($conn, $sql)) 
+                else
                 {
-                    header("Refresh:0");
-                } 
-                else 
-                {
-                    echo "Error: " . $sql . "" . mysqli_error($conn);
+                    $id = $row['id'];
+                    $sql = "UPDATE chat SET readStatus = 'read' WHERE id='$id'";
+                    if (mysqli_query($conn, $sql)) 
+                    {
+                        header('Location: '.$_SERVER['PHP_SELF']);
+                        die;
+                    } 
+                    else 
+                    {
+                        echo "Error: " . $sql . "" . mysqli_error($conn);
+                    }
                 }
             }   
         }

@@ -54,7 +54,8 @@
                 $sql = "UPDATE chat SET readStatus = 'read' WHERE id='$id'";
                 if (mysqli_query($conn, $sql)) 
                 {
-                    header("Refresh:0");
+                    header('Location: '.$_SERVER['PHP_SELF']);
+                    die;
                 } 
                 else 
                 {
