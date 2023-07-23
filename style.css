@@ -679,9 +679,11 @@
 
 .badge {
     position:absolute;
+    z-index: 100;
     display:inline-block;
     border-radius: 50%;
-    background-color: #0d3a5c;
-    color:#fff;
+    color: #0d3a5c;
     size:1em;
+    text-align: center;
+    padding: 3px 7px;
 }
