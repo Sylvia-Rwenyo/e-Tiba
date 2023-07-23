@@ -4,6 +4,7 @@
             <li><a href=""><i class="fa fa-message"></i></a></li>
             <li>
                 <?php 
+                include_once "../conn.php";
                 session_start();
                 ?>
                 <a href = <?php 
