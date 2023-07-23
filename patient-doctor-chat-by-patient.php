@@ -50,7 +50,7 @@
             include_once "../conn.php";
             $current_user = $_SESSION['id'];
             $current_user_email = $_SESSION['email'];
-            $resultPost = mysqli_query($conn,"SELECT sender_class, sent_to, message, sent_from_id, emailAddress, readStatus FROM chat WHERE sent_to = '$current_user_email' OR emailAddress = '$current_user_email' GROUP BY emailAddress");
+            $resultPost = mysqli_query($conn,"SELECT id, sender_class, sent_to, message, sent_from_id, emailAddress, readStatus FROM chat WHERE sent_to = '$current_user_email' OR emailAddress = '$current_user_email' ORDER BY id DESC LIMIT 1");
             if($resultPost == null){
                 echo "You Have No Chats Yet";
             }
