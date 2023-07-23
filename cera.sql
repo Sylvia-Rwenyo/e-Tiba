@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.0
+-- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 23, 2023 at 04:56 PM
--- Server version: 10.4.24-MariaDB
--- PHP Version: 8.1.6
+-- Generation Time: Jul 23, 2023 at 07:29 PM
+-- Server version: 10.4.28-MariaDB
+-- PHP Version: 8.2.4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -24,6 +24,38 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `chat`
+--
+
+CREATE TABLE `chat` (
+  `id` int(11) NOT NULL,
+  `sender_class` varchar(20) NOT NULL,
+  `chat_identity` varchar(200) NOT NULL,
+  `sent_from_id` int(11) NOT NULL,
+  `emailAddress` varchar(40) NOT NULL,
+  `sent_to_id` int(11) NOT NULL,
+  `sent_to` varchar(40) NOT NULL,
+  `readStatus` varchar(10) NOT NULL,
+  `message` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `dosage`
+--
+
+CREATE TABLE `dosage` (
+  `id` int(11) NOT NULL,
+  `dosageName,` varchar(400) NOT NULL,
+  `tablets` int(11) NOT NULL,
+  `number_of_days` int(11) NOT NULL,
+  `times_a_day` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `patientmedlog`
 --
 
@@ -33,7 +65,7 @@ CREATE TABLE `patientmedlog` (
   `medTime` datetime NOT NULL,
   `entryID` int(20) NOT NULL,
   `recordDate` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -46,7 +78,7 @@ CREATE TABLE `patientsleeplog` (
   `sleepTime` int(2) NOT NULL,
   `entryID` int(20) NOT NULL,
   `recordDate` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `patientsleeplog`
@@ -70,7 +102,7 @@ CREATE TABLE `patientsmeallog` (
   `mealTime` datetime NOT NULL,
   `entryID` int(20) NOT NULL,
   `recordDate` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -91,7 +123,7 @@ CREATE TABLE `regdoctors` (
   `gender` varchar(10) NOT NULL,
   `profilePhoto` blob NOT NULL,
   `phoneNumber` int(14) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `regdoctors`
@@ -118,7 +150,7 @@ CREATE TABLE `reginstitutions` (
   `illnesses` varchar(200) NOT NULL,
   `postalAddress` varchar(200) NOT NULL,
   `profilePhoto` blob NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `reginstitutions`
@@ -146,7 +178,7 @@ CREATE TABLE `regpatients` (
   `gender` varchar(10) NOT NULL,
   `phoneNumber` int(14) NOT NULL,
   `profilePhoto` blob NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `regpatients`
@@ -160,6 +192,18 @@ INSERT INTO `regpatients` (`id`, `firstName`, `lastName`, `emailAddress`, `insti
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `chat`
+--
+ALTER TABLE `chat`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `dosage`
+--
+ALTER TABLE `dosage`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `patientmedlog`
@@ -202,6 +246,18 @@ ALTER TABLE `regpatients`
 --
 -- AUTO_INCREMENT for dumped tables
 --
+
+--
+-- AUTO_INCREMENT for table `chat`
+--
+ALTER TABLE `chat`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `dosage`
+--
+ALTER TABLE `dosage`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `patientmedlog`

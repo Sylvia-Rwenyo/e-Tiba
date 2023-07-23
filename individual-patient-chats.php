@@ -31,8 +31,9 @@
     {
         $sent_to = $row["emailAddress"];	
     }
-
-    $resultPost = mysqli_query($conn,"SELECT id, readStatus, sent_to, emailAddress, sent_to_id, sent_from_id, message FROM chat WHERE (sent_to = '$current_user_email' AND emailAddress = '$sent_to') OR (sent_to = '$sent_to' AND emailAddress = '$current_user_email')");
+    $chat_identity_forward = $current_user_email."_".$sent_to;
+    $chat_identity_reverse = $sent_to."_".$current_user_email;
+    $resultPost = mysqli_query($conn,"SELECT id, chat_identity, readStatus, sent_to, emailAddress, sent_to_id, sent_from_id, message FROM chat WHERE chat_identity = '$chat_identity_forward' OR chat_identity = '$chat_identity_reverse' ");
     if($resultPost == null){
         echo "You Have No Chats Yet";
     }
@@ -66,7 +67,18 @@
                         echo "Error: " . $sql . "" . mysqli_error($conn);
                     }
                 }
-            }   
+            }  
+            else
+            {
+                ?>
+                <div class="message-box" style="<?php if($current_user_email == $row["emailAddress"]){echo 'text-align:right;margin-left:40%;margin-right:20%;';}else{echo  'text-align:left;margin-right:40%;margin-left:20%;';$sent_to = $row["emailAddress"];}?>">
+                    <p><?php echo $row["message"]; ?></p> 
+                    <form id="message-form"  action="controls/processing.php?id=<?php echo $row["id"]; ?>" method="POST" style="<?php if($current_user_email == $row["emailAddress"]){echo 'display:block;';}else{echo  'display:none;';}?>">
+                        <input type="hidden"  name="sent_to" value="<?php echo $sent_to;?>"/>
+                        <input id = "message-delete" type="submit" name="message-delete" class="neg-btn"value="Delete"/>
+                    </form>
+                </div><?php
+            } 
         }
     }?>
     </div>

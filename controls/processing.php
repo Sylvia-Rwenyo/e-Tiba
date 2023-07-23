@@ -562,9 +562,9 @@ if(isset($_POST['enter-message-as-doc']))
     {
         $sent_to_id = $row['id'];	
     }
-
+    $chat_identity = $emailAddress."_".$sent_to;
      //statement to messages and userId in the database
-	$query = "INSERT INTO chat (message, sender_class, sent_from_id, emailAddress, sent_to_id, sent_to, readStatus) VALUES ('$message','$sender_class','$userId', '$emailAddress', '$sent_to_id', '$sent_to', '$readStatus')";
+	$query = "INSERT INTO chat (chat_identity, message, sender_class, sent_from_id, emailAddress, sent_to_id, sent_to, readStatus) VALUES ('$chat_identity', '$message','$sender_class','$userId', '$emailAddress', '$sent_to_id', '$sent_to', '$readStatus')";
 
     if (mysqli_query($conn,$query)) 
     {
@@ -599,9 +599,9 @@ if(isset($_POST['enter-message-as-patient']))
     {
         $sent_to_id = $row['id'];	
     }
-
+    $chat_identity = $emailAddress."_".$sent_to;
      //statement to messages and userId in the database
-	$query = "INSERT INTO chat (message, sender_class, sent_from_id, emailAddress, sent_to_id, sent_to, readStatus) VALUES ('$message', '$sender_class','$userId', '$emailAddress', '$sent_to_id', '$sent_to', '$readStatus')";
+	$query = "INSERT INTO chat (chat_identity, message, sender_class, sent_from_id, emailAddress, sent_to_id, sent_to, readStatus) VALUES ('$chat_identity','$message', '$sender_class','$userId', '$emailAddress', '$sent_to_id', '$sent_to', '$readStatus')";
 
     if (mysqli_query($conn,$query)) 
     {

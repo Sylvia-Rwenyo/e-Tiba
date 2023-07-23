@@ -31,8 +31,9 @@
     {
         $sent_to = $row["emailAddress"];	
     }
-
-    $resultPost = mysqli_query($conn,"SELECT id, sent_to, readStatus, emailAddress, sent_to_id, sent_from_id, message FROM chat WHERE (sent_to = '$current_user_email' AND emailAddress = '$sent_to') OR (sent_to = '$sent_to' AND emailAddress = '$current_user_email')");
+    $chat_identity_forward = $current_user_email."_".$sent_to;
+    $chat_identity_reverse = $sent_to."_".$current_user_email;
+    $resultPost = mysqli_query($conn,"SELECT * FROM chat WHERE chat_identity = '$chat_identity_forward' OR chat_identity = '$chat_identity_reverse' ");
     while($row = mysqli_fetch_array($resultPost)) 
     {  
         if($current_user_email == $row["sent_to"])
@@ -63,6 +64,18 @@
                 }
             }
         } 
+        else
+        {
+            ?>
+                <div class="message-box" style="<?php if($current_user_email == $row["emailAddress"]){echo 'text-align:right;margin-left:40%;margin-right:20%;';}else{echo  'text-align:left;margin-right:40%;margin-left:20%;';}?>">
+                    <p><?php echo $row["message"]; ?></p>
+                    <form id="message-form"  action="../controls/processing.php?id=<?php echo $row["id"]; ?>" method="POST" style="<?php if($current_user_email == $row["emailAddress"]){echo 'display:block;';}else{echo  'display:none;';}?>">
+                        <input type="hidden"  name="sent_to" value="<?php echo $sent_to;?>"/>    
+                        <input id = "message-delete-doc" type="submit" name="message-delete-doc" class="neg-btn" value="Delete"/>
+                    </form>
+                </div> 
+                <?php
+        }
     }?>
     </div>
     <div class = "message-input-box">
