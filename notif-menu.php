@@ -4,7 +4,7 @@
             <li><a href=""><i class="fa fa-message"></i></a></li>
             <li>
                 <?php 
-                include_once "../conn.php";
+                include_once "conn.php";
                 session_start();
                 ?>
                 <a href = <?php 
@@ -14,7 +14,7 @@
                 }
                 elseif($_SESSION['category'] == 'patient')
                 {
-                    echo "individual-patient-chat.php";
+                    echo "patient-doctor-chat-by-patient.php";
                 }?>>
                 <?php
                 $current_user_email = $_SESSION['email'];

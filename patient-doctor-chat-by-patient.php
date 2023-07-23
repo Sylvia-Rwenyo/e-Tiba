@@ -25,7 +25,7 @@
         <div class = "dropdown-content">
             <div style="word-wrap:break-word;">
             <?php
-            include_once '../conn.php';
+            include_once 'conn.php';
             session_start();
             if(isset($_GET['search']))
             {
@@ -47,7 +47,6 @@
     <div>
         <table>
             <?php
-            include_once "../conn.php";
             $current_user = $_SESSION['id'];
             $current_user_email = $_SESSION['email'];
             $resultPost = mysqli_query($conn,"SELECT id, sender_class, sent_to, message, sent_from_id, emailAddress, readStatus FROM chat WHERE sent_to = '$current_user_email' OR emailAddress = '$current_user_email' ORDER BY id DESC LIMIT 1");
@@ -60,13 +59,15 @@
                 ?>
                 <tr class="table-row">
                     <td>
-                        <a href="individual-patient-chats.php?id=<?php if($row["sender_class"] == 'patient'){echo $row["sent_to_id"];}else{echo $row["sent_from_id"];} ?>" method="POST">
+                    <a href="individual-patient-chats.php?id=<?php if($row["sender_class"] == 'patient'){echo $row["sent_to_id"];}else{echo $row["sent_from_id"];} ?>">
                         <p>From <?php if($current_user_email == $row["emailAddress"]){echo "You";}else{echo $row["emailAddress"];} ?></p>
                         <span style="display:inline-block; font-size:25px; overflow:hidden; max-width:20ch;word-wrap:break-word;"><?php echo $row["message"]; ?></span>
                         </a>
                     </td>                        
                 </tr>
-                <?php }}?> 
+                <?php 
+                }
+            }?> 
         </table>
     </div>
     

@@ -20,8 +20,19 @@
     include_once "conn.php";
     session_start();
     $current_user_email = $_SESSION['email'];
+    if(isset($_GET['id'])){
+        $requested_doctor = $_GET['id'];
+    }
+    $sent_to = 0;
+    $query = "SELECT emailAddress, id FROM regdoctors WHERE id ='$requested_doctor'";
+    $result = mysqli_query($conn, $query) or die(mysqli_error($conn));
+    
+    while($row = mysqli_fetch_array($result))
+    {
+        $sent_to = $row["emailAddress"];	
+    }
 
-    $resultPost = mysqli_query($conn,"SELECT id, readStatus, sent_to, emailAddress, sent_to_id, sent_from_id, message FROM chat WHERE (sent_to = '$current_user_email') OR (emailAddress = '$current_user_email')");
+    $resultPost = mysqli_query($conn,"SELECT id, readStatus, sent_to, emailAddress, sent_to_id, sent_from_id, message FROM chat WHERE (sent_to = '$current_user_email' AND emailAddress = '$sent_to') OR (sent_to = '$sent_to' AND emailAddress = '$current_user_email')");
     if($resultPost == null){
         echo "You Have No Chats Yet";
     }

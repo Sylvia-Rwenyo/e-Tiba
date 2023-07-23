@@ -20,7 +20,6 @@
   </div>
   <div class="mainBody">
 <?php
-session_start();
 if(!isset($_SESSION["loggedIN"])){
   header('location:index.php');
 }else{

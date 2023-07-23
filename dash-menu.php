@@ -53,7 +53,7 @@
             <!-- settings -->
             <a href="settings.php" class="<?php echo isActive('settings.php'); ?>"><li><i class="fa-solid fa-gears"></i></li></a>
             <!-- see chats page -->
-            <a href ="individual-patient-chats.php"class="<?php echo isActive('individual-patient-chats.php'); ?>"><li><i class="fa-solid fa-gears"></i></li></a>
+            <a href ="patient-doctor-chat-by-patient.php"class="<?php echo isActive('patient-doctor-chat-by-patient.php'); ?>"><li><i class="fa-solid fa-gears"></i></li></a>
             <?php
         }
         ?>

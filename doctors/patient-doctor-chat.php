@@ -60,8 +60,8 @@
                 ?>
                 <tr class="table-row">
                     <td>
-                        <a href="individual-chats.php?id=<?php if($row["sender_class"] == 'doctor'){echo $row["sent_to_id"];}else{echo $row["sent_from_id"];} ?>" method="POST">
-                        <p>From <?php if($current_user_email == $row["emailAddress"]){echo "You";}else{echo $row["emailAddress"];} ?></p>
+                        <a href="individual-chats.php?id=<?php if($row["sender_class"] == 'doctor'){echo $row["sent_to_id"];}else{echo $row["sent_from_id"];} ?>">
+                        <p>From <?php if($current_user_email == $row["emailAddress"]){echo "You";}else{echo $row["emailAddress"];} ?> To <?php if($current_user_email == $row["sent_to"]){echo "You";}else{echo $row["sent_to"];} ?></p>
                         <span style="display:inline-block; font-size:25px; overflow:hidden; max-width:20ch;word-wrap:break-word;"><?php echo $row["message"]; ?></span>
                         </a>
                     </td>                        
