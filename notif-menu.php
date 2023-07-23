@@ -25,9 +25,9 @@
                     if($row['readStatus'] == 'unread')
                     {
                         $count = $count + 1;
-                    }?>
-                    <i class="fa fa-message"><span class="badge"><?php if($count == 0){echo "";}else{echo $count;}?></span></i><?php 
+                    }
                 }?>
+                <i class="fa fa-message"><span class="badge"><?php if($count == 0){echo "";}else{echo $count;}?></span></i>
                 </a>
                 </li>
             
