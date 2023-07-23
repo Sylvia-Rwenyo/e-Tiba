@@ -1,7 +1,7 @@
     <div class="menu meet-menu">
         <ul>
             <li><a href="meet.php"><i class="fa fa-bell"></i></a></li>
-            <li><a href=""><i class="fa fa-message"></i></a></li>
+            <li><a href=""><i class="fa-solid fa-video"></i></a></li>
             <li>
                 <?php 
                 include_once "conn.php";
@@ -26,7 +26,7 @@
                     {
                         $count = $count + 1;
                     }?>
-                    <i class="fa-solid fa-video"><?php if($count == 0){echo "";}else{echo $count;}?></i><?php 
+                    <i class="fa fa-message"><?php if($count == 0){echo "";}else{echo $count;}?></i><?php 
                 }?>
                 </a>
                 </li>
