@@ -23,7 +23,7 @@
             <a href="settings.php" class="<?php echo isActive('settings.php'); ?>"><li><i class="fa-solid fa-gears"></i></li></a>
 
             <!-- patient-doctor chats -->
-            <a href="partners/patient-doctor-chat.php" class="<?php echo isActive('partners/patient-doctor-chat.php'); ?>"><li><i class="fa-solid fa-gears"></i></li></a>
+            <a href="partners/patient-doctor-chat.php" class="<?php echo isActive('partners/patient-doctor-chat.php'); ?>"><li><i class="fa-solid fa-message"></i></li></a>
             <?php
         } else if ($_SESSION['category'] == 'doctor') {
             ?>
@@ -36,7 +36,7 @@
             <!-- check patient progress -->
             <a href="doctors/patient-progress.php" class="<?php echo isActive('doctors/patient-progress.php'); ?>"><li><i class="fa fa-plus"></i></li></a>
             <!-- talk to your patients -->
-            <a href="doctors/patient-doctor-chat.php" class="<?php echo isActive('doctors/patient-doctor-chat.php'); ?>"><li><i class="fa fa-plus"></i></li></a>
+            <a href="doctors/patient-doctor-chat.php" class="<?php echo isActive('doctors/patient-doctor-chat.php'); ?>"><li><i class="fa-solid fa-message"></i></li></a>
             <!-- schedule appointment -->
             <a href="calendar.php" class="<?php echo isActive('calendar.php'); ?>"><li><i class="fa fa-calendar"></i></li></a>
            <!-- settings -->
@@ -53,7 +53,7 @@
             <!-- settings -->
             <a href="settings.php" class="<?php echo isActive('settings.php'); ?>"><li><i class="fa-solid fa-gears"></i></li></a>
             <!-- see chats page -->
-            <a href ="patient-doctor-chat-by-patient.php"class="<?php echo isActive('patient-doctor-chat-by-patient.php'); ?>"><li><i class="fa-solid fa-gears"></i></li></a>
+            <a href ="patient-doctor-chat-by-patient.php"class="<?php echo isActive('patient-doctor-chat-by-patient.php'); ?>"><li><i class="fa-solid fa-message"></i></li></a>
             <?php
         }
         ?>

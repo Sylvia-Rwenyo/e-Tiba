@@ -676,3 +676,12 @@
 .dropdown-content {
     position: absolute;
 }
+
+.badge {
+    position:absolute;
+    display:inline-block;
+    border-radius: 50%;
+    background-color: #0d3a5c;
+    color:#fff;
+    size:1em;
+}

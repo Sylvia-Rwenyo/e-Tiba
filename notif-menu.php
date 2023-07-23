@@ -26,7 +26,7 @@
                     {
                         $count = $count + 1;
                     }?>
-                    <i class="fa fa-message"><?php if($count == 0){echo "";}else{echo $count;}?></i><?php 
+                    <i class="fa fa-message"><span class="badge"><?php if($count == 0){echo "";}else{echo $count;}?></span></i><?php 
                 }?>
                 </a>
                 </li>
