@@ -687,3 +687,20 @@
     text-align: center;
     padding: 3px 7px;
 }
+.all_messages {
+    width: 60%;
+    height: 30%;
+    margin: 20%;
+    position: relative;
+    border: 2px solid;
+    border-color: #0d3a5c;
+    border-radius: 5px;
+}
+.all_message_mini{
+    position: absolute;
+    width: auto;
+    height: auto;
+    scroll-behavior:smooth;
+	overflow:scroll;
+    background-color: #fff;
+}

@@ -44,31 +44,31 @@
     </div>
     </div>
 </div>
-    <div>
-        <table>
-            <?php
-            include_once "../conn.php";
-            $current_user = $_SESSION['id'];
-            $current_user_email = $_SESSION['email'];
-            $resultPost = mysqli_query($conn,"SELECT id, sender_class, sent_to, message, sent_from_id, sent_to_id, emailAddress, readStatus FROM chat WHERE sent_to = '$current_user_email' OR emailAddress = '$current_user_email' ORDER BY id DESC LIMIT 1");
-            if($resultPost == null){
-                echo "You Have No Chats Yet";
-            }
-            else
-            {
-                while($row = mysqli_fetch_array($resultPost)) {
-                ?>
-                <tr class="table-row">
-                    <td>
-                        <a href="individual-chats.php?id=<?php if($row["sender_class"] == 'doctor'){echo $row["sent_to_id"];}else{echo $row["sent_from_id"];} ?>">
-                        <p>From <?php if($current_user_email == $row["emailAddress"]){echo "You";}else{echo $row["emailAddress"];} ?> To <?php if($current_user_email == $row["sent_to"]){echo "You";}else{echo $row["sent_to"];} ?></p>
-                        <span style="display:inline-block; font-size:25px; overflow:hidden; max-width:20ch;word-wrap:break-word;"><?php echo $row["message"]; ?></span>
-                        </a>
-                    </td>                        
-                </tr>
-                <?php }}?> 
-        </table>
-    </div>
+<div>
+    <table>
+        <?php
+        include_once "../conn.php";
+        $current_user = $_SESSION['id'];
+        $current_user_email = $_SESSION['email'];
+        $resultPost = mysqli_query($conn,"SELECT id, sender_class, sent_to, message, sent_from_id, sent_to_id, emailAddress, readStatus FROM chat WHERE sent_to = '$current_user_email' OR emailAddress = '$current_user_email' ORDER BY id DESC LIMIT 1");
+        if($resultPost == null){
+            echo "You Have No Chats Yet";
+        }
+        else
+        {
+            while($row = mysqli_fetch_array($resultPost)) {
+            ?>
+            <tr class="table-row">
+                <td>
+                    <a href="individual-chats.php?id=<?php if($row["sender_class"] == 'doctor'){echo $row["sent_to_id"];}else{echo $row["sent_from_id"];} ?>">
+                    <p>From <?php if($current_user_email == $row["emailAddress"]){echo "You";}else{echo $row["emailAddress"];} ?> To <?php if($current_user_email == $row["sent_to"]){echo "You";}else{echo $row["sent_to"];} ?></p>
+                    <span style="display:inline-block; font-size:25px; overflow:hidden; max-width:20ch;word-wrap:break-word;"><?php echo $row["message"]; ?></span>
+                    </a>
+                </td>                        
+            </tr>
+            <?php }}?> 
+    </table>
+</div>
     
 </body>
 </html>

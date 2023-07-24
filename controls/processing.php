@@ -605,7 +605,7 @@ if(isset($_POST['enter-message-as-patient']))
 
     if (mysqli_query($conn,$query)) 
     {
-        echo "<script> window.location.href= '../doctors/individual-patient-chats.php?id=$sent_to_id'; </script>";	
+        echo "<script> window.location.href= 'individual-patient-chats.php?id=$sent_to_id'; </script>";	
         //add notifications here 
     } 
     else 
