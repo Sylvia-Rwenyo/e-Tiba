@@ -50,7 +50,7 @@
                                 <p><?php echo $row["message"]; ?></p> 
                                 <form id="message-form"  action="controls/processing.php?id=<?php echo $row["id"]; ?>" method="POST" style="<?php if($current_user_email == $row["emailAddress"]){echo 'display:block;';}else{echo  'display:none;';}?>">
                                     <input type="hidden"  name="sent_to" value="<?php echo $sent_to;?>"/>
-                                    <input id = "message-delete" type="submit" name="message-delete" class="neg-btn"value="Delete"/>
+                                    <input id = "message-delete" type="submit" name="message-delete" class="chat-btn"value="Delete"/>
                                 </form>
                             </div><?php
                         }
@@ -76,7 +76,7 @@
                             <p><?php echo $row["message"]; ?></p> 
                             <form id="message-form"  action="controls/processing.php?id=<?php echo $row["id"]; ?>" method="POST" style="<?php if($current_user_email == $row["emailAddress"]){echo 'display:block;';}else{echo  'display:none;';}?>">
                                 <input type="hidden"  name="sent_to" value="<?php echo $sent_to;?>"/>
-                                <input id = "message-delete" type="submit" name="message-delete" class="neg-btn"value="Delete"/>
+                                <input id = "message-delete" type="submit" name="message-delete" class="chat-btn"value="Delete"/>
                             </form>
                         </div><?php
                     } 

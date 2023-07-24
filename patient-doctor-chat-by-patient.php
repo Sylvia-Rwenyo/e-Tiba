@@ -17,61 +17,63 @@
 </div>
 <div class="search-bar-top">
     <div class="search-bar">
-        <form action = "" method = "GET" class = "form-inline">
-            <input name = "keyword" type = "text" placeholder = "Search Doctor here..." class = "form-control" value = "<?php echo isset($_POST['keyword'])?$_POST['keyword']:''?>"/>
-            <span class = "input-group-button"><button class="pos-btn type="submit" name = "search">SEARCH</button></span>
-        </form>
-        <div class = "dropdown">
-            <div class = "dropdown-content">
-                <div style="word-wrap:break-word;">
-                    <?php
-                    include_once 'conn.php';
-                    session_start();
-                    if(isset($_GET['search']))
-                    {
-                        $keyword = $_GET['keyword'];
-                        $sql = "SELECT * FROM regdoctors WHERE emailAddress LIKE '$keyword' or firstName LIKE '$keyword'";
-                        $result = mysqli_query($conn, $sql) or die(mysqli_error($conn));
-                        while($rows = mysqli_fetch_array($result))
-                        {?>
-                            <a href = "individual-patient-chats.php?id=<?php echo $rows['id'] ?>"><h3><?php echo $rows['firstName']?></h3></a>
-                            <a href = "individual-patient-chats.php?id=<?php echo $rows['id'] ?>" ><h4><?php echo $rows['emailAddress']?></h4></a>
+        <div data-parallax = "scroll">
+            <form action = "" method = "GET" class = "form-inline">
+                <input name = "keyword" type = "text" placeholder = "Search Doctor here..." class = "form-control" value = "<?php echo isset($_POST['keyword'])?$_POST['keyword']:''?>"/>
+                <span class = "input-group-button"><button class="pos-btn" type="submit" name = "search">SEARCH</button></span>
+            </form>
+            <div class = "dropdown">
+                <div style="position:absolute;">
+                    <div class = "dropdown-content">
+                        <div style="word-wrap:break-word;">
                             <?php
-                        }
-                    } ?>
+                            include_once 'conn.php';
+                            session_start();
+                            if(isset($_GET['search']))
+                            {
+                                $keyword = $_GET['keyword'];
+                                $sql = "SELECT * FROM regdoctors WHERE emailAddress LIKE '$keyword' or firstName LIKE '$keyword'";
+                                $result = mysqli_query($conn, $sql) or die(mysqli_error($conn));
+                                while($rows = mysqli_fetch_array($result))
+                                {?>
+                                    <a href = "individual-patient-chats.php?id=<?php echo $rows['id'] ?>"><h3><?php echo $rows['firstName']?></h3></a>
+                                    <a href = "individual-patient-chats.php?id=<?php echo $rows['id'] ?>" ><h4><?php echo $rows['emailAddress']?></h4></a>
+                                    <?php
+                                }
+                            } ?>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
-<div>
-    <table>
-        <?php
-        $_id = 0;
-        $current_user = $_SESSION['id'];
-        $current_user_email = $_SESSION['email'];
-        $resultPost = mysqli_query($conn,"SELECT * FROM chat WHERE sent_to = '$current_user_email' OR emailAddress = '$current_user_email' ORDER BY id DESC LIMIT 1");
-        if($resultPost == null){
-            echo "You Have No Chats Yet";
-        }
-        else
+<div class="chat_list_table">
+    <?php
+    $_id = 0;
+    $current_user = $_SESSION['id'];
+    $current_user_email = $_SESSION['email'];
+    $resultPost = mysqli_query($conn,"SELECT * FROM chat WHERE sent_to = '$current_user_email' OR emailAddress = '$current_user_email' GROUP BY chat_identity ORDER BY id DESC ");
+    if($resultPost == null){
+        echo "You Have No Chats Yet";
+    }
+    else
+    {
+        while($row = mysqli_fetch_array($resultPost)) 
         {
-            while($row = mysqli_fetch_array($resultPost)) 
-            {
-                ?>
-                <tr class="table-row">
-                    <td>
-                    <?php if($row["sender_class"] == 'patient'){$_id = $row["sent_to_id"];}else{$_id = $row["sent_from_id"];}?>
-                    <a href="individual-patient-chats.php?id=<?php echo $_id; ?>">
-                        <p>From <?php if($current_user_email == $row["emailAddress"]){echo "You";}else{echo $row["emailAddress"];} ?></p>
-                        <span style="display:inline-block; font-size:25px; overflow:hidden; max-width:20ch;word-wrap:break-word;"><?php echo $row["message"]; ?></span>
-                        </a>
-                    </td>                        
-                </tr>
-                <?php 
-            }
-        }?> 
-    </table>
+            ?>
+            <div class="table-row">
+                <span>
+                <?php if($row["sender_class"] == 'patient'){$_id = $row["sent_to_id"];}else{$_id = $row["sent_from_id"];}?>
+                <a href="individual-patient-chats.php?id=<?php echo $_id; ?>">
+                    <p>From <?php if($current_user_email == $row["emailAddress"]){echo "You";}else{echo $row["emailAddress"];} ?> To <?php if($current_user_email == $row["sent_to"]){echo "You";}else{echo $row["sent_to"];} ?></p>
+                    <span class="home-chat-briefs"><?php echo $row["message"]; ?></span>
+                    </a>
+                </span>                        
+            </div>
+            <?php 
+        }
+    }?> 
 </div>
     
 </body>

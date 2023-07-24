@@ -639,12 +639,17 @@ if(isset($_POST['message-delete-doc'])){
 
 if(isset($_POST['message-delete'])){
 	$id = $_GET['id'];
-     $sql = "DELETE FROM chat WHERE id=$id";
-	 if (mysqli_query($conn, $sql))
-	  {
-        echo "<script>
-		    window.location.href= '../individual-patient-chats.php';
-		</script>";	
+    $sent_to = $_POST['sent_to'];
+    $sql = "DELETE FROM chat WHERE id=$id";
+    if (mysqli_query($conn, $sql))
+    {
+        $query2 = "SELECT id FROM regdoctors WHERE emailAddress ='$sent_to'";
+        $result = mysqli_query($conn, $query2) or die(mysqli_error($conn));
+        while($row = mysqli_fetch_array($result))
+        {
+            $sent_to_id = $row['id'];
+            echo "<script> window.location.href= '../individual-patient-chats.php?id=$sent_to_id'; </script>";	
+        }
      } 
 	 else 
      {
