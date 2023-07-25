@@ -579,6 +579,7 @@
     color:#35b6be;
     width:70%;
 }
+/*message bubble*/
 .message-box {
     width: 40%;
     height: fit-content;
@@ -587,9 +588,31 @@
     color: white;
     padding: 1.5%;
     border: none;
-    border-radius: 10%;
+    border-radius: 2em 1em 4em / 0.5em 3em;
 }
 
+.tri-right-left-top::before {
+    content:"";
+    position: absolute;
+    width:0;
+    height:0;
+    left:30px;
+    right:auto;
+    top:-1px;
+    bottom:auto;
+    border:-12px solid transparent;
+}
+
+.tri-right-right-top::after {
+    content:"";
+    position: absolute;
+    width:0px;
+    height:0px;
+    left:auto;
+    right:-20px;
+    top:-0.3px;
+    bottom:auto;
+}
 .message-box form {
     width: 5%-webkit-fill-available;
     height: fit-content;
@@ -715,7 +738,7 @@
     background-color:#35b6be;
     margin: 1%;
     padding: 1%;
-    border-radius: 5%;
+    border-radius: 2em / 2em;
     width:90%;
     height: fit-content;
     position: relative;
@@ -854,6 +877,7 @@
     -webkit-box-orient: vertical;
 }
 
+/*Read ticks*/
 .read_ticks {
     border-radius: 50%;
     width: 20px;
@@ -861,8 +885,21 @@
     margin-left:90%;
 }
 
+.message-box .read_ticks_in_chat{
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    margin:5%;
+}
+
 .conversation_name {
+    color:#034b50;
+    border-radius: 5em / 4em;
+    background-color: #fff;
     word-wrap: break-word;
+    padding: 0.5%;
+    margin-left: 5%;
+    margin-right: 60%;
 }
 
 /* patient records dashboard menu */
