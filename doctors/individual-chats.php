@@ -11,12 +11,12 @@
     <script src="https://use.fontawesome.com/1d95bf24b3.js"></script>
 </head>
 <body class="reg-body" id="chat-body">
-    <div class="welcome-msg">
-        <h2>Patient Doctor Chat</h2>
-        <h3>Ask your doctor anything</h3>
-    </div>
-    <div class = "all_messages">
-        <div class="all_message_mini">
+    <div class="menu-bar">
+        <div class="welcome-msg">
+            <h2>Patient Doctor Chat</h2>
+            <h3>Ask your doctor anything</h3>
+        </div>
+        <div class="chat_with_title">
             <?php
             include_once "../conn.php";
             session_start();
@@ -25,16 +25,23 @@
             }
             $current_user_email = $_SESSION['email'];
             $sent_to = 0;
-            $query = "SELECT emailAddress, id FROM regpatients WHERE id ='$requested_patient'";
+            $fname_chatting_with = 0;
+            $query = "SELECT * FROM regpatients WHERE id ='$requested_patient'";
             $result = mysqli_query($conn, $query) or die(mysqli_error($conn));
             
             while($row = mysqli_fetch_array($result))
             {
                 $sent_to = $row["emailAddress"];	
-            }
-            $chat_identity_forward = $current_user_email."_".$sent_to;
-            $chat_identity_reverse = $sent_to."_".$current_user_email;
-            $resultPost = mysqli_query($conn,"SELECT * FROM chat WHERE chat_identity = '$chat_identity_forward' OR chat_identity = '$chat_identity_reverse' ");
+                $fname_chatting_with = $row["firstName"];
+            }?>
+            <h4><?php echo $fname_chatting_with;?></h4>
+        </div>
+    </div>
+    <div class = "all_messages">
+        <div class="all_message_mini">
+            <?php
+            $chat_identity = $current_user_email."_".$sent_to;
+            $resultPost = mysqli_query($conn,"SELECT * FROM chat WHERE chat_identity = '$chat_identity' ");
             while($row = mysqli_fetch_array($resultPost)) 
             {  
                 if($current_user_email == $row["sent_to"])

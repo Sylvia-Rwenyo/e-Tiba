@@ -599,13 +599,13 @@ if(isset($_POST['enter-message-as-patient']))
     {
         $sent_to_id = $row['id'];	
     }
-    $chat_identity = $emailAddress."_".$sent_to;
+    $chat_identity = $sent_to."_".$emailAddress;
      //statement to messages and userId in the database
 	$query = "INSERT INTO chat (chat_identity, message, sender_class, sent_from_id, emailAddress, sent_to_id, sent_to, readStatus) VALUES ('$chat_identity','$message', '$sender_class','$userId', '$emailAddress', '$sent_to_id', '$sent_to', '$readStatus')";
 
     if (mysqli_query($conn,$query)) 
     {
-        echo "<script> window.location.href= 'individual-patient-chats.php?id=$sent_to_id'; </script>";	
+        echo "<script> window.location.href= '../individual-patient-chats.php?id=$sent_to_id'; </script>";	
         //add notifications here 
     } 
     else 
