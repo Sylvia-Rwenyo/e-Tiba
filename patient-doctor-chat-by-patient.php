@@ -1,3 +1,13 @@
+<?php 
+    include_once 'conn.php';
+    session_start();
+    if($_SESSION["loggedIN"] == false)
+    {
+        echo ' <script> 
+        window.location.href = "../index.php";
+        </script>';       
+    }
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -28,8 +38,6 @@
                         <div class = "dropdown-content">
                             <div style="word-wrap:break-word;">
                                 <?php
-                                include_once 'conn.php';
-                                session_start();
                                 if(isset($_GET['search']))
                                 {
                                     $keyword = $_GET['keyword'];

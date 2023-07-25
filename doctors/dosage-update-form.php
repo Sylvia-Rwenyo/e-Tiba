@@ -10,19 +10,23 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <title>CERA</title>
 </head>
-<body>
+<body class="reg-body">
     <div>
-    <h1>Update Item Details</h1>
-        <div style="display:inline-block">
+        <div class="menu-bar">
+            <div class="welcome-msg" style="display:inline-block">
+                <h1>Update Item Details</h1>
+            </div>
+        </div>
+        <section>
             <form id="form"  action="../controls/processing.php?id=<?php echo $_GET['id'] ?>" method="POST">
                 <input type="text" id="dosageName" name="dosageName"  size="30" placeholder="Enter Name">
                 <input type="number" id="tablets" name="tablets"  size="10"  placeholder="Tablets">
                 <input type="number" id="timesADay" name="timesADay"  size="10"  placeholder="Times in a day">
                 <input type="number" id="numberOfDays" name="numberOfDays"  size="10"  placeholder="Prescribed Duration in Days">
                 <br/>
-                <input id = "itemsubmit" type="submit" value="Submit" name="dosage-update" class="btn">
+                <input id = "itemsubmit" type="submit" value="Submit" name="dosage-update" class="pos-btn">
             </form>
-        </div>
+        </section>
     </div>
 </body>
 </html>

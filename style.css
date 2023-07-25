@@ -139,8 +139,19 @@
     background-color: rgba(190, 252, 254, 0.5);
     margin-top: 2.5%;
 }
+
+#dosage-reg form{
+    height: fit-content;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    padding: 1em;
+    font-size: 1.25em;
+    background-color: rgba(190, 252, 254, 0.5);
+}
+
 .reg-body form  input, .reg-body form select, .reg-body form  div, 
-#editingProfile input, #editingProfile select, #editingProfile  div{
+#dosage-reg form input, #editingProfile input, #editingProfile select, #editingProfile  div{
     padding: 1em;
     margin: 0.5em;
     border: none;
@@ -171,7 +182,7 @@
 .reg-body form div input:focus, #editingProfile div input:focus{
     outline: none;
 }
-.reg-body .pos-btn, #editingProfile .pos-btn{
+.reg-body .pos-btn, #editingProfile .pos-btn, #dosage-reg .pos-btn{
     width: 8em;
     height: 2em;
     border-radius: 5px;
@@ -731,6 +742,47 @@
 .badge:empty {
     display: none
 }
+.dosage_records {
+    margin: 3%;
+    margin-top:10em;
+    margin-left: 5%;
+    margin-right: 0%;
+    height: 25em;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    border: none;
+    border-radius: 5px;
+    overflow:scroll;
+    background-color: #fff;
+    scroll-behavior:smooth;
+}
+
+.dosage_records td{
+    height:fit-content;
+    padding: 2%;
+    border-radius: 5%;
+}
+
+.dosage_records .table_field_names td{
+    color:#fff;
+    background-color: #35b6be;
+}
+.dosage_records .table_field_items td{
+    background-color: rgba(190, 252, 254, 0.25);
+}
+
+.dosage_records .table_field_items .pos-btn{
+    background-color: rgba(190, 252, 254, 0.5);
+    border: none;
+    font-size: 1.25em;
+    border-radius: 10%;
+}
+.dosage_records .table_field_items .pos-btn:hover{
+    background-color: white;
+    border: 2px solid rgba(190, 252, 254, 0.5);
+    
+}
 
 .all_messages {
     width: 40%-webkit-fill-available;
@@ -811,4 +863,54 @@
 
 .conversation_name {
     word-wrap: break-word;
+}
+
+/* patient records dashboard menu */
+#patient-records {
+    display: inline-block;
+}
+
+.patient-records-dash-menu {
+    height: 80vh;
+    width: 10%;
+    position: -webkit-sticky;
+    position: sticky;
+}
+
+.patient-records-dash-menu ul{
+    list-style-type: none;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    height: 100%;
+    padding: 0;
+}
+.patient-records-dash-menu .active{
+    background-color: rgba(190, 252, 254, 0.5);
+}
+.patient-records-dash-menu ul a{
+    flex-grow: 1;
+    padding: 20%;
+    padding-top: 30%;
+    text-decoration: none;
+    color: #408DCE;
+}
+.patient-records-dash-menu ul a:hover{
+    border: 2px solid #408DCE;
+}
+
+.records-container {
+    display: flex;
+    flex-direction: row;
+}
+.records-container .menu-bar{
+    z-index: 1;
+    position: fixed;
+    padding: 1.1%;
+    width: -webkit-fill-available;
+}
+
+#records-home {
+    margin:0.4%;
+    padding: 1%;
 }

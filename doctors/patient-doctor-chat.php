@@ -1,3 +1,13 @@
+<?php 
+    include_once '../conn.php';
+    session_start();
+    if($_SESSION["loggedIN"] == false)
+    {
+        echo ' <script> 
+        window.location.href = "../index.php";
+        </script>';       
+    }
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -21,15 +31,13 @@
             <div data-parallax = "scroll">
                 <form action = "" method = "GET" class = "form-inline">
                     <input name = "keyword" type = "text" placeholder = "Search Patient here..." class = "form-control" value = "<?php echo isset($_POST['keyword'])?$_POST['keyword']:''?>"/>
-                    <span class = "input-group-button"><button class="search-btn" type="submit" name = "search">SEARCH</button></span>
+                    <span class = "input-group-button"><button class="search-btn" type="submit" name = "search"><i class="fa-solid fa-search"></i></button></span>
                 </form>
                 <div class = "dropdown">
                     <div style="position:absolute;">
                         <div class = "dropdown-content">
                             <div style="word-wrap:break-word;">
                                 <?php
-                                include_once '../conn.php';
-                                session_start();
                                 if(isset($_GET['search']))
                                 {
                                     $keyword = $_GET['keyword'];
@@ -52,7 +60,6 @@
 </div>
 <div class="chat_list_table">
     <?php
-    include_once "../conn.php";
     $current_user = $_SESSION['id'];
     $current_user_email = $_SESSION['email'];
     $resultPost = mysqli_query($conn,"SELECT * FROM chat WHERE id IN (SELECT MAX(id) FROM chat WHERE (sent_to = '$current_user_email' OR emailAddress = '$current_user_email') GROUP BY chat_identity ORDER BY id DESC) GROUP BY chat_identity ORDER BY id DESC");

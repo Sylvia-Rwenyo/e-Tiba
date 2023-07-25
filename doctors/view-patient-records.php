@@ -1,3 +1,13 @@
+<?php 
+    include_once '../conn.php';
+    session_start();
+    if($_SESSION["loggedIN"] == false)
+    {
+        echo ' <script> 
+        window.location.href = "../index.php";
+        </script>';       
+    }
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,49 +21,19 @@
     <title>CERA</title>
 </head>
 
-<body>
-    <div>
-        <div style="display:inline-block">
-            <h1>Dosage Details</h1>
-            <table>
-                <tr class="table_field_names">
-                    <td>Medicine name</td>
-                    <td>Number of Tablets</td>
-                    <td>Number of Days</td>
-                    <td>Number of Times a Day</td>
-                </tr>
-                <?php
-                include_once "../conn.php";
-                $resultPost = mysqli_query($conn,"SELECT dosageId as Id, dosageName as DName, tablets as Tablets, times_a_day as TimesADay, number_of_days as NDays FROM  dosage");
-                while($row = mysqli_fetch_array($resultPost)) {
-                ?>
-                <tr>
-                    <td>
-                    <?php echo $row["DName"]; ?>
-                    </td> 
-                    <td>
-                    <?php echo $row["Tablets"]; ?>
-                    </td>
-                    <td>
-                    <?php echo $row["TimesADay"]; ?>
-                    </td> 
-                    <td>
-                    <?php echo $row["NDays"]; ?>
-                    </td>
-                    <td>
-                    <a  href="dosage-update-form.php?id=<?php echo $row["Id"]; ?>" method="POST">
-                        <button id = "dosage-update" type="button" name="dosage-update" class="btn">Update</button>
-                    </a>
-                    </td>   
-                    <td>
-                    <form id="form"  action="../controls/processing.php?id=<?php echo $row["Id"]; ?>" method="POST">
-                        <input id = "dosage-delete" type="submit" value="Delete" name="dosage-delete" class="btn">
-                    </form>
-                    </td>                        
-                </tr>    
-                <?php }?>     
-            </table>
-        </div>
+<body class="dash-body">
+<div class = "records-container" id="records-home">
+    <div class="patient-records-dash-menu">
+        <?php include_once 'patient-records-dash-menu.php';?>
     </div>
+    <section>
+        <div class="menu-bar">
+            <div class="welcome-msg" style="display:inline-block">
+                <h1>Patient Records</h1>
+                <h3>Patients Attended To By You</h3>
+            </div>
+        </div>
+    </section>
+</div>
 </body>
 </html>

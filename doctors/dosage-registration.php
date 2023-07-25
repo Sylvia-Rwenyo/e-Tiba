@@ -1,3 +1,13 @@
+<?php 
+    include_once '../conn.php';
+    session_start();
+    if($_SESSION["loggedIN"] == false)
+    {
+        echo ' <script> 
+        window.location.href = "../index.php";
+        </script>';       
+    }
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,19 +21,48 @@
     <title>CERA</title>
 </head>
 
-<body>
-    <div>
-        <h2>Dosage Entry, by Doctor</h2>
-        <div style="display:inline-block">
-            <form id="dosage-form"  action="../controls/dosage-entry.php" method="POST">
-                <input type="text" id="dosageName" name="dosageName"  size="30" placeholder="Enter Name">
-                <input type="number" id="tablets" name="tablets"  size="10"  placeholder="Tablets">
-                <input type="number" id="timesADay" name="timesADay"  size="10"  placeholder="Times in a day">
-                <input type="number" id="numberOfDays" name="numberOfDays"  size="10"  placeholder="Prescribed Duration in Days">
-                <br/>
-                <input id = "itemsubmit" type="submit" value="Submit" name="dosage-registration" class="btn">
-            </form>
+<body class="dash-body" id="dosage-reg">
+    <div class = "records-container">
+        <div class="patient-records-dash-menu">
+            <?php include_once 'patient-records-dash-menu.php';?>
         </div>
+        <section>
+            <div class="menu-bar">
+                <h2>Prescription Entry, by Doctor</h2>
+                <h4>Search For Patient To Assign Dosage</h4>
+                <div class="search-bar-top">
+                    <div class="search-bar">
+                        <div data-parallax = "scroll">
+                            <form action = "" method = "GET" class = "form-inline">
+                                <input name = "keyword" type = "text" placeholder = "Search Patient here..." class = "form-control" value = "<?php echo isset($_POST['keyword'])?$_POST['keyword']:''?>"/>
+                                <span class = "input-group-button"><button class="search-btn" type="submit" name = "search"><i class="fa-solid fa-search"></i></button></span>
+                            </form>
+                            <div class = "dropdown">
+                                <div style="position:absolute;">
+                                    <div class = "dropdown-content">
+                                        <div style="word-wrap:break-word;">
+                                            <?php
+                                            if(isset($_GET['search']))
+                                            {
+                                                $keyword = $_GET['keyword'];
+                                                $sql = "SELECT * FROM regpatients WHERE emailAddress LIKE '$keyword' or firstName LIKE '$keyword'";
+                                                $result = mysqli_query($conn, $sql) or die(mysqli_error($conn));
+                                                while($rows = mysqli_fetch_array($result))
+                                                {?>
+                                                    <a href = "dosage-registration-form.php?id=<?php echo $rows['id']; ?>"><h3><?php echo $rows['firstName']?></h3></a>
+                                                    <a href = "dosage-registration-form.php?id=<?php echo $rows['id']; ?>" ><h4><?php echo $rows['emailAddress']?></h4></a>
+                                                    <?php
+                                                }
+                                            } ?>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>    
+                    </div>
+                </div>
+            </div>
+        </section>
     </div>
 </body>
 </html>

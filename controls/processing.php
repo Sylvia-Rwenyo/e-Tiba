@@ -218,6 +218,12 @@ if(isset($_POST['register-doc-by-partner'])){
 
 
 if(isset($_POST['dosage-registration'])){
+    $fname_patient = $_POST["patientName"];
+    $patient_email = $_POST["patientEmail"];
+    $patient_id = $_POST["patient_id"];
+    $attending_doctor_name = $_POST["attending_doctor_name"];
+    $attending_doctor_email = $_POST["attending_doctor_email"];
+    $attending_doctor_id = $_POST["attending_doctor_id"];
 	$dosageName = $_POST['dosageName'];
 	$tablets = $_POST['tablets'];
 	$numberOfDays = $_POST['numberOfDays'];
@@ -230,9 +236,9 @@ if(isset($_POST['dosage-registration'])){
     }
     else
     {
-        $query="INSERT INTO dosage(dosageName, tablets, times_a_day, number_of_days) VALUES ('$dosageName', '$tablets', '$timesADay', '$numberOfDays')";
+        $query="INSERT INTO dosage(attending_doctor_id, attending_doctor_email, attending_doctor_name, patient_id, patientEmail, patientName, dosageName, tablets, times_a_day, number_of_days) VALUES ('$attending_doctor_id', '$attending_doctor_email', '$attending_doctor_name', '$patient_id','$patient_email', '$fname_patient', '$dosageName', '$tablets', '$timesADay', '$numberOfDays')";
         $sql=mysqli_query($conn,$query)or die("Could Not Perform the Query");
-        header ("Location: ../doctors/dosage-registration.php?status=success");
+        header ("Location: ../doctors/view-dosage-records.php");
     }
 }
 
