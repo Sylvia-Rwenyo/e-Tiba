@@ -53,7 +53,7 @@
                         if ($row['readStatus'] == 'read')
                         {
                             ?>
-                            <div class="message-box tri-right-left-top" style="<?php if($current_user_email == $row["emailAddress"]){echo 'text-align:right;margin-left:40%;margin-right:20%;';}else{echo  'text-align:left;margin-right:40%;margin-left:20%;';$sent_to = $row["emailAddress"];}?>">
+                            <div class="message-box" style="<?php if($current_user_email == $row["emailAddress"]){echo 'text-align:right;margin-left:40%;margin-right:20%;';}else{echo  'text-align:left;margin-right:40%;margin-left:20%;';$sent_to = $row["emailAddress"];}?>">
                                 <p><?php echo $row["message"]; ?></p> 
                                 <form id="message-form"  action="controls/processing.php?id=<?php echo $row["id"]; ?>" method="POST" style="<?php if($current_user_email == $row["emailAddress"]){echo 'display:block;';}else{echo  'display:none;';}?>">
                                     <input type="hidden"  name="sent_to" value="<?php echo $sent_to;?>"/>
@@ -79,7 +79,7 @@
                     else
                     {
                         ?>
-                        <div class="message-box tri-right-right-top" style="<?php if($current_user_email == $row["emailAddress"]){echo 'text-align:right;margin-left:40%;margin-right:20%;';}else{echo  'text-align:left;margin-right:40%;margin-left:20%;';$sent_to = $row["emailAddress"];}?>">
+                        <div class="message-box" style="<?php if($current_user_email == $row["emailAddress"]){echo 'text-align:right;margin-left:40%;margin-right:20%;';}else{echo  'text-align:left;margin-right:40%;margin-left:20%;';$sent_to = $row["emailAddress"];}?>">
                             <p><?php echo $row["message"]; ?></p> 
                             <div style="display:flex;flex-direction:row;">
                                 <form id="message-form"  action="controls/processing.php?id=<?php echo $row["id"]; ?>" method="POST" style="<?php if($current_user_email == $row["emailAddress"]){echo 'display:block;';}else{echo  'display:none;';}?>">

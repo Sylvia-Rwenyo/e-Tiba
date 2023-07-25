@@ -591,28 +591,6 @@
     border-radius: 2em 1em 4em / 0.5em 3em;
 }
 
-.tri-right-left-top::before {
-    content:"";
-    position: absolute;
-    width:0;
-    height:0;
-    left:30px;
-    right:auto;
-    top:-1px;
-    bottom:auto;
-    border:-12px solid transparent;
-}
-
-.tri-right-right-top::after {
-    content:"";
-    position: absolute;
-    width:0px;
-    height:0px;
-    left:auto;
-    right:-20px;
-    top:-0.3px;
-    bottom:auto;
-}
 .message-box form {
     width: 5%-webkit-fill-available;
     height: fit-content;
