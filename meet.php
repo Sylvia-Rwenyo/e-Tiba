@@ -9,6 +9,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">    <title>Your dashboard</title>
     <script src="https://kit.fontawesome.com/2751fbc624.js" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/peerjs@1.4.7/dist/peerjs.min.js"></script>
 </head>
 <body class="dash-body">
   <div class="header">
@@ -252,5 +253,27 @@ stopVideoButton.addEventListener('click', function() {
                     console.error('Error sending ICE candidate:', error);
                 });
         }
+        // WebSocket client code
+        const socket = new WebSocket('ws://localhost:8080');
+
+        // Event handler for connection open
+        socket.onopen = function() {
+        console.log('WebSocket connection opened');
+        };
+
+        // Event handler for receiving messages
+        socket.onmessage = function(event) {
+        const message = event.data;
+        console.log('Received message:', message);
+        };
+
+        // Event handler for connection close
+        socket.onclose = function() {
+        console.log('WebSocket connection closed');
+        };
+
+        // Send a message to the signaling server
+        socket.send('Hello, server!');
+
     </script>
 </html>

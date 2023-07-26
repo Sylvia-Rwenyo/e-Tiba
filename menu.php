@@ -16,12 +16,10 @@
         ?>
     <div class="menu">
         <ul>
-            <li><a href="index.php">Home</a></li>
-            <li><a href="">New log</a></li>
-            <li><a href="">Your reports</a></li>
+            <li><a href="dashboard.php">Home</a></li>
             <li><a href="about-us.php">About Us</a></li>
-            <!--Dosage registration test link. To be removed-->
-            <li><a href="dosage-registration.php">Dosage</a></li>
+            <!-- Dosage registration test link. To be removed -->
+            <!-- <li><a href="dosage-registration.php">Dosage</a></li> -->
         </ul>
     </div> 
     <?php 
