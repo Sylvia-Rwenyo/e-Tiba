@@ -577,8 +577,16 @@
     margin: 0.5%;
     margin-left: 20%;
     color:#35b6be;
-    width:70%;
+    width:50%;
 }
+
+.chat_content {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    bottom: 0;
+}
+
 /*message bubble*/
 .message-box {
     width: 40%;
@@ -588,7 +596,12 @@
     color: white;
     padding: 1.5%;
     border: none;
-    border-radius: 2em 1em 4em / 0.5em 3em;
+}
+.sent{
+    border-radius: 2em 20em / 2em 0.06em 3em;
+}
+.receiving{
+    border-radius: 2em 3em 4em / 0.006em 3em;
 }
 
 .message-box form {
@@ -602,8 +615,11 @@
 .message-input-box {
     margin-left: 15%;
     padding: 0.5%;
-    position: relative;
+    position: fixed;
     width: 50%;
+    bottom: 0;
+    left: 0;
+    right:20%;
 }
 
 .message-input-box form{
@@ -617,21 +633,31 @@
     position: relative;
 }
 
-.message-input-box form input {
+.message-input-box form input, .message-input-box form textarea {
     padding: 0.5em;
     margin: 0.5em;
-    width: 90%;
     height: fit-content;
+    -webkit-height: fit-content;
+    -moz-height: fit-content;
     border: none;
     border-radius: 5px;
 }
 
-.message-input-box form button {
-    padding: 1em;
+.message-input-box form .pos-btn{
+    background-color: #35b6be;
     border: none;
     border-radius: 5px;
     font-size: medium;
-    margin: 5%;
+    margin: 3%;
+    margin-left:0;
+    width: fit-content;
+    padding-left: 1.5%;
+    padding-right: 1.5%;
+}
+.message-input-box form .pos-btn:hover{
+    background-color: white;
+    border: 2px solid black;
+    
 }
 
 #patient-doc-home-chat {
@@ -786,13 +812,13 @@
 }
 
 .all_messages {
-    width: 40%-webkit-fill-available;
+    width: 70%;
     margin: 2%;
     margin-top:12em;
     margin-bottom: 0.1%;
-    margin-left: 10%-webkit-fill-available;
-    height: 25em;
-    position: relative;
+    margin-left: 10%;
+    height: 40%;
+    position: fixed;
     border: 2px solid;
     border-color: #0d3a5c;
     border-radius: 5px;
