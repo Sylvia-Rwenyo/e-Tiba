@@ -23,7 +23,7 @@
     float: right;
     margin-right: 2em;
     font-size: 1.25em;
-    padding-top: 1em;
+    padding-top: 0.5em;
 }
 .menu ul li a{
     text-decoration: none;
@@ -532,6 +532,34 @@
     position: relative;
     z-index: 1;
 }
+
+#videos {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#subscriber {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 10;
+}
+
+#publisher {
+    position: absolute;
+    width: 360px;
+    height: 240px;
+    bottom: 10px;
+    left: 10px;
+    z-index: 100;
+    border: 3px solid white;
+    border-radius: 3px;
+}
 #localVideo{
     width: 200px;
     height: 150px;
@@ -580,6 +608,8 @@
     color: rgb(136, 33, 0);
 }
 
+/* calendar */
+#calendarBody section{
 .search-bar-top {
 	text-align: center;
     margin: 1%;
@@ -600,9 +630,6 @@
     }
 }
 
-.search-bar {
-	position: relative;
-	border-radius: 5px;
 }
 
 .chat_with_title{
@@ -624,6 +651,7 @@
 .message-box {
     width: 40%;
     height: fit-content;
+    background-color: #35b6be;
     margin: 1.5%;
     color: white;
     padding: 1.5%;
@@ -631,29 +659,9 @@
 }
 .sent{
     border-radius: 2em 20em / 2em 0.06em 3em;
-    text-align:right;
-    margin-left:20em;
-    background-color: #35b6be;
 }
 .receiving{
-    text-align:left;
-    margin-right:20em;
     border-radius: 2em 3em 4em / 0.006em 3em;
-    background-color: #0d3a5c;
-}
-@media screen and (max-width:500px) {
-    .sent{
-        right:0;
-        margin-left: 7.8em;
-        width: 60%;
-    }
-}
-@media screen and (max-width:500px) {
-    .receiving{
-        left:0;
-        margin-right: 7.8em;
-        width: 60%;
-    }
 }
 
 .message-box form {
@@ -665,15 +673,17 @@
 }
 
 .message-input-box {
+    margin-left: 15%;
     padding: 0.5%;
     position: fixed;
+    width: 50%;
     bottom: 0;
     left: 0;
     right:20%;
 }
 
 .message-input-box form{
-    width: 80%;
+    width: max-content;
     display: flex;
     flex-direction: row;
     padding: 0.05em;
@@ -681,61 +691,12 @@
     background-color: rgba(190, 252, 254, 0.5);
     position: relative;
 }
-
-.message-input-box form input, .message-input-box form textarea {
-    padding: 0.5em;
-    margin: 0.5em;
-    height: fit-content;
-    -webkit-height: fit-content;
-    -moz-height: fit-content;
-    border: none;
-    border-radius: 5px;
-}
-
-.message-input-box form .pos-btn{
-    background-color: #35b6be;
-    border: none;
-    border-radius: 5px;
-    font-size: medium;
-    margin: 3%;
-    margin-left:0;
-    width: fit-content;
-    padding-left: 1.5%;
-    padding-right: 1.5%;
-}
-.message-input-box form .pos-btn:hover{
-    background-color: white;
-    border: 2px solid black;
-    
-}
-
-#patient-doc-home-chat {
-    position: relative;
-    overflow: auto;
-    width: 100%;
-}
-#chat-body {
-    position: relative;
-    overflow: auto;
-    width: 100%;
-}
-
-#patient-doc-home-chat .menu-bar{
-    z-index: 900;
-    position: fixed;
-    padding: 1.5%;
-    width: -webkit-fill-available;
-}
-
-#patient-doc-home-chat form{
-    margin-left: 20%;
+.calendar {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 5px;
     width: 80%;
-    display: flex;
-    flex-direction: row;
-    word-wrap: break-word;
-    padding: 0.005em;
-    font-size: 1.25em;
-    background-color: rgba(190, 252, 254, 0.5);
+    margin-left: 10%;
     margin-top: 2.5%;
 } 
 @media screen and (max-width:500px) {
@@ -811,35 +772,24 @@
     font-weight: 900;
     line-height: 1;
     color: black;
+    height: 80%;
+}
+
+.calendar .day {
     text-align: center;
-    white-space: nowrap;
-    vertical-align: baseline;
-    border:.04em solid ;
-    border-radius: .45rem;
-    background-color: white;
-    position: absolute;
-    z-index: 100;
-    float: left;
-    margin-left:-1%;
-    margin-top:-0.3%;
+    display: grid;
+    grid-template-rows: auto;
+    border: 1px solid #ccc;
+    padding: 10px;
+    padding-left: 0;
+    padding-right: 0;
 }
-.badge:empty {
-    display: none
+.calendar .day-name{
+    font-weight: 600;
 }
-.dosage_records {
-    margin: 3%;
-    margin-top:10em;
-    margin-left: 5%;
-    margin-right: 0%;
-    height: 25em;
-    display: flex;
-    flex-direction: column;
-    position: relative;
-    border: none;
-    border-radius: 5px;
-    overflow:scroll;
-    background-color: #fff;
-    scroll-behavior:smooth;
+.calendar .day.today {
+    background-color: #007bff;
+    color: #fff;
 }
 
 @media screen and (max-width:500px) {
@@ -856,11 +806,10 @@
     height:fit-content;
     padding: 2%;
     border-radius: 5%;
-}
-@media screen and (max-width:500px) {
-    .dosage_records td{
-        padding: 0.75%;
-    }
+.calendar .day .booked, .calendar .day .available{
+    border: 1px solid #ccc;
+    border-left: 0;
+    border-right: 0;
 }
 
 .dosage_records .table_field_names td{
@@ -900,12 +849,6 @@
 .all_message_mini{
     position: relative;
     scroll-behavior:smooth;
-}
-@media screen and (max-width:500px) {
-    .all_messages{
-        height: 60%;
-        margin-top: 10em;
-    }
 }
 .chat-btn{
     background-color: #35b6be;
@@ -952,7 +895,6 @@
 
 .home-chat-briefs {
     display:-webkit-box; 
-    margin-left:1em;
     font-size:1.3em; 
     overflow:hidden; 
     text-overflow: ellipsis;
@@ -983,13 +925,6 @@
     padding: 0.5%;
     margin-left: 5%;
     margin-right: 60%;
-}
-@media screen and (max-width: 1100px){
-    .conversation_name{
-        border-radius: 0.5em;
-        width:fit-content;
-        margin-left:7%;
-    }
 }
 
 /* patient records dashboard menu */
@@ -1030,33 +965,11 @@
     display: flex;
     flex-direction: row;
 }
-@media screen and (max-width:500px) {
-    .records-container, .patient-records-dash-menu {
-        flex-direction: row;
-    }
-    .records-container .menu-bar{
-        z-index: 1;
-        position: relative;
-        padding: 1.1%;
-        margin-left: 5%;
-    }
-}
 .records-container .menu-bar{
     z-index: 1;
     position: fixed;
     padding: 1.1%;
-}
-
-.records-container .menu-bar .search-bar-top{
-    text-align: center;
-    margin: 1%;
-    width: 170%;
-    display:flex;
-    flex-direction: column;
-}
-.records-container .menu-bar .search-bar-top form{
-    right: auto;
-    left: auto;
+    width: -webkit-fill-available;
 }
 
 #records-home {

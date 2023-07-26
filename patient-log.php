@@ -42,6 +42,27 @@
                     <!-- sleep animation or sth similar 
                     along with the average hours of sleep in the last week
                   -->
+                  
+                  <?php
+                    include_once 'conn.php';
+                    $totalSleep = 0;
+                    $avgSleep = 0;
+                    $id = $_SESSION['id'];
+                    $week = date('Y-m-d H:i:s', strtotime('-1 week'));
+                    $stmt = "SELECT * FROM patientSleepLog WHERE userID='$id' AND DATE(recordDate) >= DATE_SUB(DATE(NOW()), INTERVAL 1 WEEK)";
+                    $sql = mysqli_query($conn, $stmt);
+
+                    if (mysqli_num_rows($sql) > 0) {
+                        while ($row = mysqli_fetch_array($sql)) {
+                            $totalSleep += $row['sleepTime'];
+                        }
+                    }
+
+                    $avgSleep = $totalSleep / 7;
+
+                    // Output the average sleep time
+                    echo "<p style='margin-top: 20%;'>Your average sleep this week is $avgSleep hours</p>";
+                ?>      
                 </div>
                 <div class="prompt" id="rec-mealPrompt">
                     <h6>Keep track of your meals too</h6>
