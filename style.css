@@ -157,6 +157,27 @@
     border: none;
     border-radius: 5px;
 }
+@media screen and (max-width:500px) {
+    #dosage-reg .search-bar-top {
+        left:0;
+    };
+    #dosage-reg form input{
+        padding: 0.2em;
+        margin: 0.2em;
+        border: none;
+        border-radius: 5px;
+    };
+    #dosage-reg form .pos-btn{
+        background-color: #35b6be;
+        border: none;
+        border-radius: 5px;
+        font-size: medium;
+        margin: 3%;
+        width: fit-content;
+        padding-left: 1.5%;
+        padding-right: 1.5%;
+    };
+}
 .reg-body form div, #editingProfile  div{
    display: flex;
    flex-direction: row;
@@ -821,10 +842,25 @@
     scroll-behavior:smooth;
 }
 
+@media screen and (max-width:500px) {
+    .dosage_records {
+        padding: 0.75%;
+        margin-top:5em;
+        margin-left: 5%;
+        margin-right: 0%;
+        height: 40em;
+    }
+}
+
 .dosage_records td{
     height:fit-content;
     padding: 2%;
     border-radius: 5%;
+}
+@media screen and (max-width:500px) {
+    .dosage_records td{
+        padding: 0.75%;
+    }
 }
 
 .dosage_records .table_field_names td{
@@ -994,10 +1030,33 @@
     display: flex;
     flex-direction: row;
 }
+@media screen and (max-width:500px) {
+    .records-container, .patient-records-dash-menu {
+        flex-direction: row;
+    }
+    .records-container .menu-bar{
+        z-index: 1;
+        position: relative;
+        padding: 1.1%;
+        margin-left: 5%;
+    }
+}
 .records-container .menu-bar{
     z-index: 1;
     position: fixed;
     padding: 1.1%;
+}
+
+.records-container .menu-bar .search-bar-top{
+    text-align: center;
+    margin: 1%;
+    width: 170%;
+    display:flex;
+    flex-direction: column;
+}
+.records-container .menu-bar .search-bar-top form{
+    right: auto;
+    left: auto;
 }
 
 #records-home {
@@ -1006,9 +1065,22 @@
 }
 
 @media screen and (max-width: 500px) {
-    .all_messages, .message-input-box, #chat-body .menu-bar, .records-container, .records-container .menu-bar,
-    #patient-records, .dropdown, .conversation_name, .dosage_records{
+    .all_messages, .message-input-box, #chat-body .menu-bar, .records-container, #patient-records, .dropdown, .conversation_name, .dosage_records{
         width:90%;
         margin-left:5%;
+    }
+}
+@media screen and (max-width: 500px) {
+    .records-container .menu-bar{
+        width:80%;
+        margin-left:5%;
+    }
+}
+@media screen and (max-width: 500px) {
+    .records-container .menu-bar .search-bar-top{
+        margin: 1%;
+        width: 65%;
+        display:flex;
+        flex-direction: column;
     }
 }
