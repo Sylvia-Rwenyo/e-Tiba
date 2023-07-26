@@ -11,7 +11,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">    <title>Join CERA</title>
     <script src="https://use.fontawesome.com/1d95bf24b3.js"></script>
 </head>
-<body class="reg-body" id="chat-body" onload="show_func()">
+<body class="reg-body" id="chat-body">
     <div class="menu-bar">
         <div class="welcome-msg">
             <h2>Patient Doctor Chat</h2>
@@ -71,11 +71,20 @@
         });
     </script>
     <script>
-        function show_func() {
-            var element = document.getElementById("all_messages");
+        var div_height = 0;
+
+        const element = document.getElementById("all_messages");
+        window.onload = function(){
             element.scrollTop = element.scrollHeight;
         }
-        setInterval (show_func, 10000);
+        function check_message(){
+            var scrollable = element.scrollHeight - element.clientHeight;
+            if(div_height < scrollable){
+                div_height = scrollable;
+                element.scrollTop = element.scrollHeight;
+            }
+        }
+        setInterval(check_message, 1000);
     </script>
 </body>
 </html>
