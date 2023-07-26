@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.0
+-- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 23, 2023 at 04:56 PM
--- Server version: 10.4.24-MariaDB
--- PHP Version: 8.1.6
+-- Generation Time: Jul 25, 2023 at 05:36 PM
+-- Server version: 10.4.28-MariaDB
+-- PHP Version: 8.2.4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -24,6 +24,67 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `chat`
+--
+
+CREATE TABLE `chat` (
+  `id` int(11) NOT NULL,
+  `sender_class` varchar(20) NOT NULL,
+  `chat_identity` varchar(200) NOT NULL,
+  `sent_from_id` int(11) NOT NULL,
+  `emailAddress` varchar(40) NOT NULL,
+  `sent_to_id` int(11) NOT NULL,
+  `sent_to` varchar(40) NOT NULL,
+  `readStatus` varchar(10) NOT NULL,
+  `message` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `chat`
+--
+
+INSERT INTO `chat` (`id`, `sender_class`, `chat_identity`, `sent_from_id`, `emailAddress`, `sent_to_id`, `sent_to`, `readStatus`, `message`) VALUES
+(8, 'doctor', 'fredric.ngugi@yahoo.com_rtaer', 1, 'fredric.ngugi@yahoo.com', 11, 'rtaer', 'read', 'Hello rtaer, I would like to be your new doctor'),
+(9, 'patient', 'fredric.ngugi@yahoo.com_rtaer', 11, 'rtaer', 1, 'fredric.ngugi@yahoo.com', 'read', 'Hello Fredrick, I would like to work with you as well'),
+(10, 'patient', 'fredric.ngugi@yahoo.com_rtaer', 11, 'rtaer', 1, 'fredric.ngugi@yahoo.com', 'read', 'What do you treat?'),
+(11, 'doctor', 'fredric.ngugi@yahoo.com_rtaer', 1, 'fredric.ngugi@yahoo.com', 11, 'rtaer', 'read', 'Im a hematologist by profession, thats disease of the blood '),
+(12, 'doctor', 'fredric.ngugi@yahoo.com_646', 1, 'fredric.ngugi@yahoo.com', 6, '646', 'read', 'Hello 646, I would like to be your new doctor'),
+(13, 'patient', 'fredric.ngugi@yahoo.com_646', 6, '646', 1, 'fredric.ngugi@yahoo.com', 'read', 'Hello Fredrick, thank you for enrolling me'),
+(14, 'patient', 'fredric.ngugi@yahoo.com_646', 6, '646', 1, 'fredric.ngugi@yahoo.com', 'read', 'I have this and this disease'),
+(15, 'patient', 'morris@gmail.com_646', 6, '646', 2, 'morris@gmail.com', 'read', 'I would like to register for CERA'),
+(16, 'patient', 'morris@gmail.com_646', 6, '646', 2, 'morris@gmail.com', 'read', 'how do I go about it?'),
+(17, 'patient', 'morris@gmail.com_646', 6, '646', 2, 'morris@gmail.com', 'read', 'attempt message 1');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `dosage`
+--
+
+CREATE TABLE `dosage` (
+  `dosageId` int(11) NOT NULL,
+  `dosageName` varchar(400) NOT NULL,
+  `patientName` varchar(40) NOT NULL,
+  `patientEmail` varchar(100) NOT NULL,
+  `patient_id` int(11) NOT NULL,
+  `attending_doctor_name` varchar(40) NOT NULL,
+  `attending_doctor_id` int(11) NOT NULL,
+  `attending_doctor_email` varchar(100) NOT NULL,
+  `tablets` int(11) NOT NULL,
+  `number_of_days` int(11) NOT NULL,
+  `times_a_day` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `dosage`
+--
+
+INSERT INTO `dosage` (`dosageId`, `dosageName`, `patientName`, `patientEmail`, `patient_id`, `attending_doctor_name`, `attending_doctor_id`, `attending_doctor_email`, `tablets`, `number_of_days`, `times_a_day`) VALUES
+(1, 'omeprazol', 'khj', '646', 6, 'Morris', 2, 'morris@gmail.com', 3, 5, 2);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `patientmedlog`
 --
 
@@ -33,7 +94,7 @@ CREATE TABLE `patientmedlog` (
   `medTime` datetime NOT NULL,
   `entryID` int(20) NOT NULL,
   `recordDate` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -46,7 +107,7 @@ CREATE TABLE `patientsleeplog` (
   `sleepTime` int(2) NOT NULL,
   `entryID` int(20) NOT NULL,
   `recordDate` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `patientsleeplog`
@@ -70,7 +131,7 @@ CREATE TABLE `patientsmeallog` (
   `mealTime` datetime NOT NULL,
   `entryID` int(20) NOT NULL,
   `recordDate` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -91,7 +152,7 @@ CREATE TABLE `regdoctors` (
   `gender` varchar(10) NOT NULL,
   `profilePhoto` blob NOT NULL,
   `phoneNumber` int(14) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `regdoctors`
@@ -99,8 +160,7 @@ CREATE TABLE `regdoctors` (
 
 INSERT INTO `regdoctors` (`id`, `firstName`, `lastName`, `emailAddress`, `institution`, `password`, `specialty`, `address`, `age`, `gender`, `profilePhoto`, `phoneNumber`) VALUES
 (1, 'Fredrick', 'Kamau', 'fredric.ngugi@yahoo.com', 'none', 'er324', '', '', 23, 'Female', '', 0),
-(2, 'doctor', 'doctor', 'doctor@newhospital.com', 'none', 'doctor123', '', '', 25, 'Male', '', 0),
-(3, 'Fredrick', 'Kamau', 'fredric.ngugi@yahoo.com', 'New Hospital', '123', '', '', 34, 'Male', '', 0);
+(2, 'Morris', 'Muema', 'morris@gmail.com', 'none', 'doctor123', '', '', 25, 'Male', '', 0);
 
 -- --------------------------------------------------------
 
@@ -118,7 +178,7 @@ CREATE TABLE `reginstitutions` (
   `illnesses` varchar(200) NOT NULL,
   `postalAddress` varchar(200) NOT NULL,
   `profilePhoto` blob NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `reginstitutions`
@@ -146,7 +206,7 @@ CREATE TABLE `regpatients` (
   `gender` varchar(10) NOT NULL,
   `phoneNumber` int(14) NOT NULL,
   `profilePhoto` blob NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `regpatients`
@@ -160,6 +220,18 @@ INSERT INTO `regpatients` (`id`, `firstName`, `lastName`, `emailAddress`, `insti
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `chat`
+--
+ALTER TABLE `chat`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `dosage`
+--
+ALTER TABLE `dosage`
+  ADD PRIMARY KEY (`dosageId`);
 
 --
 -- Indexes for table `patientmedlog`
@@ -202,6 +274,18 @@ ALTER TABLE `regpatients`
 --
 -- AUTO_INCREMENT for dumped tables
 --
+
+--
+-- AUTO_INCREMENT for table `chat`
+--
+ALTER TABLE `chat`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+
+--
+-- AUTO_INCREMENT for table `dosage`
+--
+ALTER TABLE `dosage`
+  MODIFY `dosageId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `patientmedlog`

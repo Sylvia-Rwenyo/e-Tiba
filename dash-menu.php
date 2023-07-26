@@ -10,20 +10,33 @@
 
         if ($_SESSION['category'] == 'hospital') {
             ?>
+            <!-- add new doctor -->
+            <a href="partners/add-doctor.php" class="<?php echo isActive('partners/add-doctor.php'); ?>"><li><i class="fa-solid fa-folder"></i></li></a>
+
             <!-- records -->
-            <a href="doctor-records.php" class="<?php echo isActive('doctor-records.php'); ?>"><li><i class="fa-solid fa-folder"></i></li></a>
-            <a href="patient-records.php" class="<?php echo isActive('patient-records.php'); ?>"><li><i class="fa-solid fa-folder"></i></li></a>
+            <a href="partners/doctor-records.php" class="<?php echo isActive('partners/doctor-records.php'); ?>"><li><i class="fa-solid fa-folder"></i></li></a>
+            <a href="partners/patient-records.php" class="<?php echo isActive('partners/patient-records.php'); ?>"><li><i class="fa-solid fa-folder"></i></li></a>
+
             <!-- trends -->
             <a href="dashboard.php?charts=1" class="<?php echo isActive('dashboard.php'); ?>"><li><i class="fa-solid fa-chart-line"></i></li></a>
             <!-- settings -->
             <a href="settings.php" class="<?php echo isActive('settings.php'); ?>"><li><i class="fa-solid fa-gears"></i></li></a>
+
+            <!-- patient-doctor chats -->
+            <a href="partners/patient-doctor-chat.php" class="<?php echo isActive('partners/patient-doctor-chat.php'); ?>"><li><i class="fa-solid fa-message"></i></li></a>
             <?php
         } else if ($_SESSION['category'] == 'doctor') {
             ?>
             <!-- add records -->
-            <a href="add-patient.php" class="<?php echo isActive('register.php'); ?>"><li><i class="fa fa-plus"></i></li></a>
+            <a href="doctors/add-patient.php" class="<?php echo isActive('doctors/add-patient.php'); ?>"><li><i class="fa fa-plus"></i></li></a>
            <!-- existing records -->
-            <a href="patient-records.php" class="<?php echo isActive('patient-records.php'); ?>"><li><i class="fa-solid fa-folder"></i></li></a>
+            <a href="doctors/view-patient-records.php" class="<?php echo isActive('doctors/view-patient-records.php'); ?>"><li><i class="fa-solid fa-folder"></i></li></a>
+                <!-- register new dosage -->
+            <a href="doctors/dosage-registration.php" class="<?php echo isActive('doctors/dosage-registration.php'); ?>"><li><i class="fa fa-plus"></i></li></a>
+            <!-- check patient progress -->
+            <a href="doctors/patient-progress.php" class="<?php echo isActive('doctors/patient-progress.php'); ?>"><li><i class="fa fa-plus"></i></li></a>
+            <!-- talk to your patients -->
+            <a href="doctors/patient-doctor-chat.php" class="<?php echo isActive('doctors/patient-doctor-chat.php'); ?>"><li><i class="fa-solid fa-message"></i></li></a>
             <!-- schedule appointment -->
             <a href="calendar.php" class="<?php echo isActive('calendar.php'); ?>"><li><i class="fa fa-calendar"></i></li></a>
            <!-- settings -->
@@ -39,6 +52,8 @@
             <a href="calendar.php" class="<?php echo isActive('calendar.php'); ?>"><li><i class="fa fa-calendar"></i></li></a>
             <!-- settings -->
             <a href="settings.php" class="<?php echo isActive('settings.php'); ?>"><li><i class="fa-solid fa-gears"></i></li></a>
+            <!-- see chats page -->
+            <a href ="patient-doctor-chat-by-patient.php"class="<?php echo isActive('patient-doctor-chat-by-patient.php'); ?>"><li><i class="fa-solid fa-message"></i></li></a>
             <?php
         }
         ?>

@@ -6,7 +6,6 @@
     background-color: rgba(190, 252, 254, 0.25);
     margin: 0;
 }
-
 .menu{
     width: 100%;
     margin-top: 2.5%;
@@ -140,8 +139,19 @@
     background-color: rgba(190, 252, 254, 0.5);
     margin-top: 2.5%;
 }
+
+#dosage-reg form{
+    height: fit-content;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    padding: 1em;
+    font-size: 1.25em;
+    background-color: rgba(190, 252, 254, 0.5);
+}
+
 .reg-body form  input, .reg-body form select, .reg-body form  div, 
-#editingProfile input, #editingProfile select, #editingProfile  div{
+#dosage-reg form input, #editingProfile input, #editingProfile select, #editingProfile  div{
     padding: 1em;
     margin: 0.5em;
     border: none;
@@ -172,7 +182,7 @@
 .reg-body form div input:focus, #editingProfile div input:focus{
     outline: none;
 }
-.reg-body .pos-btn, #editingProfile .pos-btn{
+.reg-body .pos-btn, #editingProfile .pos-btn, #dosage-reg .pos-btn{
     width: 8em;
     height: 2em;
     border-radius: 5px;
@@ -230,14 +240,26 @@
 .transcript {
     text-align: center;
     font-size: large;
-    margin: 30px;
-    margin-top: 50px;
+    margin: 50px;
+    padding: 20px;
     background-color: white;
 }
-.transcript-mini-div {
-    background-color: aliceblue;
+.transcript-small-div {
+    background-color: white;
     margin: 20px;
 }
+
+.transcript-mini-div {
+    background-color: aliceblue;
+    border: 5px solid aliceblue;
+    margin: 20px;
+}
+
+.transcript-mini-div:hover {
+    border: 5px solid rgb(164, 164, 235);
+    color:black;
+}
+
 .transcript h3 {
     text-align: left;
     margin-left: 40px;
