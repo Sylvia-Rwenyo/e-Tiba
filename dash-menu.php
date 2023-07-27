@@ -21,9 +21,6 @@
             <a href="dashboard.php?charts=1" class="<?php echo isActive('dashboard.php'); ?>"><li><i class="fa-solid fa-chart-line"></i></li></a>
             <!-- settings -->
             <a href="settings.php" class="<?php echo isActive('settings.php'); ?>"><li><i class="fa-solid fa-gears"></i></li></a>
-
-            <!-- patient-doctor chats -->
-            <a href="partners/patient-doctor-chat.php" class="<?php echo isActive('partners/patient-doctor-chat.php'); ?>"><li><i class="fa-solid fa-message"></i></li></a>
             <?php
         } else if ($_SESSION['category'] == 'doctor') {
             ?>

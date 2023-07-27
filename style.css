@@ -998,12 +998,13 @@
 @media screen and (max-width:500px) {
     .dosage_records {
         padding: 0.75%;
-        margin-top:5em;
+        margin-top: 9em;
         margin-left: 5%;
         margin-right: 0%;
         height: 40em;
     }
 }
+
 
 #all-doctor-records .dosage_records {
     margin-top:13em;
@@ -1120,13 +1121,10 @@
 }
 
 /* patient records menu */
-#patient-records {
-    display: inline-block;
-}
 
 .patient-records-dash-menu {
-    height: 80vh;
-    width: 10%;
+    height: 70vh;
+    width: 20%;
     position: -webkit-sticky;
     position: sticky;
 }
@@ -1151,6 +1149,11 @@
 }
 .patient-records-dash-menu ul a:hover{
     border: 2px solid #408DCE;
+}
+@media screen and (max-width:800px) {
+    .patient-records-dash-menu .welcome-msg {
+        left:0;
+    }
 }
 
 
