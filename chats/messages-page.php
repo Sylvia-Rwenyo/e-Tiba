@@ -1,3 +1,13 @@
+<?php 
+    include_once '../conn.php';
+    session_start();
+    if($_SESSION["loggedIN"] == false)
+    {
+        echo ' <script> 
+        window.location.href = "../index.php";
+        </script>';       
+    }
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -12,21 +22,38 @@
     <script src="https://use.fontawesome.com/1d95bf24b3.js"></script>
 </head>
 <body class="reg-body" id="chat-body">
+    <?php 
+        $current_user_category = $_SESSION['category'];
+    ?>
     <div class="menu-bar">
         <div class="welcome-msg">
             <h2>Patient Doctor Chat</h2>
-            <h3>Ask your doctor anything</h3>
+            <h3>Ask your <?php if($current_user_category == 'doctor')
+            {
+                echo "patient";
+            }elseif($current_user_category == 'patient')
+            {
+                echo "doctor";
+            }?> anything</h3>
         </div>
         <div class="chat_with_title">
             <?php
-            include_once "../conn.php";
-            session_start();
-            if(isset($_GET['id'])){
-                $requested_patient = $_GET['id'];
-            }
             $sent_to = 0;
             $fname_chatting_with = 0;
-            $query = "SELECT * FROM regpatients WHERE id ='$requested_patient'";
+            $query = 0;
+            if($current_user_category == 'doctor'){
+                if(isset($_GET['id'])){
+                    $requested_patient = $_GET['id'];
+                }
+                $query = "SELECT * FROM regpatients WHERE id ='$requested_patient'";
+            }
+            elseif($current_user_category == 'patient'){
+                if(isset($_GET['id'])){
+                    $requested_doctor = $_GET['id'];
+                }
+                $query = "SELECT * FROM regdoctors WHERE id ='$requested_doctor'";
+            }
+            
             $result = mysqli_query($conn, $query) or die(mysqli_error($conn));
             
             while($row = mysqli_fetch_array($result))
@@ -34,20 +61,20 @@
                 $sent_to = $row["emailAddress"];	
                 $fname_chatting_with = $row["firstName"];
             }?>
-            <h4><?php echo $fname_chatting_with;?></h4>
+            <h4>Chatting with <?php echo $fname_chatting_with;?></h4>
         </div>
     </div>
     <div class="chat_content">
-    <div class = "all_messages" id="all_messages">
-        
-    </div>
+
+    <div class = "all_messages" id="all_messages"></div>
+    
     <div class = "message-input-box">
         <form method="POST" action="../controls/processing.php">
             <input type="hidden"  name="sent_to" value="<?php echo $sent_to;?>"/>
             <input type="hidden"  name="sender_class" value="<?php echo $_SESSION['category'];?>"/>
             <input type="hidden"  name="readStatus" value="<?php echo 'unread';?>"/>
             <textarea rows='2' cols ='50' id="message" name="message" placeholder="Enter Message" required></textarea>
-            <button type="submit" name="enter-message-as-doc" class="pos-btn">Send</button>
+            <button type="submit" name="input-message" class="pos-btn">Send</button>
         </form>
     </div> 
     </div>

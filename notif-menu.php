@@ -7,15 +7,7 @@
                 include_once "conn.php";
                 session_start();
                 ?>
-                <a href = <?php 
-                if($_SESSION['category'] == 'doctor')
-                {
-                    echo "doctors/patient-doctor-chat.php";
-                }
-                elseif($_SESSION['category'] == 'patient')
-                {
-                    echo "patient-doctor-chat-by-patient.php";
-                }?>>
+                <a href = "chats/chats-home.php">
                 <?php
                 $current_user_email = $_SESSION['email'];
                 $resultPost = mysqli_query($conn,"SELECT readStatus FROM chat WHERE sent_to = '$current_user_email'");

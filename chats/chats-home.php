@@ -22,10 +22,20 @@
     <title>CERA chat</title>
 </head>
 <body class="reg-body" id="patient-doc-home-chat">
+    <?php 
+        $current_user_category = $_SESSION['category'];
+    ?>
 <div class="menu-bar">
     <div class="welcome-msg">
             <h3>Patient Doctor Chat</h3>
-            <p>Get to know your patient</p>
+            <p>Get to know your <?php if($current_user_category == 'doctor')
+            {
+                echo "patient";
+            }elseif($current_user_category == 'patient')
+            {
+                echo "doctor";
+            }?>
+            </p>
     </div>
     <div class="search-bar-top">
         <div class="search-bar">
@@ -42,12 +52,17 @@
                                 if(isset($_GET['search']))
                                 {
                                     $keyword = $_GET['keyword'];
-                                    $sql = "SELECT * FROM regpatients WHERE emailAddress LIKE '$keyword' or firstName LIKE '$keyword'";
+                                    if($current_user_category == 'doctor'){
+                                        $sql = "SELECT * FROM regpatients WHERE emailAddress LIKE '$keyword' or firstName LIKE '$keyword'";
+                                    }
+                                    elseif($current_user_category == 'patient'){
+                                        $sql = "SELECT * FROM regdoctors WHERE emailAddress LIKE '$keyword' or firstName LIKE '$keyword'";
+                                    }
                                     $result = mysqli_query($conn, $sql) or die(mysqli_error($conn));
                                     while($rows = mysqli_fetch_array($result))
                                     {?>
-                                        <a href = "individual-chats.php?id=<?php echo $rows['id']; ?>"><h3><?php echo $rows['firstName']?></h3></a>
-                                        <a href = "individual-chats.php?id=<?php echo $rows['id']; ?>" ><h4><?php echo $rows['emailAddress']?></h4></a>
+                                        <a href = "messages-page.php?id=<?php echo $rows['id']; ?>"><h3><?php echo $rows['firstName']?></h3></a>
+                                        <a href = "messages-page.php?id=<?php echo $rows['id']; ?>" ><h4><?php echo $rows['emailAddress']?></h4></a>
                                         <?php
                                     }
                                 } ?>
@@ -59,45 +74,23 @@
         </div>
     </div>
 </div>
-<div class="chat_list_table">
-    <?php
-    $current_user = $_SESSION['id'];
-    $current_user_email = $_SESSION['email'];
-    $resultPost = mysqli_query($conn,"SELECT * FROM chat WHERE id IN (SELECT MAX(id) FROM chat WHERE (sent_to = '$current_user_email' OR emailAddress = '$current_user_email') GROUP BY chat_identity ORDER BY id DESC) GROUP BY chat_identity ORDER BY id DESC");
-    if($resultPost == null){
-        echo "You Have No Chats Yet";
-    }
-    else
-    {
-        while($row = mysqli_fetch_array($resultPost)) {
-        ?>
-        <div class="table-row">
-            <span>
-                <a href="individual-chats.php?id=<?php if($row["sender_class"] == 'doctor'){echo $row["sent_to_id"];}else{echo $row["sent_from_id"];} ?>">
-                <p class="conversation_name">From <?php if($current_user_email == $row["emailAddress"]){echo "You";}else{echo $row["emailAddress"];} ?> To <?php if($current_user_email == $row["sent_to"]){echo "You";}else{echo $row["sent_to"];} ?></p>
-                <span class="home-chat-briefs"><?php echo $row["message"]; ?></span>
-                <img class = "read_ticks" size = "5px" src="<?php 
-                        if(($row["readStatus"] == 'unread') AND ($row["sent_to"] == $current_user_email))
-                        {
-                            echo "../images/unread.PNG";
-                        }
-                        elseif(($row["readStatus"] == 'unread') AND ($row["sent_to"] != $current_user_email))
-                        {
-                            echo "../images/grey_tick.PNG";
-                        }
-                        elseif(($row["readStatus"] != 'unread') AND ($row["sent_to"] != $current_user_email))
-                        {
-                            echo "../images/blue_tick.PNG";
-                        }
-                        else
-                        {
-                            echo "../images/read.PNG";
-                        }?>"/>
-                </a>
-            </span>                        
-        </div>
-        <?php }}?> 
-</div>
-    
+<div class="chat_list_table" id="chat_list_table"></div>
+
+    <script src="../js/jquery-3.3.1.min.js"></script>
+    <script src="../js/code.jquery.com_jquery-latest.js"></script>
+    <script src="../js/jquery.timers-1.0.0.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $(".chat_list_table").everyTime(1000, function(i){
+                $.ajax({
+                    url:"all-chats-div.php",
+                    cache: false,
+                    success: function(html){
+                        $(".chat_list_table").html(html)
+                    }
+                })
+            })
+        });
+    </script>
 </body>
 </html>

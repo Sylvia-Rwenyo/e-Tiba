@@ -32,7 +32,7 @@
            <!-- existing records -->
             <a href="doctors/view-patient-records.php" class="<?php echo isActive('doctors/view-patient-records.php'); ?>"><li><i class="fa-solid fa-folder"></i></li></a>
             <!--Patient progress-->
-            <a href="doctors/patient-progress.php" class="<?php echo isActive('doctors/patient-progress.php'); ?>"><li><i class="fa fa-plus"></i></li></a>
+            <a href="doctors/patient-progress.php" class="<?php echo isActive('doctors/patient-progress.php'); ?>"><li><i class="fa-solid fa-chart-line"></i></li></a>
             <!-- schedule appointment -->
             <a href="calendar.php" class="<?php echo isActive('calendar.php'); ?>"><li><i class="fa fa-calendar"></i></li></a>
            <!-- settings -->
