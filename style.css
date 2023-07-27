@@ -977,6 +977,11 @@
 .badge:empty {
     display: none
 }
+@media screen and (max-width:500px) {
+    .fa.fa-message {
+        margin-right: 5%;
+    }
+}
 
 /*All Dosage Styles*/
 .dosage_records {
@@ -1123,10 +1128,16 @@
 /* patient records menu */
 
 .patient-records-dash-menu {
-    height: 70vh;
-    width: 20%;
+    height: 80vh;
+    width: 10%;
     position: -webkit-sticky;
     position: sticky;
+}
+@media screen and (max-width:500px) {
+    patient-records-dash-menu {
+        height: 60vh;
+        width: 15%;
+    }
 }
 
 .patient-records-dash-menu ul{
@@ -1149,11 +1160,6 @@
 }
 .patient-records-dash-menu ul a:hover{
     border: 2px solid #408DCE;
-}
-@media screen and (max-width:800px) {
-    .patient-records-dash-menu .welcome-msg {
-        left:0;
-    }
 }
 
 
@@ -1205,6 +1211,12 @@
     flex-direction: column;
     background-color: rgba(190, 252, 254);
 }
+@media screen and (max-width:600px) {
+    .records-container .welcome-msg {
+        margin-left:0;
+    }
+}
+
 @media screen and (max-width:500px) {
     .records-container .menu-bar .search-bar-top{
         text-align: left;

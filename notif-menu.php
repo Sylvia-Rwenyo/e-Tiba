@@ -1,12 +1,12 @@
     <div class="menu meet-menu">
+        <?php 
+        include_once "conn.php";
+        session_start();
+        ?>
         <ul>
             <li><a href="meet.php"><i class="fa fa-bell"></i></a></li>
             <li><a href=""><i class="fa-solid fa-video"></i></a></li>
             <li>
-                <?php 
-                include_once "conn.php";
-                session_start();
-                ?>
                 <a href = "chats/chats-home.php">
                 <?php
                 $current_user_email = $_SESSION['email'];
@@ -21,7 +21,7 @@
                 }?>
                 <i class="fa fa-message"><span class="badge"><?php if($count == 0){echo "";}else{echo $count;}?></span></i>
                 </a>
-                </li>
+            </li>
             
             <li><a href=""><i class="fa-solid fa-book"></i></a></li>
         </ul>
