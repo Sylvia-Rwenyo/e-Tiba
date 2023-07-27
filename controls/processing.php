@@ -178,19 +178,19 @@ if(isset($_POST['register-doc-by-partner'])){
     $lastName = $_POST['lastName'];
     $gender = $_POST['gender'];
     $emailAddress = $_POST['emailAddress'];
-    $institution = $_POST['institution'];
+    $institution = $_SESSION['username'];
     $conditionsArr= array();
-     for($i=0; $i < count($_POST['conditions']); $i++){
-        $conditionsArr[] = $_POST['conditions'][$i];
+     for($i=0; $i < count($_POST['condition']); $i++){
+        $conditionsArr[] = $_POST['condition'][$i];
          }
-    $conditions = implode('*', $conditionsArr);	 $password = $_POST['password'];
+    $conditions = implode('*', $conditionsArr);
     $phoneNumber = $_POST['phoneNumber'];
     $address = $_POST['address'];
     $years = $_POST['years'];
     $password = substr($emailAddress, 0, strpos($emailAddress, "@"));
 
 	 
-    $sql=mysqli_query($conn,"SELECT * FROM regdoctors where email='$emailAddress' AND phone_number='$phoneNumber'");
+    $sql=mysqli_query($conn,"SELECT * FROM regdoctors where emailAddress='$emailAddress' AND phoneNumber='$phoneNumber'");
     if(mysqli_num_rows($sql)>0)
     {
         echo "Doctor Already Registered"; 
@@ -198,14 +198,15 @@ if(isset($_POST['register-doc-by-partner'])){
     }
     else
     {
-        $query="INSERT INTO regdoctors(firstName, lastName, gender, institution, emailAddress, specialty, phoneNumber, address, password) VALUES ('$firstName' ,'$lastName' ,'$gender' , $institution ,'$emailAddress', '$conditions', '$phoneNumber' ,'$address' ,'$password')";
+        $query="INSERT INTO regdoctors(firstName, lastName, gender, institution, emailAddress, specialty, phoneNumber, address, password) VALUES
+         ('$firstName' ,'$lastName' ,'$gender' , '$institution' ,'$emailAddress', '$conditions', '$phoneNumber' ,'$address' ,'$password')";
     }
     //if sql query is executed...
 	 if (mysqli_query($conn, $query)) {
         if(!isset($_SESSION['category'])){
         login($conn);
         }else{
-            header('location:partner-dashboard.php?status=success');
+            header('location:../dashboard.php?status=success');
         }
 			 } else {	
                 //show error
@@ -338,7 +339,7 @@ if(isset($_GET['action'])){
             session_start();
             session_unset();
             echo ' <script> 
-                        window.location.href = "index.php"
+                        window.location.href = "../index.php"
                     </script>
         '; 
         }
@@ -664,5 +665,35 @@ if(isset($_POST['message-delete'])){
 	 mysqli_close($conn);
 }
 
-
+// book appointment date 
+if(isset($_GET["a"]))
+    if($_GET["a"] == "p"){{	
+        //create session
+        session_start();
+        
+        //store values submitted in the  form in variables
+         $doctorID = $_GET['dID'];
+         $patientID = $_GET['pID'];
+         $appointmentDate = $_GET['d'];
+         $appointmentTime = $_GET['t'];
+         //statement to enter values into a table in the database
+         $sql = "INSERT INTO appointments (doctorID, patientID, appointmentDate, appointmentTime)
+         VALUES ('$doctorID','$patientID','$appointmentDate', '$appointmentTime')";
+    
+         //if sql query is not executed...
+         if (mysqli_query($conn, $sql)) {
+            echo '
+            <script>window.location.href = "../calendar.php?p='.$patientID.'"</script>
+            ';	
+    
+        }else{
+                    //show error
+            echo "Error: " . $sql . "
+    " . mysqli_error($conn);
+        
+         }
+         //close connection
+         mysqli_close($conn);
+    
+    }}
 ?>

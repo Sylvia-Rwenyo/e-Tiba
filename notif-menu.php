@@ -1,6 +1,6 @@
     <div class="menu meet-menu">
         <ul>
-            <li><a href="meet.php"><i class="fa fa-bell"></i></a></li>
+        <li><a href="meet.php"><i class="fa fa-bell"></i></a></li>
             <li><a href=""><i class="fa-solid fa-video"></i></a></li>
             <li>
                 <?php 
@@ -15,7 +15,11 @@
                 elseif($_SESSION['category'] == 'patient')
                 {
                     echo "patient-doctor-chat-by-patient.php";
-                }?>>
+                }else if($_SESSION['category'] == 'hospital')
+                {
+                    echo "partners/patient-doctor-chat.php";
+                }
+                ?>>
                 <?php
                 $current_user_email = $_SESSION['email'];
                 $resultPost = mysqli_query($conn,"SELECT readStatus FROM chat WHERE sent_to = '$current_user_email'");
@@ -31,7 +35,7 @@
                 </a>
                 </li>
             
-            <li><a href=""><i class="fa-solid fa-book"></i></a></li>
+            <!-- <li><a href=""><i class="fa-solid fa-book"></i></a></li> -->
         </ul>
     </div>
     <script>

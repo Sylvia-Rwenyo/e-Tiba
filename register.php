@@ -52,11 +52,20 @@
             <input type="text" name="emailAddress" placeholder="Email Address" required/>
             <input type="number" name="phoneNumber" placeholder="Your phone number" required/>
             <input type="text" name="address" placeholder="Your address" required/>
-            <select name="institution" required>
-                <option selected disabled> Select your Hospital</option>
-                <option>Institution A</option>
-                <option>Institution B</option>
-                <option>Institution C</option>
+            < <select name="institution" required>
+                <option selected disabled> Select institution</option>
+                <?php
+                include_once 'conn.php';
+                 $stmt = "SELECT * FROM reginstitutions ";
+                 $sql = mysqli_query($conn, $stmt);
+                 $specialties = array();
+                 if (mysqli_num_rows($sql) > 0) {
+                     while ($row = mysqli_fetch_array($sql)) {
+                     ?>
+                    <option><?php echo $row['institution'];?></option>
+                <?php
+                }}
+                ?>
             </select>
             <select name="condition[]" multiple required>
                 <option selected disabled> Select your condition</option>

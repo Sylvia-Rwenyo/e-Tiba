@@ -20,7 +20,6 @@
   </div>
   <div class="mainBody">
     <?php
-    session_start();
     if (!isset($_SESSION["loggedIN"])) {
         header('location:index.php');
     } else {
@@ -44,7 +43,6 @@
                   -->
                   
                   <?php
-                    include_once 'conn.php';
                     $totalSleep = 0;
                     $avgSleep = 0;
                     $id = $_SESSION['id'];
@@ -80,7 +78,7 @@
             <div class="input">
                 <div class="input-div input-sleep" id="input-sleep" >
                     <h6>Sleep Tracker</h6>
-                    <form id="sleep-form" action="processing.php" method="POST">
+                    <form id="sleep-form" action="controls/processing.php" method="POST">
                         <div>
                             <label>Start time</label>
                             <input type="time" name="start-time" />
@@ -96,7 +94,7 @@
                 </div>
                 <div class="input-div input-meals" id="input-meals">
                     <h6>What have you eaten today</h6>
-                    <form id="meal-form" action="processing.php" method="POST" >
+                    <form id="meal-form" action="controls/processing.php" method="POST" >
                         <div>
                             <label>Meal name:</label>
                             <input type="text" name="meal-name" />
@@ -112,7 +110,7 @@
                 </div>
                 <div class="input-div input-medication" id="input-medication">
                     <h6>What time did you take you medicine</h6>
-                    <form id="meds-form" action="processing.php" method="POST" >
+                    <form id="meds-form" action="controls/processing.php" method="POST" >
                         <div>
                             <label>Medicine name:</label>
                             <input type="text" name="med-name" />
@@ -138,7 +136,7 @@
 //     event.preventDefault(); // Prevent the form from submitting normally
 //     // Perform the AJAX request
 //     $.ajax({
-//       url: 'processing.php',
+//       url: 'controls/controls/controls/processing.php',
 //       type: 'POST',
 //       data: $(this).serialize(),
 //       success: function(response) {
@@ -155,7 +153,7 @@
 //     event.preventDefault(); // Prevent the form from submitting normally
 //     // Perform the AJAX request
 //     $.ajax({
-//       url: 'processing.php',
+//       url: 'controls/controls/controls/processing.php',
 //       type: 'POST',
 //       data: $(this).serialize(),
 //       success: function(response) {
@@ -171,7 +169,7 @@
 //     event.preventDefault(); // Prevent the form from submitting normally
 //     // Perform the AJAX request
 //     $.ajax({
-//       url: 'processing.php',
+//       url: 'controls/controls/controls/processing.php',
 //       type: 'POST',
 //       data: $(this).serialize(),
 //       success: function(response) {

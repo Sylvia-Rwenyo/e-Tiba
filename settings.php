@@ -65,8 +65,8 @@
                 </div>
                 <div class="contactInfo">
                 <p><a href='mailto:<?php echo $result['emailAddress']?>'><i class="fa-solid fa-envelope"></i>&nbsp;&nbsp;&nbsp;<?php echo $result['emailAddress']?></a></p>
-                <p><a href='tel:<?php if($result['phoneNumber'] == 0){
-                    echo '';} else{ echo $result['phoneNumber'];}?>'>
+                <p><a <?php if($result['phoneNumber'] == 0){
+                    echo 'onclick="editProfile()"';} else{ echo 'href="tel:'. $result['phoneNumber'].'"';}?>>
                     <i class="fa-solid fa-phone"></i>&nbsp;&nbsp;&nbsp;
                     <?php if($result['phoneNumber'] == 0){
                      echo 'Add phone number';} else{ echo $result['phoneNumber'];}
@@ -89,9 +89,12 @@
                 while($result = mysqli_fetch_array($records)) {
         ?>
         <!-- show form for editing user info -->
-                <form action="processing.php" method="POST" enctype="multipart/form-data" id="editingProfile">
+                <form action="controls/processing.php" method="POST" enctype="multipart/form-data" id="editingProfile">
                     <!-- exit editing form -->
-                    <i class="fa fa-arrow-left" onclick="exitForm()"></i>
+                    <span>
+                        <h4>Edit profile</h4>
+                        <i class="fa fa-arrow-left" onclick="exitForm()"></i>
+                    </span>
                     <!-- edit photo -->
                     <div class="intro" id="editPhoto">
                         <label>Your profile picture: </label>
@@ -99,7 +102,10 @@
                             echo 'Images/user.png';} else{
                                 echo 'Uploads/'. $result['profilePhoto'];} ?>"
                             alt="profile photo" id="pfp"/>  
-                    <input name="profilePhoto"  type="file" id="profilePhoto"/>
+                            <label for="fileInput" id="pfpInput">
+                                Change<i class="fa-solid fa-cloud-arrow-up"></i>
+                                <input type="file" id="fileInput"  name="profilePhoto" />
+                            </label>
                     </div>
                 <!-- edit name and password -->
                 <div class="name">
@@ -145,7 +151,7 @@
 
             <!-- 'log out' section -->
             <div class="profile logOut">
-            <a href="processing.php?action=logOut"><h5 class="intro">Log Out</h5></a>
+            <a href="controls/processing.php?action=logOut"><h5 class="intro">Log Out</h5></a>
              </div>
 
              <!-- delete account section -->
@@ -153,7 +159,7 @@
              <h5 class="intro" id="deletePrompt">Delete Account</h5>
                 <p class="intro" id="deleteQ">Are you sure that you want to delete your account?</p>
                 <div  id="confirmDelete">
-                    <a href="processing.php?action=deleteAccount&id=<?php echo $id; ?>" class="btn pos-btn"><p>Yes</p></a>
+                    <a href="controls/processing.php?action=deleteAccount&id=<?php echo $id; ?>" class="btn pos-btn"><p>Yes</p></a>
                     <a class="btn neg-btn" onclick="cancelDelete()"><p>Cancel</p></a>
                 </div>
              </div>
@@ -226,7 +232,7 @@
 //     event.preventDefault(); // Prevent the form from submitting normally
 //     // Perform the AJAX request
 //     $.ajax({
-//       url: 'processing.php',
+//       url: 'controls/processing.php',
 //       type: 'POST',
 //       data: $(this).serialize(),
 //       success: function(response) {

@@ -290,15 +290,17 @@
 .button-links {
     text-decoration: none;
 }
-/* dashboard */
-.mainBody, #editProfileSection{
+
+.mainBody, #editProfileSection, #doctor-records-section{
     display: flex;
     flex-direction: row;
 }
 .mainBody section{
     width: 90%;
 }
-
+#editProfileSection section{
+    width: 90%;
+}
 /* dashboard */
 .progress-charts{
     display: grid;
@@ -339,8 +341,22 @@
     margin-block-start: 0.5em;
     margin-block-end: 1em;
 }
+#editingProfile div{
+    margin-bottom: 1em;
+}
 #editingProfile{
     display: none;
+}
+#editingProfile span{
+    padding: 0.5em;
+    display: flex;
+    flex-direction: row;
+    padding-bottom: 0;
+    padding-top: 0.25em;
+}
+#editingProfile span h4{
+    text-align: right;
+    width: 50%;
 }
 #editProfileSection a{
     text-decoration: none;
@@ -351,12 +367,45 @@
     height: 3em;
     border-radius: 2px;
 }
+#editingProfile{
+    margin-left: 2.5%;
+    border-bottom: 2px solid #408DCE;
+}
+#pfpInput{
+    width: 3em;
+    height: 3em;
+    border-radius: 2px;
+    border: 2px #ccc;
+    margin-left: 5%;
+}
+#pfpInput input[type="file"]{
+    display: none; /* Hide the original file input */
+  }
+  
+  #pfpInput i {
+    margin-right: 8px;
+  }
+  #pfpInput label{
+    padding-left: 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-right: 30%;
+ }
 #editProfileSection ul a{
     text-decoration: none;
     color: #408DCE;
 }
 #profilePhoto{
     display: none;
+}
+.intro .name{
+    font-size: 1.25em;
+    margin-left: 5%;
+}
+.contactInfo {
+    font-size: 1.25em;
+    padding-left: 2.5%;
 }
  #editProfileSection .profile, #patient-log .input-div{
     margin-right: 0;
@@ -637,3 +686,81 @@
     background-color: #28a745;
     color: #fff;
 }
+.calendar .day:nth-child(15){
+    border-bottom: 0;
+}
+.calendar .day div{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+.calendar .day div i{
+    color: #28a745;
+    /* padding: 0.15em; */
+    margin-top: 0.25em;
+    display: none;
+}
+
+/* records */
+#doctor-records-section section,#patient-records-section section{
+    display: flex;
+    flex-direction: column;
+    margin-top: 2.5%;
+}
+#doctor-records-section table, #patient-records-section table{
+    width: 80%;
+    margin-left: 10%;
+    font-size: 1.25em;
+    border-collapse: collapse;
+}
+#doctor-records-section tr, #patient-records-section tr{
+    width: 100%;
+}
+td span{
+    width: 100%;
+}
+td,th{
+    padding: 0.5em;
+}
+table, th, td {
+    border: 1px solid;
+    text-align: left;
+  }
+  /* records sorting area */
+  .records-header{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    /* padding-left: 10%; */
+    width: 80%;
+    margin-left: 10%;
+    margin-right: 5%;
+    margin-bottom: 2.5%;
+  }
+  .records-header h2{
+    /* font-size: 1.25em; */
+    width: 10%;
+    margin-block-end: 0;
+    margin-block-start: 0;
+  }
+  .records-header span{
+    /* width: 0%; */
+    margin-right: 2.5%;
+    font-size: 1.25em;
+    background: transparent;
+    width: 10%;
+
+  }
+  .records-header div{
+    display: grid;
+    grid-template-columns: 33.3% 33.3%;
+    width: 40%;
+    margin-left: 65%;
+  }
+  .records-header div span{
+    width: 80%;
+    padding: 0.5em;
+    border: 2px solid darkgray;
+    font-size: 1em;
+    border-radius: 10px;
+  }
