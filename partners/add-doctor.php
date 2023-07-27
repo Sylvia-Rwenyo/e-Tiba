@@ -1,3 +1,13 @@
+<?php 
+    include_once '../conn.php';
+    session_start();
+    if($_SESSION["loggedIN"] == false)
+    {
+        echo ' <script> 
+        window.location.href = "../index.php";
+        </script>';       
+    }
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,8 +21,12 @@
     <script src="https://use.fontawesome.com/1d95bf24b3.js"></script>
 </head>
 <body class="reg-body">
+    <?php
+        $current_user_name = $_SESSION['username'];
+    ?>
     <div class="welcome-msg">
         <h3>Welcome to CERA</h3>
+        <h4>Register Doctors Under <?php echo $current_user_name;?></h4>
         <p>Please fill the form below with accurate information as this is imporant for future identification with the platform administrators.</p>
     </div>
     <form method="POST" action="../controls/processing.php">
@@ -20,13 +34,13 @@
         <input type="text" name="lastName" placeholder="Doctor last name"/>
          <input type="number" name="years" placeholder="Years in practice"/>
          <select name="gender">
-            <option selected disabled> Select your gender</option>
+            <option selected disabled> Select doctor's gender</option>
             <option>Female</option>
             <option>Male</option>
             <option>None</option>
         </select>
         <input type="text" name="emailAddress" placeholder="Email Address"/>
-        <input type="text" name="institution" placeholder="Institution Name"/>
+        <input type="hidden"  name="institution" value="<?php echo $current_user_name;?>"/>
         <input type="text" name="phoneNumber" placeholder="Phone Number"/>
         <input type="text" name="address" placeholder="Your address"/>
         <input type="submit" value="submit" name="register-doc-by-partner" class="pos-btn"/>

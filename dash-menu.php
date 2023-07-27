@@ -11,7 +11,7 @@
         if ($_SESSION['category'] == 'hospital') {
             ?>
             <!-- add new doctor -->
-            <a href="partners/add-doctor.php" class="<?php echo isActive('partners/add-doctor.php'); ?>"><li><i class="fa-solid fa-folder"></i></li></a>
+            <a href="partners/add-doctor.php" class="<?php echo isActive('partners/add-doctor.php'); ?>"><li><i class="fa-solid fa-plus"></i></li></a>
 
             <!-- records -->
             <a href="partners/doctor-records.php" class="<?php echo isActive('partners/doctor-records.php'); ?>"><li><i class="fa-solid fa-folder"></i></li></a>

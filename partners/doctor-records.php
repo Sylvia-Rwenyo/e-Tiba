@@ -21,25 +21,24 @@
     <title>CERA</title>
 </head>
 
-<body class="dash-body" id="dosage-reg">
+<body class="dash-body">
     <?php
         $current_user_name = $_SESSION['username'];
         $bool_value = 0;
     ?>
     <div class = "records-container">
-        <div class="patient-records-dash-menu">
-            <?php include_once 'patient-records-dash-menu.php';?>
-        </div>
+        <?php include_once '../dash-menu.php';?>
         <section>
             <div class="menu-bar">
-                <h2>Prescription Entry, by Doctor <?php echo $current_user_name;?></h2>
-                <h4>Search For Patient To Assign Dosage</h4>
+                <h2>Doctor Records</h2>
+                <p>Doctors Under <?php echo $current_user_name;?></p>
+                <h4>View All Records / Search For individual Doctor</h4>
                 <div class="search-bar-top">
                     <div class="search-bar">
                         <div data-parallax = "scroll">
                             <form action = "" method = "GET" class = "form-inline">
-                                <input name = "keyword" type = "text" placeholder = "Search Patient here..." class = "form-control" value = "<?php echo isset($_POST['keyword'])?$_POST['keyword']:''?>"/>
-                                <span class = "input-group-button"><button class="search-btn" type="submit" name = "search"><i class="fa-solid fa-search"></i></button></span>
+                                <input name = "keyword" type = "text" placeholder = "Search Doctor Name or Email..." class = "form-control" value = "<?php echo isset($_POST['keyword'])?$_POST['keyword']:''?>"/>
+                                <span class = "input-group-button"><button class="search-btn" type="submit" name = "search">SEARCH</button></span>
                             </form>
                             <div class = "dropdown" id="dropdown">
                                 <div style="position:absolute;">
@@ -47,21 +46,21 @@
                                         <div style="word-wrap:break-word;">
                                             <?php
                                             if(isset($_GET['search']))
-                                            {
+                                            {   
                                                 $bool_value = 1;
                                                 $keyword = $_GET['keyword'];
-                                                $sql = "SELECT * FROM regpatients WHERE emailAddress LIKE '$keyword' or firstName LIKE '$keyword'";
+                                                $sql = "SELECT * FROM regdoctors WHERE emailAddress LIKE '$keyword' or firstName LIKE '$keyword'";
                                                 $result = mysqli_query($conn, $sql) or die(mysqli_error($conn));
                                                 while($rows = mysqli_fetch_array($result))
                                                 {?>
-                                                    <a href = "dosage-registration-form.php?id=<?php echo $rows['id']; ?>"><h3><?php echo $rows['firstName']?></h3></a>
-                                                    <a href = "dosage-registration-form.php?id=<?php echo $rows['id']; ?>" ><h4><?php echo $rows['emailAddress']?></h4></a>
+                                                    <a href = "doctor-records.php?doc-id=<?php echo $rows['id']; ?>"><h3><?php echo $rows['firstName']?></h3></a>
+                                                    <a href = "doctor-records.php?doc-id=<?php echo $rows['id']; ?>" ><h4><?php echo $rows['emailAddress']?></h4></a>
                                                     <?php
                                                 }
-                                            }
-                                            else{
-                                                $bool_value = 0;
-                                            } ?>
+                                            } 
+                                            elseif(isset($_GET['doc-id'])){
+                                                $bool_value = 2;
+                                            }?>
                                         </div>
                                     </div>
                                 </div>
@@ -71,8 +70,11 @@
                 </div>
             </div>
         </section>
-        <div id="dosage-summary">
-            <?php include_once "dosage-summary-div.php";?>
+        <div id="all-doctor-records">
+            <?php include_once "all-doctor-records-div.php";?>
+        </div>
+        <div id="individual-doctor-records">
+            <?php include_once "individual-doctor-records-div.php";?>
         </div>
     </div>
     <script type="text/JavaScript">
@@ -80,11 +82,18 @@
             console.log(`Bool Value:${bool_value}`);
             if(bool_value == 1){
                 document.getElementById("dropdown").style.display="block";
-                document.getElementById("dosage-summary").style.display="none";
+                document.getElementById("all-doctor-records").style.display="none";
+                document.getElementById("individual-doctor-records").style.display="none";
             }
-            else{
-                document.getElementById("dosage-summary").style.display="block";
+            else if(bool_value == 2){
                 document.getElementById("dropdown").style.display="none";
+                document.getElementById("all-doctor-records").style.display="none";
+                document.getElementById("individual-doctor-records").style.display="block";
+            }
+            else if(bool_value == 0){
+                document.getElementById("all-doctor-records").style.display="block";
+                document.getElementById("dropdown").style.display="none";
+                document.getElementById("individual-doctor-records").style.display="none";
             }
         }
     </script>
