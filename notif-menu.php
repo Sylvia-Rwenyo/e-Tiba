@@ -1,13 +1,38 @@
-    <div class="menu meet-menu">
-        <ul>
-        <li><a href="meet.php"><i class="fa fa-bell"></i></a></li>
-            <li><a href=""><i class="fa-solid fa-video"></i></a></li>
-            <li>
-                <?php 
+<?php 
                 include_once "conn.php";
                 session_start();
+                function prefixSet($linkName) {
+                    // Get the parent directory of the current page
+                    $parentDir = dirname($_SERVER['REQUEST_URI']);
+                    $parentDir = dirname($_SERVER['REQUEST_URI']);
+                    $parentDirCurrent = str_replace('/work/CERA', '', $parentDir); // Remove trailing slash
+                
+                    if ($parentDirCurrent === '/partners' && strpos($linkName, 'partners/') === 0) {
+                        $linkName = str_replace('partners/', '', $linkName);
+                        return $linkName;
+                    } else if ($parentDirCurrent === '/doctors' && strpos($linkName, 'partners/') === 0) {
+                        // If the parent directory is "doctors" and the link starts with "partners",
+                        // keep the link as it is without adding any prefix or removing any part.
+                        $linkName = '../' . $linkName;
+                        return $linkName;
+                    }else if($parentDirCurrent === '/doctors' || $parentDirCurrent === '/partners' && strpos($linkName, '/') === 1){
+                        $linkName = '../' . $linkName;
+                        return $linkName;
+                    }
+                
+                    // Add more conditions if needed for other parent directories
+                
+                    // If none of the conditions match, return the original linkName
+                    return $linkName;
+                }
                 ?>
-                <a href = <?php 
+    <div class="menu meet-menu">
+        <ul>
+            <li><a href="<?php echo prefixSet('meet.php')?>"><i class="fa-solid fa-video"></i></a></li>
+            <li>
+                <a href = <?php
+                // call the prefixSet() function appropriately.
+                //  echo prefixSet(
                 if($_SESSION['category'] == 'doctor')
                 {
                     echo "doctors/patient-doctor-chat.php";
@@ -19,6 +44,8 @@
                 {
                     echo "partners/patient-doctor-chat.php";
                 }
+            // )
+            ;
                 ?>>
                 <?php
                 $current_user_email = $_SESSION['email'];
