@@ -1,4 +1,5 @@
 <div class="dosage_records">
+    <h5>Summary of Prescriptions By You</h5>
     <table>
         <tr class="table_field_names">
             <td>Patient Name</td>

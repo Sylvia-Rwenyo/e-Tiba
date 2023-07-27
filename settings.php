@@ -89,7 +89,7 @@
                 while($result = mysqli_fetch_array($records)) {
         ?>
         <!-- show form for editing user info -->
-                <form action="processing.php" method="POST" enctype="multipart/form-data" id="editingProfile">
+                <form action="controls/processing.php" method="POST" enctype="multipart/form-data" id="editingProfile">
                     <!-- exit editing form -->
                     <i class="fa fa-arrow-left" onclick="exitForm()"></i>
                     <!-- edit photo -->
@@ -145,7 +145,7 @@
 
             <!-- 'log out' section -->
             <div class="profile logOut">
-            <a href="processing.php?action=logOut"><h5 class="intro">Log Out</h5></a>
+            <a href="controls/processing.php?action=logOut"><h5 class="intro">Log Out</h5></a>
              </div>
 
              <!-- delete account section -->
@@ -153,7 +153,7 @@
              <h5 class="intro" id="deletePrompt">Delete Account</h5>
                 <p class="intro" id="deleteQ">Are you sure that you want to delete your account?</p>
                 <div  id="confirmDelete">
-                    <a href="processing.php?action=deleteAccount&id=<?php echo $id; ?>" class="btn pos-btn"><p>Yes</p></a>
+                    <a href="controls/processing.php?action=deleteAccount&id=<?php echo $id; ?>" class="btn pos-btn"><p>Yes</p></a>
                     <a class="btn neg-btn" onclick="cancelDelete()"><p>Cancel</p></a>
                 </div>
              </div>

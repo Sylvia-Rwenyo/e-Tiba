@@ -338,7 +338,7 @@ if(isset($_GET['action'])){
             session_start();
             session_unset();
             echo ' <script> 
-                        window.location.href = "index.php"
+                        window.location.href = "../index.php"
                     </script>
         '; 
         }
@@ -401,7 +401,7 @@ if(isset($_GET['action'])){
         // $_SESSION["username"]=$name;
         $_SESSION["email"]=$emailAddress;
         echo ' <script> 
-        window.location.href = "settings.php";
+        window.location.href = "../settings.php";
         </script>
         ';
     } else {	

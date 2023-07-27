@@ -55,6 +55,12 @@
     margin-top: 2.5%;
     margin-left: 2.5%;
 }
+@media screen and (max-width:500px) {
+    .intro{
+        display: flex;
+        flex-direction: column;
+    }
+}
 
 .home .banner{
     width: 40%;
@@ -255,8 +261,14 @@
     background-color:red;
     border-radius:20px;
 }
-#video-description {
+.intro .banner .video-description {
     text-align: center;
+    margin-top: 20%;
+}
+@media screen and (max-width:500px) {
+    .intro .banner .video-description {
+        width: 400px;
+    }
 }
 .transcript {
     text-align: center;
@@ -265,9 +277,30 @@
     padding: 20px;
     background-color: white;
 }
+@media screen and (max-width:500px) {
+    .transcript {
+        text-align: left;
+        font-size: large;
+        margin: 2%;
+        margin-left: 3%;
+        padding: 2%;
+    }
+}
 .transcript-small-div {
+    display:flex;
+    flex-direction: row;
+    padding:20px;
     background-color: white;
     margin: 20px;
+}
+@media screen and (max-width:500px) {
+    .transcript-small-div {
+        display:flex;
+        flex-direction: column;
+        padding:2%;
+        background-color: white;
+        margin: 2%;
+    }
 }
 
 .transcript-mini-div {
@@ -301,6 +334,21 @@
 .transcript ul {
     text-align: left;
     margin-left: 10px;
+}
+@media screen and (max-width:500px) {
+    .transcript-mini-div {
+        margin: 5%;
+    }
+    .transcript h4 {
+        margin-left: 5%;
+        padding: 5%;
+    }
+    .transcript p {
+        margin-left: 5%;
+    }
+    .transcript ul {
+        margin-left: 5%;
+    }
 }
 #video-description {
     background-size:cover;
@@ -828,7 +876,7 @@
     margin-top: 10%;
     border-radius: 10%;
 }
-#patient-doc-home-chat .search-btn:hover, , .records-container .search-btn:hover{
+#patient-doc-home-chat .search-btn:hover, .records-container .search-btn:hover{
     background-color: white;
     border: 1px solid black;
     
@@ -1128,6 +1176,24 @@
     padding: 1.1%;
 }
 
+#dosage-reg-home .search-bar-top{
+    text-align: center;
+    margin: 1%;
+    width: 100%;
+    display:flex;
+    flex-direction: column;
+    background-color: rgba(190, 252, 254);
+}
+
+@media screen and (max-width: 500px) {
+    #dosage-reg-home #dosage-summary{
+        margin-top: 7em;
+    }
+    #dosage-reg-home .search-bar-top, #dosage-reg-home .search-bar-top form{
+        width:90%;
+    }
+}
+
 .records-container .menu-bar .search-bar-top{
     text-align: center;
     margin: 1%;
@@ -1171,3 +1237,4 @@
         margin-left:5%;
     }
 }
+

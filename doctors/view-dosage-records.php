@@ -22,6 +22,9 @@
 </head>
 
 <body class="dash-body" id="patient_records">
+    <?php
+        $current_user_name = $_SESSION['username'];
+    ?>
     <div class = "records-container">
     <div class="patient-records-dash-menu">
         <?php include_once 'patient-records-dash-menu.php';?>
@@ -30,6 +33,7 @@
         <div class="menu-bar">
             <div class="welcome-msg" style="display:inline-block">
                 <h1>Dosage Details</h1>
+                <h3>All Prescriptions Administered By <?php echo $current_user_name;?></h3>
             </div>
         </div>
         <div class="dosage_records">
