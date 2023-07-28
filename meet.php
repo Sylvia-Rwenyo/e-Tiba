@@ -175,7 +175,7 @@ stopVideoButton.addEventListener('click', function() {
             data.append('offerSdp', offerSdp);
 
             // Send the offer SDP to the PHP backend
-            fetch('processing.php', {
+            fetch('controls/processing.php', {
                 method: 'POST',
                 body: data
             })
@@ -204,7 +204,7 @@ stopVideoButton.addEventListener('click', function() {
             data.append('answerSdp', answerSdp);
 
             // Send the answer SDP to the PHP backend
-            fetch('processing.php', {
+            fetch('controls/processing.php', {
                 method: 'POST',
                 body: data
             })
@@ -233,7 +233,7 @@ stopVideoButton.addEventListener('click', function() {
             data.append('candidate', JSON.stringify(candidate));
 
             // Send the ICE candidate to the PHP backend
-            fetch('processing.php', {
+            fetch('controls/processing.php', {
                 method: 'POST',
                 body: data
             })

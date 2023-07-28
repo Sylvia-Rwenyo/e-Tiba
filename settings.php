@@ -65,8 +65,8 @@
                 </div>
                 <div class="contactInfo">
                 <p><a href='mailto:<?php echo $result['emailAddress']?>'><i class="fa-solid fa-envelope"></i>&nbsp;&nbsp;&nbsp;<?php echo $result['emailAddress']?></a></p>
-                <p><a href='tel:<?php if($result['phoneNumber'] == 0){
-                    echo '';} else{ echo $result['phoneNumber'];}?>'>
+                <p><a <?php if($result['phoneNumber'] == 0){
+                    echo 'onclick="editProfile()"';} else{ echo 'href="tel:'. $result['phoneNumber'].'"';}?>>
                     <i class="fa-solid fa-phone"></i>&nbsp;&nbsp;&nbsp;
                     <?php if($result['phoneNumber'] == 0){
                      echo 'Add phone number';} else{ echo $result['phoneNumber'];}
@@ -91,7 +91,10 @@
         <!-- show form for editing user info -->
                 <form action="controls/processing.php" method="POST" enctype="multipart/form-data" id="editingProfile">
                     <!-- exit editing form -->
-                    <i class="fa fa-arrow-left" onclick="exitForm()"></i>
+                    <span>
+                        <h4>Edit profile</h4>
+                        <i class="fa fa-arrow-left" onclick="exitForm()"></i>
+                    </span>
                     <!-- edit photo -->
                     <div class="intro" id="editPhoto">
                         <label>Your profile picture: </label>
@@ -99,7 +102,10 @@
                             echo 'Images/user.png';} else{
                                 echo 'Uploads/'. $result['profilePhoto'];} ?>"
                             alt="profile photo" id="pfp"/>  
-                    <input name="profilePhoto"  type="file" id="profilePhoto"/>
+                            <label for="fileInput" id="pfpInput">
+                                Change<i class="fa-solid fa-cloud-arrow-up"></i>
+                                <input type="file" id="fileInput"  name="profilePhoto" />
+                            </label>
                     </div>
                 <!-- edit name and password -->
                 <div class="name">
@@ -226,7 +232,7 @@
 //     event.preventDefault(); // Prevent the form from submitting normally
 //     // Perform the AJAX request
 //     $.ajax({
-//       url: 'processing.php',
+//       url: 'controls/processing.php',
 //       type: 'POST',
 //       data: $(this).serialize(),
 //       success: function(response) {
