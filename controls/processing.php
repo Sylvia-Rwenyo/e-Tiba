@@ -628,5 +628,72 @@ if(isset($_POST['message-delete'])){
 	 mysqli_close($conn);
 }
 
-
+if(isset($_POST['submit-report-or-suggestion']))
+{	
+    //create session
+    session_start();
+    //store values submitted in the chat form in variables 
+    $message = $_POST['message'];
+    $userId = $_SESSION['id'];
+    $emailAddress = $_SESSION['email'];
+    $readStatus = $_POST['readStatus'];
+    $sent_to = $_POST['sent_to'];
+    $sender_class = $_POST['sender_class'];
+    $sent_to_id = 0;
+    $query = 0;
+     
+    if(($_SESSION['category']) == 'patient' || ($_SESSION['category']) == 'doctor'){
+        $query2 = "SELECT id FROM reginstitutions WHERE emailAddress ='$sent_to'";
+        $result = mysqli_query($conn, $query2) or die(mysqli_error($conn));
+        while($row = mysqli_fetch_array($result))
+        {
+            $sent_to_id = $row['id'];	
+        }
+        $chat_identity = $sent_to."_".$emailAddress;
+        $query = "INSERT INTO reports (chat_identity, message, sender_class, sent_from_id, emailAddress, sent_to_id, sent_to, readStatus) VALUES ('$chat_identity', '$message','$sender_class','$userId', '$emailAddress', '$sent_to_id', '$sent_to', '$readStatus')";
+        if (mysqli_query($conn,$query)) 
+        {
+            echo "<script> window.location.href= '../chats/reports-messages.php?hosp-id=$sent_to_id'; </script>";	
+            //add notifications here 
+        } 
+        else 
+        {
+            echo "Error: " . $query . "" . mysqli_error($conn) . "Could Not Send Message";
+        }
+        mysqli_close($conn);
+    }
+    elseif(($_SESSION['category']) == 'hospital'){
+        $query2 = "SELECT id FROM regpatients WHERE emailAddress ='$sent_to'";
+        $result = mysqli_query($conn, $query2) or die(mysqli_error($conn));
+        if(mysqli_num_rows($result) == 0){
+            $query2 = "SELECT id FROM regdoctors WHERE emailAddress ='$sent_to'";
+            $result = mysqli_query($conn, $query2) or die(mysqli_error($conn));
+            if(mysqli_num_rows($result) == 0){
+                echo "Error, Does not Exist from both patients and doctors records";
+            }
+        }
+        while($row = mysqli_fetch_array($result))
+        {
+            $sent_to_id = $row['id'];	
+        }
+        $chat_identity = $emailAddress."_".$sent_to;
+        $query = "INSERT INTO reports (chat_identity, message, sender_class, sent_from_id, emailAddress, sent_to_id, sent_to, readStatus) VALUES ('$chat_identity', '$message','$sender_class','$userId', '$emailAddress', '$sent_to_id', '$sent_to', '$readStatus')";
+        if (mysqli_query($conn,$query)) 
+        {
+            $query3 = "SELECT MAX(id) FROM reports WHERE emailAddress ='$emailAddress'";
+            $result = mysqli_query($conn, $query3) or die(mysqli_error($conn));
+            while($row = mysqli_fetch_array($result))
+            {
+                $message_id = $row['id'];	
+            }
+            echo "<script> window.location.href= '../chats/reports-messages.php?id=$message_id'; </script>";	
+            //add notifications here 
+        } 
+        else 
+        {
+            echo "Error: " . $query . "" . mysqli_error($conn) . "Could Not Send Message";
+        }
+        mysqli_close($conn);
+    }
+}
 ?>

@@ -44,10 +44,6 @@
             { ?>
                 <div class="message-box receiving">
                     <p><?php echo $row["message"]; ?></p>
-                    <form id="message-form"  action="../controls/processing.php?id=<?php echo $row["id"]; ?>" method="POST" style="<?php if($current_user_email == $row["emailAddress"]){echo 'display:block;';}else{echo  'display:none;';}?>">
-                        <input type="hidden"  name="sent_to" value="<?php echo $sent_to;?>"/>    
-                        <input id = "message-delete" type="submit" name="message-delete" class="chat-btn" value="Delete"/>
-                    </form>
                 </div> 
                 <?php
             }
@@ -72,7 +68,20 @@
                 <div class="message-box sent">
                     <p><?php echo $row["message"]; ?></p>
                     <div style="display:flex;flex-direction:row;">
-                        <form id="message-form"  action="../controls/processing.php?id=<?php echo $row["id"]; ?>" method="POST" style="<?php if($current_user_email == $row["emailAddress"]){echo 'display:block;';}else{echo  'display:none;';}?>">
+                        <form id="message-form"  action="../controls/processing.php?id=<?php echo $row["id"]; ?>" method="POST" style="
+                        <?php 
+                            if($current_user_email == $row["emailAddress"]){
+                                echo 'display:block;';
+                            }
+                            else{
+                                echo  'display:none;';
+                            }
+                            if($row['readStatus'] == 'unread')
+                            {
+                                echo 'display:block;';
+                            }else{
+                                echo  'display:none;';
+                        }?>">
                             <input type="hidden"  name="sent_to" value="<?php echo $sent_to;?>"/>    
                             <input id = "message-delete" type="submit" name="message-delete" class="chat-btn" value="Delete"/>
                         </form>

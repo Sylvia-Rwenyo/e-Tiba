@@ -7,7 +7,15 @@
             <li><a href="meet.php"><i class="fa fa-bell"></i></a></li>
             <li><a href=""><i class="fa-solid fa-video"></i></a></li>
             <li>
-                <a href = "chats/chats-home.php">
+                <a href = <?php 
+                if($_SESSION['category'] == 'hospital')
+                {
+                    echo "chats/reports-home.php";
+                }
+                else
+                {
+                    echo "chats/chats-home.php";
+                }?>>
                 <?php
                 $current_user_email = $_SESSION['email'];
                 $resultPost = mysqli_query($conn,"SELECT readStatus FROM chat WHERE sent_to = '$current_user_email'");
@@ -18,7 +26,16 @@
                     {
                         $count = $count + 1;
                     }
+                }
+                $resultGetReport = mysqli_query($conn,"SELECT readStatus FROM reports WHERE sent_to = '$current_user_email'");
+                while($row = mysqli_fetch_array($resultGetReport)) 
+                {
+                    if($row['readStatus'] == 'unread')
+                    {
+                        $count = $count + 1;
+                    }
                 }?>
+                
                 <i class="fa fa-message"><span class="badge"><?php if($count == 0){echo "";}else{echo $count;}?></span></i>
                 </a>
             </li>
