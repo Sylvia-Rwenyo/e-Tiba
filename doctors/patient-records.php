@@ -29,7 +29,7 @@
             <!-- filter/sort functionality -->
             <div>
                 <span id="all-indicator" onclick="sort('all')">All</span>
-                <!-- <span id="attended-indicator">Attended</span> -->
+                <span id="attended-indicator" onclick="sort('my-dosage')">Attended</span>
                 <span id="atRisk-indicator" onclick="sort('at-risk')">At risk</span>
             </div>
         </div>
@@ -161,14 +161,17 @@ function sort(criteria){
     }else  if(criteria == 'at-risk'){
         window.location.href = 'patient-records.php?a=r';
     }
+    else  if(criteria == 'my-dosage'){
+        window.location.href = 'patient-records.php?a=d';
+    }
 }
 function fetchData() {
 $.ajax({
-    url: 'doctor-records.php', // Replace with your server-side script URL
+    url: 'patient-records.php', // Replace with your server-side script URL
     method: 'GET',
     success: function(response) {
     // Handle the response and update the HTML content
-    $('#doctor-records-section').html(response);
+    $('#patient-records-section').html(response);
     console.log("all good");
     },
     error: function(xhr, status, error) {

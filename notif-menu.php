@@ -4,8 +4,8 @@
         session_start();
         ?>
         <ul>
-        <li><a href="meet.php"><i class="fa fa-bell"></i></a></li>
-            <li><a href=""><i class="fa-solid fa-video"></i></a></li>
+        <li><a href=""><i class="fa fa-bell"></i></a></li>
+            <li><a href="meet.php"><i class="fa-solid fa-video"></i></a></li>
             <li>
                 <a href = <?php 
                 if($_SESSION['category'] == 'hospital')

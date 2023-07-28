@@ -29,7 +29,7 @@
     <div class="patient-records-dash-menu">
         <?php include_once 'chats-dash-menu.php';?>
     </div>
-    <div>
+    <div style="width:100%;">
     <div class="menu-bar">
             <div class="welcome-msg">
                 <h3>Patient Doctor Chat</h3>

@@ -7,7 +7,7 @@
         return ($currentPage === $linkName) ? 'active' : '';
     }?>
     <!-- back to dashboard -->
-    <a href="../dashboard.php"><li><i class="fa fa-back"></i></li></a>
+    <a href="../dashboard.php"><li><i class="fa fa-angle-left"></i></li></a>
     <!-- chat home page -->
     <a href="chats-home.php" class="<?php echo isActive('chats-home.php'); ?>">
         <li>
@@ -22,7 +22,7 @@
                     $count = $count + 1;
                 }
             }?>
-            <i class="fa fa-message"><span class="badge"><?php if($count == 0){echo "";}else{echo $count;}?></span></i>
+            <i class="fa fa-comments"><span class="badge"><?php if($count == 0){echo "";}else{echo $count;}?></span></i>
         </li>
     </a>
     <!-- send report to hospital -->
@@ -39,7 +39,7 @@
                     $count = $count + 1;
                 }
             }?>
-            <i class="fa fa-copy"><span class="badge"><?php if($count == 0){echo "";}else{echo $count;}?></span></i>
+            <i class="fa fa-comment"><span class="badge"><?php if($count == 0){echo "";}else{echo $count;}?></span></i>
         </li>
     </a>
 </ul>

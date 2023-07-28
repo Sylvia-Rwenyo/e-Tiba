@@ -7,9 +7,9 @@
         return ($currentPage === $linkName) ? 'active' : '';
     }?>
     <!-- back to dashboard -->
-    <a href="../dashboard.php"><li><i class="fa fa-back"></i></li></a>
+    <a href="../dashboard.php"><li><i class="fa fa-angle-left"></i></li></a>
     <!-- records -->
-    <a href="view-patient-records.php" class="<?php echo isActive('view-patient-records.php'); ?>"><li><i class="fa fa-home"></i></li></a>
+    <a href="view-patient-records.php" class="<?php echo isActive('view-patient-records.php'); ?>"><li><i class="fa-solid fa-folder-closed"></i></li></a>
     <!-- existing records -->
     <a href="view-dosage-records.php" class="<?php echo isActive('view-dosage-records.php'); ?>"><li><i class="fa fa-folder"></i></li></a>
         <!-- register new dosage -->

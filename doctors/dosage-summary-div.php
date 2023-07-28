@@ -1,5 +1,5 @@
 <div class="dosage_records">
-    <h5>Summary of Prescriptions By You</h5>
+    <h5>Summary of Prescriptions For <?php $result['firstName'] ?></h5>
     <table>
         <tr class="table_field_names">
             <td>Patient Name</td>
@@ -10,7 +10,7 @@
         
         <?php
         $current_user_id = $_SESSION['id'];
-        $resultPost = mysqli_query($conn,"SELECT * FROM dosage  WHERE attending_doctor_id = '$current_user_id'");
+        $resultPost = mysqli_query($conn,"SELECT * FROM dosage  WHERE patient_id = '$pID'");
         while($row = mysqli_fetch_array($resultPost)) {
         ?>
         <tr class="table_field_items">

@@ -24,6 +24,7 @@
     <section>
         <div class="records-header" style="flex-direction:column;justify-content: unset;">
             <?php
+            $i=0;
             $pID = isset($_GET['p']) ? $_GET['p'] : null;
             $stmt = mysqli_query($conn,"SELECT * FROM regPatients where id='$pID'");
             if (mysqli_num_rows($stmt) > 0) {
@@ -35,7 +36,8 @@
             <?php
          
             ?>
-            <!-- search functionality to be added -->
+            <!-- search functionality to be added. Get from dosage-registration.php-->
+            <?php include_once "dosage-registration.php";?>
         </div>
         <table>
         <tr>
@@ -128,10 +130,11 @@
 
         <tr>
             <th>Treatment plan</th>
+            <!-- register new dosage -->
             <td>
-                <?php 
-                echo ''; //dosage info
-                ?>
+                <a href="dosage-registration-form.php?id=<?php echo $pID; ?>"><li><i class="fa fa-plus">New Dose</i></li></a>
+                <!-- dosages for all patients -->
+                <a href="view-all-dosages.php"><li><i class="fa-solid fa-folder">All Doses</i></li></a>
             </td>
         </tr>
         <tr>
