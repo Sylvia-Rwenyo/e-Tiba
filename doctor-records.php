@@ -1,10 +1,10 @@
 <?php 
-    include_once '../conn.php';
+    include_once 'conn.php';
     session_start();
     if($_SESSION["loggedIN"] == false)
     {
         echo ' <script> 
-        window.location.href = "../index.php";
+        window.location.href = "index.php";
         </script>';       
     }
 ?>
@@ -19,18 +19,18 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://kit.fontawesome.com/2751fbc624.js" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <link rel="icon" href="../favicon.ico" />
-    <link rel="stylesheet" href="../style.css">
+    <link rel="icon" href="favicon.ico" />
+    <link rel="stylesheet" href="style.css">
     <title>Records of Doctors</title>
 </head>
 <body class="profileBody" id="doctor-records-main" >
     <div class="header">
         <h1 style="width: 20%">Records</h1>
-        <?php include_once '../notif-menu.php';?>
+        <?php include_once 'notif-menu.php';?>
     </div>
     <div class="mainBody" id="doctor-records-section">
     <?php 
-        include_once '../dash-menu.php';
+        include_once 'dash-menu.php';
         $id = $_SESSION['id'];
     ?>
     <section id="doctor-records-main">
@@ -76,10 +76,10 @@
 </html>
 <script>
     function toPatientRecords(doctorID){
-        window.location.href = '../doctors/patient-records.php?d=' + doctorID ;
+        window.location.href = 'patient-records.php?d=' + doctorID ;
     }
     function toDoctorCalendar(doctorID){
-        window.location.href = '../calendar.php?d=' + doctorID ;
+        window.location.href = 'calendar.php?d=' + doctorID ;
     }
 function fetchData() {
 $.ajax({

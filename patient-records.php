@@ -9,18 +9,18 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://kit.fontawesome.com/2751fbc624.js" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <link rel="icon" href="../favicon.ico" />
-    <link rel="stylesheet" href="../style.css">
+    <link rel="icon" href="favicon.ico" />
+    <link rel="stylesheet" href="style.css">
     <title>Records of Patients</title>
 </head>
 <body class="profileBody" id="profileBody" >
     <div class="header">
         <h1 style="width: 20%">Records</h1>
-        <?php include_once '../notif-menu.php';?>
+        <?php include_once 'notif-menu.php';?>
     </div>
     <div class="mainBody" id="patient-records-section">
     <?php 
-        include_once '../dash-menu.php';
+        include_once 'dash-menu.php';
     ?>
     <section>
         <div class="records-header">
@@ -71,9 +71,6 @@
              // show filter/sort criteria
         if(isset($_GET['a'])){
             if($_GET['a'] == 'l'){
-                if($_SESSION['category'] == 'doctor'){
-
-                }
                 echo '
                 <style>
                     #all-indicator{
@@ -207,7 +204,7 @@
         window.location.href = 'single-patient-records.php?p='+patientID;
     }
     function toPatientCalendar(patientID){
-        window.location.href = '../calendar.php?p='+patientID;
+        window.location.href = 'calendar.php?p='+patientID;
     }
     // sort patient records display
 function sort(criteria){

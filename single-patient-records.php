@@ -8,18 +8,18 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://kit.fontawesome.com/2751fbc624.js" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <link rel="icon" href="../favicon.ico" />
-    <link rel="stylesheet" href="../style.css">
+    <link rel="icon" href="favicon.ico" />
+    <link rel="stylesheet" href="style.css">
     <title>Records of Patients</title>
 </head>
 <body class="profileBody" id="profileBody" >
     <div class="header">
         <h1 style="width: 20%">Records</h1>
-        <?php include_once '../notif-menu.php';?>
+        <?php include_once 'notif-menu.php';?>
     </div>
     <div class="mainBody" id="patient-records-section">
     <?php 
-        include_once '../dash-menu.php';
+        include_once 'dash-menu.php';
     ?>
     <section>
         <div class="records-header" style="flex-direction:column;justify-content: unset;">
@@ -37,7 +37,7 @@
          
             ?>
             <!-- search functionality to be added. Get from dosage-registration.php-->
-            <?php include_once "dosage-registration.php";?>
+            <?php include_once "doctors/dosage-reg-search-div.php";?>
         </div>
         <table>
         <tr>
@@ -130,11 +130,16 @@
 
         <tr>
             <th>Treatment plan</th>
-            <!-- register new dosage -->
-            <td>
-                <a href="dosage-registration-form.php?id=<?php echo $pID; ?>"><li><i class="fa fa-plus">New Dose</i></li></a>
+            
+            <td style="display:flex;flex-direction:row;">
+                <!-- register new dosage -->
+                <a href="doctors/dosage-registration-form.php?id=<?php echo $pID; ?>"><li><i class="fa fa-plus"></i>New Dose</li></a>
+            
+                <!-- dosages for this patient patients -->
+                <a href="doctors/dosage-registration.php?id=<?php echo $pID; ?>"><li><i class="fa-solid fa-folder"></i>Doses</li></a>
+            
                 <!-- dosages for all patients -->
-                <a href="view-all-dosages.php"><li><i class="fa-solid fa-folder">All Doses</i></li></a>
+                <a href="doctors/view-all-dosages.php"><li><i class="fa-solid fa-folder-tree"></i>All Doses</li></a>
             </td>
         </tr>
         <tr>
@@ -160,7 +165,7 @@
 
 <script>
     function toPatientCalendar(patientID){
-        window.location.href = '../calendar.php?p='+patientID;
+        window.location.href = 'calendar.php?p='+patientID;
     }
     // sort patient records display
 function sort(criteria){
@@ -172,11 +177,11 @@ function sort(criteria){
 }
 function fetchData() {
 $.ajax({
-    url: 'doctor-records.php', // Replace with your server-side script URL
+    url: 'single-patient-records.php', // Replace with your server-side script URL
     method: 'GET',
     success: function(response) {
     // Handle the response and update the HTML content
-    $('#doctor-records-section').html(response);
+    $('#profile-body').html(response);
     console.log("all good");
     },
     error: function(xhr, status, error) {

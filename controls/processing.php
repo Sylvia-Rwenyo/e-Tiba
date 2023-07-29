@@ -239,23 +239,63 @@ if(isset($_POST['dosage-registration'])){
     {
         $query="INSERT INTO dosage(attending_doctor_id, attending_doctor_email, attending_doctor_name, patient_id, patientEmail, patientName, dosageName, tablets, times_a_day, number_of_days) VALUES ('$attending_doctor_id', '$attending_doctor_email', '$attending_doctor_name', '$patient_id','$patient_email', '$fname_patient', '$dosageName', '$tablets', '$timesADay', '$numberOfDays')";
         $sql=mysqli_query($conn,$query)or die("Could Not Perform the Query");
-        header ("Location: ../doctors/view-dosage-records.php");
+        header ("Location: ../single-patient-records.php?p='$patient_id'");
     }
 }
 
 if(isset($_POST['dosage-update']))
 {
 	$id = $_GET['id'];
-	$dosageName = $_POST['dosageName'];
-	$tablets = $_POST['tablets'];
-	$numberOfDays = $_POST['numberOfDays'];
-	$timesADay = $_POST['timesADay'];
+    $original_dosageName = 0;
+    $original_tablets = 0;
+    $original_numberOfDays = 0;
+    $original_timesADay = 0;
+    $query3 = "SELECT * FROM dosage WHERE dosageId ='$id'";
+    $result3 = mysqli_query($conn, $query3) or die(mysqli_error($conn));
+    while($row = mysqli_fetch_array($result3))
+    {
+        $original_dosageName = $row['dosageName'];
+        $original_tablets = $row['tablets'];
+        $original_numberOfDays = $row['number_of_days'];
+        $original_timesADay = $row['times_a_day'];
+    }
+	$id = $_GET['id'];
+    if(isset($_POST['dosageName'])){
+        $dosageName = $_POST['dosageName'];
+    }
+    else{
+        $dosageName = $original_dosageName;
+    }
+    if(isset($_POST['tablets'])){
+        $tablets = $_POST['tablets'];
+    }
+    else{
+        $tablets = $original_tablets;
+    }
+    if(isset($_POST['numberOfDays'])){
+        $numberOfDays = $_POST['numberOfDays'];
+    }
+    else{
+        $numberOfDays = $original_numberOfDays;
+    }
+    if(isset($_POST['timesADay'])){
+        $timesADay = $_POST['timesADay'];
+    }
+    else{
+        $timesADay = $original_timesADay;
+    }
 
      $sql = "UPDATE dosage SET dosageName = '$dosageName', tablets = '$tablets', number_of_days = '$numberOfDays', times_a_day = '$timesADay' WHERE dosageId=$id";
     
     if (mysqli_query($conn, $sql)) 
     {
-        echo "<script> alert(\"Item updated\");window.location.href=\"../doctors/dosage-registration.php\"; </script>";	 
+        $query2 = "SELECT * FROM dosage WHERE dosageId ='$id'";
+        $result = mysqli_query($conn, $query2) or die(mysqli_error($conn));
+        while($row = mysqli_fetch_array($result))
+        {
+            $pId = $row['patient_id'];	
+        }
+        echo "<script> alert(\"Item updated\");window.location.href='../doctors/dosage-registration.php?id=$pId'; </script>";	 
     } 
     else 
     {
@@ -265,11 +305,17 @@ if(isset($_POST['dosage-update']))
 }
 if(isset($_POST['dosage-delete'])){
 	$id = $_GET['id'];
+    $query2 = "SELECT * FROM dosage WHERE dosageId ='$id'";
+    $result = mysqli_query($conn, $query2) or die(mysqli_error($conn));
+    while($row = mysqli_fetch_array($result))
+    {
+        $pId = $row['patient_id'];	
+    }
      $sql = "DELETE FROM dosage WHERE dosageId=$id";
 	 if (mysqli_query($conn, $sql))
 	  {echo "<script>
 		alert(\"Item deleted\");
-		window.location.href=\"../doctors/dosage-registration.php\";
+		window.location.href='../doctors/dosage-registration.php?id=$pId';
 		</script>";	
      } 
 	 else 

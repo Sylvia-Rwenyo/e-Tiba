@@ -914,6 +914,9 @@
     background-color: rgba(190, 252, 254, 0.5);
     margin-top: 2.5%;
 } 
+#records-search-container form{
+    margin-left: 5%;
+} 
 @media screen and (max-width:500px) {
     #patient-doc-home-chat form ,#records-search-container form{
         margin-left: 2%;
@@ -1190,51 +1193,13 @@
     }
 }
 
-/* patient records menu */
-
-.patient-records-dash-menu {
-    height: 80vh;
-    width: 10%;
-    position: -webkit-sticky;
-    position: sticky;
-}
-@media screen and (max-width:500px) {
-    patient-records-dash-menu {
-        height: 60vh;
-        width: 15%;
-    }
-}
-
-.patient-records-dash-menu ul{
-    list-style-type: none;
-    display: flex;
-    flex-direction: column;
-    text-align: center;
-    height: 100%;
-    padding: 0;
-}
-.patient-records-dash-menu .active{
-    background-color: rgba(190, 252, 254, 0.5);
-}
-.patient-records-dash-menu ul a{
-    flex-grow: 1;
-    padding: 20%;
-    padding-top: 30%;
-    text-decoration: none;
-    color: #408DCE;
-}
-.patient-records-dash-menu ul a:hover{
-    border: 2px solid #408DCE;
-}
-
-
 /*All records pages, doctors records , dosage records*/
 .records-container {
     display: flex;
     flex-direction: row;
 }
 @media screen and (max-width:500px) {
-    .records-container, .patient-records-dash-menu {
+    .records-container {
         flex-direction: row;
     }
     .records-container .menu-bar{
@@ -1420,14 +1385,15 @@ table, th, td {
     position: relative;
     padding: 1.1%;
 }
-.records-header #records-search-container div{
+#records-search-container div{
     margin:0;
     display:flex;
     flex-direction:column;
     width: 100%;
 }
+
 @media screen and (max-width:500px) {
-    .records-header #records-search-container div{
+    #records-search-container div{
         margin-left: 0;
     }
     #records-search-container .menu-bar{
@@ -1445,6 +1411,13 @@ table, th, td {
 }
   .records-header div span{
     width: 80%;
+    padding: 0.5em;
+    border: 2px solid darkgray;
+    font-size: 1em;
+    border-radius: 10px;
+  }
+  #records-search-container div span{
+    width: fit-content;
     padding: 0.5em;
     border: 2px solid darkgray;
     font-size: 1em;

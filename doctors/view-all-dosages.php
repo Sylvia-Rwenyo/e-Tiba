@@ -27,9 +27,6 @@
         $current_user_name = $_SESSION['username'];
     ?>
     <div class = "records-container">
-    <div class="patient-records-dash-menu">
-        <?php include_once 'patient-records-dash-menu.php';?>
-    </div>
     <section>
         <div class="menu-bar">
             <div class="welcome-msg" style="display:inline-block">
@@ -48,7 +45,7 @@
                 
                 <?php
                 $current_user_id = $_SESSION['id'];
-                $resultPost = mysqli_query($conn,"SELECT * FROM dosage'");
+                $resultPost = mysqli_query($conn,"SELECT * FROM dosage");
                 while($row = mysqli_fetch_array($resultPost)) {
                 ?>
                 <tr class="table_field_items">

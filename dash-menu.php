@@ -41,7 +41,7 @@
             <a href="<?php echo prefixSet('partners/add-doctor.php')?>" class="<?php echo isActive('partners/add-doctor.php'); ?>"><li><i class="fa-solid fa-add"></i></li></a>
 
             <!-- records -->
-            <a href="<?php echo prefixSet('partners/doctor-records.php')?>" class="<?php echo isActive('partners/doctor-records.php'); ?>"><li><i class="fa-solid fa-folder"></i></li></a>
+            <a href="<?php echo prefixSet('doctor-records.php')?>" class="<?php echo isActive('doctor-records.php'); ?>"><li><i class="fa-solid fa-folder"></i></li></a>
 
             <!-- trends -->
             <a href="<?php echo prefixSet('dashboard.php?charts=1')?>" class="<?php echo isActive('dashboard.php'); ?>"><li><i class="fa-solid fa-chart-line"></i></li></a>
@@ -55,7 +55,7 @@
             <!-- add records -->
             <a href="<?php echo prefixSet('doctors/add-patient.php')?>" class="<?php echo isActive('doctors/add-patient.php'); ?>"><li><i class="fa fa-plus"></i></li></a>
             <!-- existing records -->
-            <a href="<?php echo prefixSet('doctors/patient-records.php')?>" class="<?php echo isActive('doctors/patient-records.php'); ?>"><li><i class="fa-solid fa-folder"></i></li></a>
+            <a href="<?php echo prefixSet('patient-records.php')?>" class="<?php echo isActive('patient-records.php'); ?>"><li><i class="fa-solid fa-folder"></i></li></a>
             <!-- schedule appointment -->
             <a href="<?php echo prefixSet('calendar.php')?>"><li><i class="fa fa-calendar"></i></li></a>
             <!-- settings -->
