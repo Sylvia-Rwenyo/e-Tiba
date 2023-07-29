@@ -239,7 +239,7 @@ if(isset($_POST['dosage-registration'])){
     {
         $query="INSERT INTO dosage(attending_doctor_id, attending_doctor_email, attending_doctor_name, patient_id, patientEmail, patientName, dosageName, tablets, times_a_day, number_of_days) VALUES ('$attending_doctor_id', '$attending_doctor_email', '$attending_doctor_name', '$patient_id','$patient_email', '$fname_patient', '$dosageName', '$tablets', '$timesADay', '$numberOfDays')";
         $sql=mysqli_query($conn,$query)or die("Could Not Perform the Query");
-        header ("Location: ../single-patient-records.php?p='$patient_id'");
+        header ("Location: ../single-patient-records.php?p=$patient_id");
     }
 }
 
