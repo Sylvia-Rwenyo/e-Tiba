@@ -63,12 +63,12 @@
                     </td>
                     <td>
                     <a  href="dosage-update-form.php?id=<?php echo $row["dosageId"]; ?>" method="POST">
-                        <button id = "dosage-update" type="button" name="dosage-update" class="pos-btn">Update</button>
+                        <button id = "dosage-update" type="button" name="dosage-update" class="pos-btn"><i class="fa fa-edit"></i>Update</button>
                     </a>
                     </td>   
                     <td>
                     <form id="form"  action="../controls/processing.php?id=<?php echo $row["dosageId"]; ?>" method="POST">
-                        <input id = "dosage-delete" type="submit" value="Delete" name="dosage-delete" class="pos-btn">
+                        <button id = "dosage-delete" type="submit" name="dosage-delete" class="pos-btn"><i class="fa fa-trash-o"></i>Delete</button>
                     </form>
                     </td>                        
                 </tr>   
