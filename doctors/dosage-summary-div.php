@@ -2,10 +2,10 @@
     <h5>Summary of Prescriptions For <?php $result['firstName'] ?></h5>
     <table>
         <tr class="table_field_names">
-            <td>Patient Name</td>
-            <td>Patient Email</td>
-            <td>Dosage Name</td>
-            <td>Number of Days</td>
+            <th>Patient Name</th>
+            <th>Patient Email</th>
+            <th>Dosage Name</th>
+            <th>Number of Days</th>
         </tr>
         
         <?php

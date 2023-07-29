@@ -50,7 +50,7 @@
         </tr>
         <?php
             $username = $_SESSION['username'];
-            $records = mysqli_query($conn,"SELECT * FROM regDoctors where institution='$username'");
+            $records = mysqli_query($conn,"SELECT * FROM regdoctors where institution='$username'");
         if (mysqli_num_rows($records) > 0) {
         $i=0;
         while($result = mysqli_fetch_array($records)) {

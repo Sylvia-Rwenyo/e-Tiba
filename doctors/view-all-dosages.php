@@ -40,10 +40,10 @@
         <div class="dosage_records">
             <table>
                 <tr class="table_field_names">
-                    <td>Medicine name</td>
-                    <td>Number of Tablets</td>
-                    <td>Number of Days</td>
-                    <td>Number of Times a Day</td>
+                    <th>Medicine name</th>
+                    <th>Number of Tablets</th>
+                    <th>Number of Days</th>
+                    <th>Number of Times a Day</th>
                 </tr>
                 
                 <?php

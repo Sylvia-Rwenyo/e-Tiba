@@ -143,6 +143,29 @@
     }
         ?>
         </table>
+        <table>
+        <tr>
+            <th>Full Name</th>
+            <th>Email Address</th>
+            <th>Phone No.</th>
+            <th>Address</th>
+            <th>Condition</th>
+            <th>Doctor Attending</th>
+        </tr>
+        <?php
+        $current_user_id = $_SESSION['id'];
+        $resultPost = mysqli_query($conn,"SELECT * FROM dosage  WHERE patient_id = '$pID'");
+        while($row = mysqli_fetch_array($resultPost)) {
+        ?>
+        <tr>
+            <td><?php echo $row["firstName"]; ?></td>
+            <td><?php echo $row["emailAddress"]; ?></td>
+            <td><?php echo $row["phoneNumber"]; ?></td>
+            <td><?php echo $row["address"]; ?></td>
+            <td><?php echo $row["condition"]; ?></td>
+            <td><?php echo $row["Doctor Attending"]; ?></td>
+        </tr><?php 
+        }?>
         </section>
     </div>
 </body>
