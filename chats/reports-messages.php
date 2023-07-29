@@ -105,8 +105,10 @@
             $(".all_messages").everyTime(1000, function(i){
                 $.ajax({
                     url:"all-report-bubbles-div.php",
-                    data: ('chat_id='+encodeURIComponent(<?php echo $chat_identity;?>),
-                        'sent_to='+encodeURIComponent(<?php echo $sent_to;?>)),
+                    data: {
+                        chat_id:`<?php echo $chat_identity;?>`,
+                        sent_to:`<?php echo $sent_to;?>`,
+                    },
                     cache: false,
                     success: function(html){
                         $(".all_messages").html(html)
