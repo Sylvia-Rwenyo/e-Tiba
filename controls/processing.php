@@ -260,25 +260,25 @@ if(isset($_POST['dosage-update']))
         $original_timesADay = $row['times_a_day'];
     }
 	$id = $_GET['id'];
-    if(isset($_POST['dosageName'])){
+    if(!empty($_POST['dosageName'])){
         $dosageName = $_POST['dosageName'];
     }
     else{
         $dosageName = $original_dosageName;
     }
-    if(isset($_POST['tablets'])){
+    if(!empty($_POST['tablets'])){
         $tablets = $_POST['tablets'];
     }
     else{
         $tablets = $original_tablets;
     }
-    if(isset($_POST['numberOfDays'])){
+    if(!empty($_POST['numberOfDays'])){
         $numberOfDays = $_POST['numberOfDays'];
     }
     else{
         $numberOfDays = $original_numberOfDays;
     }
-    if(isset($_POST['timesADay'])){
+    if(!empty($_POST['timesADay'])){
         $timesADay = $_POST['timesADay'];
     }
     else{
