@@ -17,7 +17,7 @@
                 <h1>Update Item Details</h1>
             </div>
         </div>
-        <section>
+        <section >
             <form id="form"  action="../controls/processing.php?id=<?php echo $_GET['id'] ?>" method="POST">
                 <input type="text" id="dosageName" name="dosageName"  size="30" placeholder="Enter Name">
                 <input type="number" id="tablets" name="tablets"  size="10"  placeholder="Tablets">

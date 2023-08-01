@@ -326,6 +326,15 @@
     font-size: 1em;
     color: rgb(0, 0, 0)
 }
+
+.header .menuBar{
+    font-size: 2em;
+    margin-top: 0.5em;
+}
+#menuBars{
+    display: none;
+}
+
 #editingProfileSection section{
     display: flex;
     flex-direction: column;
@@ -459,6 +468,7 @@
     width: 10%;
     position: -webkit-sticky;
     position: sticky;
+/* add animation transform  */
 }
 
 .dash-menu ul{
@@ -545,6 +555,9 @@
 .meet-menu{
     margin-top: 0;
     background: transparent;
+}
+.meet-menu ul li .active i{
+    color: #35b6be;
 }
 
 /* video chat /'meet' page */

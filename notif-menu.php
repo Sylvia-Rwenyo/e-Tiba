@@ -1,52 +1,106 @@
 <?php 
-                include_once "conn.php";
-                session_start();
-                function prefixSet($linkName) {
-                    // Get the parent directory of the current page
-                    $parentDir = dirname($_SERVER['REQUEST_URI']);
-                    $parentDir = dirname($_SERVER['REQUEST_URI']);
-                    $parentDirCurrent = str_replace('/work/CERA', '', $parentDir); // Remove trailing slash
-                
-                    if ($parentDirCurrent === '/partners' && strpos($linkName, 'partners/') === 0) {
-                        $linkName = str_replace('partners/', '', $linkName);
-                        return $linkName;
-                    } else if ($parentDirCurrent === '/doctors' && strpos($linkName, 'partners/') === 0) {
-                        // If the parent directory is "doctors" and the link starts with "partners",
-                        // keep the link as it is without adding any prefix or removing any part.
-                        $linkName = '../' . $linkName;
-                        return $linkName;
-                    }else if($parentDirCurrent === '/doctors' || $parentDirCurrent === '/partners' && strpos($linkName, '/') === 1){
-                        $linkName = '../' . $linkName;
-                        return $linkName;
-                    }
-                
-                    // Add more conditions if needed for other parent directories
-                
-                    // If none of the conditions match, return the original linkName
-                    return $linkName;
-                }
-                ?>
+    include_once "conn.php";
+    session_start();
+    // check logged in status
+    if(!isset($_SESSION["loggedIN"])){
+        header('location:index.php');
+        }
+
+        // Function to check if the current page name matches the given link name
+    function isActive($linkName)
+    {
+          // get current page's name
+          $currentPage = basename($_SERVER['PHP_SELF']);
+        $modifiedLink = prefixSet($linkName); // Get the modified link using prefixSet() function
+        return ($currentPage === $modifiedLink) ? 'active' : '';
+    }
+
+    //   set link name prefix depending on target file location in relation to the current file
+        function prefixSet($linkName) {
+        // Get the parent directory of the current page
+        $parentDir = dirname($_SERVER['REQUEST_URI']);
+        $parentDir = dirname($_SERVER['REQUEST_URI']);
+        $parentDirCurrent = str_replace('/work/CERA', '', $parentDir); // Remove trailing slash
+    
+        if ($parentDirCurrent === '/partners' && strpos($linkName, 'partners/') === 0) {
+            $linkName = str_replace('partners/', '', $linkName);
+            return $linkName;
+        } else if ($parentDirCurrent === '/doctors' && strpos($linkName, 'partners/') === 0) {
+            $linkName = '../' . $linkName;
+            return $linkName;
+        }else if ($parentDirCurrent === '/partners' && strpos($linkName, 'doctors/') === 0) {
+            $linkName = '../' . $linkName;
+            return $linkName;
+        }else if ($parentDirCurrent === '/doctors' && strpos($linkName, 'doctors/') === 0) {
+            $linkName = str_replace('doctors/', '', $linkName);
+            return $linkName;
+        }else if($parentDirCurrent === '/doctors' || $parentDirCurrent === '/partners' && strpos($linkName, '/') === 1){
+            $linkName = '../' . $linkName;
+            return $linkName;
+        }
+    
+        // Add more conditions if needed for other parent directories
+    
+        // If none of the conditions match, return the original linkName
+        return $linkName;
+    }
+
+    // set page header name based on page name
+    function headerName(){
+        $currentPage = basename($_SERVER['PHP_SELF']);
+        $headerName = ucwords(str_replace('.php', '', $currentPage));
+
+        if($currentPage === 'calendar.php'){
+            $headerName = 'Appointments';
+        }else if(strpos($currentPage, 'log') || strpos($currentPage, 'record')){
+            $headerName = 'Records';
+        }else if($currentPage === 'settings.php'){
+            $headerName = 'Profile';
+        }
+        return $headerName;
+    }
+?>
+
+    <span class="menuBar" id="menuBars" onClick="toggleMenu()">o<i class="fa-solid fa-bars"></i></span>
+    <span class="menuBar" id="menuX" onClick="toggleMenu()">x<i class="fa-solid fa-bars"></i></span>
+
+    <h1><?php echo headerName()?></h1>
+
     <div class="menu meet-menu">
         <ul>
-            <li><a href="<?php echo prefixSet('meet.php')?>"><i class="fa-solid fa-video"></i></a></li>
+            <li><a href="<?php echo prefixSet('meet.php'); ?>" class='<?php echo isActive('meet.php') ?>'><i class="fa-solid fa-video"></i></a></li>
             <li>
                 <a href = <?php
-                // call the prefixSet() function appropriately.
-                //  echo prefixSet(
+                // determine target page depending on user category
                 if($_SESSION['category'] == 'doctor')
                 {
-                    echo "doctors/patient-doctor-chat.php";
+                    echo prefixSet("doctors/patient-doctor-chat.php");
                 }
                 elseif($_SESSION['category'] == 'patient')
                 {
-                    echo "patient-doctor-chat-by-patient.php";
+                    echo prefixSet("patient-doctor-chat-by-patient.php");
                 }else if($_SESSION['category'] == 'hospital')
                 {
-                    echo "partners/patient-doctor-chat.php";
+                    echo prefixSet("partners/patient-doctor-chat.php");
                 }
-            // )
             ;
-                ?>>
+                ?>
+                class='
+                    <?php
+                     if($_SESSION['category'] == 'doctor')
+                     {
+                         echo isActive("doctors/patient-doctor-chat.php");
+                     }
+                     elseif($_SESSION['category'] == 'patient')
+                     {
+                         echo isActive("patient-doctor-chat-by-patient.php");
+                     }else if($_SESSION['category'] == 'hospital')
+                     {
+                         echo isActive("partners/patient-doctor-chat.php");
+                     }
+                    ?>
+                '
+                >
                 <?php
                 $current_user_email = $_SESSION['email'];
                 $resultPost = mysqli_query($conn,"SELECT readStatus FROM chat WHERE sent_to = '$current_user_email'");
@@ -62,11 +116,14 @@
                 </a>
                 </li>
             
-            <!-- <li><a href=""><i class="fa-solid fa-book"></i></a></li> -->
+            <!-- 
+                notes functionality to be added
+                <li><a href=""><i class="fa-solid fa-book"></i></a></li>
+             -->
         </ul>
     </div>
     <script>
-        var element = document.querySelectorAll(".menu a");
+        var element = document.querySelectorAll(".meet-menu a");
         var length = element.length;
         for(var i=0; i<length;i++){
             element[i].onclick=function()
@@ -75,5 +132,27 @@
                 if(b) b.classList.remove("active");
                 this.classList.add('active');
             };
+        }
+
+        let menuCount = 0;
+        function toggleMenu(){
+            menuCount += 1;
+
+            let openMenu = document.getElementById('menuBars');
+            let closeMenu = document.getElementById('menuX');
+            let dashMenu = document.querySelector(".dash-menu");
+            let mainSection = document.querySelector(".main-section");
+
+            if(menuCount%2 == 0){
+                dashMenu.style.display = 'block';
+                openMenu.style.display = 'none';
+                closeMenu.style.display = 'block';
+                mainSection.style.marginLeft = 'initial';
+            }else if(menuCount%2 !== 0){
+                dashMenu.style.display = 'none';
+                openMenu.style.display = 'block';
+                closeMenu.style.display = 'none';
+                mainSection.style.marginLeft = '10%';
+            }
         }
     </script>

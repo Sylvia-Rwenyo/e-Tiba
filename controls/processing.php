@@ -685,7 +685,6 @@ if(isset($_GET["a"]))
             echo '
             <script>window.location.href = "../calendar.php?p='.$patientID.'"</script>
             ';	
-    
         }else{
                     //show error
             echo "Error: " . $sql . "

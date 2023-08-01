@@ -1,40 +1,7 @@
 <div class="dash-menu">
     <ul>
-        <?php
-        // Function to check if the current page name matches the given link name
-        function isActive($linkName)
-        {
-            $currentPage = basename($_SERVER['PHP_SELF']);
-            $modifiedLink = prefixSet($linkName); // Get the modified link using prefixSet() function
-            return ($currentPage === $modifiedLink) ? 'active' : '';
-        }
-        
-        function prefixSet($linkName) {
-            // Get the parent directory of the current page
-            $parentDir = dirname($_SERVER['REQUEST_URI']);
-            $parentDir = dirname($_SERVER['REQUEST_URI']);
-            $parentDirCurrent = str_replace('/work/CERA', '', $parentDir); // Remove trailing slash
-        
-            if ($parentDirCurrent === '/partners' && strpos($linkName, 'partners/') === 0) {
-                $linkName = str_replace('partners/', '', $linkName);
-                return $linkName;
-            } else if ($parentDirCurrent === '/doctors' && strpos($linkName, 'partners/') === 0) {
-                // If the parent directory is "doctors" and the link starts with "partners",
-                // keep the link as it is without adding any prefix or removing any part.
-                $linkName = '../' . $linkName;
-                return $linkName;
-            }else if($parentDirCurrent === '/doctors' || $parentDirCurrent === '/partners' && strpos($linkName, '/') === 1){
-                $linkName = '../' . $linkName;
-                return $linkName;
-            }
-        
-            // Add more conditions if needed for other parent directories
-        
-            // If none of the conditions match, return the original linkName
-            return $linkName;
-        }
-     
-        
+        <?php  
+        // determine target page based on user category
         if ($_SESSION['category'] == 'hospital') {
             ?>
             <!-- add new doctor -->
@@ -57,9 +24,24 @@
             <!-- existing records -->
             <a href="<?php echo prefixSet('doctors/patient-records.php')?>" class="<?php echo isActive('doctors/patient-records.php'); ?>"><li><i class="fa-solid fa-folder"></i></li></a>
             <!-- schedule appointment -->
-            <a href="<?php echo prefixSet('calendar.php')?>"><li><i class="fa fa-calendar"></i></li></a>
+            <a href="<?php echo prefixSet('calendar.php')?>"><li>                
+                <?php
+                $id = $_SESSION['id'];
+                $today = new DateTime(); // Get the current date and time
+                $today->setTime(0, 0, 0); // Set the time to the beginning of the day (midnight)
+                
+                $appointment = mysqli_query($conn,"SELECT * FROM appointments WHERE appointmentDate = '$today' && appoinmentTime");
+                $count = 0;
+                while($row = mysqli_fetch_array($resultPost)) 
+                {
+                    if($row['readStatus'] == 'unread')
+                    {
+                        $count = $count + 1;
+                    }
+                }?>
+                <i class="fa fa-calendar"><span class="badge"><?php if($count == 0){echo "";}else{echo $count;}?></span></i></li></a>
             <!-- settings -->
-            <a href="<?php echo prefixSet('settings.php')?>"><li><i class="fa-solid fa-gears"></i></li></a>
+            <a href="<?php echo prefixSet('settings.php')?>">d<li><i class="fa-solid fa-gears"></i></li></a>
             <?php
         } else {
             ?>

@@ -1,14 +1,3 @@
-<?php 
-        include_once 'conn.php';
-        session_start();
-        $user = $_SESSION["username"];
-        if($_SESSION["loggedIN"] == false){
-            echo ' <script> 
-            window.location.href = "index.php";
-            </script>';       
-         }else{
-            $id;
-    ?>
     <!DOCTYPE html>
     <html lang="en">
     <head>
@@ -26,7 +15,10 @@
     </head>
     <body class="profileBody" id="profileBody" >
         <div class="header">
-            <h1>Your profile</h1>
+            <?php 
+             include_once 'notif-menu.php';
+             $user = $_SESSION["username"];
+            ?>
         </div>
         <div id="editProfileSection">
         <?php 
@@ -45,7 +37,7 @@
             $i=0;
             while($result = mysqli_fetch_array($records)) {
         ?>
-        <section>
+        <section class="main-section">
             <div class="profile">
                 <div class="intro">
                     <img src="<?php if($result['profilePhoto'] == ''){
@@ -264,6 +256,3 @@
 setInterval(fetchData, 60000);
 
     </script>
-    <?php
-        }
-        ?>

@@ -13,7 +13,7 @@
 </head>
 <body class="reg-body">
     <div class="welcome-msg">
-        <h3>Add Patient to CERA</h3>
+        <h3>Patient registration</h3>
         <p>Please fill the form below with accurate information as this is imporant for future identification of your patients.</p>
     </div>
     <form method="POST" action="../controls/processing.php">
