@@ -20,7 +20,7 @@
           <p>Let us help you track your health and treatment process</p>
       </div>
       <div class="banner">
-        <div id="video-description" style="position:relative">
+        <div class="video-description" id="video-description" style="position:relative">
           <video width="100%" height="100%" style="border:1px 1px 1px" controls>
               <source src="images/CERA.mp4" type="video/mp4"/>
               Your browser does not support video tag
@@ -54,7 +54,7 @@
         The patient can view nearby cancer care centres offering treatment where their vitals and test results during chemo can be uploaded.
       </li>
     </ul>
-    <div class="transcript-small-div" style="display:flex;padding:20px;">
+    <div class="transcript-small-div">
       <div style="margin:20px;">
         <div class="transcript-mini-div">
           <h4>Electronic Health Records</h4> 

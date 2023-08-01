@@ -8,8 +8,8 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://kit.fontawesome.com/2751fbc624.js" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <link rel="icon" href="../favicon.ico" />
-    <link rel="stylesheet" href="../style.css">
+    <link rel="icon" href="favicon.ico" />
+    <link rel="stylesheet" href="style.css">
     <title>Records of Patients</title>
 </head>
 <body class="profileBody" id="profileBody" >
@@ -18,11 +18,12 @@
     </div>
     <div class="mainBody" id="patient-records-section">
     <?php 
-        include_once '../dash-menu.php';
+        include_once 'dash-menu.php';
     ?>
     <section class="main-section">
         <div class="records-header" style="flex-direction:column;justify-content: unset;">
             <?php
+            $i=0;
             $pID = isset($_GET['p']) ? $_GET['p'] : null;
             $stmt = mysqli_query($conn,"SELECT * FROM regPatients where id='$pID'");
             if (mysqli_num_rows($stmt) > 0) {
@@ -34,7 +35,8 @@
             <?php
          
             ?>
-            <!-- search functionality to be added -->
+            <!-- search functionality to be added. Get from dosage-registration.php-->
+            <?php include_once "doctors/dosage-reg-search-div.php";?>
         </div>
         <table>
         <tr>
@@ -127,10 +129,16 @@
 
         <tr>
             <th>Treatment plan</th>
-            <td>
-                <?php 
-                echo ''; //dosage info
-                ?>
+            
+            <td style="display:flex;flex-direction:row;padding:10px;">
+                <!-- register new dosage -->
+                <a style="text-decoration:none;margin-right:20px;" href="doctors/dosage-registration-form.php?id=<?php echo $pID; ?>"><i class="fa fa-plus"></i><br/>New Dose</a>
+            
+                <!-- dosages for this patient patients -->
+                <a style="text-decoration:none;margin-right:20px;" href="doctors/dosage-registration.php?id=<?php echo $pID; ?>"><i class="fa-solid fa-folder"></i><br/>Doses</a>
+            
+                <!-- dosages for all patients -->
+                <a style="text-decoration:none;margin-right:20px;" href="doctors/view-all-dosages.php"><i class="fa-solid fa-folder-tree"></i><br/>All Doses</a>
             </td>
         </tr>
         <tr>
@@ -156,7 +164,7 @@
 
 <script>
     function toPatientCalendar(patientID){
-        window.location.href = '../calendar.php?p='+patientID;
+        window.location.href = 'calendar.php?p='+patientID;
     }
     // sort patient records display
 function sort(criteria){
@@ -168,11 +176,11 @@ function sort(criteria){
 }
 function fetchData() {
 $.ajax({
-    url: 'doctor-records.php', // Replace with your server-side script URL
+    url: 'single-patient-records.php', // Replace with your server-side script URL
     method: 'GET',
     success: function(response) {
     // Handle the response and update the HTML content
-    $('#doctor-records-section').html(response);
+    $('#profile-body').html(response);
     console.log("all good");
     },
     error: function(xhr, status, error) {

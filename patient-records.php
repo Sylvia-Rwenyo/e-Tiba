@@ -9,8 +9,8 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://kit.fontawesome.com/2751fbc624.js" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <link rel="icon" href="../favicon.ico" />
-    <link rel="stylesheet" href="../style.css">
+    <link rel="icon" href="favicon.ico" />
+    <link rel="stylesheet" href="style.css">
     <title>Records of Patients</title>
 </head>
 <body class="profileBody" id="profileBody" >
@@ -19,7 +19,7 @@
     </div>
     <div class="mainBody" id="patient-records-section">
     <?php 
-        include_once '../dash-menu.php';
+        include_once 'dash-menu.php';
     ?>
         <section class="main-section">
         <div class="records-header">
@@ -28,7 +28,7 @@
             <!-- filter/sort functionality -->
             <div>
                 <span id="all-indicator" onclick="sort('all')">All</span>
-                <!-- <span id="attended-indicator">Attended</span> -->
+                <span id="attended-indicator" onclick="sort('my-dosage')">Attended</span>
                 <span id="atRisk-indicator" onclick="sort('at-risk')">At risk</span>
             </div>
         </div>
@@ -46,6 +46,10 @@
         <?php
             $username = $_SESSION['username'];
             $id = $_SESSION['id'];
+            $doct_id = 0;
+            if(isset($_GET['d'])){
+                $doct_id = $_GET['d'];
+            }
             $institution = '';
             $institutionName = '';
             $records = '';
@@ -59,7 +63,8 @@
                     $i++;
                 }
                 $records = "SELECT * FROM regPatients where institution='$institution'";
-            }else{
+            }
+            else{
             $records = "SELECT * FROM regPatients where institution='$username'";
             }
              // show filter/sort criteria
@@ -74,6 +79,18 @@
                 </style>
                 ';
             }else if($_GET['a'] == 'd'){
+                $records = "SELECT * FROM regpatients where id in (SELECT patientID FROM appointments WHERE doctorID = '$id')";
+                echo '
+                <style>
+                    #attended-indicator{
+                        background-color:#408DCE;
+                        border: none;
+                    }
+                </style>
+                ';
+            }
+            else if(isset($_GET['d'])){
+                $records = "SELECT * FROM regpatients where id in (SELECT patientID FROM appointments WHERE doctorID = '$doct_id')";
                 echo '
                 <style>
                     #attended-indicator{
@@ -142,6 +159,41 @@
     }
         ?>
         </table>
+        <br/><br/>
+        <table>
+        <tr>
+            <th>Full Name</th>
+            <th>Email Address</th>
+            <th>Phone No.</th>
+            <th>Address</th>
+            <th>Condition</th>
+            <th>Doctor Attending</th>
+        </tr>
+        <?php
+        $current_user_id = $_SESSION['id'];
+        if($_SESSION['category'] == 'doctor'){
+            $doct_name = $_SESSION['username'];
+            $resultPost = mysqli_query($conn,"SELECT * FROM regpatients WHERE id IN (SELECT patientID FROM appointments  WHERE doctorID = '$current_user_id')");
+        }
+        else{
+            $institution = $_SESSION['username'];
+            $resultPost = mysqli_query($conn,"SELECT * FROM regpatients WHERE id IN (SELECT patientID FROM appointments  WHERE doctorID IN (SELECT id FROM regdoctors WHERE institution = '$institution' and id = '$doct_id'))");
+            $mini_query = mysqli_query($conn,"SELECT * FROM regdoctors WHERE id = '$doct_id'");
+            while($row = mysqli_fetch_array($mini_query)) {
+                $doct_name = $row['firstName'];
+            }
+        }
+        while($row = mysqli_fetch_array($resultPost)) {
+        ?>
+        <tr>
+            <td><?php echo $row["firstName"]; ?></td>
+            <td><?php echo $row["emailAddress"]; ?></td>
+            <td><?php echo $row["phoneNumber"]; ?></td>
+            <td><?php echo $row["address"]; ?></td>
+            <td><?php echo $row["illness"]; ?></td>
+            <td><?php echo $doct_name ?></td>
+        </tr><?php 
+        }?>
         </section>
     </div>
 </body>
@@ -151,7 +203,7 @@
         window.location.href = 'single-patient-records.php?p='+patientID;
     }
     function toPatientCalendar(patientID){
-        window.location.href = '../calendar.php?p='+patientID;
+        window.location.href = 'calendar.php?p='+patientID;
     }
     // sort patient records display
 function sort(criteria){
@@ -160,14 +212,17 @@ function sort(criteria){
     }else  if(criteria == 'at-risk'){
         window.location.href = 'patient-records.php?a=r';
     }
+    else  if(criteria == 'my-dosage'){
+        window.location.href = 'patient-records.php?a=d';
+    }
 }
 function fetchData() {
 $.ajax({
-    url: 'doctor-records.php', // Replace with your server-side script URL
+    url: 'patient-records.php', // Replace with your server-side script URL
     method: 'GET',
     success: function(response) {
     // Handle the response and update the HTML content
-    $('#doctor-records-section').html(response);
+    $('#patient-records-section').html(response);
     console.log("all good");
     },
     error: function(xhr, status, error) {

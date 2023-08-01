@@ -1,3 +1,13 @@
+<?php 
+    include_once '../conn.php';
+    session_start();
+    if($_SESSION["loggedIN"] == false)
+    {
+        echo ' <script> 
+        window.location.href = "../index.php";
+        </script>';       
+    }
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,6 +21,9 @@
     <script src="https://use.fontawesome.com/1d95bf24b3.js"></script>
 </head>
 <body class="reg-body">
+    <?php
+        $current_user_name = $_SESSION['username'];
+    ?>
     <div class="welcome-msg">
         <h3>Doctor Registration</h3>
         <h5>Welcome to CERA</h5>
@@ -27,6 +40,7 @@
             <option>Prefer not to say</option>
         </select>
         <input type="text" name="emailAddress" placeholder="Email Address"/>
+        <input type="hidden"  name="institution" value="<?php echo $current_user_name;?>"/>
         <select name="condition[]" multiple required>
                 <option selected disabled> Select specialties</option>
                 <?php

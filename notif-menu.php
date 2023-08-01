@@ -67,21 +67,23 @@
     <h1><?php echo headerName()?></h1>
 
     <div class="menu meet-menu">
+        <?php 
+        include_once "conn.php";
+        session_start();
+        ?>
         <ul>
-            <li><a href="<?php echo prefixSet('meet.php'); ?>" class='<?php echo isActive('meet.php') ?>'><i class="fa-solid fa-video"></i></a></li>
+          
+        <li><a href=""><i class="fa fa-bell"></i></a></li>
+            <li><a href="<?php echo prefixSet('meet.php'); ?>"><i class="fa-solid fa-video"></i></a></li>
             <li>
-                <a href = <?php
-                // determine target page depending on user category
-                if($_SESSION['category'] == 'doctor')
+                <a href = <?php 
+                if($_SESSION['category'] == 'hospital')
                 {
-                    echo prefixSet("doctors/patient-doctor-chat.php");
+                    echo prefixSet("chats/reports-home.php");
                 }
-                elseif($_SESSION['category'] == 'patient')
+                else
                 {
                     echo prefixSet("patient-doctor-chat-by-patient.php");
-                }else if($_SESSION['category'] == 'hospital')
-                {
-                    echo prefixSet("partners/patient-doctor-chat.php");
                 }
             ;
                 ?>
@@ -111,10 +113,19 @@
                     {
                         $count = $count + 1;
                     }
+                }
+                $resultGetReport = mysqli_query($conn,"SELECT readStatus FROM reports WHERE sent_to = '$current_user_email'");
+                while($row = mysqli_fetch_array($resultGetReport)) 
+                {
+                    if($row['readStatus'] == 'unread')
+                    {
+                        $count = $count + 1;
+                    }
                 }?>
+                
                 <i class="fa fa-message"><span class="badge"><?php if($count == 0){echo "";}else{echo $count;}?></span></i>
                 </a>
-                </li>
+            </li>
             
             <!-- 
                 notes functionality to be added
