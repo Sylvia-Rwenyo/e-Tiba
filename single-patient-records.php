@@ -22,6 +22,8 @@
         include_once 'dash-menu.php';
     ?>
     <section>
+        <!-- search functionality to be added.-->
+        <?php include_once "records-search-div.php";?>
         <div class="records-header" style="flex-direction:column;justify-content: unset;">
             <?php
             $i=0;
@@ -33,11 +35,6 @@
             ?>
             <h2 style="width: 30%;"><?php echo $result["firstName"] .' '.$result["lastName"]?></h2>
             <h4><strong>Contact number:</strong>  <?php echo $result["phoneNumber"] ?></h4>
-            <?php
-         
-            ?>
-            <!-- search functionality to be added. Get from dosage-registration.php-->
-            <?php include_once "doctors/dosage-reg-search-div.php";?>
         </div>
         <table>
         <tr>
