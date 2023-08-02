@@ -5,10 +5,10 @@
     $bool_value = 0;
 ?>
     <div class="menu-bar">
-        <h4>Search For Patient To View Records</h4>
         <div class="search-bar-top">
             <div class="search-bar">
                 <div data-parallax = "scroll">
+                <h4>Search For Patient To View Records</h4>
                     <form action = "" method = "GET" class = "form-inline">
                         <input name = "keyword" id="search" type = "text" placeholder = "Search Patient here..." class = "form-control" value = "<?php echo isset($_POST['keyword'])?$_POST['keyword']:''?>"/>
                         <span><button class="search-btn" type="submit" name = "search"><i class="fa fa-search"></i>search</button></span>
