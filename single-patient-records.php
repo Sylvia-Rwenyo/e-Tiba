@@ -23,7 +23,7 @@
     ?>
     <section>
         <!-- search functionality to be added.-->
-        <?php include_once "records-search-div.php";?>
+        <div style="margin-top:-5%;"><?php include_once "records-search-div.php";?></div>
         <div class="records-header" style="flex-direction:column;justify-content: unset;">
             <?php
             $i=0;
@@ -130,13 +130,13 @@
             
             <td style="display:flex;flex-direction:row;padding:10px;">
                 <!-- register new dosage -->
-                <a style="text-decoration:none;margin-right:20px;" href="doctors/dosage-registration-form.php?id=<?php echo $pID; ?>"><i class="fa fa-plus"></i><br/>New Dose</a>
+                <a style="text-decoration:none;margin-right:20px;color:blue;" href="doctors/dosage-registration-form.php?id=<?php echo $pID; ?>"><i class="fa fa-plus"></i><br/>New Dose</a>
             
                 <!-- dosages for this patient patients -->
-                <a style="text-decoration:none;margin-right:20px;" href="doctors/dosage-registration.php?id=<?php echo $pID; ?>"><i class="fa-solid fa-folder"></i><br/>Doses</a>
+                <a style="text-decoration:none;margin-right:20px;color:blue;" href="doctors/dosage-registration.php?id=<?php echo $pID; ?>"><i class="fa-solid fa-folder"></i><br/>Doses</a>
             
                 <!-- dosages for all patients -->
-                <a style="text-decoration:none;margin-right:20px;" href="doctors/view-all-dosages.php"><i class="fa-solid fa-folder-tree"></i><br/>All Doses</a>
+                <a style="text-decoration:none;margin-right:20px;color:blue;" href="doctors/view-all-dosages.php"><i class="fa-solid fa-folder-tree"></i><br/>All Doses</a>
             </td>
         </tr>
         <tr>
