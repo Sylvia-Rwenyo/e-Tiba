@@ -35,9 +35,12 @@
         <div class="search-bar">
             <div data-parallax = "scroll">
                 <form action = "" method = "GET" class = "form-inline">
-                    <input name = "keyword" type = "text" placeholder = "Search For Report here..." class = "form-control" value = "<?php echo isset($_POST['keyword'])?$_POST['keyword']:''?>"/>
+                    <input id="search" name = "keyword" type = "text" placeholder = "Search For Report here..." class = "form-control" value = "<?php echo isset($_POST['keyword'])?$_POST['keyword']:''?>"/>
                     <span class = "input-group-button"><button class="search-btn" type="submit" name = "search"><i class="fa fa-search"></i>search</button></span>
                 </form>
+                <div id="suggestion" class="suggestion">
+
+                </div>
                 <div class = "dropdown">
                     <div style="position:absolute;">
                         <div class = "dropdown-content">
@@ -80,6 +83,23 @@
                         $(".chat_list_table").html(html)
                     }
                 })
+            })
+            //autocomplete 1
+            $("#search").keyup(function(e){
+                var search_query = $(this).val();
+                if(search_query != ""){
+                    $.ajax({
+                        url:"return-list-reports.php",
+                        type: "POST",
+                        data: {search: search_query},
+                        success: function($data){
+                            $("#suggestion").fadeIn('fast').html($data);
+                        }
+                    });
+                }
+                else{
+                    $("#suggestion").fadeOut();
+                }
             })
         });
     </script>

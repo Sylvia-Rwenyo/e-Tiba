@@ -39,9 +39,12 @@
                 <div class="search-bar">
                     <div data-parallax = "scroll">
                         <form action = "" method = "GET" class = "form-inline">
-                            <input name = "keyword" type = "text" placeholder = "Search Hospital here..." class = "form-control" value = "<?php echo isset($_POST['keyword'])?$_POST['keyword']:''?>"/>
+                            <input id="search" name = "keyword" type = "text" placeholder = "Search Hospital here..." class = "form-control" value = "<?php echo isset($_POST['keyword'])?$_POST['keyword']:''?>"/>
                             <span class = "input-group-button"><button class="search-btn" type="submit" name = "search"><i class="fa fa-search"></i>search</button></span>
                         </form>
+                        <div id="suggestion" class="suggestion">
+
+                        </div>
                         <div class = "dropdown">
                             <div style="position:absolute;">
                                 <div class = "dropdown-content">
@@ -50,12 +53,12 @@
                                         if(isset($_GET['search']))
                                         {
                                             $keyword = $_GET['keyword'];
-                                            $sql = "SELECT * FROM reginstitutions WHERE emailAddress LIKE '$keyword' or firstName LIKE '$keyword'";
+                                            $sql = "SELECT * FROM reginstitutions WHERE emailAddress LIKE '$keyword' or institutionName LIKE '$keyword'";
                                             
                                             $result = mysqli_query($conn, $sql) or die(mysqli_error($conn));
                                             while($rows = mysqli_fetch_array($result))
                                             {?>
-                                                <a href = "reports-messages.php?hosp-id=<?php echo $rows['id']; ?>"><h3><?php echo $rows['firstName']?></h3></a>
+                                                <a href = "reports-messages.php?hosp-id=<?php echo $rows['id']; ?>"><h3><?php echo $rows['institutionName']?></h3></a>
                                                 <a href = "reports-messages.php?hosp-id=<?php echo $rows['id']; ?>" ><h4><?php echo $rows['emailAddress']?></h4></a>
                                                 <?php
                                             }
@@ -86,6 +89,23 @@
                         $(".chat_list_table").html(html)
                     }
                 })
+            })
+            //autocomplete 1
+            $("#search").keyup(function(e){
+                var search_query = $(this).val();
+                if(search_query != ""){
+                    $.ajax({
+                        url:"return-list-hospital-search.php",
+                        type: "POST",
+                        data: {search: search_query},
+                        success: function($data){
+                            $("#suggestion").fadeIn('fast').html($data);
+                        }
+                    });
+                }
+                else{
+                    $("#suggestion").fadeOut();
+                }
             })
         });
     </script>

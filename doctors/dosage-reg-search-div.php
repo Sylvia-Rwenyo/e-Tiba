@@ -10,9 +10,12 @@
             <div class="search-bar">
                 <div data-parallax = "scroll">
                     <form action = "" method = "GET" class = "form-inline">
-                        <input name = "keyword" type = "text" placeholder = "Search Patient here..." class = "form-control" value = "<?php echo isset($_POST['keyword'])?$_POST['keyword']:''?>"/>
+                        <input name = "keyword" id="search" type = "text" placeholder = "Search Patient here..." class = "form-control" value = "<?php echo isset($_POST['keyword'])?$_POST['keyword']:''?>"/>
                         <span><button class="search-btn" type="submit" name = "search"><i class="fa fa-search"></i>search</button></span>
                     </form>
+                    <div id="suggestion" class="suggestion">
+
+                    </div>
                     <div class = "dropdown" id="dropdown">
                         <div style="position:absolute;">
                             <div class = "dropdown-content">
@@ -53,6 +56,30 @@
                 document.getElementById("dropdown").style.display="none";
             }
         }
+    </script>
+    <script src="../js/jquery-3.3.1.min.js"></script>
+    <script src="../js/code.jquery.com_jquery-latest.js"></script>
+    <script src="../js/jquery.timers-1.0.0.js"></script>
+    <script type="text/javascript">
+        //autocomplete 1
+        $(document).ready(function(){
+            $("#search").keyup(function(e){
+                var search_query = $(this).val();
+                if(search_query != ""){
+                    $.ajax({
+                        url:"return-list.php",
+                        type: "POST",
+                        data: {search: search_query},
+                        success: function($data){
+                            $("#suggestion").fadeIn('fast').html($data);
+                        }
+                    });
+                }
+                else{
+                    $("#suggestion").fadeOut();
+                }
+            })
+        });
     </script>
     <?php echo "<script>check_search($bool_value)</script>";?>
 </section>
