@@ -634,7 +634,7 @@ if(isset($_POST['input-message']))
     
     if (mysqli_query($conn,$query)) 
     {
-        echo "<script> window.location.href= '../individual-patient-chats.php?id=$sent_to_id'; </script>";	
+        echo "<script> window.location.href= '../chats/messages-page.php?id=$sent_to_id'; </script>";	
         //add notifications here 
     } 
     else 
