@@ -13,7 +13,6 @@
 </head>
 <body class="dash-body" id="patient-log">
   <div class="header">
-    <h1>Records</h1>
     <?php
       include_once 'notif-menu.php';
     ?>
@@ -26,7 +25,7 @@
         //show dashboard menu
         include_once 'dash-menu.php';
     ?>
-    <section style=' margin-top: 2.5%;'>
+    <section style=' margin-top: 2.5%;' class ="main-section">
         <?php
             echo "
             <div class='welcome-msg' style='margin-left: 2.5%'>

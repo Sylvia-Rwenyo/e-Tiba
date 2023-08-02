@@ -13,7 +13,6 @@
 </head>
 <body class="dash-body">
   <div class="header">
-    <h1>Dashboard</h1>
     <?php
       include_once 'notif-menu.php';
     ?>
@@ -26,7 +25,7 @@ if(!isset($_SESSION["loggedIN"])){
 //show dashboard menu
 include_once 'dash-menu.php'
 ?>
-<section>
+<section class="main-section">
 <?php
 if(isset($_SESSION["loggedIN"])){
     echo '

@@ -13,21 +13,16 @@
 </head>
 <body class="dash-body">
   <div class="header">
-    <h1>Meet</h1>
     <?php
       include_once 'notif-menu.php';
     ?>
   </div>
   <div class="mainBody" id="videoChat">
 <?php
-session_start();
-if(!isset($_SESSION["loggedIN"])){
-  header('location:index.php');
-}else{
 //show dashboard menu
 include_once 'dash-menu.php'
 ?>
-<section> 
+<section class="main-section">
     <div class="video-stream">
         <video id="localVideo" autoplay></video>
         <video id="remoteVideo" autoplay></video>
@@ -39,9 +34,6 @@ include_once 'dash-menu.php'
         </div> 
     </div>
 </section>
-<?php
-    }
-    ?>
 </div>
 </body>
 <script>

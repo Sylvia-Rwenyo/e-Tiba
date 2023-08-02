@@ -25,8 +25,8 @@
         $current_user_name = $_SESSION['username'];
     ?>
     <div class="welcome-msg">
-        <h3>Welcome to CERA</h3>
-        <h4>Register Doctors Under <?php echo $current_user_name;?></h4>
+        <h3>Doctor Registration</h3>
+        <h5>Welcome to CERA</h5>
         <p>Please fill the form below with accurate information as this is imporant for future identification with the platform administrators.</p>
     </div>
     <form method="POST" action="../controls/processing.php">

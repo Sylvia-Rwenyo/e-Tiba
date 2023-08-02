@@ -15,14 +15,13 @@
 </head>
 <body class="profileBody" id="profileBody" >
     <div class="header">
-        <h1 style="width: 20%">Records</h1>
-        <?php include_once 'notif-menu.php';?>
+        <?php include_once '../notif-menu.php';?>
     </div>
     <div class="mainBody" id="patient-records-section">
     <?php 
         include_once 'dash-menu.php';
     ?>
-    <section>
+        <section class="main-section">
         <div class="records-header">
             <h2>Patients</h2>
             <!-- search functionality to be added -->

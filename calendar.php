@@ -14,7 +14,6 @@
     <title>Appointments</title></head>
 <body class="dash-body">
     <div class="header">
-        <h1>Appointments</h1>
         <?php include_once 'notif-menu.php'; ?>
     </div>
     <div class="mainBody" id="calendarBody">
@@ -36,7 +35,7 @@
             $lastDayOfWeek->modify('+6 days'); // Get the last day of the week as 6 days after the first day
             $lastDayOfWeekString = $lastDayOfWeek->format('Y-m-d'); // Convert the DateTime object to a string
         ?>
-        <section>
+        <section class="main-section">
             <span class="week-indicator"><i class="fa fa-arrow-left"></i> <?php echo substr($firstDayOfWeekString, 5, 5) . ' - ' . substr($lastDayOfWeekString, 5, 5); ?> <i class="fa fa-arrow-right"></i></span>
             <div class="calendar">
                 <?php
@@ -64,12 +63,21 @@
                             } else if (isset($_GET["p"])) {
                                 $pID = $_GET['p'];
                                 if($_SESSION['category'] == "doctor" ){
-                                $dID =$id;
+                                    $dID =$id;
+                                    // possibly show only that particular patient's appointments to the doctor
+                                    // if(isset($_GET["s"])){
+                                    //     $stmt .= "SELECT * FROM appointments WHERE patientID='$id' && AND appointmentDate='$currentDayString'";
+                                    // }
                                 }
                                 $stmt .= "SELECT * FROM appointments WHERE patientID='$pID' AND appointmentDate='$currentDayString'";
                             } else if (isset($_GET["d"])) {
                                 $dID = $_GET['d'];
+                                if (isset($_GET["p"])) {
+                                    $pID = $_GET['p'];
+                                }
                                 $stmt .= "SELECT * FROM appointments WHERE doctorID='$dID' AND appointmentDate='$currentDayString'";
+                            } else if ($_SESSION['category'] == "doctor" && !isset($_GET["p"]) ){
+                                $stmt .= "SELECT * FROM appointments WHERE doctorID='$id' AND appointmentDate='$currentDayString'";
                             }
                             $sql = mysqli_query($conn, $stmt);
                             
@@ -85,7 +93,7 @@
                             
                             if ($appointmentExists) {
                                 // Output the booked time slot
-                                echo '<div class="booked">' . $timeString . '</div>';
+                                echo '<div class="booked" onclick="startMeeting(\''.$timeString.'\')">' . $timeString . '</div>';
                             } else {
                                 $reqID = $_SESSION['category'] == "patient" ? $pID : $dID;
                                 // Output the available time slot
@@ -108,6 +116,9 @@
     function makeAppointment(date, time, pID, dID) {
         window.location.href = "controls/processing.php?a=p&d=" + date + 
         "&t=" + time + "&pID=" + pID + "&dID=" + dID;
+    }
+    function startMeeting(time){
+        //join video call if its 15 min to time or within 30 minutes of indicated time
     }
 </script>
 </html>

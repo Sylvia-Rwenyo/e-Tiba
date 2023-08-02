@@ -25,15 +25,14 @@
 </head>
 <body class="profileBody" id="doctor-records-main" >
     <div class="header">
-        <h1 style="width: 20%">Records</h1>
-        <?php include_once 'notif-menu.php';?>
+        <?php include_once '../notif-menu.php';?>
     </div>
     <div class="mainBody" id="doctor-records-section">
     <?php 
         include_once 'dash-menu.php';
         $id = $_SESSION['id'];
     ?>
-    <section id="doctor-records-main">
+    <section id="doctor-records-main" class="main-section">
         <div class="records-header">
             <!-- search/sort functionality -->
             <h2>Records</h2>
