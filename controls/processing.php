@@ -600,7 +600,7 @@ if(isset($_POST['input-message']))
     //create session
     session_start();
     //store values submitted in the chat form in variables 
-    $message = $_POST['message'];
+    $message = $mysqli->real_escape_string($_POST['message']);
     $userId = $_SESSION['id'];
     $emailAddress = $_SESSION['email'];
     $readStatus = $_POST['readStatus'];
@@ -680,7 +680,7 @@ if(isset($_POST['submit-report-or-suggestion']))
     //create session
     session_start();
     //store values submitted in the chat form in variables 
-    $message = $_POST['message'];
+    $message = $mysqli->real_escape_string($_POST['message']);
     $userId = $_SESSION['id'];
     $emailAddress = $_SESSION['email'];
     $readStatus = $_POST['readStatus'];
