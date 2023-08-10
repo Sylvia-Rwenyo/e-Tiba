@@ -14,11 +14,15 @@ if(isset($_POST['register']))
 	 $emailAddress = $_POST['emailAddress'];
      $phoneNumber = $_POST['phoneNumber'];
      $institution = $_POST['institution'];
-     $conditionsArr= array();
-     for($i=0; $i < count($_POST['condition']); $i++){
-        $conditionsArr[] = $_POST['condition'][$i];
-         }
-    $conditions = implode('*', $conditionsArr);	 $password = $_POST['password'];
+     $conditions = '';
+     if(isset($_POST['condition'])){
+        $conditionsArr= array();
+        for($i=0; $i < count($_POST['condition']); $i++){
+            $conditionsArr[] = $_POST['condition'][$i];
+            }
+        $conditions .= implode('*', $conditionsArr);	
+        }
+     $password = $_POST['password'];
      $age = $_POST['age'];
      $address = $_POST['address'];
 	 $gender = $_POST['gender'];
@@ -337,6 +341,7 @@ function login($conn){
     extract($_POST);
     $emailAddress = $_POST ["emailAddress"];
     $password = $_POST ["password"];
+    echo $password .' '. $emailAddress;
     $stmt;
      //statement to select values from the registration table in the database
     $stmt = "SELECT * FROM regpatients where emailAddress='$emailAddress' and password='$password'";
@@ -360,7 +365,7 @@ function login($conn){
             $_SESSION["username"] = $row['firstName'];
             $_SESSION["id"]=$row['id'];
             $_SESSION["loggedIN"] = true;
-            header('location:../dashboard.php');
+            header('location:../patient-records.php');
         }else{
         $stmt = "SELECT * FROM reginstitutions where emailAddress='$emailAddress' and password='$password'"; 
         $sql=mysqli_query($conn, $stmt);

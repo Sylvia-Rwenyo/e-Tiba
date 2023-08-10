@@ -25,14 +25,15 @@
             // get user info
                 include_once 'dash-menu.php';
                 $id = $_SESSION['id'];
-                $records;
+                $stmt ='';
                 if( $_SESSION['category'] == 'patient'){
-                $records = mysqli_query($conn,"SELECT * FROM  regPatients where id='$id'");
+                $stmt .="SELECT * FROM  regPatients where id='$id'";
                 }else if ( $_SESSION['category'] == 'doctor') {
-                $records = mysqli_query($conn,"SELECT * FROM regDoctors where id='$id'");
+                $stmt .="SELECT * FROM regDoctors where id='$id'";
             }else if( $_SESSION['category'] == 'hospital') {
-                $records = mysqli_query($conn,"SELECT * FROM regInstitutions where id='$id'");
+                $stmt .="SELECT * FROM regInstitutions where id='$id'";
             }
+            $records = mysqli_query($conn, $stmt);
              if(mysqli_num_rows($records) > 0){
             $i=0;
             while($result = mysqli_fetch_array($records)) {

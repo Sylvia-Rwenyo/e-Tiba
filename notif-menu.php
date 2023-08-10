@@ -6,6 +6,7 @@
         header('location:index.php');
         }
 
+        $id = $_SESSION['id'];
         // Function to check if the current page name matches the given link name
     function isActive($linkName)
     {
@@ -59,21 +60,19 @@
         }
         return $headerName;
     }
-?>
 
-    <span class="menuBar" id="menuBars" onClick="toggleMenu()">o<i class="fa-solid fa-bars"></i></span>
-    <span class="menuBar" id="menuX" onClick="toggleMenu()">x<i class="fa-solid fa-bars"></i></span>
+?>
+    
+
+    <span class="menuBar" id="menuBars" onClick="toggleMenu()"><i class="fa-solid fa-bars"></i></span>
+    <span class="menuBar" id="menuX" onClick="toggleMenu()"><i class="fa-solid fa-x"></i></span>
 
     <h1><?php echo headerName()?></h1>
 
     <div class="menu meet-menu">
-        <?php 
-        include_once "conn.php";
-        session_start();
-        ?>
         <ul>
           
-        <li><a href=""><i class="fa fa-bell"></i></a></li>
+        <!-- <li><a href=""><i class="fa fa-bell"></i></a></li> -->
             <li><a href="<?php echo prefixSet('meet.php'); ?>"><i class="fa-solid fa-video"></i></a></li>
             <li>
                 <a href = <?php 
@@ -121,7 +120,11 @@
                     {
                         $count = $count + 1;
                     }
-                }?>
+                }
+                if(!isset($_SESSION['menuCount'])){
+                    $_SESSION['menuCount'] = 0;
+                }
+                ?>
                 
                 <i class="fa fa-message"><span class="badge"><?php if($count == 0){echo "";}else{echo $count;}?></span></i>
                 </a>
@@ -155,15 +158,15 @@
             let mainSection = document.querySelector(".main-section");
 
             if(menuCount%2 == 0){
-                dashMenu.style.display = 'block';
-                openMenu.style.display = 'none';
-                closeMenu.style.display = 'block';
-                mainSection.style.marginLeft = 'initial';
-            }else if(menuCount%2 !== 0){
                 dashMenu.style.display = 'none';
                 openMenu.style.display = 'block';
                 closeMenu.style.display = 'none';
                 mainSection.style.marginLeft = '10%';
+            }else if(menuCount%2 !== 0){
+                dashMenu.style.display = 'block';
+                openMenu.style.display = 'none';
+                closeMenu.style.display = 'block';
+                mainSection.style.marginLeft = '0';
             }
         }
     </script>

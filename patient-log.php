@@ -58,12 +58,12 @@
                     $avgSleep = $totalSleep / 7;
 
                     // Output the average sleep time
-                    echo "<p style='margin-top: 20%;'>Your average sleep this week is $avgSleep hours</p>";
+                    echo "<p style='margin-top: 20%;'>Recorded sleep time this week is $avgSleep hours</p>";
                 ?>      
                 </div>
                 <div class="prompt" id="rec-mealPrompt">
                     <h6>Keep track of your meals too</h6>
-                     <!-- eating animation or sth similar 
+                     <!-- eating animation or sth similar liked a picture of food
                     along with a fun fact about recommended foods or sth similar
                   -->
                 </div>

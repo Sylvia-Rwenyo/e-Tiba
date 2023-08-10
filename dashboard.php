@@ -28,12 +28,22 @@ include_once 'dash-menu.php'
 <section class="main-section">
 <?php
 if(isset($_SESSION["loggedIN"])){
-    echo '
-    <div class="welcome-msg">
-        <h3>'. $_SESSION["username"]. ', thank you for choosing CERA</h3>
-        <p>Your healthcare care companion.</p>
-    </div>
-    ';
+   ?>
+   <div class="dash-intro">
+     <?php include_once 'dash-nav.php';?>
+   </div>
+
+   <?php
+}
+if(isset($_GET['r'])){
+  if($_GET['r'] == 1){
+    include_once 'single-patient-records.php';
+  }
+}
+if(isset($_GET['m'])){
+  if($_GET['m'] == 1){
+    // include_once 'single-patient-records.php';
+  }
 }
 if(isset($_GET['charts'])){
   ?>
@@ -134,6 +144,8 @@ while (startDate <= currentDate) {
 myChart.update(); // Update the chart to reflect the new data
 myChart1.update(); // Update the chart to reflect the new data
 
-
+function print1patientRecord(){
+  window.location.href = 'single-patient-records.php?print=1';
+}
     </script>
 </html>

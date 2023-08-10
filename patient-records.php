@@ -13,9 +13,9 @@
     <link rel="stylesheet" href="style.css">
     <title>Records of Patients</title>
 </head>
-<body class="profileBody" id="profileBody" >
+<body class="profileBody" id="patient-records" >
     <div class="header">
-        <?php include_once '../notif-menu.php';?>
+        <?php include_once 'notif-menu.php';?>
     </div>
     <div class="mainBody" id="patient-records-section">
     <?php 
@@ -24,8 +24,8 @@
         <section class="main-section">
         <div class="records-header">
             <h2>Patients</h2>
-            <!-- search functionality to be added -->
-            <!-- filter/sort functionality -->
+               <!-- search functionality to be added. Get from dosage-registration.php-->
+               <!-- <?php include_once "doctors/dosage-reg-search-div.php";?> -->
             <div>
                 <span id="all-indicator" onclick="sort('all')">All</span>
                 <span id="attended-indicator" onclick="sort('my-dosage')">Attended</span>
@@ -33,16 +33,6 @@
             </div>
         </div>
         <table>
-        <tr>
-            <th>Full Name</th>
-            <th>Email Address</th>
-            <th>Phone No.</th>
-            <th>Address</th>
-            <th>Condition</th>
-            <th>Risk</th>
-            <th>Records</th>
-            <th>calendar</th>
-        </tr>
         <?php
             $username = $_SESSION['username'];
             $id = $_SESSION['id'];
@@ -89,17 +79,17 @@
                 </style>
                 ';
             }
-            else if(isset($_GET['d'])){
-                $records = "SELECT * FROM regpatients where id in (SELECT patientID FROM appointments WHERE doctorID = '$doct_id')";
-                echo '
-                <style>
-                    #attended-indicator{
-                        background-color:#408DCE;
-                        border: none;
-                    }
-                </style>
-                ';
-            }
+            // else if(isset($_GET['d'])){
+            //     $records = "SELECT * FROM regpatients where id in (SELECT patientID FROM appointments WHERE doctorID = '$doct_id')";
+            //     echo '
+            //     <style>
+            //         #attended-indicator{
+            //             background-color:#408DCE;
+            //             border: none;
+            //         }
+            //     </style>
+            //     ';
+            // }
             else if($_GET['a'] == 'r'){
                 $records .= " ORDER BY status DESC ";
                 echo '
@@ -124,6 +114,18 @@
         $stmt = mysqli_query($conn, $records);
         if (mysqli_num_rows($stmt) > 0) {
         $i=0;
+        ?>
+        <tr>
+            <th>Full Name</th>
+            <th>Email Address</th>
+            <th>Phone No.</th>
+            <th>Address</th>
+            <th>Condition</th>
+            <th>Risk</th>
+            <th>Records</th>
+            <th>calendar</th>
+        </tr>
+    <?php
         while($result = mysqli_fetch_array($stmt)) {
         ?>
         <tr>
@@ -156,11 +158,13 @@
         <?php
         }
         $i++;
+    }else{
+        'There are no records of patients matching your selected criteria';
     }
         ?>
         </table>
-        <br/><br/>
-        <table>
+        <!-- <br/><br/> -->
+        <!-- <table>
         <tr>
             <th>Full Name</th>
             <th>Email Address</th>
@@ -168,39 +172,31 @@
             <th>Address</th>
             <th>Condition</th>
             <th>Doctor Attending</th>
-        </tr>
+        </tr> -->
         <?php
-        $current_user_id = $_SESSION['id'];
-        if($_SESSION['category'] == 'doctor'){
-            $doct_name = $_SESSION['username'];
-            $resultPost = mysqli_query($conn,"SELECT * FROM regpatients WHERE id IN (SELECT patientID FROM appointments  WHERE doctorID = '$current_user_id')");
-        }
-        else{
-            $institution = $_SESSION['username'];
-            $resultPost = mysqli_query($conn,"SELECT * FROM regpatients WHERE id IN (SELECT patientID FROM appointments  WHERE doctorID IN (SELECT id FROM regdoctors WHERE institution = '$institution' and id = '$doct_id'))");
-            $mini_query = mysqli_query($conn,"SELECT * FROM regdoctors WHERE id = '$doct_id'");
-            while($row = mysqli_fetch_array($mini_query)) {
-                $doct_name = $row['firstName'];
-            }
-        }
-        while($row = mysqli_fetch_array($resultPost)) {
+        // $current_user_id = $_SESSION['id'];
+        // if($_SESSION['category'] == 'doctor'){
+        //     $doct_name = $_SESSION['username'];
+        //     $resultPost = mysqli_query($conn,"SELECT * FROM regpatients WHERE id IN (SELECT patientID FROM appointments  WHERE doctorID = '$current_user_id')");
+        // }
+        // else{
+        //     $institution = $_SESSION['username'];
+        //     $resultPost = mysqli_query($conn,"SELECT * FROM regpatients WHERE id IN (SELECT patientID FROM appointments  WHERE doctorID IN (SELECT id FROM regdoctors WHERE institution = '$institution' and id = '$doct_id'))");
+        //     $mini_query = mysqli_query($conn,"SELECT * FROM regdoctors WHERE id = '$doct_id'");
+        //     while($row = mysqli_fetch_array($mini_query)) {
+        //         $doct_name = $row['firstName'];
+        //     }
+        // }
+        // while($row = mysqli_fetch_array($resultPost)) {
         ?>
-        <tr>
-            <td><?php echo $row["firstName"]; ?></td>
-            <td><?php echo $row["emailAddress"]; ?></td>
-            <td><?php echo $row["phoneNumber"]; ?></td>
-            <td><?php echo $row["address"]; ?></td>
-            <td><?php echo $row["illness"]; ?></td>
-            <td><?php echo $doct_name ?></td>
-        </tr><?php 
-        }?>
+    
         </section>
     </div>
 </body>
 </html>
 <script>
     function toSinglePatientRecords(patientID){
-        window.location.href = 'single-patient-records.php?p='+patientID;
+        window.location.href = 'doctors/single-patient-records.php?p='+patientID;
     }
     function toPatientCalendar(patientID){
         window.location.href = 'calendar.php?p='+patientID;
@@ -222,7 +218,7 @@ $.ajax({
     method: 'GET',
     success: function(response) {
     // Handle the response and update the HTML content
-    $('#patient-records-section').html(response);
+    $('#"patient-records').html(response);
     console.log("all good");
     },
     error: function(xhr, status, error) {
