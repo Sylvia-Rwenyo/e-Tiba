@@ -15,7 +15,7 @@
 </head>
 <body class="profileBody" id="profileBody" >
     <div class="header">
-        <?php include_once '../notif-menu.php';?>
+        <?php include_once 'notif-menu.php';?>
     </div>
     <div class="mainBody" id="patient-records-section">
     <?php 

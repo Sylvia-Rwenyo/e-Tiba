@@ -67,10 +67,6 @@
     <h1><?php echo headerName()?></h1>
 
     <div class="menu meet-menu">
-        <?php 
-        include_once "conn.php";
-        session_start();
-        ?>
         <ul>
           
         <li><a href=""><i class="fa fa-bell"></i></a></li>

@@ -2,6 +2,7 @@
     <ul>
         <?php  
         // determine target page based on user category
+        $current_user_id = $_SESSION['id'];
         if ($_SESSION['category'] == 'hospital') {
             ?>
             <!-- add new doctor -->
@@ -9,9 +10,8 @@
 
             <!-- records -->
             <a href="<?php echo prefixSet('doctor-records.php')?>" class="<?php echo isActive('doctor-records.php'); ?>"><li><i class="fa-solid fa-folder"></i></li></a>
-
             <!-- trends -->
-            <a href="<?php echo prefixSet('dashboard.php?charts=1')?>" class="<?php echo isActive('dashboard.php'); ?>"><li><i class="fa-solid fa-chart-line"></i></li></a>
+            <a href="<?php echo prefixSet(`patient-progress-home.php?id=$current_user_id`)?>" class="<?php echo isActive('patient-progress-home.php'); ?>"><li><i class="fa-solid fa-chart-line"></i></li></a>
             <!-- settings -->
             <a href="<?php echo prefixSet('settings.php')?>" class="<?php echo isActive('settings.php'); ?>"><li><i class="fa-solid fa-gears"></i></li></a>
 
@@ -23,6 +23,8 @@
             <a href="<?php echo prefixSet('doctors/add-patient.php')?>" class="<?php echo isActive('doctors/add-patient.php'); ?>"><li><i class="fa fa-plus"></i></li></a>
             <!-- existing records -->
             <a href="<?php echo prefixSet('patient-records.php')?>" class="<?php echo isActive('patient-records.php'); ?>"><li><i class="fa-solid fa-folder"></i></li></a>
+            <!-- trends -->
+            <a href="<?php echo prefixSet(`patient-progress-home.php?id=$current_user_id`)?>" class="<?php echo isActive('patient-progress-home.php'); ?>"><li><i class="fa-solid fa-chart-line"></i></li></a>
             <!-- schedule appointment -->
             <a href="<?php echo prefixSet('calendar.php')?>"><li>                
                 <?php
@@ -41,14 +43,14 @@
                 }?>
                 <i class="fa fa-calendar"><span class="badge"><?php if($count == 0){echo "";}else{echo $count;}?></span></i></li></a>
             <!-- settings -->
-            <a href="<?php echo prefixSet('settings.php')?>">d<li><i class="fa-solid fa-gears"></i></li></a>
+            <a href="<?php echo prefixSet('settings.php')?>"><li><i class="fa-solid fa-gears"></i></li></a>
             <?php
         } else {
             ?>
             <!-- records -->
             <a href="<?php echo prefixSet('patient-log.php')?>" class="<?php echo isActive('records.php'); ?>"><li><i class="fa-solid fa-folder"></i></li></a>
             <!-- trends -->
-            <a href="<?php echo prefixSet('dashboard.php?charts=1')?>" class="<?php echo isActive('dashboard.php'); ?>"><li><i class="fa-solid fa-chart-line"></i></li></a>
+            <a href="<?php echo prefixSet(`patient-progress.php?id=$current_user_id`)?>" class="<?php echo isActive('patient-progress.php'); ?>"><li><i class="fa-solid fa-chart-line"></i></li></a>
             <!-- see set appointments or request to set one -->
             <a href="<?php echo prefixSet('calendar.php')?>"><li><i class="fa fa-calendar"></i></li></a>
             <!-- settings -->
