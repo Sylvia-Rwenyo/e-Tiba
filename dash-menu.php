@@ -11,7 +11,7 @@
             <!-- records -->
             <a href="<?php echo prefixSet('doctor-records.php')?>" class="<?php echo isActive('doctor-records.php'); ?>"><li><i class="fa-solid fa-folder"></i></li></a>
             <!-- trends -->
-            <a href="<?php echo prefixSet(`patient-progress-home.php?id=$current_user_id`)?>" class="<?php echo isActive('patient-progress-home.php'); ?>"><li><i class="fa-solid fa-chart-line"></i></li></a>
+            <a href="<?php echo prefixSet('patient-progress-home.php')?>" class="<?php echo isActive('patient-progress-home.php'); ?>"><li><i class="fa-solid fa-chart-line"></i></li></a>
             <!-- settings -->
             <a href="<?php echo prefixSet('settings.php')?>" class="<?php echo isActive('settings.php'); ?>"><li><i class="fa-solid fa-gears"></i></li></a>
 
@@ -24,7 +24,7 @@
             <!-- existing records -->
             <a href="<?php echo prefixSet('patient-records.php')?>" class="<?php echo isActive('patient-records.php'); ?>"><li><i class="fa-solid fa-folder"></i></li></a>
             <!-- trends -->
-            <a href="<?php echo prefixSet(`patient-progress-home.php?id=$current_user_id`)?>" class="<?php echo isActive('patient-progress-home.php'); ?>"><li><i class="fa-solid fa-chart-line"></i></li></a>
+            <a href="<?php echo prefixSet('patient-progress-home.php')?>" class="<?php echo isActive('patient-progress-home.php'); ?>"><li><i class="fa-solid fa-chart-line"></i></li></a>
             <!-- schedule appointment -->
             <a href="<?php echo prefixSet('calendar.php')?>"><li>                
                 <?php
@@ -50,7 +50,7 @@
             <!-- records -->
             <a href="<?php echo prefixSet('patient-log.php')?>" class="<?php echo isActive('records.php'); ?>"><li><i class="fa-solid fa-folder"></i></li></a>
             <!-- trends -->
-            <a href="<?php echo prefixSet(`patient-progress.php?id=$current_user_id`)?>" class="<?php echo isActive('patient-progress.php'); ?>"><li><i class="fa-solid fa-chart-line"></i></li></a>
+            <a href="<?php $prefix_set="patient-progress.php?id='$current_user_id'"; echo prefixSet($prefix_set);?>" class="<?php echo isActive('patient-progress.php'); ?>"><li><i class="fa-solid fa-chart-line"></i></li></a>
             <!-- see set appointments or request to set one -->
             <a href="<?php echo prefixSet('calendar.php')?>"><li><i class="fa fa-calendar"></i></li></a>
             <!-- settings -->

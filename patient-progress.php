@@ -31,6 +31,11 @@
             include_once 'dash-menu.php';
         ?>
         <section>
+            <?php
+                if(isset($_GET['id'])){
+                    $requested_patient = $_GET['id'];
+                }
+            ?>
             <div class="chart1" id="chart1"></div>
         </section>
     </div>

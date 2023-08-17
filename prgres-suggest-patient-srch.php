@@ -1,21 +1,17 @@
 <?php
-    include_once '../conn.php';
-    session_start();
-    $current_user_category = $_SESSION['category'];
-    $current_user_email = $_SESSION['email'];
+    include_once 'conn.php';
     if(isset($_POST['search']))
     {
         $keyword = $_POST['search'];
-        $chat_identity = $current_user_email.'_'.$keyword;
-        $sql = "SELECT * FROM reports WHERE chat_identity LIKE '%{$chat_identity}%' GROUP BY chat_identity ORDER BY id DESC";
+        $sql = "SELECT * FROM regpatients WHERE emailAddress LIKE '$keyword' OR firstName LIKE '$keyword'";
         $result = mysqli_query($conn, $sql) or die(mysqli_error($conn));?>
         <ul class='list-group' style='margin-top:-15px;'>
         <?php 
         while($rows = mysqli_fetch_array($result))
         {?>
             <li class="list-group-item">
-                <a href = "reports-messages.php?id=<?php echo $rows['id']; ?>"><h3><?php echo $rows['sent_to']?></h3></a>
-                <a style="text-decoration:none; color:black;" href = "reports-messages.php?id=<?php echo $rows['id']; ?>" ><h4><?php echo $rows['emailAddress']?></h4></a>
+                <a href = "patient-progress.php?id=<?php echo $rows['id']; ?>"><h3><?php echo $rows['firstName']?></h3></a>
+                <a style="text-decoration:none; color:black;" href = "patient-progress.php?id=<?php echo $rows['id']; ?>" ><h4><?php echo $rows['emailAddress']?></h4></a>
             </li>
             <?php
         }?>

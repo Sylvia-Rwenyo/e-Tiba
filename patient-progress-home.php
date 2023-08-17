@@ -26,51 +26,58 @@
         $current_user_category = $_SESSION['category'];
         $current_user_email = $_SESSION['email'];
     ?>
-<div class="menu-bar">
-    <div class="welcome-msg">
-            <h3>Patient Progress Charts</h3>
-            <p>Search Patient...</p>
-    </div>
-    <div class="search-bar-top">
-        <div class="search-bar">
-            <div data-parallax = "scroll">
-                <form action = "" method = "GET" class = "form-inline">
-                    <input id="search" name = "keyword" type = "text" placeholder = "Search Paient..." class = "form-control" value = "<?php echo isset($_POST['keyword'])?$_POST['keyword']:''?>"/>
-                    <span class = "input-group-button"><button class="search-btn" type="submit" name = "search"><i class="fa fa-search"></i>search</button></span>
-                </form>
-                <div id="suggestion" class="suggestion">
+    <div class="mainBody">
+        <div>
+            <?php 
+                include_once 'dash-menu.php';
+            ?>
+        </div>
+        <div class="menu-bar">
+            <div class="welcome-msg">
+                <h3>Patient Progress Charts</h3>
+                <p>Search Patient...</p>
+            </div>
+            <div class="search-bar-top">
+                <div class="search-bar">
+                    <div data-parallax = "scroll">
+                        <form action = "" method = "GET" class = "form-inline">
+                            <input id="search" name = "keyword" type = "text" placeholder = "Search Patient..." class = "form-control" value = "<?php echo isset($_POST['keyword'])?$_POST['keyword']:''?>"/>
+                            <span class = "input-group-button"><button class="search-btn" type="submit" name = "search"><i class="fa fa-search"></i>search</button></span>
+                        </form>
+                        <div id="suggestion" class="suggestion">
 
-                </div>
-                <div class = "dropdown">
-                    <div style="position:absolute;">
-                        <div class = "dropdown-content">
-                            <div style="word-wrap:break-word;">
-                                <?php
-                                if(isset($_GET['search']))
-                                {
-                                    $keyword = $_GET['keyword'];
-                                    $sql = "SELECT * FROM regpatients WHERE emailAddress LIKE '$keyword' OR firstName LIKE '$keyword'";
-                                    
-                                    $result = mysqli_query($conn, $sql) or die(mysqli_error($conn));
-                                    while($rows = mysqli_fetch_array($result))
-                                    {?>
-                                        <a href = "patient-progress.php?id=<?php echo $rows['id']; ?>"><h3><?php echo $rows['firstName']?></h3></a>
-                                        <a href = "patient-progress.php?id=<?php echo $rows['id']; ?>" ><h4><?php echo $rows['emailAddress']?></h4></a>
+                        </div>
+                        <div class = "dropdown">
+                            <div style="position:absolute;">
+                                <div class = "dropdown-content">
+                                    <div style="word-wrap:break-word;">
                                         <?php
-                                    }
-                                } ?>
+                                        if(isset($_GET['search']))
+                                        {
+                                            $keyword = $_GET['keyword'];
+                                            $sql = "SELECT * FROM regpatients WHERE emailAddress LIKE '$keyword' OR firstName LIKE '$keyword'";
+                                            
+                                            $result = mysqli_query($conn, $sql) or die(mysqli_error($conn));
+                                            while($rows = mysqli_fetch_array($result))
+                                            {?>
+                                                <a href = "patient-progress.php?id=<?php echo $rows['id']; ?>"><h3><?php echo $rows['firstName']?></h3></a>
+                                                <a href = "patient-progress.php?id=<?php echo $rows['id']; ?>" ><h4><?php echo $rows['emailAddress']?></h4></a>
+                                                <?php
+                                            }
+                                        } ?>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                    </div>
+                    </div>    
                 </div>
-            </div>    
+            </div>
         </div>
     </div>
-</div>
 
-    <script src="../js/jquery-3.3.1.min.js"></script>
-    <script src="../js/code.jquery.com_jquery-latest.js"></script>
-    <script src="../js/jquery.timers-1.0.0.js"></script>
+    <script src="js/jquery-3.3.1.min.js"></script>
+    <script src="js/code.jquery.com_jquery-latest.js"></script>
+    <script src="js/jquery.timers-1.0.0.js"></script>
     <script type="text/javascript">
         $(document).ready(function(){
             //autocomplete 1
