@@ -8,29 +8,36 @@ $fname_chatting_with = 0;
 if(isset($_GET['p_id'])){
         $requested_patient = $_GET['p_id'];
 }
-$data_points = array();
-$sql = "SELECT attending_doctor_name, times_a_day FROM dosage WHERE patient_id = '$requested_patient'";
+$data_points_meals = array();
+$sql = "SELECT recordDate, mealTime FROM patientsmeallog WHERE userID = '$requested_patient'";
 $result = mysqli_query($conn, $sql) or die(mysqli_error($conn));
 while($rows = mysqli_fetch_array($result)){
-    $point = array("label"=>$rows['attending_doctor_name'], "y"=>$rows["times_a_day"]);
-    array_push($data_points, $point);
+    $point = array("label"=>$rows['recordDate'], "y"=>$rows["mealTime"]);
+    array_push($data_points_meals, $point);
 }
+
+$sql2 = "SELECT firstName, lastName FROM regpatients WHERE id = '$requested_patient'";
+$result2 = mysqli_query($conn, $sql2) or die(mysqli_error($conn));
+while($row = mysqli_fetch_array($result2)){
+    $patient_meal_chart_title = $row['firstName'].' '.$row['lastName'].'\'s Eating Progress';
+}
+
 ?>
-<div class="chart_container" id="chart_container"></div>
+<div class="meals_chart_container" id="meals_chart_container"></div>
 <script src="js/canvasjs.min.js"></script>
 <script type="text/JavaScript">
-    var chart = new CanvasJS.Chart("chart_container", {
+    var chart2 = new CanvasJS.Chart("meals_chart_container", {
         animationEnabled: true,
-        title:{text: "Progress Chart 1"},
+        title:{text: <?php echo json_encode($patient_meal_chart_title);?>},
         axisY: {
-            title:"title 1",
+            title:"Number of Meals",
             titleFontColor:"#4F81BC",
             lineColor: "#4F81BC",
             labelFontColor: "#4F81BC",
             tickColor:"#4F81BC"
         },
         axisX: {
-            title:"title 2",
+            title:"Date n Time",
             titleFontColor:"red",
             lineColor: "red",
             labelFontColor: "red",
@@ -39,25 +46,26 @@ while($rows = mysqli_fetch_array($result)){
         toolTip:{shared: true},
         legend: {
             cursor: "pointer",
-            itemclick: toggleDataSeries
+            itemclick: toggleDataSeries2
         },
         data:[{
             type:"line",
             name:"title 1",
-            legendText:"title 1",
+            legendText:"Number of Meals",
             showInLegend:true,
-            dataPoints:<?php echo json_encode($data_points,JSON_NUMERIC_CHECK);?>
+            dataPoints:<?php echo json_encode($data_points_meals,JSON_NUMERIC_CHECK);?>
         }]
     });
-    chart.render();
 
-    function toggleDataSeries(e){
+    function toggleDataSeries2(e){
         if(typeof(e.dataSeries.visible) === "undefined" || e.dataSeries.visible){
             e.dataSeries.visible = false;
         }
         else {
             e.dataSeries.visible = true;
         }
-        chart.render();
+        chart2.render();
     }
+
+    chart2.render();
 </script>

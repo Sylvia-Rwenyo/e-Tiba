@@ -31,8 +31,8 @@
                 $id = $_SESSION['id'];
                 $today = new DateTime(); // Get the current date and time
                 $today->setTime(0, 0, 0); // Set the time to the beginning of the day (midnight)
-                
-                //$appointment = mysqli_query($conn,"SELECT * FROM appointments WHERE '$today' = appointmentDate && appointmentTime");
+                $today_formatted = $today->format('Y-m-d');
+                $appointment = mysqli_query($conn,"SELECT * FROM appointments WHERE appointmentDate = '$today_formatted'");
                 $count = 0;
                 while($row = mysqli_fetch_array($resultPost)) 
                 {

@@ -38,7 +38,10 @@ if(isset($_SESSION["loggedIN"])){
   include_once 'patient-progress-search-div.php';
   if(isset($_GET['id'])){
     $requested_patient = $_GET['id'];?>
-    <div class="chart1" id="chart1"></div>
+    <div class="progress-charts">
+      <div class="sleep_chart" id="sleep_chart"></div>
+      <div class="meals_chart" id="meals_chart"></div>
+  </div>
   <?php
   }
 ?>
@@ -48,7 +51,7 @@ if(isset($_SESSION["loggedIN"])){
 
 
 //Sylvia chart code start
-if(isset($_GET['charts'])){
+/*if(isset($_GET['charts'])){
   ?>
   <div class="progress-charts">
 
@@ -64,7 +67,7 @@ if(isset($_GET['charts'])){
   <?php
     }
     //Sylvia chart code end
-
+*/
     
 }
     ?>   
@@ -74,24 +77,34 @@ if(isset($_GET['charts'])){
 <script src="js/code.jquery.com_jquery-latest.js"></script>
 <script src="js/jquery.timers-1.0.0.js"></script>
 <script type="text/javascript">
+  var sections = [{
+    divclass: ".sleep_chart",
+    urlname:"sleep-chart-div.php"
+  },
+  {
+    divclass: ".meals_chart",
+    urlname:"meals-chart-div.php"
+  }];
     $(document).ready(function(){
-        $(".chart1").everyTime(10000, function(i){
+        $.each(sections, function(index, value){
+          $(value.divclass).everyTime(10000, function(i){
             $.ajax({
-                url:"chart1-div.php",
+                url:value.urlname,
                 data: {
                     p_id:<?php echo $requested_patient;?>,
                 },
                 cache: false,
                 success: function(html){
-                    $(".chart1").html(html)
+                    $(value.divclass).html(html)
                 }
             })
         })
+        });
     });
 </script>
 </body>
 <script>
-  var currentDate = new Date();
+  /*var currentDate = new Date();
 
 // Subtract one month from the current date
 currentDate.setMonth(currentDate.getMonth() - 1);
@@ -171,5 +184,5 @@ myChart.update(); // Update the chart to reflect the new data
 myChart1.update(); // Update the chart to reflect the new data
 
 
-    </script>
+    */</script>
 </html>
