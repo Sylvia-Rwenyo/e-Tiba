@@ -24,7 +24,7 @@ while($row = mysqli_fetch_array($result2)){
 
 ?>
 <div class="sleep_chart_container" id="sleep_chart_container"></div>
-<script src="../js/canvasjs.min.js"></script>
+<script src="js/canvasjs.min.js"></script>
 <script type="text/JavaScript">
     var chart1 = new CanvasJS.Chart("sleep_chart_container", {
         animationEnabled: true,
