@@ -916,8 +916,6 @@
     width: -webkit-fill-available;
 }
 #dash-body .menu-bar{
-    z-index: 900;
-    position: fixed;
     padding: 1.5%;
     width: -webkit-fill-available;
 }

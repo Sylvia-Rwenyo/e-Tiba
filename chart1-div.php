@@ -29,13 +29,20 @@ while($rows = mysqli_fetch_array($result)){
             labelFontColor: "#4F81BC",
             tickColor:"#4F81BC"
         },
+        axisX: {
+            title:"title 2",
+            titleFontColor:"red",
+            lineColor: "red",
+            labelFontColor: "red",
+            tickColor:"red"
+        },
         toolTip:{shared: true},
         legend: {
             cursor: "pointer",
-            itemclick: toggleDataSeriesFunction
+            itemclick: toggleDataSeries
         },
         data:[{
-            type:"column",
+            type:"line",
             name:"title 1",
             legendText:"title 1",
             showInLegend:true,
@@ -44,7 +51,7 @@ while($rows = mysqli_fetch_array($result)){
     });
     chart.render();
 
-    function toggleDataSeriesFunction(e){
+    function toggleDataSeries(e){
         if(typeof(e.dataSeries.visible) === "undefined" || e.dataSeries.visible){
             e.dataSeries.visible = false;
         }
