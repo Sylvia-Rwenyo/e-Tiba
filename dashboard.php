@@ -79,11 +79,11 @@ if(isset($_SESSION["loggedIN"])){
 <script type="text/javascript">
   var sections = [{
     divclass: ".sleep_chart",
-    urlname:"sleep-chart-div.php"
+    urlname:"charts/sleep-chart-div.php"
   },
   {
     divclass: ".meals_chart",
-    urlname:"meals-chart-div.php"
+    urlname:"charts/meals-chart-div.php"
   }];
     $(document).ready(function(){
         $.each(sections, function(index, value){
