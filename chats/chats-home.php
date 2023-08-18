@@ -26,9 +26,7 @@
         $current_user_category = $_SESSION['category'];
     ?>
 <div style="display:flex; flec-direction:row;">
-    <div class="patient-records-dash-menu">
-        <?php include_once 'chats-dash-menu.php';?>
-    </div>
+    <?php include_once 'chats-dash-menu.php';?>
     <div style="width:100%;">
     <div class="menu-bar">
             <div class="welcome-msg">

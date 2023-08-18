@@ -11,7 +11,7 @@
     <script src="https://kit.fontawesome.com/2751fbc624.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
-<body class="dash-body">
+<body class="dash-body" id="dash-body">
   <div class="header">
     <?php
       include_once 'notif-menu.php';
@@ -35,6 +35,19 @@ if(isset($_SESSION["loggedIN"])){
     </div>
     ';
 }
+  include_once 'patient-progress-search-div.php';
+  if(isset($_GET['id'])){
+    $requested_patient = $_GET['id'];?>
+    <div class="chart1" id="chart1"></div>
+  <?php
+  }
+?>
+    
+</div>
+<?php
+
+
+//Sylvia chart code start
 if(isset($_GET['charts'])){
   ?>
   <div class="progress-charts">
@@ -49,10 +62,33 @@ if(isset($_GET['charts'])){
         ?>
   </div>
   <?php
-    }}
+    }
+    //Sylvia chart code end
+
+    
+}
     ?>   
 </section>
 </div>
+<script src="js/jquery-3.3.1.min.js"></script>
+<script src="js/code.jquery.com_jquery-latest.js"></script>
+<script src="js/jquery.timers-1.0.0.js"></script>
+<script type="text/javascript">
+    $(document).ready(function(){
+        $(".chart1").everyTime(10000, function(i){
+            $.ajax({
+                url:"chart1-div.php",
+                data: {
+                    p_id:<?php echo $requested_patient;?>,
+                },
+                cache: false,
+                success: function(html){
+                    $(".chart1").html(html)
+                }
+            })
+        })
+    });
+</script>
 </body>
 <script>
   var currentDate = new Date();

@@ -61,8 +61,8 @@
     }
 ?>
 
-    <span class="menuBar" id="menuBars" onClick="toggleMenu()">o<i class="fa-solid fa-bars"></i></span>
-    <span class="menuBar" id="menuX" onClick="toggleMenu()">x<i class="fa-solid fa-bars"></i></span>
+    <span class="menuBar" id="menuBars" onClick="toggleMenu()"><i class="fa-solid fa-bars"></i></span>
+    <span class="menuBar" id="menuX" onClick="toggleMenu()">x</span>
 
     <h1><?php echo headerName()?></h1>
 
@@ -79,22 +79,19 @@
                 }
                 else
                 {
-                    echo prefixSet("patient-doctor-chat-by-patient.php");
+                    echo prefixSet("chats/chats-home.php");
                 }
             ;
                 ?>
                 class='
                     <?php
-                     if($_SESSION['category'] == 'doctor')
+                     if($_SESSION['category'] == 'hospital')
                      {
-                         echo isActive("doctors/patient-doctor-chat.php");
+                         echo isActive("chats/reports-home.php");
                      }
-                     elseif($_SESSION['category'] == 'patient')
+                     else
                      {
-                         echo isActive("patient-doctor-chat-by-patient.php");
-                     }else if($_SESSION['category'] == 'hospital')
-                     {
-                         echo isActive("partners/patient-doctor-chat.php");
+                         echo isActive("chats-home.php");
                      }
                     ?>
                 '

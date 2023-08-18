@@ -5,13 +5,13 @@
         $current_user_id = $_SESSION['id'];
         if ($_SESSION['category'] == 'hospital') {
             ?>
+            <!-- trends -->
+            <a href="<?php echo prefixSet('dashboard.php')?>" class="<?php echo isActive('dashboard.php'); ?>"><li><i class="fa-solid fa-chart-line"></i></li></a>
             <!-- add new doctor -->
             <a href="<?php echo prefixSet('partners/add-doctor.php')?>" class="<?php echo isActive('partners/add-doctor.php'); ?>"><li><i class="fa-solid fa-add"></i></li></a>
 
             <!-- records -->
             <a href="<?php echo prefixSet('doctor-records.php')?>" class="<?php echo isActive('doctor-records.php'); ?>"><li><i class="fa-solid fa-folder"></i></li></a>
-            <!-- trends -->
-            <a href="<?php echo prefixSet('patient-progress-home.php')?>" class="<?php echo isActive('patient-progress-home.php'); ?>"><li><i class="fa-solid fa-chart-line"></i></li></a>
             <!-- settings -->
             <a href="<?php echo prefixSet('settings.php')?>" class="<?php echo isActive('settings.php'); ?>"><li><i class="fa-solid fa-gears"></i></li></a>
 
@@ -19,12 +19,12 @@
             <?php
         } else if ($_SESSION['category'] == 'doctor') {
             ?>
+            <!-- trends -->
+            <a href="<?php echo prefixSet('dashboard.php')?>" class="<?php echo isActive('dashboard.php'); ?>"><li><i class="fa-solid fa-chart-line"></i></li></a>
             <!-- add records -->
             <a href="<?php echo prefixSet('doctors/add-patient.php')?>" class="<?php echo isActive('doctors/add-patient.php'); ?>"><li><i class="fa fa-plus"></i></li></a>
             <!-- existing records -->
             <a href="<?php echo prefixSet('patient-records.php')?>" class="<?php echo isActive('patient-records.php'); ?>"><li><i class="fa-solid fa-folder"></i></li></a>
-            <!-- trends -->
-            <a href="<?php echo prefixSet('patient-progress-home.php')?>" class="<?php echo isActive('patient-progress-home.php'); ?>"><li><i class="fa-solid fa-chart-line"></i></li></a>
             <!-- schedule appointment -->
             <a href="<?php echo prefixSet('calendar.php')?>"><li>                
                 <?php
@@ -32,7 +32,7 @@
                 $today = new DateTime(); // Get the current date and time
                 $today->setTime(0, 0, 0); // Set the time to the beginning of the day (midnight)
                 
-                $appointment = mysqli_query($conn,"SELECT * FROM appointments WHERE appointmentDate = '$today' && appoinmentTime");
+                //$appointment = mysqli_query($conn,"SELECT * FROM appointments WHERE '$today' = appointmentDate && appointmentTime");
                 $count = 0;
                 while($row = mysqli_fetch_array($resultPost)) 
                 {
@@ -47,10 +47,10 @@
             <?php
         } else {
             ?>
+            <!-- trends -->
+            <a href="<?php $prefix_set="dashboard.php?id='$current_user_id'"; echo prefixSet($prefix_set);?>" class="<?php echo isActive('dashboard.php'); ?>"><li><i class="fa-solid fa-chart-line"></i></li></a>
             <!-- records -->
             <a href="<?php echo prefixSet('patient-log.php')?>" class="<?php echo isActive('records.php'); ?>"><li><i class="fa-solid fa-folder"></i></li></a>
-            <!-- trends -->
-            <a href="<?php $prefix_set="patient-progress.php?id='$current_user_id'"; echo prefixSet($prefix_set);?>" class="<?php echo isActive('patient-progress.php'); ?>"><li><i class="fa-solid fa-chart-line"></i></li></a>
             <!-- see set appointments or request to set one -->
             <a href="<?php echo prefixSet('calendar.php')?>"><li><i class="fa fa-calendar"></i></li></a>
             <!-- settings -->
