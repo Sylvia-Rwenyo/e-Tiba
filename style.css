@@ -386,7 +386,15 @@
     display: grid;
     grid-template-rows: 1fr 1fr 1fr; 
 }
-
+.chart1 {
+    display: grid;
+    grid-template-rows: 1fr 1fr 1fr; 
+}
+@media screen and (max-width:500px) {
+    .chart1 {
+        width: 90%;
+    }
+}
 /* settings page */
 .header{
     margin-left: 5%;
