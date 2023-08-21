@@ -9,10 +9,10 @@ if(isset($_GET['p_id'])){
         $requested_patient = $_GET['p_id'];
 }
 $data_points_meals = array();
-$sql = "SELECT recordDate, mealTime FROM patientsmeallog WHERE userID = '$requested_patient'";
+$sql = "SELECT recordDate, COUNT(mealTime) num_of_meals FROM patientsmeallog WHERE userID = '$requested_patient' GROUP BY recordDate";
 $result = mysqli_query($conn, $sql) or die(mysqli_error($conn));
 while($rows = mysqli_fetch_array($result)){
-    $point = array("label"=>$rows['recordDate'], "y"=>$rows["mealTime"]);
+    $point = array("label"=>$rows['recordDate'], "y"=>$rows["num_of_meals"]);
     array_push($data_points_meals, $point);
 }
 
@@ -50,7 +50,7 @@ while($row = mysqli_fetch_array($result2)){
         },
         data:[{
             type:"line",
-            name:"title 1",
+            name:"Number of meals",
             legendText:"Number of Meals",
             showInLegend:true,
             dataPoints:<?php echo json_encode($data_points_meals,JSON_NUMERIC_CHECK);?>

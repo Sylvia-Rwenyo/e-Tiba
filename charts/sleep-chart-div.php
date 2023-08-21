@@ -50,7 +50,7 @@ while($row = mysqli_fetch_array($result2)){
         },
         data:[{
             type:"line",
-            name:"title 1",
+            name:"Hours Slept",
             legendText:"Hours Slept",
             showInLegend:true,
             dataPoints:<?php echo json_encode($data_points_sleep,JSON_NUMERIC_CHECK);?>
