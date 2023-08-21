@@ -500,10 +500,11 @@ if(isset($_POST["record-meal"]))
     //store values submitted in the signup form in variables
 	 $mealName = $_POST['meal-name'];
      $mealTime = $_POST['meal-time'];
+     $current_date = date('Y-m-d');
      $id = $_SESSION['id'];
      //statement to enter values into the registration table in the database
-	 $sql = "INSERT INTO patientsMealLog (userID, mealName, mealTime)
-	 VALUES ('$id','$mealName','$mealTime')";
+	 $sql = "INSERT INTO patientsMealLog (userID, mealName, mealTime, recordDate)
+	 VALUES ('$id','$mealName','$mealTime', '$current_date')";
 
      //if sql query is not executed...
 	 if (mysqli_query($conn, $sql)) {

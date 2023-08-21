@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 04, 2023 at 07:35 PM
+-- Generation Time: Aug 21, 2023 at 11:58 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -31,9 +31,9 @@ CREATE TABLE `appointments` (
   `appointmentID` int(8) NOT NULL,
   `patientID` int(8) NOT NULL,
   `doctorID` int(8) NOT NULL,
-  `appointmentDate` varchar(10) DEFAULT NULL,
-  `appointmentTime` varchar(8) DEFAULT NULL,
-  `appointmentDuration` varchar(3) DEFAULT NULL
+  `appointmentDate` date DEFAULT NULL,
+  `appointmentTime` time DEFAULT NULL,
+  `appointmentDuration` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -41,20 +41,20 @@ CREATE TABLE `appointments` (
 --
 
 INSERT INTO `appointments` (`appointmentID`, `patientID`, `doctorID`, `appointmentDate`, `appointmentTime`, `appointmentDuration`) VALUES
-(1, 6, 1, '2023-07-26', '10:30', '60'),
-(2, 11, 2, '2023-07-28', '16:30', NULL),
-(3, 2, 0, '16:30', '11', NULL),
-(4, 2, 0, '16:30', '2', NULL),
-(5, 2, 0, '16:00', '11', NULL),
-(6, 2, 0, '12:30', '11', NULL),
-(7, 2, 0, '16:00', '11', NULL),
-(8, 2, 0, '16:30', '11', NULL),
-(9, 11, 2, '2023-07-28', '16:00', NULL),
-(10, 0, 4, '2023-07-29', '15:00', NULL),
-(11, 0, 4, '2023-07-28', '15:00', NULL),
-(12, 0, 4, '2023-07-28', '15:30', NULL),
-(13, 0, 4, '2023-07-28', '16:00', NULL),
-(14, 0, 4, '2023-07-29', '16:30', NULL);
+(1, 6, 1, '2023-07-26', '10:30:00', '0000-00-00 00:00:00'),
+(2, 11, 2, '2023-07-28', '16:30:00', NULL),
+(3, 2, 0, '0000-00-00', '00:00:11', NULL),
+(4, 2, 0, '0000-00-00', '00:00:02', NULL),
+(5, 2, 0, '0000-00-00', '00:00:11', NULL),
+(6, 2, 0, '0000-00-00', '00:00:11', NULL),
+(7, 2, 0, '0000-00-00', '00:00:11', NULL),
+(8, 2, 0, '0000-00-00', '00:00:11', NULL),
+(9, 11, 2, '2023-07-28', '16:00:00', NULL),
+(10, 0, 4, '2023-07-29', '15:00:00', NULL),
+(11, 0, 4, '2023-07-28', '15:00:00', NULL),
+(12, 0, 4, '2023-07-28', '15:30:00', NULL),
+(13, 0, 4, '2023-07-28', '16:00:00', NULL),
+(14, 0, 4, '2023-07-29', '16:30:00', NULL);
 
 -- --------------------------------------------------------
 
@@ -174,10 +174,10 @@ CREATE TABLE `patientsleeplog` (
 --
 
 INSERT INTO `patientsleeplog` (`userID`, `sleepTime`, `entryID`, `recordDate`) VALUES
-(6, 3600, 1, '2023-06-23 14:31:39'),
-(6, 3600, 2, '2023-06-23 14:31:56'),
-(6, 1, 3, '2023-06-23 14:32:12'),
-(6, 1, 4, '2023-06-23 14:35:14');
+(6, 7, 1, '2023-08-18 07:58:19'),
+(6, 5, 2, '2023-08-18 07:58:29'),
+(6, 8, 3, '2023-08-18 07:58:42'),
+(6, 3, 4, '2023-08-18 07:59:07');
 
 -- --------------------------------------------------------
 
@@ -188,10 +188,18 @@ INSERT INTO `patientsleeplog` (`userID`, `sleepTime`, `entryID`, `recordDate`) V
 CREATE TABLE `patientsmeallog` (
   `userID` int(10) NOT NULL,
   `mealName` varchar(100) NOT NULL,
-  `mealTime` datetime NOT NULL,
+  `mealTime` time NOT NULL,
   `entryID` int(20) NOT NULL,
-  `recordDate` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+  `recordDate` date NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `patientsmeallog`
+--
+
+INSERT INTO `patientsmeallog` (`userID`, `mealName`, `mealTime`, `entryID`, `recordDate`) VALUES
+(6, 'food1', '07:50:00', 1, '2023-08-21'),
+(6, 'food 2', '12:50:00', 2, '2023-08-21');
 
 -- --------------------------------------------------------
 
@@ -394,7 +402,7 @@ ALTER TABLE `patientsleeplog`
 -- AUTO_INCREMENT for table `patientsmeallog`
 --
 ALTER TABLE `patientsmeallog`
-  MODIFY `entryID` int(20) NOT NULL AUTO_INCREMENT;
+  MODIFY `entryID` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `regdoctors`
