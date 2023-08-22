@@ -91,7 +91,7 @@
                      }
                      else
                      {
-                         echo isActive("chats-home.php");
+                         echo isActive("chats/chats-home.php");
                      }
                     ?>
                 '
