@@ -37,7 +37,9 @@
         <div class="dosage_records">
             <table>
                 <tr class="table_field_names">
+                    <th>Patient name</th>
                     <th>Medicine name</th>
+                    <th>Administered By</th>
                     <th>Number of Tablets</th>
                     <th>Number of Days</th>
                     <th>Number of Times a Day</th>
@@ -50,8 +52,14 @@
                 ?>
                 <tr class="table_field_items">
                     <td>
+                    <?php echo $row["patientName"]; ?>
+                    </td> 
+                    <td>
                     <?php echo $row["dosageName"]; ?>
                     </td> 
+                    <td>
+                    <?php echo $row["attending_doctor_name"]; ?>
+                    </td>
                     <td>
                     <?php echo $row["tablets"]; ?>
                     </td>
@@ -65,11 +73,6 @@
                     <a  href="dosage-update-form.php?id=<?php echo $row["dosageId"]; ?>" method="POST">
                         <button id = "dosage-update" type="button" name="dosage-update" class="pos-btn"><i class="fa fa-edit"></i>Update</button>
                     </a>
-                    </td>   
-                    <td>
-                    <form id="form"  action="../controls/processing.php?id=<?php echo $row["dosageId"]; ?>" method="POST">
-                        <button id = "dosage-delete" type="submit" name="dosage-delete" class="pos-btn"><i class="fa fa-trash-o"></i>Delete</button>
-                    </form>
                     </td>                        
                 </tr>   
                  

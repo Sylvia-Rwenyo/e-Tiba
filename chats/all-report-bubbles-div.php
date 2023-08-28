@@ -46,12 +46,12 @@
             ?>
                 <div class="message-box sent">
                     <p><?php echo $row["message"]; ?></p>
-                    <div style="display:flex;flex-direction:row;">
-                        <form id="message-form"  action="../controls/processing.php?id=<?php echo $row["id"]; ?>" method="POST" style="<?php if($row['readStatus'] == 'unread'){echo 'display:block;';}else{echo  'display:none;';}?>">
-                            <input type="hidden"  name="sent_to" value="<?php echo $sent_to;?>"/>    
+                    <!--<div style="display:flex;flex-direction:row;">
+                        <form id="message-form"  action="../controls/processing.php?id=<?php //echo $row["id"]; ?>" method="POST" style="<?php // if($row['readStatus'] == 'unread'){echo 'display:block;';}else{echo  'display:none;';}?>">
+                            <input type="hidden"  name="sent_to" value="<?php //echo $sent_to;?>"/>    
                             <input id = "report-update" type="submit" name="report-update" class="chat-btn" value="Edit"/>
                         </form>
-                    </div>
+                    </div>-->
                 </div> 
                 <?php
         }

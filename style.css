@@ -103,6 +103,12 @@
     width: 30%;
     height: 3em;
 }
+@media screen and (max-width:990px) {
+    .CTA a{
+        width: 45%;
+        height: 4em;
+    }
+}
 .CTA button{
     width: 100%;
     height: 100%;
@@ -426,7 +432,6 @@
 /* dashboard */
 .progress-charts{
     display: grid;
-    grid-template-rows: 1fr 1fr 1fr; 
 }
 .dash-intro{
     display: flex;
@@ -456,7 +461,29 @@
 .dash-nav ul a .active, .dash-nav ul a:hover{
     color: #408DCE;
     text-decoration: underline;
-
+.chart {
+    width: 90%;
+    position: relative;
+}
+@media screen and (max-width:500px) {
+    .chart {
+        width: 90%;
+        margin-bottom: 20%;
+    }
+}
+.sleep_chart_container, .meals_chart_container {
+    width:100%;
+    display:inline-block;
+    position:relative;
+}
+.meals_chart_container {
+    margin-top: 55%;
+}
+@media screen and (max-width:500px) {
+    .meals_chart_container {
+        margin-top: 125%;
+    }
+}
 }
 /* settings page */
 .header{
@@ -1075,8 +1102,11 @@
     padding: 1.5%;
     width: -webkit-fill-available;
 }
-
-#patient-doc-home-chat form, #records-search-container form{
+#dash-body .menu-bar{
+    padding: 1.5%;
+    width: -webkit-fill-available;
+}
+#patient-doc-home-chat form, #records-search-container form, #dash-body form{
     margin-left: 20%;
     width: 80%;
     display: flex;
@@ -1091,19 +1121,19 @@
     margin-left: 5%;
 } 
 @media screen and (max-width:500px) {
-    #patient-doc-home-chat form ,#records-search-container form{
+    #patient-doc-home-chat form ,#records-search-container form, #dash-body form{
         margin-left: 2%;
     }
 }
 
-#patient-doc-home-chat form  input , #records-search-container form input{
+#patient-doc-home-chat form  input , #records-search-container form input, #dash-body form input{
     padding: 1em;
     width: 80%;
     margin: 0.5em;
     border: none;
     border-radius: 5px;
 }
-#patient-doc-home-chat .search-btn, .records-container .search-btn, #records-search-container .search-btn{
+#patient-doc-home-chat .search-btn, .records-container .search-btn, #records-search-container .search-btn, #dash-body form .search-btn{
     background-color: #35b6be;
     color: #fff;
     width: fit-content;
@@ -1116,7 +1146,7 @@
     margin-top: 10%;
     border-radius: 10%;
 }
-#patient-doc-home-chat .search-btn:hover, .records-container .search-btn:hover, #records-search-container .search-btn:hover{
+#patient-doc-home-chat .search-btn:hover, .records-container .search-btn:hover, #records-search-container .search-btn:hover, #dash-body form .search-btn:hover{
     background-color: white;
     border: 1px solid black;
     
@@ -1472,7 +1502,7 @@
 }
 
 /* records */
-#doctor-records-section section,#patient-records-section section{
+#doctor-records-section section,#patient-records-section section, #dash-body section{
     display: flex;
     flex-direction: column;
     margin-top: 2.5%;
@@ -1484,7 +1514,7 @@
     border-collapse: collapse;
 }
 @media screen and (max-width:500px) {
-    #doctor-records-section section,#patient-records-section section{
+    #doctor-records-section section,#patient-records-section section, #dash-body section{
         width:90%;
         overflow:scroll;
     }

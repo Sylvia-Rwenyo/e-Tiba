@@ -505,10 +505,11 @@ if(isset($_POST["record-meal"]))
     //store values submitted in the signup form in variables
 	 $mealName = $_POST['meal-name'];
      $mealTime = $_POST['meal-time'];
+     $current_date = date('Y-m-d');
      $id = $_SESSION['id'];
      //statement to enter values into the registration table in the database
-	 $sql = "INSERT INTO patientsMealLog (userID, mealName, mealTime)
-	 VALUES ('$id','$mealName','$mealTime')";
+	 $sql = "INSERT INTO patientsMealLog (userID, mealName, mealTime, recordDate)
+	 VALUES ('$id','$mealName','$mealTime', '$current_date')";
 
      //if sql query is not executed...
 	 if (mysqli_query($conn, $sql)) {
@@ -605,7 +606,7 @@ if(isset($_POST['input-message']))
     //create session
     session_start();
     //store values submitted in the chat form in variables 
-    $message = $_POST['message'];
+    $message = $mysqli->real_escape_string($_POST['message']);
     $userId = $_SESSION['id'];
     $emailAddress = $_SESSION['email'];
     $readStatus = $_POST['readStatus'];
@@ -639,7 +640,7 @@ if(isset($_POST['input-message']))
     
     if (mysqli_query($conn,$query)) 
     {
-        echo "<script> window.location.href= '../individual-patient-chats.php?id=$sent_to_id'; </script>";	
+        echo "<script> window.location.href= '../chats/messages-page.php?id=$sent_to_id'; </script>";	
         //add notifications here 
     } 
     else 
@@ -685,7 +686,7 @@ if(isset($_POST['submit-report-or-suggestion']))
     //create session
     session_start();
     //store values submitted in the chat form in variables 
-    $message = $_POST['message'];
+    $message = $mysqli->real_escape_string($_POST['message']);
     $userId = $_SESSION['id'];
     $emailAddress = $_SESSION['email'];
     $readStatus = $_POST['readStatus'];
