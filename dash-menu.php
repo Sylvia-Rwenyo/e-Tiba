@@ -19,8 +19,6 @@
             <?php
         } else if ($_SESSION['category'] == 'doctor') {
             ?>
-            <!-- trends -->
-            <a href="<?php echo prefixSet('dashboard.php')?>" class="<?php echo isActive('dashboard.php'); ?>"><li><i class="fa-solid fa-chart-line"></i></li></a>
             <!-- add records -->
             <a href="<?php echo prefixSet('doctors/add-patient.php')?>" class="<?php echo isActive('doctors/add-patient.php'); ?>"><li><i class="fa fa-plus"></i></li></a>
             <!-- existing records -->

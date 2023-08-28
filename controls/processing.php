@@ -95,14 +95,22 @@ if(isset($_POST['add-patient'])){
 	 $emailAddress = $_POST['emailAddress'];
      $phoneNumber = $_POST['phoneNumber'];
      $address = $_POST['address'];
-     $institution = $_POST['institution'];
+     session_start();
+     $doctorID = $_SESSION['id'];
+     $institution ='';
+     $sql=mysqli_query($conn,"SELECT * FROM regDoctors where id='$doctorID'");
+     if($row = mysqli_fetch_array($sql))
+     {
+        $institution .= $row['institution'];
+     }
+    
      $conditionsArr= array();
      for($i=0; $i < count($_POST['condition']); $i++){
         $conditionsArr[] = $_POST['condition'][$i];
          }
     $conditions = implode('*', $conditionsArr);    
 	 
-    $sql=mysqli_query($conn,"SELECT * FROM regpatients where email='$emailAddress' AND phone_number='$phoneNumber'");
+    $sql=mysqli_query($conn,"SELECT * FROM regpatients where emailAddress='$emailAddress' AND phoneNumber='$phoneNumber'");
     if(mysqli_num_rows($sql)>0)
     {
         echo "User Already Registered"; 
@@ -110,7 +118,7 @@ if(isset($_POST['add-patient'])){
     }
     else
     {
-        $query="INSERT INTO regpatients(firstName, lastName, age, gender, emailAddress, phoneNumber, address, institution, condition) VALUES ('$firstName' ,'$lastName' ,'$age' ,'$gender' ,'$emailAddress' ,'$phoneNumber' ,'$address' ,'$institution' ,'$conditions')";
+        $query="INSERT INTO regpatients(firstName, lastName, age, gender, emailAddress, phoneNumber, address, institution, illness) VALUES ('$firstName' ,'$lastName' ,'$age' ,'$gender' ,'$emailAddress' ,'$phoneNumber' ,'$address' ,'$institution' ,'$conditions')";
     }
     //if sql query is executed...
 	 if (mysqli_query($conn, $query)) {
@@ -445,9 +453,18 @@ if(isset($_GET['action'])){
     $profilePhoto = $fileName3;
     $phoneNumber = $_POST['phoneNumber'];
     //statement to update values
-    $sql = "UPDATE regPatients SET  emailAddress='$emailAddress', password='$password', 
+    $sql ='';
+    session_start();
+    if($_SESSION['category'] == 'patient'){
+    $sql .= "UPDATE regPatients SET  emailAddress='$emailAddress', password='$password', 
                    profilePhoto='$profilePhoto', phoneNumber='$phoneNumber' WHERE id='$id'";
-
+    }  else if($_SESSION['category'] == 'doctor'){
+        $sql .= "UPDATE regDoctors SET  emailAddress='$emailAddress', password='$password', 
+                       profilePhoto='$profilePhoto', phoneNumber='$phoneNumber' WHERE id='$id'";
+    }  else if($_SESSION['category'] == 'hospital'){
+        $sql .= "UPDATE regDoctors SET  emailAddress='$emailAddress', password='$password', 
+                        profilePhoto='$profilePhoto', phoneNumber='$phoneNumber' WHERE id='$id'";
+    }
     // if sql query is executed and database connection is established
     if (mysqli_query($conn, $sql)) {
         // $_SESSION["username"]=$name;
@@ -487,7 +504,9 @@ if (isset($_POST["record-sleep"])) {
     }
 
     if (mysqli_query($conn, $sql)) {
-        echo $sleepTime;
+        echo '
+        <script> window.location.href="../patient-log.php"</script>
+        ';
     }else{
         // Show error if the SQL query is not executed
         echo "Error: " . $sql . "<br>" . mysqli_error($conn);
@@ -513,7 +532,9 @@ if(isset($_POST["record-meal"]))
 
      //if sql query is not executed...
 	 if (mysqli_query($conn, $sql)) {
-        echo 'Meal recorded';	
+        echo '
+        <script> window.location.href="../patient-log.php"</script>
+        ';	
          }else{
                 //show error
 		echo "Error: " . $sql . "

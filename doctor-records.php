@@ -1,13 +1,3 @@
-<?php 
-    include_once 'conn.php';
-    session_start();
-    if($_SESSION["loggedIN"] == false)
-    {
-        echo ' <script> 
-        window.location.href = "index.php";
-        </script>';       
-    }
-?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -25,7 +15,9 @@
 </head>
 <body class="profileBody" id="doctor-records-main" >
     <div class="header">
-        <?php include_once '../notif-menu.php';?>
+        <?php 
+        include_once 'notif-menu.php';
+        ?>
     </div>
     <div class="mainBody" id="doctor-records-section">
     <?php 

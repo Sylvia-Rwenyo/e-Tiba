@@ -257,3 +257,4 @@
 setInterval(fetchData, 60000);
 
     </script>
+   

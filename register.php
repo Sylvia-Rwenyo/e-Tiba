@@ -78,7 +78,7 @@
             <div id="pswdDiv">
                 <input type="password" id="reg-pw"  name="password" placeholder="password" required/>
                 <span id="showPswd" onclick="pswdDisplay()">
-                    <i class="fa fa-eye-slash">o</i>
+                    <i class="fa fa-eye-slash"></i>
                 </span>
             </div>
             <div id="passwordChecker">

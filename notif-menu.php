@@ -69,7 +69,6 @@
     <div class="menu meet-menu">
         <ul>
           
-        <!-- <li><a href=""><i class="fa fa-bell"></i></a></li> -->
             <li><a href="<?php echo prefixSet('meet.php'); ?>"><i class="fa-solid fa-video"></i></a></li>
             <li>
                 <a href = <?php 
@@ -93,7 +92,7 @@
                      {
                          echo isActive("chats/chats-home.php");
                      }
-                    ?>
+                    ?>\
                 '
                 >
                 <?php

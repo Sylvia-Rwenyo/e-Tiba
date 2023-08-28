@@ -14,7 +14,7 @@
 </head>
 <body class="profileBody" id="profileBody" >
     <div class="header">
-        <?php include_once '../notif-menu.php';?>
+        <?php include_once 'notif-menu.php';?>
     </div>
     <div class="mainBody" id="patient-records-section">
     <?php 
@@ -36,7 +36,9 @@
          
             ?>
             <!-- search functionality to be added. Get from dosage-registration.php-->
-            <?php include_once "doctors/dosage-reg-search-div.php";?>
+            <?php 
+            // include_once "doctors/dosage-reg-search-div.php";
+            ?>
         </div>
         <table>
         <tr>
@@ -149,51 +151,16 @@
                 ?>
             </td>
         </tr>
-        <?php
-        }}
-        $i++;
-        ?>
         </table>
                         </section>
                     </div>
                 </body>
                 </html>
-                <script>
-                    // Your JavaScript code...
-                </script>
-                
-                <script>
-                    function toPatientCalendar(patientID){
-                        window.location.href = 'calendar.php?p='+patientID;
-                    }
-                
-                function fetchData() {
-                $.ajax({
-                    url: 'single-patient-records.php', // Replace with your server-side script URL
-                    method: 'GET',
-                    success: function(response) {
-                    // Handle the response and update the HTML content
-                    $('#profile-body').html(response);
-                    console.log("all good");
-                    },
-                    error: function(xhr, status, error) {
-                    // Handle errors
-                    console.error(error);
-                    }
-                });
-                }
-                
-                // Call the getNewData function periodically to fetch new data
-                setInterval(fetchData, 60000);
-                
-                window.onload(window.print());
-                if(window.print()){
-                    window.location.href = 'dashboard.php?r=1';
-                }
-                // </script>
-                 
-            <?php
-            }else{ 
+              
+                <?php
+            }
+            $i++;
+        }else{ 
                 include_once 'conn.php';
             $i=0;
             $pID = isset($_GET['p']) ? $_GET['p'] : $_SESSION['id'];
@@ -321,8 +288,50 @@
         $i++;
         ?>
         </table>
+        <?php
+            if(isset($_GET['print'])){
+                ?>
+                <script>
+        window.onload(window.print());
+        if(window.print()){
+            window.location.href = 'dashboard.php?r=1';
+        }
+        </script>
+                        <?php
+                  
+                }else{
+
+        ?>
         <button class="records-print-btn" onclick="print1patientRecord()">Print</button>
         <?php
-         }
+         }}
          ?>
+        <script>
+    function toPatientCalendar(patientID){
+        window.location.href = 'calendar.php?p='+patientID;
+    }
+
+function fetchData() {
+$.ajax({
+    url: 'single-patient-records.php', // Replace with your server-side script URL
+    method: 'GET',
+    success: function(response) {
+    // Handle the response and update the HTML content
+    $('#profile-body').html(response);
+    console.log("all good");
+    },
+    error: function(xhr, status, error) {
+    // Handle errors
+    console.error(error);
+    }
+});
+}
+
+// Call the getNewData function periodically to fetch new data
+setInterval(fetchData, 60000);
+
+function print1patientRecord(){
+    window.location.href = 'single-patient-records.php?print=1';
+}
+// </script>
      

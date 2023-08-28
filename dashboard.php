@@ -26,15 +26,12 @@ if(!isset($_SESSION["loggedIN"])){
 include_once 'dash-menu.php'
 ?>
 <section class="main-section">
-<?php
-if(isset($_SESSION["loggedIN"])){
-   ?>
+
    <div class="dash-intro">
      <?php include_once 'dash-nav.php';?>
    </div>
 
    <?php
-}
 if(isset($_GET['r'])){
   if($_GET['r'] == 1){
     include_once 'single-patient-records.php';
@@ -49,55 +46,26 @@ if($_SESSION["category"] != "patient"){
   include_once 'patient-progress-search-div.php';
 }
 
-if(isset($_GET['id'])){
-  $requested_patient = $_GET['id'];?>
-  <div class="progress-charts">
-    <div class="sleep_chart" id="sleep_chart"></div>
-    <div class="meals_chart" id="meals_chart"></div>
-  </div>
-<?php
-}
-elseif($_SESSION["category"] == "patient"){
-  $requested_patient = $_SESSION['id'];?>
-  <div class="progress-charts">
-    <div class="sleep_chart" id="sleep_chart"></div>
-    <div class="meals_chart" id="meals_chart"></div>
-  </div>
-<?php
-}
-?>
-    
-</div>
-<?php
-
-
-//Sylvia chart code start
-/*if(isset($_GET['charts'])){
+if(isset($_GET['charts'])){
   ?>
   <div class="progress-charts">
-
-    <?php
-    if($_GET['charts'] == 1){
-        ?>
-            <canvas id="progress1"></canvas>
-            <!-- <canvas id="progress2"></canvas> -->
-    <?php
-        }
-        ?>
+    <div class="sleep_chart" id="sleep_chart"></div>
+    <div class="meals_chart" id="meals_chart"></div>
   </div>
-  <?php
-    }
-    //Sylvia chart code end
-*/
-    
+<?php
 }
-    ?>   
+?>   
+</div>
+ 
 </section>
 </div>
 <script src="js/jquery-3.3.1.min.js"></script>
 <script src="js/code.jquery.com_jquery-latest.js"></script>
-<script src="js/jquery.timers-1.0.0.js"></script>
 <script type="text/javascript">
+  function print1patientRecord(){
+                        window.location.href = 'single-patient-records.php?print=1';
+                    }
+                    
   var sections = [{
     divclass: ".sleep_chart",
     urlname:"charts/sleep-chart-div.php"
@@ -112,7 +80,7 @@ elseif($_SESSION["category"] == "patient"){
             $.ajax({
                 url:value.urlname,
                 data: {
-                    p_id:<?php echo $requested_patient;?>,
+                    p_id:<?php echo $_SESSION['id'];?>,
                 },
                 cache: false,
                 success: function(html){
@@ -124,88 +92,7 @@ elseif($_SESSION["category"] == "patient"){
     });
 </script>
 </body>
-<script>
-  /*var currentDate = new Date();
-
-// Subtract one month from the current date
-currentDate.setMonth(currentDate.getMonth() - 1);
-
-var year = currentDate.getFullYear();
-var month = currentDate.getMonth() + 1;
-var day = currentDate.getDate();
-
-var formattedDate = (month < 10 ? "0" + month : month) + "-" + (day < 10 ? "0" + day : day) + "-" + year + "-";
-
- var ctx = document.getElementById('progress1').getContext('2d');
-var myChart = new Chart(ctx, {
-  type: 'line',
-  data: {
-    labels: [], // Initialize an empty array for labels
-    datasets: [{
-      label: 'Your progress since ' + formattedDate,
-      data: [], // Initialize an empty array for data
-      borderColor: 'rgba(255, 99, 132, 1)',
-      borderWidth: 1,
-      pointBackgroundColor: [], // Initialize an empty array for point background color
-    }]
-  },
-  options: {
-    scales: {
-      y: {
-        beginAtZero: true
-      }
-    }
-  }
-});
-var ctx1 = document.getElementById('progress2').getContext('2d');
-var myChart1 = new Chart(ctx1, {
-  type: 'pie',
-  data: {
-    labels: ['a', 'b', 'c'], // Initialize an empty array for labels
-    datasets: [{
-      label: 'Your progress since ' + formattedDate,
-      data: [60, 90, 210], // Initialize an empty array for data
-      borderColor: 'rgba(255, 99, 132, 1)',
-      borderWidth: 1,
-      pointBackgroundColor: [], // Initialize an empty array for point background color
-    }]
-  },
-  options: {
-    scales: {
-      y: {
-        beginAtZero: true
-      }
-    }
-  }
-});
-
-
-// Populate labels, data, and point background color arrays dynamically
-var startDate = new Date(year, month - 1, day); // Create a new date object for the start date
-var currentDate = new Date(); // Get the current date
-
-while (startDate <= currentDate) {
-  myChart.data.labels.push(startDate.getDate()); // Add the day of the month as a label
-  var progress = Math.floor(Math.random() * 10) + 1; // Generate random progress data (replace with your actual data)
-  myChart.data.datasets[0].data.push(progress); // Add progress data
-
-  // Set the point background color based on the value of progress
-  if (progress < 3) {
-    myChart.data.datasets[0].pointBackgroundColor.push('green');
-  } else if (progress < 6) {
-    myChart.data.datasets[0].pointBackgroundColor.push('yellow');
-  } else {
-    myChart.data.datasets[0].pointBackgroundColor.push('red');
-  }
-
-  startDate.setDate(startDate.getDate() + 1); // Increment the date by 1 day
-}
-
-myChart.update(); // Update the chart to reflect the new data
-myChart1.update(); // Update the chart to reflect the new data
-
-function print1patientRecord(){
-  window.location.href = 'single-patient-records.php?print=1';
-}
-    </script>
 </html>
+<?php    
+}
+?>  

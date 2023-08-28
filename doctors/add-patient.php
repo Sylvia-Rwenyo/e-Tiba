@@ -29,12 +29,6 @@
             <input type="text" name="emailAddress" placeholder="Patient Email Address" required/>
             <input type="number" name="phoneNumber" placeholder="Patient phone number" required/>
             <input type="text" name="address" placeholder="Patient address" required/>
-            <select name="institution" required>
-                <option selected disabled> Select Patient Hospital</option>
-                <option>Institution A</option>
-                <option>Institution B</option>
-                <option>Institution C</option>
-            </select>
             <select name="condition[]" multiple required>
                 <option selected disabled> Select Patient condition</option>
                 <option>Condition A</option>

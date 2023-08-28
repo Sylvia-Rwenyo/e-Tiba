@@ -116,6 +116,7 @@
                                     if ($row['appointmentTime'] === $timeString) {
                                         $appointmentExists = true;
                                         $dID = $row['doctorID'];
+                                        $pID = $row['patientID'];
                                         $apID = $row['appointmentID'];
                                         break;
                                     }
@@ -177,6 +178,7 @@
                             opacity: 0.5;
                         }
                     </style>';
+                if(!isset($_GET['c'])){
                     if(isset($_GET['dID']) && $_SESSION['category'] == 'patient'){
                         if($_GET['dID'] == 0){
                             ?>
@@ -203,14 +205,17 @@
                                 <button  class="btn btn-lg btn-danger dialog-box-btn" onclick="cancelDialogBox()">Back</button>                            </div>
                         </div>
             <?php
-                }}
+                }}}else{
             $dateString = $_GET['d'];
             $dateObject = DateTime::createFromFormat('Y-m-d', $dateString);
-            $doctorID = $_GET['dID'];
-            $sql = mysqli_query($conn,  "SELECT * FROM regDoctors WHERE id='$doctorID'");     
-            if (mysqli_num_rows($sql) > 0) {
-                while ($row = mysqli_fetch_array($sql)) {
+            if($_SESSION['category'] !== 'doctor'){
+                $doctorID = $_GET['dID'];
+                $sql = mysqli_query($conn,  "SELECT * FROM regDoctors WHERE id='$doctorID'");     
+                if (mysqli_num_rows($sql) > 0) {
+                    while ($row = mysqli_fetch_array($sql)) {
+                   
         ?>
+
         <div id="confirmAppointment" class="overlay">
             <p>You have an appoinment on <?php echo $dateObject->format('m/d/Y')?> at <?php echo $_GET['t']?> with Dr.
             <?php echo ucfirst($row['lastName'])?> of <?php echo ucfirst($row['institution'])?>
@@ -222,7 +227,24 @@
 
         </div>
         <?php
-           }}}}
+                    }}}else{
+                        $patientID = $_GET['pID'];
+                        $sql = mysqli_query($conn,  "SELECT * FROM regPatients WHERE id='$patientID'");     
+                        if (mysqli_num_rows($sql) > 0) {
+                            while ($row = mysqli_fetch_array($sql)) {
+                        ?>
+                     <div id="confirmAppointment" class="overlay">
+            <p>You have an appoinment on <?php echo $dateObject->format('m/d/Y')?> at <?php echo $_GET['t']?> with
+            <?php echo ucfirst($row['firstName'].' '.$row['lastName'])?> at <?php echo ucfirst($row['institution'])?>
+            </p>
+            <div>
+                <button id="confirmButton" class="btn btn-lg btn-success confirm">Confirm</button>
+                <button  class="btn btn-lg btn-danger dialog-box-btn" onclick="cancelDialogBox()">Back</button>
+            </div>
+
+        </div>
+                    <?php
+            }}}}}}
         ?>
     </div>
 </body>
@@ -261,7 +283,7 @@
     if (currentTime >= nearTime && currentTime <= afterTime) {
         window.location.href = 'meet.php';
     } else {
-        window.location.href = "calendar.php?a=p&d=" + date + 
+        window.location.href = "calendar.php?a=p&c=1&d=" + date + 
              "&t=" + appointmentTime + "&pID=" + pID + "&dID=" + dID + "&apID=" + apID;
     }
 }
