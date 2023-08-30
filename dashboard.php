@@ -35,19 +35,7 @@ if(isset($_SESSION["loggedIN"])){
     </div>
     ';
 }
-if($_SESSION["category"] != "patient"){
-  include_once 'patient-progress-search-div.php';
-}
-
-if(isset($_GET['id'])){
-  $requested_patient = $_GET['id'];?>
-  <div class="progress-charts">
-    <div class="sleep_chart" id="sleep_chart"></div>
-    <div class="meals_chart" id="meals_chart"></div>
-  </div>
-<?php
-}
-elseif($_SESSION["category"] == "patient"){
+if($_SESSION["category"] == "patient"){
   $requested_patient = $_SESSION['id'];?>
   <div class="progress-charts">
     <div class="sleep_chart" id="sleep_chart"></div>

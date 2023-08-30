@@ -21,10 +21,15 @@
     <?php 
         include_once 'dash-menu.php';
     ?>
-        <section class="main-section">
+        <section class="main-section" id="patient-records-main-section">
         <div class="records-header">
             <h2>Patients</h2>
             <!-- search functionality to be added -->
+            <?php
+            if($_SESSION["category"] != "patient"){
+                include_once 'patient-progress-search-div.php';
+            }
+            ?>
             <!-- filter/sort functionality -->
             <div>
                 <span id="all-indicator" onclick="sort('all')">All</span>
@@ -111,7 +116,12 @@
                 </style>
                 ';
             }
-        }else{
+        }
+        else if(isset($_GET['id'])){
+            $requested_patient = $_GET['id'];
+            $records = "SELECT * FROM regpatients where id = '$requested_patient'";
+        }
+        else{
             echo '
                 <style>
                     #all-indicator{
@@ -222,7 +232,7 @@ $.ajax({
     method: 'GET',
     success: function(response) {
     // Handle the response and update the HTML content
-    $('#patient-records-section').html(response);
+    $('#patient-records-main-section').html(response);
     console.log("all good");
     },
     error: function(xhr, status, error) {
