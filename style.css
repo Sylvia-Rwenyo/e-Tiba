@@ -1404,8 +1404,8 @@ table, th, td {
   .records-header div{
     display: grid;
     grid-template-columns: 33.3% 33.3%;
-    width: 60%;
-    margin-left: 65%;
+    width: 100%;
+    margin-left: 5%;
     display:flex;
     flex-direction:row;
 }

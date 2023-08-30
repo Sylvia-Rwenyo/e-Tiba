@@ -91,16 +91,8 @@
                         background-color:#408DCE;
                         border: none;
                     }
-                </style>
-                ';
-            }
-            else if(isset($_GET['d'])){
-                $records = "SELECT * FROM regpatients where id in (SELECT patientID FROM appointments WHERE doctorID = '$doct_id')";
-                echo '
-                <style>
-                    #attended-indicator{
-                        background-color:#408DCE;
-                        border: none;
+                    #attended_to_table{
+                        display:none;
                     }
                 </style>
                 ';
@@ -116,6 +108,20 @@
                 </style>
                 ';
             }
+        }
+        else if(isset($_GET['d'])){
+            $records = "SELECT * FROM regpatients where id in (SELECT patientID FROM appointments WHERE doctorID = '$doct_id')";
+            echo '
+            <style>
+                #attended-indicator{
+                    background-color:#408DCE;
+                    border: none;
+                }
+                #attended_to_table{
+                    display:none;
+                }
+            </style>
+            ';
         }
         else if(isset($_GET['id'])){
             $requested_patient = $_GET['id'];
@@ -170,7 +176,7 @@
         ?>
         </table>
         <br/><br/>
-        <table>
+        <table id="attended_to_table">
         <tr>
             <th>Full Name</th>
             <th>Email Address</th>

@@ -1,13 +1,4 @@
-<?php 
-    include_once 'conn.php';
-    session_start();
-    if($_SESSION["loggedIN"] == false)
-    {
-        echo ' <script> 
-        window.location.href = "index.php";
-        </script>';       
-    }
-?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -29,7 +20,7 @@
     </div>
     <div class="mainBody" id="doctor-records-section">
     <?php 
-        include_once 'dash-menu.php';
+        include_once '../dash-menu.php';
         $id = $_SESSION['id'];
     ?>
     <section id="doctor-records-main" class="main-section">
@@ -38,7 +29,6 @@
             <?php
                 include_once 'doctor-records-search-div.php';
             ?>
-            <h2>Records</h2>
         </div>
         <table>
         <tr>
