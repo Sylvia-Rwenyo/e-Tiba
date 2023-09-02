@@ -25,7 +25,7 @@
             <?php
             if(!isset($_GET['print'])){
             $i=0;
-            $pID = isset($_GET['p']) ? $_GET['p'] : null;
+            $pID = isset($_GET['p']) ? $_GET['p'] : $_SESSION['id'];
             $stmt = mysqli_query($conn,"SELECT * FROM regPatients where id='$pID'");
             if (mysqli_num_rows($stmt) > 0) {
                 $i=0;
