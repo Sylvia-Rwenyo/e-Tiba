@@ -82,32 +82,32 @@
                             $appointmentExists = false;
                             
                             // Fetch the appointments for the current date from the database
-                            $stmt = '';
-                            if ($_SESSION['category'] == "patient" ) {
+                            $stmt = ''; // Initialize the query string
+                            if ($_SESSION['category'] == "patient") {
                                 $pID = $id;
                                 $dID = 0;
-                                $stmt .= "SELECT * FROM appointments WHERE patientID='$id' AND appointmentDate='$currentDayString'";
-                            } else{
-                             if (isset($_GET["p"])) {
-                                $pID = $_GET['p'];
-                                if($_SESSION['category'] == "doctor" ){
-                                    $dID =$id;
-                                    // possibly show only that particular patient's appointments to the doctor
-                                    // if(isset($_GET["s"])){
-                                    //     $stmt .= "SELECT * FROM appointments WHERE patientID='$id' && AND appointmentDate='$currentDayString'";
-                                    // }
-                                }
-                                $stmt .= "SELECT * FROM appointments WHERE patientID='$pID' AND appointmentDate='$currentDayString'";
-                            } else if (isset($_GET["d"])) {
-                                $dID = $_GET['d'];
+                                $stmt .= "SELECT * FROM appointments WHERE patientID='$pID' AND appointmentDate='$currentDayString' AND cancelled=0";
+                            } else {
                                 if (isset($_GET["p"])) {
                                     $pID = $_GET['p'];
+                                    if ($_SESSION['category'] == "doctor") {
+                                        $dID = $id;
+                                        $stmt .= "SELECT * FROM appointments WHERE patientID='$pID' AND appointmentDate='$currentDayString' AND cancelled=0";
+                                    }
+                                } else if (isset($_GET["d"])) {
+                                    $dID = $_GET['d'];
+                                    if (isset($_GET["p"])) {
+                                        $pID = $_GET['p'];
+                                        $stmt .= "SELECT * FROM appointments WHERE doctorID='$dID' AND patientID='$pID' AND appointmentDate='$currentDayString' AND cancelled=0";
+                                    } else {
+                                        $stmt .= "SELECT * FROM appointments WHERE doctorID='$dID' AND appointmentDate='$currentDayString' AND cancelled=0";
+                                    }
+                                } else if ($_SESSION['category'] == "doctor" && !isset($_GET["p"])) {
+                                    $dID = $id;
+                                    $stmt .= "SELECT * FROM appointments WHERE doctorID='$dID' AND appointmentDate='$currentDayString' AND cancelled=0";
                                 }
-                                $stmt .= "SELECT * FROM appointments WHERE doctorID='$dID' AND appointmentDate='$currentDayString'";
-                            } else if ($_SESSION['category'] == "doctor" && !isset($_GET["p"]) ){
-                                $stmt .= "SELECT * FROM appointments WHERE doctorID='$id' AND appointmentDate='$currentDayString'";
                             }
-                        }
+                            
                             $sql = mysqli_query($conn, $stmt);
                             
                             if (mysqli_num_rows($sql) > 0) {
@@ -239,7 +239,7 @@
             </p>
             <div>
                 <button id="confirmButton" class="btn btn-lg btn-success confirm">Confirm</button>
-                <button  class="btn btn-lg btn-danger dialog-box-btn" onclick="cancelDialogBox()">Back</button>
+                <button  class="btn btn-lg btn-danger dialog-box-btn" onclick="cancelAppointment()">Cancel</button>
             </div>
 
         </div>
@@ -289,17 +289,21 @@
 }
 
 document.getElementById('confirmButton').onclick = () =>{
-    window.location.href = "calendar.php?a=p&s=1"<?php if(isset( $_GET['apID'])){?>+"&apID=" + <?php echo $_GET['apID'];}?>;;
+    window.location.href = "calendar.php?a=p&s=1"<?php if(isset( $_GET['apID'])){?>+"&apID=" + <?php echo $_GET['apID'];}?>;
 }
 document.getElementById('cancelButton').onclick = () =>{
-    window.location.href = "calendar.php?a=p&s=0"<?php if(isset( $_GET['apID'])){?>+"&apID=" + <?php echo $_GET['apID'];}?>;;
+    window.location.href = "calendar.php?a=p&s=0"<?php if(isset( $_GET['apID'])){?>+"&apID=" + <?php echo $_GET['apID'];}?>;
 
 }
 function cancelDialogBox(){
     window.location.href = "calendar.php";
 }
+function cancelAppointment(){
+    window.location.href = 'controls/processing.php?a=pc&apID=' <?php if(isset( $_GET['apID'])){ echo '+'.$_GET['apID'];}?> +'&pID=' <?php if(isset($_GET['pID'])){ echo '+'.$_GET['pID'];}else if(isset( $_GET['p'])){ echo '+'.$_GET['p'];}?>;
+}
 function toChat(){
     // add link to patient-doctor chat
+    window.location.href = 'chats/chats-home.php';
 }
 function toPatientRecords(){
     window.location.href = 'patient-records.php';

@@ -25,7 +25,6 @@
         <div class="records-header">
             <h2>Patients</h2>
                <!-- search functionality to be added. Get from dosage-registration.php-->
-               <!-- <?php include_once "doctors/dosage-reg-search-div.php";?> -->
             <div>
                 <span id="all-indicator" onclick="sort('all')">All</span>
                 <span id="attended-indicator" onclick="sort('my-dosage')">Attended</span>
@@ -79,17 +78,6 @@
                 </style>
                 ';
             }
-            // else if(isset($_GET['d'])){
-            //     $records = "SELECT * FROM regpatients where id in (SELECT patientID FROM appointments WHERE doctorID = '$doct_id')";
-            //     echo '
-            //     <style>
-            //         #attended-indicator{
-            //             background-color:#408DCE;
-            //             border: none;
-            //         }
-            //     </style>
-            //     ';
-            // }
             else if($_GET['a'] == 'r'){
                 $records .= " ORDER BY status DESC ";
                 echo '
@@ -159,37 +147,10 @@
         }
         $i++;
     }else{
-        'There are no records of patients matching your selected criteria';
+        '<tr>There are no records of patients matching your selected criteria</tr>';
     }
         ?>
-        </table>
-        <!-- <br/><br/> -->
-        <!-- <table>
-        <tr>
-            <th>Full Name</th>
-            <th>Email Address</th>
-            <th>Phone No.</th>
-            <th>Address</th>
-            <th>Condition</th>
-            <th>Doctor Attending</th>
-        </tr> -->
-        <?php
-        // $current_user_id = $_SESSION['id'];
-        // if($_SESSION['category'] == 'doctor'){
-        //     $doct_name = $_SESSION['username'];
-        //     $resultPost = mysqli_query($conn,"SELECT * FROM regpatients WHERE id IN (SELECT patientID FROM appointments  WHERE doctorID = '$current_user_id')");
-        // }
-        // else{
-        //     $institution = $_SESSION['username'];
-        //     $resultPost = mysqli_query($conn,"SELECT * FROM regpatients WHERE id IN (SELECT patientID FROM appointments  WHERE doctorID IN (SELECT id FROM regdoctors WHERE institution = '$institution' and id = '$doct_id'))");
-        //     $mini_query = mysqli_query($conn,"SELECT * FROM regdoctors WHERE id = '$doct_id'");
-        //     while($row = mysqli_fetch_array($mini_query)) {
-        //         $doct_name = $row['firstName'];
-        //     }
-        // }
-        // while($row = mysqli_fetch_array($resultPost)) {
-        ?>
-    
+        </table>   
         </section>
     </div>
 </body>

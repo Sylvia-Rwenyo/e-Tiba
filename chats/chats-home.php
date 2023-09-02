@@ -25,7 +25,7 @@
     <?php 
         $current_user_category = $_SESSION['category'];
     ?>
-<div style="display:flex; flec-direction:row;">
+<div style="display:flex; flex-direction:row;">
     <?php include_once 'chats-dash-menu.php';?>
     <div style="width:100%;">
     <div class="menu-bar">

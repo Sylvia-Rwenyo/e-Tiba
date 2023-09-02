@@ -1,71 +1,76 @@
 <?php
-include_once "../conn.php";
-session_start();
 $current_user_email = $_SESSION['email'];
 $current_user_category = $_SESSION['category'];
 $fname_chatting_with = 0;
 
-if(isset($_GET['p_id'])){
-        $requested_patient = $_GET['p_id'];
+if (isset($_GET['p_id'])) {
+    $requested_patient = $_GET['p_id'];
+}else{
+    $requested_patient = $_SESSION['id'];
 }
 $data_points_meals = array();
 $sql = "SELECT recordDate, COUNT(mealTime) num_of_meals FROM patientsmeallog WHERE userID = '$requested_patient' GROUP BY recordDate";
 $result = mysqli_query($conn, $sql) or die(mysqli_error($conn));
-while($rows = mysqli_fetch_array($result)){
-    $point = array("label"=>$rows['recordDate'], "y"=>$rows["num_of_meals"]);
+while ($rows = mysqli_fetch_array($result)) {
+    $point = array("label" => $rows['recordDate'], "y" => $rows["num_of_meals"]);
     array_push($data_points_meals, $point);
 }
 
 $sql2 = "SELECT firstName, lastName FROM regpatients WHERE id = '$requested_patient'";
 $result2 = mysqli_query($conn, $sql2) or die(mysqli_error($conn));
-while($row = mysqli_fetch_array($result2)){
-    $patient_meal_chart_title = $row['firstName'].' '.$row['lastName'].'\'s Eating Progress';
+while ($row = mysqli_fetch_array($result2)) {
+    $patient_meal_chart_title = $row['firstName'] . ' ' . $row['lastName'] . '\'s Eating Progress';
 }
-
 ?>
-<div class="meals_chart_container" id="meals_chart_container"></div>
-<script src="js/canvasjs.min.js"></script>
+
+<canvas id="mealsChart" class="canvas-chart" ></canvas>
+<!-- <script src="../js/cdnjs.cloudflare.com_ajax_libs_Chart.js_2.9.4_Chart.js"></script> -->
 <script type="text/JavaScript">
-    var chart2 = new CanvasJS.Chart("meals_chart_container", {
-        animationEnabled: true,
-        title:{text: <?php echo json_encode($patient_meal_chart_title);?>},
-        axisY: {
-            title:"Number of Meals",
-            titleFontColor:"#4F81BC",
-            lineColor: "#4F81BC",
-            labelFontColor: "#4F81BC",
-            tickColor:"#4F81BC"
+    var data_points_meals = <?php echo json_encode($data_points_meals); ?>;
+
+    var mealsChart = new Chart("mealsChart", {
+        type: "bar",
+        data: {
+            labels: data_points_meals.map(point => point.label),
+            datasets: [{
+                label: "Number of Meals",
+                data: data_points_meals.map(point => point.y),
+                backgroundColor: 'rgba(75, 192, 192, 0.2)', // Customize the chart color
+                borderColor: 'rgba(75, 192, 192, 1)', // Customize the border color
+                borderWidth: 1 // Customize the border width
+            }]
         },
-        axisX: {
-            title:"Date n Time",
-            titleFontColor:"red",
-            lineColor: "red",
-            labelFontColor: "red",
-            tickColor:"red"
-        },
-        toolTip:{shared: true},
-        legend: {
-            cursor: "pointer",
-            itemclick: toggleDataSeries2
-        },
-        data:[{
-            type:"line",
-            name:"Number of meals",
-            legendText:"Number of Meals",
-            showInLegend:true,
-            dataPoints:<?php echo json_encode($data_points_meals,JSON_NUMERIC_CHECK);?>
-        }]
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            scales: {
+                y: {
+                    beginAtZero: true, // Start the scale from zero
+                    min: 0,           // Minimum value on the y-axis
+                    max: 10,         // Maximum value on the y-axis
+                    stepSize: 1,                    title: {
+                        display: true,
+                        text: 'Number of Meals'
+                    }
+                },
+                x: {
+                    title: {
+                        display: true,
+                        text: 'Record Date'
+                    }
+                }
+            },
+            plugins: {
+                legend: {
+                    display: true,
+                    position: 'top'
+                },
+                title: {
+                    display: true,
+                    text: "<?php echo $patient_meal_chart_title; ?>",
+                    fontSize: 16
+                }
+            }
+        }
     });
-
-    function toggleDataSeries2(e){
-        if(typeof(e.dataSeries.visible) === "undefined" || e.dataSeries.visible){
-            e.dataSeries.visible = false;
-        }
-        else {
-            e.dataSeries.visible = true;
-        }
-        chart2.render();
-    }
-
-    chart2.render();
 </script>

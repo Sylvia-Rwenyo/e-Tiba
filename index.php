@@ -14,12 +14,11 @@
 <body class="home">
     <div class="partners-CTA">
        <a href="partners/reg-partner.php"> 
-        <p>Join us as a partner hospital</p>
+            <p>Join us as a partner hospital</p>
        </a>
-    </div>
-    <div class="partners-CTA">
-        <!--Dosage registration test link. To be removed-->
-        <a href="doctors/independent-reg-doc.php"><p>Join us as independent medical practitioner</p></a>
+       <a href="doctors/independent-reg-doc.php">
+            <p>Join us as independent medical practitioner</p>
+        </a>
     </div>
     <?php include_once "menu.php" ?>
     <div class="intro">

@@ -2,7 +2,6 @@
     <ul>
         <?php  
         // determine target page based on user category
-        $current_user_id = $_SESSION['id'];
         if ($_SESSION['category'] == 'hospital') {
             ?>
             <!-- trends -->
@@ -59,7 +58,7 @@
             }
             ?>
             <!-- trends -->
-            <a href="<?php $prefix_set="dashboard.php?id='$current_user_id'"; echo prefixSet($prefix_set);?>" class="<?php echo isActive('dashboard.php'); ?>"><li><i class="fa-solid fa-chart-line"></i></li></a>
+            <a href="<?php $prefix_set="dashboard.php"; echo prefixSet($prefix_set);?>" class="<?php echo isActive('dashboard.php'); ?>"><li><i class="fa-solid fa-chart-line"></i></li></a>
             <!-- records -->
             <a href="<?php echo prefixSet('patient-log.php')?>" class="<?php echo isActive('records.php'); ?>"><li><i class="fa-solid fa-folder"></i></li></a>
             <!-- see set appointments or request to set one -->

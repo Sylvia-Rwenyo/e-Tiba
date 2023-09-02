@@ -29,65 +29,126 @@
         <?php
             echo "
             <div class='welcome-msg' style='margin-left: 2.5%'>
-                <h5>How're you feeling today, ".$_SESSION["username"]."?</h5>
+                <h3>How're you feeling today, ".$_SESSION["username"]."?</h3>
                 <p>Keep track of your progress.</p>
             </div>
             ";
             ?>
             <div class="prompts" id="prompts">
                 <div class="prompt" id="rec-sleepPrompt">
-                    <h6>Record how much you've slept today</h6>
+                    <h4>Record how much you've slept today</h4>
                     <!-- sleep animation or sth similar 
                     along with the average hours of sleep in the last week
                   -->
                   
                   <?php
-                    $totalSleep = 0;
-                    $avgSleep = 0;
+$totalSleep = 0;
+$avgSleep = 0;
+$numDaysWithRecord = 0; // Initialize the variable to count the number of days with records
+$id = $_SESSION['id'];
+$week = date('Y-m-d H:i:s', strtotime('-1 week'));
+$stmt = "SELECT DISTINCT DATE(recordDate) AS logDate FROM patientSleepLog WHERE userID='$id' AND DATE(recordDate) >= DATE_SUB(DATE(NOW()), INTERVAL 1 WEEK)";
+$sql = mysqli_query($conn, $stmt);
+
+if (mysqli_num_rows($sql) > 0) {
+    while ($row = mysqli_fetch_array($sql)) {
+        $logDate = $row['logDate'];
+        $daySleepQuery = "SELECT SUM(sleepTime) AS daySleep FROM patientSleepLog WHERE userID='$id' AND DATE(recordDate) = '$logDate'";
+        $daySleepResult = mysqli_query($conn, $daySleepQuery);
+        
+        if ($daySleepResult) {
+            $daySleepRow = mysqli_fetch_assoc($daySleepResult);
+            $daySleep = $daySleepRow['daySleep'];
+            if ($daySleep > 0) {
+                $numDaysWithRecord++; // Increment the count for each day with a non-zero sleep record
+                $totalSleep += $daySleep;
+            }
+        }
+    }
+
+    // Calculate average sleep based on the number of days with non-zero records
+    $avgSleep = ($numDaysWithRecord > 0) ? floor($totalSleep / $numDaysWithRecord) : 0;
+
+    // Output the average sleep time
+    echo "<p style='margin-top: 20%;'>Average recorded sleep time this week is $avgSleep hours</p>";
+} else {
+    echo "<p style='margin-top: 20%;'>Add a record here</p>";
+}
+?>
+
+
+  
+                </div>
+                <div class="prompt" id="rec-mealPrompt">
+                    <h4>Keep track of your meals too</h4>
+                     <!-- eating animation or sth similar liked a picture of food
+                    along with a fun fact about recommended foods or sth similar
+                  -->
+                    <?php
                     $id = $_SESSION['id'];
-                    $week = date('Y-m-d H:i:s', strtotime('-1 week'));
-                    $stmt = "SELECT * FROM patientSleepLog WHERE userID='$id' AND DATE(recordDate) >= DATE_SUB(DATE(NOW()), INTERVAL 1 WEEK)";
+                    $meal = '';
+                    $mealTime = '';
+
+                    // Calculate the timestamp 24 hours ago
+                    $twentyFourHoursAgo = date('Y-m-d H:i:s', strtotime('-24 hours'));
+
+                    $stmt = "SELECT * FROM patientsmeallog WHERE userID='$id' AND mealTime >= '$twentyFourHoursAgo' ORDER BY mealTime DESC LIMIT 1";
                     $sql = mysqli_query($conn, $stmt);
 
                     if (mysqli_num_rows($sql) > 0) {
                         while ($row = mysqli_fetch_array($sql)) {
-                            $totalSleep += $row['sleepTime'];
+                            $meal .= $row['mealName'];
+                            $mealTime .= $row['mealTime'];
                         }
+                        // Output the most recent meal intake's details
+                        echo "<p style='margin-top: 20%;'>Your most recent meal was $meal taken at $mealTime</p>";
+                        echo "<p style='margin-top: 20%;'>Add a record here</p>";
+                    } else {
+                        echo "<p style='margin-top: 20%;'>Add a record here</p>";
                     }
+                    ?>
 
-                    $avgSleep = floor($totalSleep / 7);
 
-                    // Output the average sleep time
-                    echo "<p style='margin-top: 20%;'>Recorded sleep time this week is $avgSleep hours</p>";
-                ?>      
                 </div>
-                <div class="prompt" id="rec-mealPrompt">
-                    <h6>Keep track of your meals too</h6>
+                <!-- <div class="prompt" id="rec-medPrompt"> -->
+                    <!-- <h4>Record the last time you took your medicine</h4> -->
+                     <!-- medicine intake animation or sth similar 
+                    along with sth idk
+                  -->
+                <!-- </div> -->
+                <div class="prompt" id="rec-exercisePrompt">
+                    <h4>Track your physical activity</h4>
                      <!-- eating animation or sth similar liked a picture of food
                     along with a fun fact about recommended foods or sth similar
                   -->
                   <?php
                   $id = $_SESSION['id'];
-                  $meal ='';
+                  $exerciseTypeString ='';
+                  $exerciseTime ='';
+                  $exerciseDuration ='';
                   $week = date('Y-m-d H:i:s', strtotime('-1 week'));
-                  $stmt = "SELECT * FROM patientsmeallog WHERE userID='$id' order by mealTime DESC limit 1";
+                  $stmt = "SELECT * FROM patientsexerciselog WHERE userID='$id' order by exerciseTime DESC limit 1";
                   $sql = mysqli_query($conn, $stmt);
 
                   if (mysqli_num_rows($sql) > 0) {
                       while ($row = mysqli_fetch_array($sql)) {
-                          $meal .= $row['mealName'];
+                          $exerciseType = explode( '*', $row['exerciseType']);
+                          for($i = 0; $i < count($exerciseType); $i++){
+                            $exerciseTypeString .= $exerciseType[$i] . ' ';
+                          }
+                          $exerciseTime .= $row['exerciseTime'];
+                          $exerciseDuration .= $row['exerciseDuration'];
                       }
+                // Output the details of the user's most recent exercise duration
+                  echo "<p style='margin-top: 20%;'>You had a $exerciseTypeString exercise session for $exerciseDuration at $exerciseTime</p>";
+                  echo "<p style='margin-top: 20%;'>Add a record here</span></p>";
+                  }else{
+                    // show no recorded exercise lately
+                  echo "<p style='margin-top: 20%;'>Add a record here</span></p>";
                   }
 
-                  // Output the average sleep time
-                  echo "<p style='margin-top: 20%;'>Your most recent meal was $meal taken at</p>";
+
                   ?>
-                </div>
-                <div class="prompt" id="rec-medPrompt">
-                    <h6>Record the last time you took your medicine</h6>
-                     <!-- medicine intake animation or sth similar 
-                    along with sth idk
-                  -->
                 </div>
             </div>
             <div class="input">
@@ -102,13 +163,12 @@
                             <label>End time</label>
                             <input type="time" name="end-time" />
                         </div>
-                        <button type="submit" name="record-sleep" class="btn btn-primary">
+                        <button type="submit" name="record-sleep" class="btn btn-primary" style="margin-top:13.5%;">
                             <i class="fas fa-check-circle"></i>
                         </button>
                     </form>
                 </div>
                 <div class="input-div input-meals" id="input-meals">
-                    <h6>What have you eaten today</h6>
                     <form id="meal-form" action="controls/processing.php" method="POST" >
                         <div>
                             <label>Meal name:</label>
@@ -118,13 +178,38 @@
                             <label>Meal time:</label>
                             <input type="time" name="meal-time" />
                         </div>
-                        <button type="submit" name="record-meal" class="btn btn-primary">
+                        <button type="submit" name="record-meal" class="btn btn-primary" style="margin-top:13.5%;">
+                            <i class="fas fa-check-circle"></i>
+                        </button>
+                    </form>
+                </div>
+                <div class="input-div input-exerciseRoutine" id="input-exerciseRoutine">
+                    <form id="exercise-form" action="controls/processing.php" method="POST" >
+                        <div>
+                            <label>Exercise type:</label>
+                            <select multiple name="exerciseType[]" style="color: black;">
+                                <option>Aerobics</option>
+                                <option>Weight Training</option>
+                                <option>Body Weight Exercises</option>
+                                <option>Dancing</option>
+                                <option>Walking</option>
+                                <option>Swimming</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label>For how long? (in minutes)</label>
+                            <input type="number" name="exerciseDuration" />
+                        </div>
+                        <div>
+                            <label>At what time:</label>
+                            <input type="time" name="exerciseTime" />
+                        </div>
+                        <button type="submit" name="record-physicalActivity" class="btn btn-primary" style="margin-top:13.5%;">
                             <i class="fas fa-check-circle"></i>
                         </button>
                     </form>
                 </div>
                 <div class="input-div input-medication" id="input-medication">
-                    <h6>What time did you take you medicine</h6>
                     <form id="meds-form" action="controls/processing.php" method="POST" >
                         <div>
                             <label>Medicine name:</label>
@@ -134,7 +219,7 @@
                             <label>Intake time:</label>
                             <input type="time" name="med-time" />
                         </div>
-                        <button type="submit" name="record-medTime" class="btn btn-primary">
+                        <button type="submit" name="record-medTime" class="btn btn-primary" style="margin-top:13.5%;">
                             <i class="fas fa-check-circle"></i>
                         </button>
                     </form>
@@ -146,17 +231,37 @@
     ?>
   </div>
   <script>
-  document.getElementById('rec-sleepPrompt').onclick = () =>{
-    document.getElementById('input-sleep').style.display ='flex';
+    function recordsSleep(){
+        document.getElementById('input-sleep').style.display ='flex';
+        document.getElementById('prompts').style.display ='none';   
+    }
+   document.getElementById('rec-sleepPrompt').onclick = () =>{
+        recordsSleep();
+    }
+
+    function recordMeals(){
+        document.getElementById('input-meals').style.display ='flex';
+        document.getElementById('prompts').style.display ='none';
+    }
+
+  document.getElementById('rec-mealPrompt').onclick = () =>{
+    recordMeals();
+  }
+
+  function recordPhysicalActvity(){
+    document.getElementById('input-exerciseRoutine').style.display ='flex';
     document.getElementById('prompts').style.display ='none';
   }
-  document.getElementById('rec-mealPrompt').onclick = () =>{
-    document.getElementById('input-meals').style.display ='flex';
+  document.getElementById('rec-exercisePrompt').onclick = () =>{
+    recordPhysicalActvity();
+  }
+
+  function recordMedIntake(){
+    document.getElementById('input-medication').style.display ='flex';
     document.getElementById('prompts').style.display ='none';
   }
   document.getElementById('rec-medPrompt').onclick = () =>{
-    document.getElementById('input-medication').style.display ='flex';
-    document.getElementById('prompts').style.display ='none';
+    recordMedIntake();
   }
 </script>
 
