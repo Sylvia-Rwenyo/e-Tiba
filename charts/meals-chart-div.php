@@ -12,7 +12,7 @@ $data_points_meals = array();
 $sql = "SELECT recordDate, COUNT(mealTime) num_of_meals FROM patientsmeallog WHERE userID = '$requested_patient' GROUP BY recordDate";
 $result = mysqli_query($conn, $sql) or die(mysqli_error($conn));
 while ($rows = mysqli_fetch_array($result)) {
-    $point = array("label" => $rows['recordDate'], "y" => $rows["num_of_meals"]);
+    $point = array("label" =>substr($rows['recordDate'], 8, 2), "y" => $rows["num_of_meals"]);
     array_push($data_points_meals, $point);
 }
 

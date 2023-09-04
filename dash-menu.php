@@ -60,7 +60,7 @@
             <!-- trends -->
             <a href="<?php $prefix_set="dashboard.php"; echo prefixSet($prefix_set);?>" class="<?php echo isActive('dashboard.php'); ?>"><li><i class="fa-solid fa-chart-line"></i></li></a>
             <!-- records -->
-            <a href="<?php echo prefixSet('patient-log.php')?>" class="<?php echo isActive('records.php'); ?>"><li><i class="fa-solid fa-folder"></i></li></a>
+            <a href="<?php echo prefixSet('patient-log.php')?>" class="<?php echo isActive('patient-log.php'); ?>"><li><i class="fa-solid fa-folder"></i></li></a>
             <!-- see set appointments or request to set one -->
             <a href="<?php echo prefixSet('calendar.php')?>"><li><i class="fa fa-calendar"></i>
             <span class="badge"><?php if($calendarNotifCount == 0){echo "";}else{echo $calendarNotifCount;}?></span>

@@ -11,7 +11,7 @@
              <!-- progress charts -->
              <a href="dashboard.php?charts=1" class="<?php echo isActive('dashboard.php?charts=1'); ?>"><li>Progress<i class="fa-solid fa-charts"></i></li></a>
              <!-- reports -->
-            <a href="dashboard.php?r=1" class="<?php echo isActive('dashboard.php?r=1'); ?>"><li>Reports<i class="fa-solid fa-note"></i></li></a>
+            <a href="dashboard.php?dr=1" class="<?php echo isActive('dashboard.php?r=1'); ?>"><li>Reports<i class="fa-solid fa-note"></i></li></a>
             <?php
         }else if($_SESSION['category'] == 'doctor'){
             ?>

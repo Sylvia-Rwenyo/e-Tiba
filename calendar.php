@@ -61,7 +61,8 @@
             <span class="week-indicator">
                 <i class="fa fa-arrow-left" onclick="showLastWeek()"></i>
                     <?php echo substr($firstDayOfWeekString, 5, 5) . ' - ' . substr($lastDayOfWeekString, 5, 5); ?>
-                <i class="fa fa-arrow-right" onclick="showNextWeek()"></i></span>
+                <i class="fa fa-arrow-right" onclick="showNextWeek()"></i>
+            </span>
             <div class="calendar">
                 <?php
                 $currentDay = clone $firstDayOfWeek;

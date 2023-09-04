@@ -1,47 +1,24 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="https://kit.fontawesome.com/2751fbc624.js" crossorigin="anonymous"></script>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <link rel="icon" href="favicon.ico" />
-    <link rel="stylesheet" href="style.css">
-    <title>Records of Patients</title>
-</head>
-<body class="profileBody" id="singlePatientRecords" >
-    <div class="header">
-        <?php include_once 'notif-menu.php';?>
-    </div>
-    <div class="mainBody" id="patient-records-section">
-    <?php 
-        include_once 'dash-menu.php';
-    ?>
-    <section class="main-section">
-        <div class="records-header" style="flex-direction:column;justify-content: unset;">
             <?php
             if(!isset($_GET['print'])){
+                ?>
+                <section style="margin-top: 0;" id="singlePatientRecords">
+                <?php
             $i=0;
             $pID = isset($_GET['p']) ? $_GET['p'] : $_SESSION['id'];
             $stmt = mysqli_query($conn,"SELECT * FROM regPatients where id='$pID'");
             if (mysqli_num_rows($stmt) > 0) {
                 $i=0;
                 while($result = mysqli_fetch_array($stmt)) {
+                    if(!isset($_GET['dr'])){
             ?>
-            <h2 style="width: 30%; margin-left: 0;"><?php echo $result["firstName"] .' '.$result["lastName"]?></h2>
-            <h4 style="margin-left: 0;"><strong>Contact number:</strong>  <?php echo $result["phoneNumber"] ?></h4>
+            <div class="records-header" style="flex-direction:column;justify-content: unset;">
+                <h2 style="width: 30%; margin-left: 0;"><?php echo $result["firstName"] .' '.$result["lastName"]?></h2>
+                <h4 style="margin-left: 0;"><strong>Contact number:</strong>  <?php echo $result["phoneNumber"] ?></h4>
+            </div>
             <?php
-         
+                    }
             ?>
-            <!-- search functionality to be added. Get from dosage-registration.php-->
-            <?php 
-            // include_once "doctors/dosage-reg-search-div.php";
-            ?>
-        </div>
-        <table style="margin-left: 10%;">
+        <table>
         <tr>
             <th>Registration Date</th>
             <td><?php
@@ -158,22 +135,39 @@
         </table>
         <button class="records-print-btn" onclick="print1patientRecord()">Print</button>
 
-                        </section>
-                    </div>
-                </body>
-                </html>
-              
+                        </section>              
                 <?php
             }
             $i++;
         }}else{ 
-            $i=0;
-            $pID = isset($_GET['p']) ? $_GET['p'] : $_SESSION['id'];
-            $stmt = mysqli_query($conn,"SELECT * FROM regPatients where id='$pID'");
-            if (mysqli_num_rows($stmt) > 0) {
-                $i=0;
-                while($result = mysqli_fetch_array($stmt)) {
             ?>
+            <!DOCTYPE html>
+            <html lang="en">
+            <head>
+                <meta charset="UTF-8">
+                <meta http-equiv="X-UA-Compatible" content="IE=edge">
+                <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js"></script>
+                <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+                <script src="https://kit.fontawesome.com/2751fbc624.js" crossorigin="anonymous"></script>
+                <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+                <link rel="icon" href="favicon.ico" />
+                <link rel="stylesheet" href="style.css">
+                <title>Records of Patients</title>
+                </head>
+                <body class="profileBody">
+                <div class="mainBody" id="patient-records-section">
+                <section style="margin-top: 0;" id="singlePatientRecords">
+                <?php 
+                    include_once 'conn.php';
+                    session_start();
+                    $i=0;
+                    $pID = isset($_GET['p']) ? $_GET['p'] : $_SESSION['id'];
+                    $stmt = mysqli_query($conn,"SELECT * FROM regPatients where id='$pID'");
+                    if (mysqli_num_rows($stmt) > 0) {
+                        $i=0;
+                        while($result = mysqli_fetch_array($stmt)) {
+                    ?>
             <h2 style="width: 30%; margin-left: 0;"><?php echo $result["firstName"] .' '.$result["lastName"]?></h2>
             <h4 style="margin-left: 0;"><strong>Contact number:</strong>  <?php echo $result["phoneNumber"] ?></h4>
 
@@ -292,6 +286,10 @@
         $i++;
         ?>
         </table>
+                </section>
+                </div>
+                </body>
+            </html>
         <style>
             .menuBar, .menu{
                 display: none;

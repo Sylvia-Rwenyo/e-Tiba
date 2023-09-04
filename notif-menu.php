@@ -62,7 +62,7 @@
     }
 ?>
     <span class="menuBar" id="menuBars" onClick="toggleMenu()"><i class="fa-solid fa-bars"></i></span>
-    <span class="menuBar" id="menuX" onClick="toggleMenu()"></span>
+    <span class="menuBar" id="menuX" onClick="toggleMenu()"><i class="fa-solid fa-x"></i></span>
 
     <h1><?php echo headerName()?></h1>
 
