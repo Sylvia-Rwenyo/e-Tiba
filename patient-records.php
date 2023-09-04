@@ -21,10 +21,16 @@
     <?php 
         include_once 'dash-menu.php';
     ?>
-        <section class="main-section">
+        <section class="main-section" id="patient-records-main-section">
         <div class="records-header">
             <h2>Patients</h2>
-               <!-- search functionality to be added. Get from dosage-registration.php-->
+            <!-- search functionality to be added -->
+            <?php
+            if($_SESSION["category"] != "patient"){
+                include_once 'patient-progress-search-div.php';
+            }
+            ?>
+            <!-- filter/sort functionality -->
             <div>
                 <span id="all-indicator" onclick="sort('all')">All</span>
                 <span id="attended-indicator" onclick="sort('my-dosage')">Attended</span>
@@ -78,6 +84,17 @@
                 </style>
                 ';
             }
+            else if(isset($_GET['d'])){
+                $records = "SELECT * FROM regpatients where id in (SELECT patientID FROM appointments WHERE doctorID = '$doct_id')";
+                echo '
+                <style>
+                    #attended-indicator{
+                        background-color:#408DCE;
+                        border: none;
+                    }
+                </style>
+                ';
+            }
             else if($_GET['a'] == 'r'){
                 $records .= " ORDER BY status DESC ";
                 echo '
@@ -89,7 +106,26 @@
                 </style>
                 ';
             }
-        }else{
+        }
+        else if(isset($_GET['d'])){
+            $records = "SELECT * FROM regpatients where id in (SELECT patientID FROM appointments WHERE doctorID = '$doct_id')";
+            echo '
+            <style>
+                #attended-indicator{
+                    background-color:#408DCE;
+                    border: none;
+                }
+                #attended_to_table{
+                    display:none;
+                }
+            </style>
+            ';
+        }
+        else if(isset($_GET['id'])){
+            $requested_patient = $_GET['id'];
+            $records = "SELECT * FROM regpatients where id = '$requested_patient'";
+        }
+        else{
             echo '
                 <style>
                     #all-indicator{
@@ -150,7 +186,34 @@
         '<tr>There are no records of patients matching your selected criteria</tr>';
     }
         ?>
-        </table>   
+        </table>
+        <!-- <br/><br/> -->
+        <!-- <table>
+        <tr>
+            <th>Full Name</th>
+            <th>Email Address</th>
+            <th>Phone No.</th>
+            <th>Address</th>
+            <th>Condition</th>
+            <th>Doctor Attending</th>
+        </tr> -->
+        <?php
+        // $current_user_id = $_SESSION['id'];
+        // if($_SESSION['category'] == 'doctor'){
+        //     $doct_name = $_SESSION['username'];
+        //     $resultPost = mysqli_query($conn,"SELECT * FROM regpatients WHERE id IN (SELECT patientID FROM appointments  WHERE doctorID = '$current_user_id')");
+        // }
+        // else{
+        //     $institution = $_SESSION['username'];
+        //     $resultPost = mysqli_query($conn,"SELECT * FROM regpatients WHERE id IN (SELECT patientID FROM appointments  WHERE doctorID IN (SELECT id FROM regdoctors WHERE institution = '$institution' and id = '$doct_id'))");
+        //     $mini_query = mysqli_query($conn,"SELECT * FROM regdoctors WHERE id = '$doct_id'");
+        //     while($row = mysqli_fetch_array($mini_query)) {
+        //         $doct_name = $row['firstName'];
+        //     }
+        // }
+        // while($row = mysqli_fetch_array($resultPost)) {
+        ?>
+    
         </section>
     </div>
 </body>
@@ -179,7 +242,7 @@ $.ajax({
     method: 'GET',
     success: function(response) {
     // Handle the response and update the HTML content
-    $('#"patient-records').html(response);
+    $('#patient-records-section').html(response);
     console.log("all good");
     },
     error: function(xhr, status, error) {
