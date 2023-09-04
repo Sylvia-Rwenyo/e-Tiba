@@ -16,7 +16,7 @@
 .home .menu{
     margin-top: 0;
 }
-.menu ul{
+.menu ul, .dash-nav ul{
     list-style-type: none;
     display: flex;
     flex-direction: row;
@@ -25,12 +25,12 @@
     font-size: 1.25em;
     padding-top: 1em;
 }
-.menu ul li a{
+.menu ul li a, .dash-nav ul li a{
     text-decoration: none;
     color: black;
     padding:  1em;
 }
-.menu ul .active{
+.menu ul .active, .dash-nav ul .active{
     color: #35b6be;
 }
 .menu ul .active-meet{
@@ -138,8 +138,11 @@
 /* registration page */
 
 .welcome-msg{
-    margin-left: 20%;
+    margin-left: 3%;
     margin-top: 1%;
+}
+.reg-body .welcome-msg{
+    margin-left: 20%;
 }
 @media screen and (max-width:500px){
     .welcome-msg{
@@ -167,13 +170,29 @@
     background-color: rgba(190, 252, 254, 0.5);
 }
 
-.reg-body form  input, .reg-body form select, .reg-body form  div, 
+.reg-body form  input, .reg-body form select, .reg-body form div input,
 #dosage-reg form input, #editingProfile input, #editingProfile select, #editingProfile  div{
-    padding: 1em;
+    padding: 1.25em;
     margin: 0.5em;
     border: none;
     border-radius: 5px;
 }
+.reg-body form div{
+    margin: 0.25em;
+    border: none;
+    border-radius: 5px;
+}
+.reg-body form div input{
+    /* margin-left: 0.5em;
+    margin-right: 0.5em; */
+    width: 90%;
+    margin: 0;
+    border: none;
+}
+.reg-body form div span{
+    padding-top: 0.75em;
+}
+
 @media screen and (max-width:500px) {
     #dosage-reg .search-bar-top {
         left:0;
@@ -207,7 +226,7 @@
 #editingProfile  div label{
     margin-right: 10% ;
 }
-.reg-body form div input, #editingProfile div input{
+#editingProfile div input{
    width: 90%;
    padding: 0;
    margin:0;
@@ -217,6 +236,26 @@
     width: 60%;
     font-size: 1em;
 }
+/* check password functionality */
+#passwordChecker{
+    display: grid;
+    grid-template-columns: auto auto;
+    column-gap: 2.5%;
+    /* margin-left: 5%;
+    margin-right: 5%; */
+    padding-left: 10%;
+    background: transparent;
+    display: none;
+    padding: 0;
+}
+#passwordChecker label{
+    width: 100%;
+
+}
+#passwordChecker label i{
+    margin-right: 5%;
+}
+
 .reg-body form div input:focus, #editingProfile div input:focus{
     outline: none;
 }
@@ -387,10 +426,41 @@
 #editProfileSection section{
     width: 90%;
 }
+.main-section{
+    margin-left: 10%;
+}
 /* dashboard */
 .progress-charts{
     display: grid;
 }
+.dash-intro{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 80%;
+    margin-right: 20%;
+}
+.dash-nav{
+    width: 30%;
+    font-size: 0.9em;
+}
+.dash-nav ul{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding-top: 3em;
+}
+.dash-nav ul a{
+    text-decoration: none;
+    color: #000000;
+}
+.dash-nav ul a i{
+    margin-left: 0.5em;
+}
+.dash-nav ul a .active, .dash-nav ul a:hover{
+    color: #408DCE;
+    text-decoration: underline;
 .chart {
     width: 90%;
     position: relative;
@@ -414,16 +484,20 @@
         margin-top: 125%;
     }
 }
+}
 /* settings page */
 .header{
-    margin-left: 5%;
+    margin-left: 4%;
     margin-top: 1.5%;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
 }
 .header h1{
-   margin-left: 5%;
+   margin-left: 7.5%;
+   font-size: 1.5em;
+   margin-block-start: 0.35em;
+   /* margin-block-end: 0; */
 }
 .header i{
     font-size: 1em;
@@ -435,10 +509,12 @@
 }
 
 .header .menuBar{
-    font-size: 2em;
+    font-size: 1.25em;
     margin-top: 0.5em;
+    color: black;
+    cursor: pointer;
 }
-#menuBars{
+#menuX{
     display: none;
 }
 
@@ -575,6 +651,9 @@
     width: 10%;
     position: -webkit-sticky;
     position: sticky;
+    transition: top 0.3s ease;
+    display: none;
+
 /* add animation transform  */
 }
 
@@ -596,8 +675,21 @@
     text-decoration: none;
     color: #408DCE;
 }
+
 .dash-menu ul a:hover{
     border: 2px solid #408DCE;
+}
+.dash-body table{
+    width: 80%;
+    margin-left: 3%;
+    margin-right: 10%;
+    margin-top: 2.5%;
+}
+.records-print-btn{
+    width: 10%;
+    color: white;
+    margin-left: 3%;
+    margin-top: 2.5%;
 }
 
 /* patient log page */
@@ -673,6 +765,7 @@
 }
 #videoChat section{
     position: relative;
+    height:50%;
 }
 #remoteVideo{
     width: 100%;
@@ -720,7 +813,6 @@
     font-size: 1.5em;
 }
 #videoChat section .video-stream{
-    padding-top: 5%;
     width: 80%;
     height: 100%;
     margin-left: 10%;
@@ -768,6 +860,71 @@
     margin-left: 10%;
     margin-top: 2.5%;
 } 
+.week-indicator{
+    width: 10%;
+    margin-left: 10%;
+    border: 2px solid black;
+    border-radius: 10px;
+}
+.week-indicator i{
+    margin-left: 1%;
+    margin-right: 1%;
+
+}
+/* confirm appointment */
+.overlay {
+    display: none; /* Start with the overlay hidden */
+    position: fixed;
+    top: 30%;
+    left: 38.5%;
+    width: 30%;
+    height: 25%;
+    background-color:rgba(64, 141, 206, 0.8); /* Semi-transparent black overlay */
+    z-index: 9999;
+    padding: 1em;
+    border-radius: 5px;
+    font-size: 1.25em;
+}
+
+.overlay p{
+    margin-left: 7.5%;
+}
+.overlay a{
+    text-decoration: none;
+    color: black;
+
+}
+.overlay div{
+    margin-top: 7.5%;
+    display: flex;
+    flex-direction: space-between;
+}
+.confirm{
+    background-color: #28a745;
+}
+.cancel{
+    background-color: #882100;
+}
+.cancel:hover, .confirm:hover,  .dialog-box-btn:hover{
+    transform: scale(1.1);
+}
+.cancel, .confirm, .dialog-box-btn, .records-print-btn{
+    margin-right: 10px;
+    width: 30%;
+    margin-left: 7.5%;
+    height: 3em;
+    border-radius: 5px;
+    border: none;
+}
+.dialog-box-btn, .records-print-btn{
+    background-color: #007bff;
+}
+.records-print-btn{
+    width: 10%;
+    margin-left: 10%;
+}
+
+
 @media screen and (max-width:500px){
     .calendar {
     width: 100%;
@@ -790,6 +947,9 @@
 .calendar .day.today {
     background-color: #007bff;
     color: #fff;
+}
+.calendar .day .booked{
+    background-color: #28a745;
 }
 .calendar .day .booked, .calendar .day .available{
     border: 1px solid #ccc;
@@ -1375,6 +1535,7 @@ td,th{
 table, th, td {
     border: 1px solid;
     text-align: left;
+    border-collapse: collapse;
   }
   /* records sorting area */
   .records-header{

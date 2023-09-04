@@ -25,7 +25,7 @@
     <div class="intro">
         <div class="c-phrase-section">
             <div class="c-phrase">
-                <h3>Cancer care made seamless,&nbsp;<b>for you</b></h3>
+                <h3>Mobile Health care made seamless,&nbsp;<b>for you</b></h3>
             </div>
             <p>Let us help you track your health and treatment process</p>
         </div>

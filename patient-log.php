@@ -9,7 +9,7 @@
     <script src="https://kit.fontawesome.com/2751fbc624.js" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <link rel="icon" href="favicon.ico" />
-    <title>Your dashboard</title>
+    <title>Your daily records</title>
 </head>
 <body class="dash-body" id="patient-log">
   <div class="header">
@@ -55,17 +55,33 @@
                         }
                     }
 
-                    $avgSleep = $totalSleep / 7;
+                    $avgSleep = floor($totalSleep / 7);
 
                     // Output the average sleep time
-                    echo "<p style='margin-top: 20%;'>Your average sleep this week is $avgSleep hours</p>";
+                    echo "<p style='margin-top: 20%;'>Recorded sleep time this week is $avgSleep hours</p>";
                 ?>      
                 </div>
                 <div class="prompt" id="rec-mealPrompt">
                     <h6>Keep track of your meals too</h6>
-                     <!-- eating animation or sth similar 
+                     <!-- eating animation or sth similar liked a picture of food
                     along with a fun fact about recommended foods or sth similar
                   -->
+                  <?php
+                  $id = $_SESSION['id'];
+                  $meal ='';
+                  $week = date('Y-m-d H:i:s', strtotime('-1 week'));
+                  $stmt = "SELECT * FROM patientsmeallog WHERE userID='$id' order by mealTime DESC limit 1";
+                  $sql = mysqli_query($conn, $stmt);
+
+                  if (mysqli_num_rows($sql) > 0) {
+                      while ($row = mysqli_fetch_array($sql)) {
+                          $meal .= $row['mealName'];
+                      }
+                  }
+
+                  // Output the average sleep time
+                  echo "<p style='margin-top: 20%;'>Your most recent meal was $meal taken at</p>";
+                  ?>
                 </div>
                 <div class="prompt" id="rec-medPrompt">
                     <h6>Record the last time you took your medicine</h6>
@@ -130,55 +146,6 @@
     ?>
   </div>
   <script>
-// //   // Sleep Form submission
-// $('#sleep-form').on('submit', function(event) {
-//     event.preventDefault(); // Prevent the form from submitting normally
-//     // Perform the AJAX request
-//     $.ajax({
-//       url: 'controls/controls/controls/processing.php',
-//       type: 'POST',
-//       data: $(this).serialize(),
-//       success: function(response) {
-//          alert("Sleep time: " + response); // Display the calculated sleep time as an alert
-//       },
-//       error: function(xhr, status, error) {
-//         console.log(error); // Handle any errors
-//       }
-//     });
-//   });
-
-//   // Meal Form submission
-//   $('#meal-form').on('submit', function(event) {
-//     event.preventDefault(); // Prevent the form from submitting normally
-//     // Perform the AJAX request
-//     $.ajax({
-//       url: 'controls/controls/controls/processing.php',
-//       type: 'POST',
-//       data: $(this).serialize(),
-//       success: function(response) {
-//          alert(response); 
-//       },
-//       error: function(xhr, status, error) {
-//         console.log(error); // Handle any errors
-//       }
-//     });
-//   });
-//   // Medication Form submission
-//   $('#meds-form').on('submit', function(event) {
-//     event.preventDefault(); // Prevent the form from submitting normally
-//     // Perform the AJAX request
-//     $.ajax({
-//       url: 'controls/controls/controls/processing.php',
-//       type: 'POST',
-//       data: $(this).serialize(),
-//       success: function(response) {
-//         alert(response); 
-//       },
-//       error: function(xhr, status, error) {
-//         console.log(error); // Handle any errors
-//       }
-//     });
-//   });
   document.getElementById('rec-sleepPrompt').onclick = () =>{
     document.getElementById('input-sleep').style.display ='flex';
     document.getElementById('prompts').style.display ='none';

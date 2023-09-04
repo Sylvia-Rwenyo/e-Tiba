@@ -19,8 +19,6 @@
             <?php
         } else if ($_SESSION['category'] == 'doctor') {
             ?>
-            <!-- trends -->
-            <a href="<?php echo prefixSet('dashboard.php')?>" class="<?php echo isActive('dashboard.php'); ?>"><li><i class="fa-solid fa-chart-line"></i></li></a>
             <!-- add records -->
             <a href="<?php echo prefixSet('doctors/add-patient.php')?>" class="<?php echo isActive('doctors/add-patient.php'); ?>"><li><i class="fa fa-plus"></i></li></a>
             <!-- existing records -->
@@ -31,8 +29,13 @@
                 $id = $_SESSION['id'];
                 $today = new DateTime(); // Get the current date and time
                 $today->setTime(0, 0, 0); // Set the time to the beginning of the day (midnight)
-                $today_formatted = $today->format('Y-m-d');
-                $appointment = mysqli_query($conn,"SELECT * FROM appointments WHERE appointmentDate = '$today_formatted'");
+                
+                $todayFormatted = $today->format('Y-m-d'); // Format the date as 'YYYY-MM-DD'
+                
+                $appointmentTime = $today->format('H:i'); // Format the time as 'HH:ii'
+                
+                $appointment = mysqli_query($conn,"SELECT * FROM appointments WHERE appointmentDate = '$todayFormatted' AND appointmentTime >= '$appointmentTime'");
+                
                 $count = 0;
                 while($row = mysqli_fetch_array($resultPost)) 
                 {
@@ -46,13 +49,23 @@
             <a href="<?php echo prefixSet('settings.php')?>"><li><i class="fa-solid fa-gears"></i></li></a>
             <?php
         } else {
+            $calendarNotif = "SELECT * FROM appointments WHERE patientID='$id' && pConfirmed = '0'";
+            $notifs = mysqli_query($conn, $calendarNotif);
+            $calendarNotifCount = 0;
+            if (mysqli_num_rows($notifs) > 0) {
+            while ($row = mysqli_fetch_array($notifs)) {
+                  $calendarNotifCount += 1;
+                }
+            }
             ?>
             <!-- trends -->
             <a href="<?php $prefix_set="dashboard.php?id='$current_user_id'"; echo prefixSet($prefix_set);?>" class="<?php echo isActive('dashboard.php'); ?>"><li><i class="fa-solid fa-chart-line"></i></li></a>
             <!-- records -->
             <a href="<?php echo prefixSet('patient-log.php')?>" class="<?php echo isActive('records.php'); ?>"><li><i class="fa-solid fa-folder"></i></li></a>
             <!-- see set appointments or request to set one -->
-            <a href="<?php echo prefixSet('calendar.php')?>"><li><i class="fa fa-calendar"></i></li></a>
+            <a href="<?php echo prefixSet('calendar.php')?>"><li><i class="fa fa-calendar"></i>
+            <span class="badge"><?php if($calendarNotifCount == 0){echo "";}else{echo $calendarNotifCount;}?></span>
+            </li></a>
             <!-- settings -->
             <a href="<?php echo prefixSet('settings.php')?>"><li><i class="fa-solid fa-gears"></i></li></a>
             <?php

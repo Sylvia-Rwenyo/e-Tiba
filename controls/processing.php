@@ -90,15 +90,15 @@ if(isset($_POST['add-patient'])){
      $gender = filter_var($_POST['gender'], FILTER_SANITIZE_STRING);
 	 $emailAddress = filter_var($_POST['emailAddress'], FILTER_SANITIZE_EMAIL);
      $phoneNumber = $_POST['phoneNumber'];
-     $address = filter_var($_POST['address'], FILTER_SANITIZE_STRING);
-     $institution = filter_var($_POST['institution'], FILTER_SANITIZE_STRING);
+     $address = $_POST['address'];
+     $institution = $_POST['institution'];
      $conditionsArr= array();
      for($i=0; $i < count($_POST['condition']); $i++){
         $conditionsArr[] = $_POST['condition'][$i];
          }
     $conditions = implode('*', $conditionsArr);    
 	 
-    $sql=mysqli_query($conn,"SELECT * FROM regpatients where email='$emailAddress' AND phone_number='$phoneNumber'");
+    $sql=mysqli_query($conn,"SELECT * FROM regpatients where emailAddress='$emailAddress' AND phoneNumber='$phoneNumber'");
     if(mysqli_num_rows($sql)>0)
     {
         echo "User Already Registered"; 
@@ -106,7 +106,7 @@ if(isset($_POST['add-patient'])){
     }
     else
     {
-        $query="INSERT INTO regpatients(firstName, lastName, age, gender, emailAddress, phoneNumber, address, institution, condition) VALUES ('$firstName' ,'$lastName' ,'$age' ,'$gender' ,'$emailAddress' ,'$phoneNumber' ,'$address' ,'$institution' ,'$conditions')";
+        $query="INSERT INTO regpatients(firstName, lastName, age, gender, emailAddress, phoneNumber, address, institution, illness) VALUES ('$firstName' ,'$lastName' ,'$age' ,'$gender' ,'$emailAddress' ,'$phoneNumber' ,'$address' ,'$institution' ,'$conditions')";
     }
     //if sql query is executed...
 	 if (mysqli_query($conn, $query)) {
@@ -337,6 +337,7 @@ function login($conn){
     extract($_POST);
     $emailAddress = filter_var($_POST['emailAddress'], FILTER_SANITIZE_EMAIL);
     $password = $_POST["password"];
+    echo $password .' '. $emailAddress;
     $stmt;
      //statement to select values from the registration table in the database
     $stmt = "SELECT * FROM regpatients where emailAddress='$emailAddress' and password='$password'";
@@ -360,7 +361,7 @@ function login($conn){
             $_SESSION["username"] = $row['firstName'];
             $_SESSION["id"]=$row['id'];
             $_SESSION["loggedIN"] = true;
-            header('location:../dashboard.php');
+            header('location:../patient-records.php');
         }else{
         $stmt = "SELECT * FROM reginstitutions where emailAddress='$emailAddress' and password='$password'"; 
         $sql=mysqli_query($conn, $stmt);
@@ -440,9 +441,18 @@ if(isset($_GET['action'])){
     $profilePhoto = $fileName3;
     $phoneNumber = $_POST['phoneNumber'];
     //statement to update values
-    $sql = "UPDATE regPatients SET  emailAddress='$emailAddress', password='$password', 
+    $sql ='';
+    session_start();
+    if($_SESSION['category'] == 'patient'){
+    $sql .= "UPDATE regPatients SET  emailAddress='$emailAddress', password='$password', 
                    profilePhoto='$profilePhoto', phoneNumber='$phoneNumber' WHERE id='$id'";
-
+    }  else if($_SESSION['category'] == 'doctor'){
+        $sql .= "UPDATE regDoctors SET  emailAddress='$emailAddress', password='$password', 
+                       profilePhoto='$profilePhoto', phoneNumber='$phoneNumber' WHERE id='$id'";
+    }  else if($_SESSION['category'] == 'hospital'){
+        $sql .= "UPDATE regDoctors SET  emailAddress='$emailAddress', password='$password', 
+                        profilePhoto='$profilePhoto', phoneNumber='$phoneNumber' WHERE id='$id'";
+    }
     // if sql query is executed and database connection is established
     if (mysqli_query($conn, $sql)) {
         // $_SESSION["username"]=$name;
@@ -482,7 +492,9 @@ if (isset($_POST["record-sleep"])) {
     }
 
     if (mysqli_query($conn, $sql)) {
-        echo $sleepTime;
+        echo '
+        <script> window.location.href="../patient-log.php"</script>
+        ';
     }else{
         // Show error if the SQL query is not executed
         echo "Error: " . $sql . "<br>" . mysqli_error($conn);
@@ -508,7 +520,9 @@ if(isset($_POST["record-meal"]))
 
      //if sql query is not executed...
 	 if (mysqli_query($conn, $sql)) {
-        echo 'Meal recorded';	
+        echo '
+        <script> window.location.href="../patient-log.php"</script>
+        ';	
          }else{
                 //show error
 		echo "Error: " . $sql . "
