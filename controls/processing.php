@@ -140,7 +140,7 @@ if(isset($_POST['register-doc'])){
          }
     $conditions = implode('*', $conditionsArr);	 $password = $_POST['password'];
     $address = filter_var($_POST['address'], FILTER_SANITIZE_STRING);
-    $years = $_POST['years'];//years experience
+    $years = filter_var($_POST['years'], FILTER_SANITIZE_NUMBER_INT);//years experience
     $password = $_POST['password'];
 
 	 
@@ -186,7 +186,7 @@ if(isset($_POST['register-doc-by-partner'])){
     $conditions = implode('*', $conditionsArr);
     $phoneNumber = $_POST['phoneNumber'];
     $address = filter_var($_POST['address'], FILTER_SANITIZE_STRING);
-    $years = $_POST['years'];
+    $years = filter_var($_POST['years'], FILTER_SANITIZE_NUMBER_INT);
     $password = substr($emailAddress, 0, strpos($emailAddress, "@"));
 
 	 
@@ -226,9 +226,9 @@ if(isset($_POST['dosage-registration'])){
     $attending_doctor_email = filter_var($_POST['attending_doctor_email'], FILTER_SANITIZE_EMAIL);
     $attending_doctor_id = $_POST["attending_doctor_id"];
 	$dosageName = filter_var($_POST['dosageName'], FILTER_SANITIZE_STRING);
-	$tablets = $_POST['tablets'];
-	$numberOfDays = $_POST['numberOfDays'];
-	$timesADay = $_POST['timesADay'];
+	$tablets = filter_var($_POST['tablets'], FILTER_SANITIZE_NUMBER_INT);
+	$numberOfDays = filter_var($_POST['numberOfDays'], FILTER_SANITIZE_NUMBER_INT);
+	$timesADay = filter_var($_POST['timesADay'], FILTER_SANITIZE_NUMBER_INT);
     $sql=mysqli_query($conn,"SELECT * FROM dosage where dosageName='$dosageName'");
     if(mysqli_num_rows($sql)>0)
     {
@@ -267,19 +267,19 @@ if(isset($_POST['dosage-update']))
         $dosageName = $original_dosageName;
     }
     if(!empty($_POST['tablets'])){
-        $tablets = $_POST['tablets'];
+        $tablets = filter_var($_POST['tablets'], FILTER_SANITIZE_NUMBER_INT);
     }
     else{
         $tablets = $original_tablets;
     }
     if(!empty($_POST['numberOfDays'])){
-        $numberOfDays = $_POST['numberOfDays'];
+        $numberOfDays = filter_var($_POST['numberOfDays'], FILTER_SANITIZE_NUMBER_INT);
     }
     else{
         $numberOfDays = $original_numberOfDays;
     }
     if(!empty($_POST['timesADay'])){
-        $timesADay = $_POST['timesADay'];
+        $timesADay = filter_var($_POST['timesADay'], FILTER_SANITIZE_NUMBER_INT);
     }
     else{
         $timesADay = $original_timesADay;
