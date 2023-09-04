@@ -31,9 +31,17 @@
             <input type="text" name="address" placeholder="Patient address" required/>
             <select name="institution" required>
                 <option selected disabled> Select Patient Hospital</option>
-                <option>Institution A</option>
-                <option>Institution B</option>
-                <option>Institution C</option>
+                <?php
+                include_once '../conn.php';
+                 $stmt = "SELECT * FROM reginstitutions ";
+                 $sql = mysqli_query($conn, $stmt);
+                 if (mysqli_num_rows($sql) > 0) {
+                     while ($row = mysqli_fetch_array($sql)) {
+                     ?>
+                    <option><?php echo $row['institutionName'];?></option>
+                <?php
+                }}
+                ?>
             </select>
             <select name="condition[]" multiple required>
                 <option selected disabled> Select Patient condition</option>
