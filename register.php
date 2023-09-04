@@ -62,7 +62,7 @@
                  if (mysqli_num_rows($sql) > 0) {
                      while ($row = mysqli_fetch_array($sql)) {
                      ?>
-                    <option><?php echo $row['institution'];?></option>
+                    <option><?php echo $row['institutionName'];?></option>
                 <?php
                 }}
                 ?>
