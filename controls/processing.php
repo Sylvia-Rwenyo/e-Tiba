@@ -11,16 +11,15 @@ if(isset($_POST['register']))
     //store values submitted in the signup form in variables
 	 $firstName = htmlspecialchars($_POST['firstName']);
      $lastName = htmlspecialchars($_POST['lastName']);
-	 $emailAddress = htmlspecialchars($_POST['emailAddress'], FILTER_SANITIZE_EMAIL);
+	 $emailAddress = filter_var($_POST['emailAddress'], FILTER_SANITIZE_EMAIL);
      $phoneNumber = htmlspecialchars($_POST['phoneNumber']);
      $institution = htmlspecialchars($_POST['institution']);
      $conditionsArr= array();
      for($i=0; $i < count($_POST['condition']); $i++){
         $conditionsArr[] = $_POST['condition'][$i];
          }
-    $conditions = htmlspecialchars(implode('*', $conditionsArr));
-    $password = htmlspecialchars($_POST['password']);
-     $age = htmlspecialchars($_POST['age']);
+    $conditions = implode('*', $conditionsArr);	 $password = $_POST['password'];
+     $age = $_POST['age'];
      $address = htmlspecialchars($_POST['address']);
 	 $gender = htmlspecialchars($_POST['gender']);
     
@@ -67,10 +66,10 @@ if(isset($_POST['reg-partner']))
     session_start();
     
     //store values submitted in the signup form in variables
-	 $institutionName = filter_var($_POST['institutionName'], FILTER_SANITIZE_STRING);
-     $location = filter_var($_POST['location'], FILTER_SANITIZE_STRING);
+	 $institutionName = htmlspecialchars($_POST['institutionName']);
+     $location = htmlspecialchars($_POST['location']);
 	 $emailAddress = filter_var($_POST['emailAddress'], FILTER_SANITIZE_EMAIL);
-     $phoneNumber = $_POST['phoneNumber'];
+     $phoneNumber = htmlspecialchars($_POST['phoneNumber']);
 
      $conditionsArr= array();
      for($i=0; $i < count($_POST['conditions']); $i++){
@@ -78,8 +77,9 @@ if(isset($_POST['reg-partner']))
          }
     $conditions = implode('*', $conditionsArr);
 	$password = $_POST['password'];
-    $postalAddress = filter_var($_POST['postalAddress'], FILTER_SANITIZE_STRING);
+    $postalAddress = htmlspecialchars($_POST['postalAddress']);
     
+     
      //statement to enter values into the registration table in the database
 	 $sql = "INSERT INTO regInstitutions (institutionName, location, emailAddress, phoneNumber,  password, illnesses, postalAddress)
 	 VALUES ('$institutionName','$location', '$emailAddress','$phoneNumber', '$password', '$conditions', '$postalAddress')";
@@ -98,14 +98,14 @@ if(isset($_POST['reg-partner']))
 }
 
 if(isset($_POST['add-patient'])){
-    $firstName = filter_var($_POST['firstName'], FILTER_SANITIZE_STRING);
-     $lastName = filter_var($_POST['lastName'], FILTER_SANITIZE_STRING);
+    $firstName = htmlspecialchars($_POST['firstName']);
+     $lastName = htmlspecialchars($_POST['lastName']);
      $age = $_POST['age'];
-     $gender = filter_var($_POST['gender'], FILTER_SANITIZE_STRING);
+     $gender = htmlspecialchars($_POST['gender']);
 	 $emailAddress = filter_var($_POST['emailAddress'], FILTER_SANITIZE_EMAIL);
-     $phoneNumber = $_POST['phoneNumber'];
-     $address = $_POST['address'];
-     $institution = $_POST['institution'];
+     $phoneNumber = htmlspecialchars($_POST['phoneNumber']);
+     $address = htmlspecialchars($_POST['address']);
+     $institution = htmlspecialchars($_POST['institution']);
      $conditionsArr= array();
      for($i=0; $i < count($_POST['condition']); $i++){
         $conditionsArr[] = $_POST['condition'][$i];
@@ -142,18 +142,18 @@ if(isset($_POST['register-doc'])){
     //create session
     session_start();
 
-    $firstName = filter_var($_POST['firstName'], FILTER_SANITIZE_STRING);
-    $lastName = filter_var($_POST['lastName'], FILTER_SANITIZE_STRING);
-    $gender = filter_var($_POST['gender'], FILTER_SANITIZE_STRING);
+    $firstName = htmlspecialchars($_POST['firstName']);
+    $lastName = htmlspecialchars($_POST['lastName']);
+    $gender = htmlspecialchars($_POST['gender']);
     $emailAddress = filter_var($_POST['emailAddress'], FILTER_SANITIZE_EMAIL);
-    $phoneNumber = $_POST['phoneNumber'];
-    $institution = filter_var($_POST['institution'], FILTER_SANITIZE_STRING);
+    $phoneNumber = htmlspecialchars($_POST['phoneNumber']);
+    $institution = htmlspecialchars($_POST['institution']);
     $conditionsArr= array();
      for($i=0; $i < count($_POST['conditions']); $i++){
         $conditionsArr[] = $_POST['conditions'][$i];
          }
     $conditions = implode('*', $conditionsArr);	 $password = $_POST['password'];
-    $address = filter_var($_POST['address'], FILTER_SANITIZE_STRING);
+    $address = htmlspecialchars($_POST['address']);
     $years = filter_var($_POST['years'], FILTER_SANITIZE_NUMBER_INT);//years experience
     $password = $_POST['password'];
 
@@ -188,18 +188,18 @@ if(isset($_POST['register-doc-by-partner'])){
     //create session
     session_start();
 
-    $firstName = filter_var($_POST['firstName'], FILTER_SANITIZE_STRING);
-    $lastName = filter_var($_POST['lastName'], FILTER_SANITIZE_STRING);
-    $gender = filter_var($_POST['gender'], FILTER_SANITIZE_STRING);
+    $firstName = htmlspecialchars($_POST['firstName']);
+    $lastName = htmlspecialchars($_POST['lastName']);
+    $gender = htmlspecialchars($_POST['gender']);
     $emailAddress = filter_var($_POST['emailAddress'], FILTER_SANITIZE_EMAIL);
-    $institution = filter_var($_SESSION['username'], FILTER_SANITIZE_STRING);
+    $institution = $_SESSION['username'];
     $conditionsArr= array();
      for($i=0; $i < count($_POST['condition']); $i++){
         $conditionsArr[] = $_POST['condition'][$i];
          }
     $conditions = implode('*', $conditionsArr);
-    $phoneNumber = $_POST['phoneNumber'];
-    $address = filter_var($_POST['address'], FILTER_SANITIZE_STRING);
+    $phoneNumber = htmlspecialchars($_POST['phoneNumber']);
+    $address = htmlspecialchars($_POST['address']);
     $years = filter_var($_POST['years'], FILTER_SANITIZE_NUMBER_INT);
     $password = substr($emailAddress, 0, strpos($emailAddress, "@"));
 
@@ -233,13 +233,13 @@ if(isset($_POST['register-doc-by-partner'])){
 
 
 if(isset($_POST['dosage-registration'])){
-    $fname_patient = filter_var($_POST["patientName"], FILTER_SANITIZE_STRING);
+    $fname_patient = $_POST["patientName"];
     $patient_email = filter_var($_POST['patientEmail'], FILTER_SANITIZE_EMAIL);
     $patient_id = $_POST["patient_id"];
-    $attending_doctor_name = filter_var($_POST["attending_doctor_name"], FILTER_SANITIZE_STRING);
+    $attending_doctor_name = $_POST["attending_doctor_name"];
     $attending_doctor_email = filter_var($_POST['attending_doctor_email'], FILTER_SANITIZE_EMAIL);
     $attending_doctor_id = $_POST["attending_doctor_id"];
-	$dosageName = filter_var($_POST['dosageName'], FILTER_SANITIZE_STRING);
+	$dosageName = htmlspecialchars($_POST['dosageName']);
 	$tablets = filter_var($_POST['tablets'], FILTER_SANITIZE_NUMBER_INT);
 	$numberOfDays = filter_var($_POST['numberOfDays'], FILTER_SANITIZE_NUMBER_INT);
 	$timesADay = filter_var($_POST['timesADay'], FILTER_SANITIZE_NUMBER_INT);
@@ -275,7 +275,7 @@ if(isset($_POST['dosage-update']))
     }
 	$id = $_GET['id'];
     if(!empty($_POST['dosageName'])){
-        $dosageName = filter_var($_POST['dosageName'], FILTER_SANITIZE_STRING);
+        $dosageName = htmlspecialchars($_POST['dosageName']);
     }
     else{
         $dosageName = $original_dosageName;
@@ -401,45 +401,45 @@ function login($conn){
 
 if(isset($_GET['action'])){
     // log out if the user selects "Log Out" on the menu bar
-        if($_GET['action']== "logOut"){
-            session_start();
-            session_unset();
-            echo ' <script> 
-                        window.location.href = "../index.php"
-                    </script>
-        '; 
-        }
-    
-        if($_GET['action'] == "deleteAccount"){
-            session_start();
-            $id = $_GET['id'];
-            $stmt;
-            // check the user's category
-            if($_SESSION['category'] == 'patient'){
-             //statements to select values from the registration tables in the database
-            $stmt = "DELETE FROM regPatients where id='$id'";
-            }else if($_SESSION['category'] == 'doctor'){
-                $stmt = "DELETE FROM regDoctors where id='$id'";
-            }else if($_SESSION['category'] == 'hospital'){
-                $stmt = "DELETE FROM regInstitutions where id='$id'";
-            }
-            $sql=mysqli_query($conn, $stmt);
-             if ($sql)
-              {     
-                session_unset();      
-                echo ' <script> 
-                         window.location.href = "../index.php";
-                       </script>';
-             } 
-        
-             else {
-                echo "Error: " . $stmt . "
-        " . mysqli_error($conn);
-             }
-             mysqli_close($conn);
-        }
+    if($_GET['action']== "logOut"){
+        session_start();
+        session_unset();
+        echo ' <script> 
+                    window.location.href = "../index.php"
+                </script>
+    '; 
     }
-    if(isset($_POST['update']))
+
+    if($_GET['action'] == "deleteAccount"){
+        session_start();
+        $id = $_GET['id'];
+        $stmt;
+        // check the user's category
+        if($_SESSION['category'] == 'patient'){
+            //statements to select values from the registration tables in the database
+        $stmt = "DELETE FROM regPatients where id='$id'";
+        }else if($_SESSION['category'] == 'doctor'){
+            $stmt = "DELETE FROM regDoctors where id='$id'";
+        }else if($_SESSION['category'] == 'hospital'){
+            $stmt = "DELETE FROM regInstitutions where id='$id'";
+        }
+        $sql=mysqli_query($conn, $stmt);
+            if ($sql)
+            {     
+            session_unset();      
+            echo ' <script> 
+                        window.location.href = "../index.php";
+                    </script>';
+            } 
+    
+            else {
+            echo "Error: " . $stmt . "
+    " . mysqli_error($conn);
+            }
+            mysqli_close($conn);
+    }
+}
+if(isset($_POST['update']))
 {	 
      // specify directory for uploading the file
      $target_dir3 = "Uploads/";
@@ -458,7 +458,7 @@ if(isset($_GET['action'])){
     $emailAddress = filter_var($_POST['emailAddress'], FILTER_SANITIZE_EMAIL);
     $password = $_POST['password'];
     $profilePhoto = $fileName3;
-    $phoneNumber = $_POST['phoneNumber'];
+    $phoneNumber = htmlspecialchars($_POST['phoneNumber']);
     //statement to update values
     $sql ='';
     session_start();
@@ -610,7 +610,7 @@ if(isset($_POST["record-meal"]))
     session_start();
     
     //store values submitted in the signup form in variables
-	 $mealName = filter_var($_POST['meal-name'], FILTER_SANITIZE_STRING);
+	 $mealName = htmlspecialchars($_POST['meal-name']);
      $mealTime = $_POST['meal-time'];
      $current_date = date('Y-m-d');
      $id = $_SESSION['id'];
@@ -638,7 +638,7 @@ if(isset($_POST["record-medTime"]))
     session_start();
     
     //store values submitted in the  form in variables
-	 $medName = filter_var($_POST['med-name'], FILTER_SANITIZE_STRING);
+	 $medName = htmlspecialchars($_POST['med-name']);
      $medTime = $_POST['med-time'];
      $id = $_SESSION['id'];
      //statement to enter values into a table in the database

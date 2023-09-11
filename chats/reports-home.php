@@ -50,9 +50,11 @@
                                 {
                                     $keyword = $_GET['keyword'];
                                     $chat_identity = $current_user_email.'_'.$keyword;
-                                    $sql = "SELECT * FROM reports WHERE chat_identity LIKE '$chat_identity' GROUP BY chat_identity ORDER BY id DESC";
-                                    
-                                    $result = mysqli_query($conn, $sql) or die(mysqli_error($conn));
+                                    $sql = "SELECT id, sent_to, emailAddress FROM reports WHERE chat_identity LIKE ? GROUP BY chat_identity ORDER BY id DESC";
+                                    $stmt = $conn->prepare($sql);
+                                    $stmt->execute([$chat_identity]);
+                                    $sql = $stmt;
+                                    $result = $sql->get_result();
                                     while($rows = mysqli_fetch_array($result))
                                     {?>
                                         <a href = "reports-messages.php?id=<?php echo $rows['id']; ?>"><h3><?php echo $rows['sent_to']?></h3></a>
