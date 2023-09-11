@@ -513,43 +513,53 @@
 }
 /* dashboard */
 .progress-charts{
-    width: 90%;
-    height: 80%;
+    width: 80%;
+    margin-left: 10%;
+    height: 50%;
 }
-.single-progress-chart{
-    display: grid;
-    grid-template-columns: repeat(7, 1fr);
-    height: 100%;
-}
-.progress-charts .single-chart{
-    height: 100%;
+.progress-charts .single-progress-chart{
+    height: 90%;
     width: 100%;
+    margin-top: 2.5%;
 }
-.progress-charts .single-chart .day-graphs{
-    height: 95%;
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
+.day-graphs, .date-labels-div{
+    height:200px;
 }
-.progress-charts .single-chart .date-label{
-    height: 5%;
-}
-.day-graphs .single-graph{
-    width: 1em;
-    border-top-left-radius: 2px;
-    border-top-right-radius: 2px;
-    height: 100%;
+
+    .day-graphs .single-graph span{
+        width: 1em;
     }
-    .single-graph.sleep span{
+    .single-graph.sleep span, .target-display.sleepLog span{
         background-color: #28a745;
     }
-    .single-graph.meals span{
+    .single-graph.meals span, .target-display.mealLog span{
         background-color: #fbfac2;
     }
-    .single-graph.exercise span{
+    .single-graph.exercise span, .target-display.exerciseLog span{
         background-color: #0d3a5c;
     }
-.canvas-chart{
-    width: 30%;
+.log-prompts{
+    margin-top: 5%;
+    width: 80%;
+    margin-left: 10%;
+    height: 30%;
+    display: grid;
+    grid-template-rows: 20% 20% 20%;
+    row-gap: 10%;
+}
+.single-log-prompt{
+    display: grid;
+    grid-template-columns: 70% 30%;
+    border-radius: 10px;
+}
+.single-log-prompt .target-display{
+    background-color: rgba(204, 204, 204, 0.5);
+}
+.single-log-prompt .target-display span{
+    padding: 0.5em;
+}
+.single-log-prompt .prompt{
+    padding-left: 10%;
 }
 .dash-intro{
     display: flex;
@@ -717,7 +727,7 @@
     font-size: 1.25em;
     padding-left: 2.5%;
 }
- #editProfileSection .profile, #patient-log .input-div{
+ #editProfileSection .profile, .dash-body .input-div{
     margin-right: 0;
     margin-bottom:2.5%;
     background-color: rgba(190, 252, 254, 0.5);
@@ -726,7 +736,10 @@
     width: 80%;
     padding: 1em;
  }
-
+ .dash-body .input-div{
+    width: 50%;
+    margin-left: 10%;
+ }
 .deleteAccount, .logOut{
     padding: 1em;
 }
@@ -803,6 +816,9 @@
     margin-right: 10%;
     margin-top: 2.5%;
 }
+.dash-body .welcome-msg{
+    display: none;
+}
 .records-print-btn{
     width: 10%;
     color: white;
@@ -812,44 +828,49 @@
 
 
 /* patient log page */
-#patient-log .welcome-msg{
+.dash-body .welcome-msg{
     margin-top: 0;
     margin-left: 10%;
 }
-#patient-log .input{
+.dash-body .input{
     margin-top: 2.5%;
 }
-#patient-log .input .input-div{
+.dash-body .input .input-div{
     padding: 1em;
     padding-left: 5%;
     margin-top: 3.5%;
+    display: flex;
+    flex-direction: column;
 }
-#patient-log .input .input-div form{
+.dash-body .input .input-div form{
     padding: 1em;
     padding-left: 0;
-    width: 60%;
+    width: 80%;
     display: flex;
     flex-direction: row;
 }
-#patient-log .input .input-div form div{
+.dash-body .input .input-div form div{
     margin-right: 2.5%;
 }
-#patient-log .input .input-div form input, #patient-log .input .input-div form button{
+.dash-body .input .input-div form input, .dash-body .input .input-div form button{
     height: 2.5em;
 }
-#patient-log .input .input-div form button{
-    margin-top: 7.5%;
+.dash-body .input .input-div form button{
+    margin-top: 2.5%;
+}
+.sleep-form button{
+    margin-top: 1.5%;
 }
 
-#patient-log .input .input-div div{
+.dash-body .input .input-div div{
     width: 50%;
     display: flex;
     flex-direction: column;
 }
-#patient-log .input .input-div {
+.dash-body .input .input-div {
     display: none;
 }
-#patient-log .prompts{
+.dash-body .prompts{
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -857,7 +878,7 @@
     margin-right: 2%;
     margin-left: 2.5%;
 }
-#patient-log .prompts .prompt{
+.dash-body .prompts .prompt{
     background-color: rgba(190, 252, 254, 0.5);
     border: none;
     border-right: 2px solid  rgba(64, 141, 206, 0.5);
@@ -866,7 +887,7 @@
     width: 30%;
     height: 45vh;
 }
-#patient-log .prompts .prompt i{
+.dash-body .prompts .prompt i{
     size: 3em;
 }
 /* meet-menu */
@@ -1097,6 +1118,32 @@
 	display:flex;
 	flex-direction: column;
 }
+.search-bar {
+	position: relative;
+	border-radius: 5px;
+    width: 100%;
+}
+.search-bar form{
+    display: flex;
+    flex-direction: row;
+    background-color: white;
+    border: 1px solid darkgray;
+    width: 100%;
+    padding: 0.5em;
+}
+.search-bar form input{
+    background: transparent;
+    border: none;
+    width: 85%;
+}
+.search-bar form button{
+    background: transparent;
+    border: none;
+    width: 15%;
+}
+.dropdown, .suggestion{
+    display: none;
+}
 @media screen and (max-width:500px) {
     .search-bar-top, .search-bar {
         width:90%;
@@ -1107,10 +1154,7 @@
     }
 }
 
-.search-bar {
-	position: relative;
-	border-radius: 5px;
-}
+
 /*Chat Page Styles*/
 
 .chat_with_title{
@@ -1648,16 +1692,6 @@
     margin-left: 5%;
     padding: 0;
   }
-@media screen and (max-width:500px) {
-    #doctor-records-section section,#patient-records-section section, #dash-body section{
-        width:90%;
-        overflow:scroll;
-    }
-    #doctor-records-section table, #patient-records-section table{
-        margin-left: 3%;
-        font-size: 0.8em;
-    }
-}
 #doctor-records-section tr, #patient-records-section tr{
     width: 100%;
 }
@@ -1674,20 +1708,20 @@ table, th, td {
   }
   /* records sorting area */
   .records-header{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    /* padding-left: 10%; */
+    /* display: grid;
+    grid-template-columns: 12.5% 45% 40%;
+    column-gap: 5%; */
     width: 80%;
-    margin-left: 10%;
-    margin-right: 5%;
     margin-bottom: 2.5%;
+    display:flex;
+    flex-direction:row;
+    justify-content: space-between;
   }
   .records-header h2{
-    /* font-size: 1.25em; */
-    width: 10%;
+    font-size: 2.25em;
+    width: auto;
     margin-block-end: 0;
-    margin-block-start: 0;
+    margin-block-start: 0em;
   }
   .records-header span{
     /* width: 0%; */
@@ -1698,27 +1732,16 @@ table, th, td {
 
   }
   .records-header div{
-    display: grid;
-    grid-template-columns: 33.3% 33.3%;
+    /* display: grid;
+    grid-template-columns: 33.3% 33.3%; */
     width: 100%;
-    margin-left: 5%;
+    margin-left: 10%;
     display:flex;
     flex-direction:row;
 }
 .records-container {
     display: flex;
     flex-direction: row;
-}
-@media screen and (max-width:500px) {
-    #records-search-container {
-        flex-direction: column;
-    }
-    #records-search-container .menu-bar{
-        z-index: 1;
-        position: relative;
-        padding: 1.1%;
-        margin-left: 0;
-    }
 }
 #records-search-container .menu-bar{
     position: relative;
@@ -1730,25 +1753,7 @@ table, th, td {
     flex-direction:column;
     width: 100%;
 }
-
-@media screen and (max-width:500px) {
-    #records-search-container div{
-        margin-left: 0;
-    }
-    #records-search-container .menu-bar{
-        position: relative;
-        padding: 1.1%;
-    }
-}
-@media screen and (max-width:500px){
-  #patient-records-section section{
-    margin-left:0%;
-    width:80%;
-    overflow:scroll; 
-    font-size: 10px;
-  }
-}
-  .records-header div span{
+.records-header div span{
     width: 80%;
     padding: 0.5em;
     border: 2px solid darkgray;
@@ -1762,3 +1767,43 @@ table, th, td {
     font-size: 1em;
     border-radius: 10px;
   }
+  @media screen and (max-width:1000px) {
+    .records-header{
+        width: 100%;
+    }
+  }
+@media screen and (max-width:500px) {
+    #records-search-container {
+        flex-direction: column;
+    }
+    #records-search-container .menu-bar{
+        z-index: 1;
+        position: relative;
+        padding: 1.1%;
+        margin-left: 0;
+    }
+    #doctor-records-section section,#patient-records-section section, #dash-body section{
+        width:90%;
+        overflow:scroll;
+    }
+    #doctor-records-section table, #patient-records-section table{
+        margin-left: 3%;
+        font-size: 0.8em;
+    }
+
+    #records-search-container div{
+        margin-left: 0;
+    }
+    #records-search-container .menu-bar{
+        position: relative;
+        padding: 1.1%;
+    }
+
+  #patient-records-section section{
+    margin-left:0%;
+    width:80%;
+    overflow:scroll; 
+    font-size: 10px;
+  }
+}
+

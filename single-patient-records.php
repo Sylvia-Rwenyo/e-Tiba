@@ -133,7 +133,7 @@
             </td>
         </tr>
         </table>
-        <button class="records-print-btn" onclick="print1patientRecord()">Print</button>
+        <button class="records-print-btn" onclick="print1patientRecord()">Download</button>
 
                         </section>              
                 <?php

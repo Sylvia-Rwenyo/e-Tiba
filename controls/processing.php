@@ -9,19 +9,20 @@ if(isset($_POST['register']))
     session_start();
     
     //store values submitted in the signup form in variables
-	 $firstName = filter_var($_POST['firstName'], FILTER_SANITIZE_STRING);
-     $lastName = filter_var($_POST['lastName'], FILTER_SANITIZE_STRING);
-	 $emailAddress = filter_var($_POST['emailAddress'], FILTER_SANITIZE_EMAIL);
-     $phoneNumber = $_POST['phoneNumber'];
-     $institution = filter_var($_POST['institution'], FILTER_SANITIZE_STRING);
+	 $firstName = htmlspecialchars($_POST['firstName']);
+     $lastName = htmlspecialchars($_POST['lastName']);
+	 $emailAddress = htmlspecialchars($_POST['emailAddress'], FILTER_SANITIZE_EMAIL);
+     $phoneNumber = htmlspecialchars($_POST['phoneNumber']);
+     $institution = htmlspecialchars($_POST['institution']);
      $conditionsArr= array();
      for($i=0; $i < count($_POST['condition']); $i++){
         $conditionsArr[] = $_POST['condition'][$i];
          }
-    $conditions = implode('*', $conditionsArr);	 $password = $_POST['password'];
-     $age = $_POST['age'];
-     $address = filter_var($_POST['address'], FILTER_SANITIZE_STRING);
-	 $gender = filter_var($_POST['gender'], FILTER_SANITIZE_STRING);
+    $conditions = htmlspecialchars(implode('*', $conditionsArr));
+    $password = htmlspecialchars($_POST['password']);
+     $age = htmlspecialchars($_POST['age']);
+     $address = htmlspecialchars($_POST['address']);
+	 $gender = htmlspecialchars($_POST['gender']);
     
     //  check for duplicate entries first
      $sql_e=mysqli_query($conn,"SELECT * FROM regpatients where emailAddress='$emailAddress'");
@@ -563,7 +564,7 @@ if (isset($_POST["record-sleep"])) {
 
     if (mysqli_query($conn, $sql)) {
         echo '
-        <script> window.location.href="../patient-log.php"</script>
+        <script> window.location.href="../dashboard.php"</script>
         ';
     }else{
         // Show error if the SQL query is not executed
@@ -592,7 +593,7 @@ if(isset($_POST["record-physicalActivity"]))
      //if sql query is not executed...
 	 if (mysqli_query($conn, $sql)) {
         echo '
-        <script> window.location.href="../patient-log.php"</script>
+        <script> window.location.href="../dashboard.php"</script>
         ';	
          }else{
                 //show error
@@ -620,7 +621,7 @@ if(isset($_POST["record-meal"]))
      //if sql query is not executed...
 	 if (mysqli_query($conn, $sql)) {
         echo '
-        <script> window.location.href="../patient-log.php"</script>
+        <script> window.location.href="../dashboard.php"</script>
         ';	
          }else{
                 //show error
