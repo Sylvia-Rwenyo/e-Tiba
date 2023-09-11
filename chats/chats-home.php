@@ -59,12 +59,20 @@
                                         {
                                             $keyword = $_GET['keyword'];
                                             if($current_user_category == 'doctor'){
-                                                $sql = "SELECT * FROM regpatients WHERE emailAddress LIKE '$keyword' or firstName LIKE '$keyword'";
+                                                $sql = "SELECT id, firstName, emailAddress FROM regpatients WHERE emailAddress LIKE ? or firstName LIKE ?";
+                                                $stmt = $conn->prepare($sql);
+                                                $stmt->execute([$keyword,$keyword]);
+                                                $sql = $stmt;
+
                                             }
                                             elseif($current_user_category == 'patient'){
-                                                $sql = "SELECT * FROM regdoctors WHERE emailAddress LIKE '$keyword' or firstName LIKE '$keyword'";
+                                                $sql = "SELECT id, firstName, emailAddress FROM regdoctors WHERE emailAddress LIKE ? or firstName LIKE ?";
+                                                $stmt = $conn->prepare($sql);
+                                                $stmt->execute([$keyword,$keyword]);
+                                                $sql = $stmt;
                                             }
-                                            $result = mysqli_query($conn, $sql) or die(mysqli_error($conn));
+                                            //$result = mysqli_query($conn, $sql) or die(mysqli_error($conn));
+                                            $result = $sql->get_result();
                                             while($rows = mysqli_fetch_array($result))
                                             {?>
                                                 <a href = "messages-page.php?id=<?php echo $rows['id']; ?>"><h3><?php echo $rows['firstName']?></h3></a>

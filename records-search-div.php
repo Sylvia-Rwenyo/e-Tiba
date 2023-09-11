@@ -25,8 +25,11 @@
                                     {
                                         $bool_value = 1;
                                         $keyword = $_GET['keyword'];
-                                        $sql = "SELECT * FROM regpatients WHERE emailAddress LIKE '$keyword' or firstName LIKE '$keyword'";
-                                        $result = mysqli_query($conn, $sql) or die(mysqli_error($conn));
+                                        $sql = "SELECT id, firstName, emailAddress FROM regpatients WHERE emailAddress LIKE ? or firstName LIKE ?'";
+                                        $stmt = $conn->prepare($sql);
+                                        $stmt->execute([$keyword,$keyword]);
+                                        $sql = $stmt;
+                                        $result = $sql->get_result();
                                         while($rows = mysqli_fetch_array($result))
                                         {?>
                                             <a href = "single-patient-records.php?p=<?php echo $rows['id']; ?>"><h3><?php echo $rows['firstName']?></h3></a>

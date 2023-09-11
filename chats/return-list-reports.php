@@ -7,7 +7,7 @@
     {
         $keyword = $_POST['search'];
         $chat_identity = $current_user_email.'_'.$keyword;
-        $sql = "SELECT * FROM reports WHERE chat_identity LIKE '%{$chat_identity}%' GROUP BY chat_identity ORDER BY id DESC";
+        $sql = "SELECT id, sent_to, emailAddress FROM reports WHERE chat_identity LIKE '%{$chat_identity}%' GROUP BY chat_identity ORDER BY id DESC";
         $result = mysqli_query($conn, $sql) or die(mysqli_error($conn));?>
         <ul class='list-group' style='margin-top:-15px;'>
         <?php 
