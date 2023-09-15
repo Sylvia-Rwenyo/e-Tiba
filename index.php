@@ -12,9 +12,6 @@
     <title>CERA</title>
 </head>
 <body class="home">
-    <div class="partners-CTA">
-       
-    </div>
     <?php include_once "menu.php" ?>
     <div class="intro">
         <div class="c-phrase-section">
@@ -26,7 +23,7 @@
         <div class="CTA">
             <button class="pos-btn" id="join-us" onclick="popupFunc()" style="position:relative;display:block;cursor:pointer;">Join Us
                 <span class="popuplinks" id="popuplinks">
-                    Select To Join Us As:
+                    <p style="margin-bottom:-2%;">Select To Join Us As:</p>
                     <a href="register.php">
                         <p>Patient</p>
                     </a>

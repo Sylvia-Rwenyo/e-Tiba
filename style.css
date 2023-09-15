@@ -35,22 +35,6 @@
 .menu ul .active-meet{
     border-bottom: 2px solid #408DCE;
 }
-.partners-CTA{
-    font-size: 1em;
-    padding-right: 5%;
-    padding-top: 1%;
-    height: 3%;
-    display: flex;
-    flex-direction: column;
-}
-.partners-CTA a{
-    text-decoration: none;
-    color: black;
-    height: 50%;
-}
-.partners-CTA p{
-    float: right;
-}
 .intro{
     display: flex;
     flex-direction: row;
@@ -97,7 +81,7 @@
     z-index: 10;
     margin-left:-58%;
     margin-top:15%;
-    font-size: 22px;
+    font-size: 12px;
     padding-left:10%;
 }
 #join-us .popuplinks::after{
@@ -168,7 +152,7 @@
     border: none;
 }
 @media screen and (max-width:990px) {
-    .CTA a{
+    .CTA a, .CTA #join-us{
         width: 30%;
         height: 3.5em;
         font-size: 0.95em;
@@ -206,8 +190,11 @@
         }
 }
 @media screen and (max-width:500px) {
-    .CTA a{
+    .CTA a, .CTA #join-us{
         width: 45%;
+    }
+    .CTA #join-us{
+        height:2.5em;
     }
     .c-phrase h3{
         font-size: 2em;
