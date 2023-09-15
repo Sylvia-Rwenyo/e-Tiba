@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 21, 2023 at 11:58 AM
+-- Generation Time: Sep 15, 2023 at 02:03 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -79,22 +79,7 @@ CREATE TABLE `chat` (
 --
 
 INSERT INTO `chat` (`id`, `sender_class`, `chat_identity`, `sent_from_id`, `emailAddress`, `sent_to_id`, `sent_to`, `readStatus`, `message`) VALUES
-(8, 'doctor', 'fredric.ngugi@yahoo.com_rtaer', 1, 'fredric.ngugi@yahoo.com', 11, 'rtaer', 'read', 'Hello rtaer, I would like to be your new doctor'),
-(9, 'patient', 'fredric.ngugi@yahoo.com_rtaer', 11, 'rtaer', 1, 'fredric.ngugi@yahoo.com', 'read', 'Hello Fredrick, I would like to work with you as well'),
-(11, 'doctor', 'fredric.ngugi@yahoo.com_rtaer', 1, 'fredric.ngugi@yahoo.com', 11, 'rtaer', 'read', 'Im a hematologist by profession, thats disease of the blood '),
-(12, 'doctor', 'fredric.ngugi@yahoo.com_646', 1, 'fredric.ngugi@yahoo.com', 6, '646', 'read', 'Hello 646, I would like to be your new doctor'),
-(13, 'patient', 'fredric.ngugi@yahoo.com_646', 6, '646', 1, 'fredric.ngugi@yahoo.com', 'read', 'Hello Fredrick, thank you for enrolling me'),
-(14, 'patient', 'fredric.ngugi@yahoo.com_646', 6, '646', 1, 'fredric.ngugi@yahoo.com', 'read', 'I have this and this disease'),
-(15, 'patient', 'morris@gmail.com_646', 6, '646', 2, 'morris@gmail.com', 'read', 'I would like to register for CERA'),
-(16, 'patient', 'morris@gmail.com_646', 6, '646', 2, 'morris@gmail.com', 'read', 'how do I go about it?'),
-(17, 'patient', 'morris@gmail.com_646', 6, '646', 2, 'morris@gmail.com', 'read', 'attempt message 1'),
-(19, 'patient', 'fredric.ngugi@yahoo.com_rtaer', 11, 'rtaer', 1, 'fredric.ngugi@yahoo.com', 'read', 'By mistake'),
-(20, 'doctor', 'fredric.ngugi@yahoo.com_rtaer', 1, 'fredric.ngugi@yahoo.com', 11, 'rtaer', 'read', 'okay, lets go on'),
-(21, 'patient', 'fredric.ngugi@yahoo.com_rtaer', 11, 'rtaer', 1, 'fredric.ngugi@yahoo.com', 'read', 'where do we begin?'),
-(23, 'doctor', 'fredric.ngugi@yahoo.com_rtaer', 1, 'fredric.ngugi@yahoo.com', 11, 'rtaer', 'read', 'hey'),
-(25, 'patient', 'fredric.ngugi@yahoo.com_rtaer', 11, 'rtaer', 1, 'fredric.ngugi@yahoo.com', 'read', 'sorry for the late reply'),
-(26, 'doctor', 'morris@gmail.com_646', 2, 'morris@gmail.com', 6, '646', 'unread', 'hello kjh'),
-(27, 'doctor', 'morris@gmail.com_646', 2, 'morris@gmail.com', 6, '646', 'unread', 'attempt message 2');
+(29, 'patient', 'fredric.ngugi@yahoo.com_646', 6, '646', 1, 'fredric.ngugi@yahoo.com', 'unread', '+zjPeS04/RcQJKdEnB9mHW594izow8tW1z9dx6Aa82h3Dvmv8OCqaiF3Fw9gN4y7');
 
 -- --------------------------------------------------------
 
@@ -199,7 +184,10 @@ CREATE TABLE `patientsmeallog` (
 
 INSERT INTO `patientsmeallog` (`userID`, `mealName`, `mealTime`, `entryID`, `recordDate`) VALUES
 (6, 'food1', '07:50:00', 1, '2023-08-21'),
-(6, 'food 2', '12:50:00', 2, '2023-08-21');
+(6, 'food 2', '12:50:00', 2, '2023-08-21'),
+(6, 'food 1', '08:00:00', 3, '2023-08-22'),
+(6, 'food 2', '12:00:00', 4, '2023-08-22'),
+(6, 'food 3', '22:00:00', 5, '2023-08-22');
 
 -- --------------------------------------------------------
 
@@ -268,7 +256,7 @@ CREATE TABLE `regpatients` (
   `lastName` varchar(50) NOT NULL,
   `emailAddress` varchar(50) NOT NULL,
   `institution` varchar(100) NOT NULL,
-  `password` varchar(50) NOT NULL,
+  `password` text DEFAULT NULL,
   `illness` varchar(200) NOT NULL,
   `address` varchar(200) NOT NULL,
   `age` int(11) NOT NULL,
@@ -282,8 +270,9 @@ CREATE TABLE `regpatients` (
 --
 
 INSERT INTO `regpatients` (`id`, `firstName`, `lastName`, `emailAddress`, `institution`, `password`, `illness`, `address`, `age`, `gender`, `phoneNumber`, `profilePhoto`) VALUES
-(6, 'khj', 'jh', '646', 'mediheal hospital', 'hgh', 'Array', '456', 56, 'Female', 0, ''),
-(11, 'amsnfc', ' SDNF', 'rtaer', 'mediheal hospital', '234', 'Condition A', '1231', 34, 'Male', 2313, '');
+(6, 'khj', 'jh', '646', 'mediheal hospital', 'BIw6HeLqdkTIjmBI8zeHqg==', 'Array', '456', 56, 'Female', 0, ''),
+(11, 'amsnfc', ' SDNF', 'rtaer', 'mediheal hospital', 'xbytrGCr+Gk6Bd4IHkKU8A==', 'Condition A', '1231', 34, 'Male', 2313, ''),
+(13, 'berclay', 'Sprouts', 'berclaym@gmail.com', 'mediheal hospital', '4XnLuIpnX7JL5i3plnywyg==', 'Condition B', 'Nairobi', 25, 'Male', 722222222, '');
 
 -- --------------------------------------------------------
 
@@ -378,7 +367,7 @@ ALTER TABLE `reports`
 -- AUTO_INCREMENT for table `chat`
 --
 ALTER TABLE `chat`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 
 --
 -- AUTO_INCREMENT for table `dosage`
@@ -402,7 +391,7 @@ ALTER TABLE `patientsleeplog`
 -- AUTO_INCREMENT for table `patientsmeallog`
 --
 ALTER TABLE `patientsmeallog`
-  MODIFY `entryID` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `entryID` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `regdoctors`
@@ -420,7 +409,7 @@ ALTER TABLE `reginstitutions`
 -- AUTO_INCREMENT for table `regpatients`
 --
 ALTER TABLE `regpatients`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `reports`
