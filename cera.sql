@@ -1,9 +1,9 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.0
+-- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 15, 2023 at 02:03 PM
+-- Generation Time: Sep 15, 2023 at 04:04 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -35,7 +35,7 @@ CREATE TABLE `appointments` (
   `appointmentTime` varchar(8) DEFAULT NULL,
   `pConfirmed` tinyint(1) NOT NULL,
   `cancelled` tinyint(1) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `appointments`
@@ -90,7 +90,7 @@ CREATE TABLE `chat` (
   `sent_to` varchar(40) NOT NULL,
   `readStatus` varchar(10) NOT NULL,
   `message` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `chat`
@@ -157,7 +157,7 @@ CREATE TABLE `patientmedlog` (
   `medTime` datetime NOT NULL,
   `entryID` int(20) NOT NULL,
   `recordDate` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -172,15 +172,15 @@ CREATE TABLE `patientsexerciselog` (
   `exerciseType` varchar(40) NOT NULL,
   `exerciseDuration` int(4) NOT NULL,
   `exerciseTime` varchar(20) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `patientsexerciselog`
 --
 
 INSERT INTO `patientsexerciselog` (`recordID`, `userID`, `recordDate`, `exerciseType`, `exerciseDuration`, `exerciseTime`) VALUES
-(0, 28, '2023-08-29 12:31:35', 'Aerobics', 10, '10:30'),
-(0, 28, '2023-08-29 12:31:44', 'Aerobics', 10, '10:30');
+(0, 28, '2023-08-29 09:31:35', 'Aerobics', 10, '10:30'),
+(0, 28, '2023-08-29 09:31:44', 'Aerobics', 10, '10:30');
 
 -- --------------------------------------------------------
 
@@ -193,23 +193,21 @@ CREATE TABLE `patientsleeplog` (
   `sleepTime` int(2) NOT NULL,
   `entryID` int(20) NOT NULL,
   `recordDate` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `patientsleeplog`
 --
 
 INSERT INTO `patientsleeplog` (`userID`, `sleepTime`, `entryID`, `recordDate`) VALUES
-(6, 3600, 1, '2023-06-23 14:31:39'),
-(6, 3600, 2, '2023-06-23 14:31:56'),
-(6, 1, 3, '2023-06-23 14:32:12'),
-(6, 1, 4, '2023-06-23 14:35:14'),
-(12, 3, 5, '2023-07-04 15:54:33'),
-(12, 18, 7, '2023-07-05 15:29:57'),
-(29, 11, 8, '2023-08-28 08:32:43'),
-(29, 7, 9, '2023-08-28 08:34:34'),
-(29, 7, 10, '2023-08-28 08:34:54'),
-(28, 15, 11, '2023-08-29 12:05:49');
+(6, 7, 1, '2023-08-18 07:58:19'),
+(6, 5, 2, '2023-08-18 07:58:29'),
+(6, 8, 3, '2023-08-18 07:58:42'),
+(6, 3, 4, '2023-08-18 07:59:07'),
+(29, 11, 8, '2023-08-28 05:32:43'),
+(29, 7, 9, '2023-08-28 05:34:34'),
+(29, 7, 10, '2023-08-28 05:34:54'),
+(28, 15, 11, '2023-08-29 09:05:49');
 
 -- --------------------------------------------------------
 
@@ -220,10 +218,10 @@ INSERT INTO `patientsleeplog` (`userID`, `sleepTime`, `entryID`, `recordDate`) V
 CREATE TABLE `patientsmeallog` (
   `userID` int(10) NOT NULL,
   `mealName` varchar(100) NOT NULL,
-  `mealTime` varchar(20) NOT NULL,
+  `mealTime` time NOT NULL,
   `entryID` int(20) NOT NULL,
-  `recordDate` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+  `recordDate` date NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `patientsmeallog`
@@ -234,7 +232,13 @@ INSERT INTO `patientsmeallog` (`userID`, `mealName`, `mealTime`, `entryID`, `rec
 (6, 'food 2', '12:50:00', 2, '2023-08-21'),
 (6, 'food 1', '08:00:00', 3, '2023-08-22'),
 (6, 'food 2', '12:00:00', 4, '2023-08-22'),
-(6, 'food 3', '22:00:00', 5, '2023-08-22');
+(6, 'food 3', '22:00:00', 5, '2023-08-22'),
+(29, 'Githeri', '00:00:00', 6, '2023-08-27'),
+(29, 'Githeri', '00:00:00', 7, '2023-08-27'),
+(28, '', '00:00:00', 8, '0000-00-00'),
+(28, '', '00:00:00', 9, '0000-00-00'),
+(28, 'Mutura', '13:41:00', 10, '2023-08-28'),
+(28, 'Chakula tu', '20:02:00', 11, '2023-08-29');
 
 -- --------------------------------------------------------
 
@@ -255,18 +259,15 @@ CREATE TABLE `regdoctors` (
   `gender` varchar(10) NOT NULL,
   `profilePhoto` blob NOT NULL,
   `phoneNumber` int(14) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `regdoctors`
 --
 
 INSERT INTO `regdoctors` (`id`, `firstName`, `lastName`, `emailAddress`, `institution`, `password`, `specialty`, `address`, `age`, `gender`, `profilePhoto`, `phoneNumber`) VALUES
-(1, 'Fredrick', 'Kamau', 'fredric.ngugi@yahoo.com', 'none', 'er324', '', '', 23, 'Female', '', 0),
-(3, 'Fredrick', 'Kamau', 'fredric.ngu@yahoo.com', 'New Hospital', '123', '', '', 34, 'Male', '', 787689899),
-(4, 'adhfkj', 'jadfhds', '', 'Hospitali', '', 'Condition C', '34434', 0, 'Female', '', 2147483647),
-(5, 'adhfkj', 'jadfhds', '', 'Hospitali', '', 'Condition C', '34434', 0, 'Female', '', 2147483647),
-(6, 'Daktary', 'Daktary', 'Daktary@Daktary.com', 'New Hospital', 'Daktary', 'Condition B', '34534', 0, 'Female', '', 732645334);
+(1, 'Fredrick', 'Kamau', 'fredric.ngugi@yahoo.com', 'none', 'ULBCXckbvOWLrae3HBB99g==', '', '', 23, 'Female', '', 0),
+(2, 'Morris', 'Muema', 'morris@gmail.com', 'mediheal hospital', 'ntj5NGsbJiWn94OnHNlc8w==', '', '', 25, 'Male', '', 0);
 
 -- --------------------------------------------------------
 
@@ -284,15 +285,16 @@ CREATE TABLE `reginstitutions` (
   `illnesses` varchar(200) NOT NULL,
   `postalAddress` varchar(200) NOT NULL,
   `profilePhoto` blob NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `reginstitutions`
 --
 
 INSERT INTO `reginstitutions` (`id`, `institutionName`, `location`, `emailAddress`, `phoneNumber`, `password`, `illnesses`, `postalAddress`, `profilePhoto`) VALUES
-(1, 'New Hospital', '234', '234234', '3242', 'qweqw', 'Condition B', '2342', ''),
-(2, 'Hospitali', 'Nairobi', 'hospitali@hospitali.com', '254111111111', 'Hospitali123', 'Condition A*Condition C', '13051', '');
+(1, 'New Hospital', '234', '234234', '3242', 'TB8MvNoRYKrdyScdWwubgw==', 'Condition B', '2342', ''),
+(2, 'mediheal hospital', 'Eldoret', 'mediheal.hos@gmail.com', '0722222222', 'm97SyqgW1aPhLBeUlcmNhQ==', 'Condition B', '22234-3345', ''),
+(3, 'Hospitali', 'Nairobi', 'hospitali@hospitali.com', '254111111111', 'xHf2LRAW6NbUqZs/3fLc0A==', 'Condition A*Condition C', '13051', '');
 
 -- --------------------------------------------------------
 
@@ -312,19 +314,18 @@ CREATE TABLE `regpatients` (
   `age` int(11) NOT NULL,
   `gender` varchar(10) NOT NULL,
   `phoneNumber` int(14) NOT NULL,
-  `profilePhoto` blob NOT NULL,
-  `status` int(1) NOT NULL,
-  `registrationDate` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+  `status` int(11) NOT NULL,
+  `profilePhoto` blob NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `regpatients`
 --
 
-INSERT INTO `regpatients` (`id`, `firstName`, `lastName`, `emailAddress`, `institution`, `password`, `illness`, `address`, `age`, `gender`, `phoneNumber`, `profilePhoto`) VALUES
-(6, 'khj', 'jh', '646', 'mediheal hospital', 'BIw6HeLqdkTIjmBI8zeHqg==', 'Array', '456', 56, 'Female', 0, ''),
-(11, 'amsnfc', ' SDNF', 'rtaer', 'mediheal hospital', 'xbytrGCr+Gk6Bd4IHkKU8A==', 'Condition A', '1231', 34, 'Male', 2313, ''),
-(13, 'berclay', 'Sprouts', 'berclaym@gmail.com', 'mediheal hospital', '4XnLuIpnX7JL5i3plnywyg==', 'Condition B', 'Nairobi', 25, 'Male', 722222222, '');
+INSERT INTO `regpatients` (`id`, `firstName`, `lastName`, `emailAddress`, `institution`, `password`, `illness`, `address`, `age`, `gender`, `phoneNumber`, `status`, `profilePhoto`) VALUES
+(6, 'khj', 'jh', '646', 'mediheal hospital', 'BIw6HeLqdkTIjmBI8zeHqg==', 'Array', '456', 56, 'Female', 0, 0, ''),
+(11, 'amsnfc', ' SDNF', 'rtaer', 'mediheal hospital', 'xbytrGCr+Gk6Bd4IHkKU8A==', 'Condition A', '1231', 34, 'Male', 2313, 0, ''),
+(13, 'berclay', 'Sprouts', 'berclaym@gmail.com', 'mediheal hospital', '4XnLuIpnX7JL5i3plnywyg==', 'Condition B', 'Nairobi', 25, 'Male', 722222222, 0, '');
 
 -- --------------------------------------------------------
 
@@ -342,17 +343,30 @@ CREATE TABLE `reports` (
   `sent_to` varchar(40) NOT NULL,
   `readStatus` varchar(10) NOT NULL,
   `message` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `reports`
+--
+
+INSERT INTO `reports` (`id`, `sender_class`, `chat_identity`, `sent_from_id`, `emailAddress`, `sent_to_id`, `sent_to`, `readStatus`, `message`) VALUES
+(1, 'patient', 'mediheal.hos@gmail.com_rtaer', 11, 'rtaer', 2, 'mediheal.hos@gmail.com', 'read', 'Hello , I would like to launch a complaint');
 
 --
 -- Indexes for dumped tables
 --
 
 --
--- Indexes for table `appointments`
+-- Indexes for table `chat`
 --
-ALTER TABLE `appointments`
-  ADD PRIMARY KEY (`appointmentID`);
+ALTER TABLE `chat`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `dosage`
+--
+ALTER TABLE `dosage`
+  ADD PRIMARY KEY (`dosageId`);
 
 --
 -- Indexes for table `patientmedlog`
@@ -393,11 +407,17 @@ ALTER TABLE `regpatients`
   ADD UNIQUE KEY `emailAddress` (`emailAddress`);
 
 --
+-- Indexes for table `reports`
+--
+ALTER TABLE `reports`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT for table `appointments`
+-- AUTO_INCREMENT for table `chat`
 --
 ALTER TABLE `chat`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
@@ -424,19 +444,19 @@ ALTER TABLE `patientsleeplog`
 -- AUTO_INCREMENT for table `patientsmeallog`
 --
 ALTER TABLE `patientsmeallog`
-  MODIFY `entryID` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `entryID` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `regdoctors`
 --
 ALTER TABLE `regdoctors`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `reginstitutions`
 --
 ALTER TABLE `reginstitutions`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `regpatients`
