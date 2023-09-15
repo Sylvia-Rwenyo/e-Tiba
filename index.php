@@ -13,12 +13,7 @@
 </head>
 <body class="home">
     <div class="partners-CTA">
-       <a href="partners/reg-partner.php"> 
-            <p>Join us as a partner hospital</p>
-       </a>
-       <a href="doctors/independent-reg-doc.php">
-            <p>Join us as independent medical practitioner</p>
-        </a>
+       
     </div>
     <?php include_once "menu.php" ?>
     <div class="intro">
@@ -29,9 +24,28 @@
             <p>Let us help you track your health and treatment process</p>
         </div>
         <div class="CTA">
-            <a href="register.php"><button class="pos-btn">Join us</button></a>
+            <button class="pos-btn" id="join-us" onclick="popupFunc()" style="position:relative;display:block;cursor:pointer;">Join Us
+                <span class="popuplinks" id="popuplinks">
+                    Select To Join Us As:
+                    <a href="register.php">
+                        <p>Patient</p>
+                    </a>
+                    <a href="partners/reg-partner.php"> 
+                        <p>Partner Hospital</p>
+                    </a>
+                    <a href="doctors/independent-reg-doc.php">
+                        <p>Independent Medical Practitioner</p>
+                    </a>
+                </span>
+            </button>
             <a href="about-us.php"><button class="neg-btn">Learn More</button></a>
         </div>
     </div>
+    <script>
+        function popupFunc(){
+            var popup = document.getElementById("popuplinks");
+            popup.classList.toggle("show");
+        }
+    </script>
 </body>
 </html>
