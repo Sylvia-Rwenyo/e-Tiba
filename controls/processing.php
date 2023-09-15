@@ -19,6 +19,11 @@ if(isset($_POST['register']))
      for($i=0; $i < count($_POST['condition']); $i++){
         $conditionsArr[] = $_POST['condition'][$i];
          }
+    $conditions = htmlspecialchars(implode('*', $conditionsArr));
+    $password = htmlspecialchars($_POST['password']);
+     $age = htmlspecialchars($_POST['age']);
+     $address = htmlspecialchars($_POST['address']);
+	 $gender = htmlspecialchars($_POST['gender']);
     $conditions = implode('*', $conditionsArr);	
 
     $password = $_POST['password'];
@@ -31,7 +36,21 @@ if(isset($_POST['register']))
      $address = htmlspecialchars($_POST['address']);
 	 $gender = htmlspecialchars($_POST['gender']);
     
-     
+    //  check for duplicate entries first
+     $sql_e=mysqli_query($conn,"SELECT * FROM regpatients where emailAddress='$emailAddress'");
+        if(mysqli_num_rows($sql_e)>0)
+        {
+            echo '<script> 
+            window.location.href = "../register.php?e=3"
+            </script>';
+        }
+        $sql_f=mysqli_query($conn,"SELECT * FROM regpatients where phoneNumber='$phoneNumber'");
+        if(mysqli_num_rows($sql_f)>0)
+        {
+            echo '<script> 
+            window.location.href = "../register.php?e=2"
+            </script>';
+        }
      //statement to enter values into the registration table in the database
 	 $sql = "INSERT INTO regPatients (firstName, lastName, emailAddress, institution,  password, illness, address, age, gender,phoneNumber )
 	 VALUES ('$firstName','$lastName', '$emailAddress','$institution', '$password', '$conditions', '$address', '$age', '$gender', '$phoneNumber')";
@@ -78,7 +97,6 @@ if(isset($_POST['reg-partner']))
 
     $postalAddress = htmlspecialchars($_POST['postalAddress']);
     
-     
      //statement to enter values into the registration table in the database
 	 $sql = "INSERT INTO regInstitutions (institutionName, location, emailAddress, phoneNumber,  password, illnesses, postalAddress)
 	 VALUES ('$institutionName','$location', '$emailAddress','$phoneNumber', '$password', '$conditions', '$postalAddress')";
@@ -111,7 +129,7 @@ if(isset($_POST['add-patient'])){
          }
     $conditions = implode('*', $conditionsArr);    
 	 
-    $sql=mysqli_query($conn,"SELECT * FROM regpatients where emailAddress='$emailAddress' AND phoneNumber='$phoneNumber'");
+    $sql=mysqli_query($conn,"SELECT * FROM regpatients where emailAddress='$emailAddress' || phoneNumber='$phoneNumber'");
     if(mysqli_num_rows($sql)>0)
     {
         echo "User Already Registered"; 
@@ -371,6 +389,7 @@ function login($conn){
             $_SESSION["username"] = $row['firstName'];
             $_SESSION["id"]=$row['id'];
             $_SESSION["loggedIN"] = true;
+            $_SESSION["menuState"] = false;
             header('location:../dashboard.php');
     }else{
         $stmt = "SELECT * FROM regdoctors where emailAddress='$emailAddress' and password='$password'"; 
@@ -382,6 +401,7 @@ function login($conn){
             $_SESSION["username"] = $row['firstName'];
             $_SESSION["id"]=$row['id'];
             $_SESSION["loggedIN"] = true;
+            $_SESSION["menuState"] = false;
             header('location:../patient-records.php');
         }else{
         $stmt = "SELECT * FROM reginstitutions where emailAddress='$emailAddress' and password='$password'"; 
@@ -393,9 +413,12 @@ function login($conn){
             $_SESSION["username"] = $row['institutionName'];
             $_SESSION["id"]=$row['id'];
             $_SESSION["loggedIN"] = true;
+            $_SESSION["menuState"] = false;
             header('location:../dashboard.php');
         }else{
-            echo "Invalid email address /Password";
+            echo '<script> 
+            window.location.href = "../register.php?login=1&e=1"
+        </script>';
          }
 }
     }
@@ -471,12 +494,64 @@ if(isset($_POST['update']))
     $sql ='';
     session_start();
     if($_SESSION['category'] == 'patient'){
+        
+        // check for duplicate entries first
+        $sql_e=mysqli_query($conn,"SELECT * FROM regpatients where emailAddress='$emailAddress'");       
+        if(mysqli_num_rows($sql_e)>0)
+        {
+            echo '<script> 
+            window.location.href = "../settings.php?e=3"
+            </script>';
+        }
+        $sql_f=mysqli_query($conn,"SELECT * FROM regpatients where phoneNumber='$phoneNumber'");
+        if(mysqli_num_rows($sql_f)>0)
+        {
+            echo '<script> 
+            window.location.href = "../settings.php?e=2"
+            </script>';
+        }
+
     $sql .= "UPDATE regPatients SET  emailAddress='$emailAddress', password='$password', 
                    profilePhoto='$profilePhoto', phoneNumber='$phoneNumber' WHERE id='$id'";
+
     }  else if($_SESSION['category'] == 'doctor'){
+
+        // check for duplicate entries first
+        $sql_e=mysqli_query($conn,"SELECT * FROM regDoctors where emailAddress='$emailAddress'");
+        if(mysqli_num_rows($sql_e)>0)
+        {
+            echo '<script> 
+            window.location.href = "../settings.php?e=3"
+            </script>';
+        }
+        $sql_f=mysqli_query($conn,"SELECT * FROM regDoctors where phoneNumber='$phoneNumber'");
+        if(mysqli_num_rows($sql_f)>0)
+        {
+            echo '<script> 
+            window.location.href = "../settings.php?e=2"
+            </script>';
+        }
         $sql .= "UPDATE regDoctors SET  emailAddress='$emailAddress', password='$password', 
                        profilePhoto='$profilePhoto', phoneNumber='$phoneNumber' WHERE id='$id'";
+
     }  else if($_SESSION['category'] == 'hospital'){
+
+         // check for duplicate entries first
+         $sql_e=mysqli_query($conn,"SELECT * FROM reginstitutions where emailAddress='$emailAddress'");
+         if(mysqli_num_rows($sql_e)>0)
+         {
+             echo '<script> 
+             window.location.href = "../settings.php?e=3"
+             </script>';
+         }
+         $sql_f=mysqli_query($conn,"SELECT * FROM reginstitutions where phoneNumber='$phoneNumber'");
+         if(mysqli_num_rows($sql_f)>0)
+         {
+             echo '<script> 
+             window.location.href = "../settings.php?e=2"
+             </script>';
+         }
+
         $sql .= "UPDATE regDoctors SET  emailAddress='$emailAddress', password='$password', 
                         profilePhoto='$profilePhoto', phoneNumber='$phoneNumber' WHERE id='$id'";
     }
@@ -520,7 +595,7 @@ if (isset($_POST["record-sleep"])) {
 
     if (mysqli_query($conn, $sql)) {
         echo '
-        <script> window.location.href="../patient-log.php"</script>
+        <script> window.location.href="../dashboard.php"</script>
         ';
     }else{
         // Show error if the SQL query is not executed
@@ -530,7 +605,36 @@ if (isset($_POST["record-sleep"])) {
     // Close the database connection
     mysqli_close($conn);
 }
+if(isset($_POST["record-physicalActivity"]))
+{	
+    //create session
+    session_start();
+    
+    //store values submitted in the signup form in variables
+     $exerciseType = '';
+     $exerciseTypeArr = $_POST['exerciseType'];
+     $exerciseType .= implode('*', $exerciseTypeArr);	
+	 $exerciseDuration = $_POST['exerciseDuration'];
+     $exerciseTime = $_POST['exerciseTime'];
+     $id = $_SESSION['id'];
+     //statement to enter values into the registration table in the database
+	 $sql = "INSERT INTO patientsexerciselog (userID, exerciseType, exerciseTime, exerciseDuration)
+	 VALUES ('$id','$exerciseType','$exerciseTime', '$exerciseDuration')";
 
+     //if sql query is not executed...
+	 if (mysqli_query($conn, $sql)) {
+        echo '
+        <script> window.location.href="../dashboard.php"</script>
+        ';	
+         }else{
+                //show error
+		echo "Error: " . $sql . "
+" . mysqli_error($conn);
+	     }
+     //close connection
+	 mysqli_close($conn);
+
+}
 if(isset($_POST["record-meal"]))
 {	
     //create session
@@ -548,7 +652,7 @@ if(isset($_POST["record-meal"]))
      //if sql query is not executed...
 	 if (mysqli_query($conn, $sql)) {
         echo '
-        <script> window.location.href="../patient-log.php"</script>
+        <script> window.location.href="../dashboard.php"</script>
         ';	
          }else{
                 //show error
@@ -796,8 +900,8 @@ if(isset($_POST['submit-report-or-suggestion']))
     }
 }
 // book appointment date 
-if(isset($_GET["a"]))
-    if($_GET["a"] == "p"){{	
+if(isset($_GET["a"])){
+    if($_GET["a"] == "p"){
         //create session
         session_start();
         
@@ -824,5 +928,23 @@ if(isset($_GET["a"]))
          //close connection
          mysqli_close($conn);
     
+    }
+    if($_GET["a"] == "pc"){
+        $patientID = $_GET['pID'];
+        $appointmentID = $_GET['apID'];
+        $sql = "UPDATE appointments SET  cancelled=1 WHERE appointmentID='$appointmentID'";
+         //if sql query is not executed...
+         if (mysqli_query($conn, $sql)) {
+            echo '
+            <script>window.location.href = "../calendar.php?p='.$patientID.'"</script>
+            ';	
+        }else{
+                    //show error
+            echo "Error: " . $sql . "
+    " . mysqli_error($conn);
+        
+         }
+         //close connection
+         mysqli_close($conn);
     }}
 ?>

@@ -152,7 +152,7 @@ if (isset($result['dosage'])) {
         $i++;
         ?>
         </table>
-        <button class="records-print-btn" onclick="print1patientRecord()">Print</button>
+        <button class="records-print-btn" onclick="print1patientRecord()">Download</button>
 
         </section>
     </div>

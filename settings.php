@@ -80,6 +80,38 @@
                 if (mysqli_num_rows($records) > 0) {
                 $i=0;
                 while($result = mysqli_fetch_array($records)) {
+                    if(isset($_GET['e'])){
+                        echo '<style>
+                        .alertDiv 
+                            {
+                                display: block;
+                            }
+                        </style>';
+                            if($_GET['e'] == 2){                
+                                ?>
+                                 <div class="alertDiv">
+                                    <button  class="btn btn-lg btn-danger dialog-box-btn" onclick="register2()">x</button>
+                                    <p>Phone number already registered</p>  
+                                </div>
+                                   <?php
+                            }
+                            if($_GET['e'] == 3){   
+                            ?>
+                                 <div class="alertDiv">
+                                    <button  class="btn btn-lg btn-danger dialog-box-btn" onclick="register2()">x</button>
+                                    <p>Email address already registered</p> 
+                                </div>
+                                <?php
+                            }
+                            if($_GET['e'] == 4){   
+                            ?>
+                             <div class="alertDiv">
+                                <button  class="btn btn-lg btn-danger dialog-box-btn" onclick="register2()">x</button>
+                                <p>Password must be 8 - 20 characters long and include an uppercase letter, a number, and a symbol. Password must not include spaces.</p>  
+                            </div>
+                            <?php
+                            }
+                        }
         ?>
         <!-- show form for editing user info -->
                 <form action="controls/processing.php" method="POST" enctype="multipart/form-data" id="editingProfile">
@@ -97,7 +129,7 @@
                             alt="profile photo" id="pfp"/>  
                             <label for="fileInput" id="pfpInput">
                                 Change<i class="fa-solid fa-cloud-arrow-up"></i>
-                                <input type="file" id="fileInput"  name="profilePhoto" />
+                                <input type="file" id="fileInput"  name="profilePhoto" id="profilePhoto" />
                             </label>
                     </div>
                 <!-- edit name and password -->
@@ -178,6 +210,14 @@
         confirmDelete.style.display = "none";
         }
 
+        //remove dialog box
+        function register2(){
+        window.location.href = "settings.php";
+    }
+    if(sessionStorage.getItem("editFormState") == true){
+            editProfile();
+        }
+
         // remove all profile divs in the page except the editing form
         function editProfile(){
             let profileDivs = document.getElementsByClassName('profile');
@@ -186,6 +226,7 @@
             }
             document.getElementById('editingProfile').style.display = "block";
         }
+        console.log(sessionStorage.getItem("editFormState"));
         // display all profile divs in the page except the editing form
         function exitForm(){
             let profileDivs = document.getElementsByClassName('profile');
@@ -193,6 +234,10 @@
                 profileDivs[i].style.display = 'block';
             }
             document.getElementById('editingProfile').style.display = "none";
+            sessionStorage.setItem("editFormState", false);
+        }
+        if(sessionStorage.getItem("editFormState") == false){
+            exitForm();
         }
 
         // show pfp file input element

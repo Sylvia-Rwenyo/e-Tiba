@@ -1,45 +1,23 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="https://kit.fontawesome.com/2751fbc624.js" crossorigin="anonymous"></script>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <link rel="icon" href="favicon.ico" />
-    <link rel="stylesheet" href="style.css">
-    <title>Records of Patients</title>
-</head>
-<body class="profileBody" id="profileBody" >
-    <div class="header">
-        <?php include_once 'notif-menu.php';?>
-    </div>
-    <div class="mainBody" id="patient-records-section">
-    <?php 
-        include_once 'dash-menu.php';
-    ?>
-    <section class="main-section">
-        <div class="records-header" style="flex-direction:column;justify-content: unset;">
             <?php
+            if(!isset($_GET['print'])){
+                ?>
+                <section style="margin-top: 0;" id="singlePatientRecords">
+                <?php
             $i=0;
-            $pID = isset($_GET['p']) ? $_GET['p'] : null;
+            $pID = isset($_GET['p']) ? $_GET['p'] : $_SESSION['id'];
             $stmt = mysqli_query($conn,"SELECT * FROM regPatients where id='$pID'");
             if (mysqli_num_rows($stmt) > 0) {
                 $i=0;
                 while($result = mysqli_fetch_array($stmt)) {
+                    if(!isset($_GET['dr'])){
             ?>
-            <h2 style="width: 30%;"><?php echo $result["firstName"] .' '.$result["lastName"]?></h2>
-            <h4><strong>Contact number:</strong>  <?php echo $result["phoneNumber"] ?></h4>
+            <div class="records-header" style="flex-direction:column;justify-content: unset;">
+                <h2 style="width: 30%; margin-left: 0;"><?php echo $result["firstName"] .' '.$result["lastName"]?></h2>
+                <h4 style="margin-left: 0;"><strong>Contact number:</strong>  <?php echo $result["phoneNumber"] ?></h4>
+            </div>
             <?php
-         
+                    }
             ?>
-            <!-- search functionality to be added. Get from dosage-registration.php-->
-            <?php 
-            // include_once "doctors/dosage-reg-search-div.php";
-            ?>
-        </div>
         <table>
         <tr>
             <th>Registration Date</th>
@@ -132,16 +110,19 @@
         <tr>
             <th>Current Treatment plan</th>
             
-            <td style="display:flex;flex-direction:row;padding:10px;">
-                <!-- register new dosage -->
-                <a style="text-decoration:none;margin-right:20px;" href="doctors/dosage-registration-form.php?id=<?php echo $pID; ?>"><i class="fa fa-plus"></i><br/>New Dose</a>
-            
-                <!-- dosages for this patient patients -->
-                <a style="text-decoration:none;margin-right:20px;" href="doctors/dosage-registration.php?id=<?php echo $pID; ?>"><i class="fa-solid fa-folder"></i><br/>Doses</a>
-            
-                <!-- dosages for all patients -->
-                <a style="text-decoration:none;margin-right:20px;" href="doctors/view-all-dosages.php"><i class="fa-solid fa-folder-tree"></i><br/>All Doses</a>
-            </td>
+            <td><?php
+        if (isset($result['dosage'])) {
+            // get dosage info
+        } else {
+            echo "Not under any treatment";
+            ?>
+            &nbsp;  &nbsp;  &nbsp;  &nbsp;
+            <!-- link to this patient's treatment records -->
+            <a href="">See history</a>
+            <?php
+
+        }
+    ?></td>
         </tr>
         <tr>
             <th>Progress</th>
@@ -152,24 +133,45 @@
             </td>
         </tr>
         </table>
-                        </section>
-                    </div>
-                </body>
-                </html>
-              
+        <button class="records-print-btn" onclick="print1patientRecord()">Download</button>
+
+                        </section>              
                 <?php
             }
             $i++;
-        }else{ 
-                include_once 'conn.php';
-            $i=0;
-            $pID = isset($_GET['p']) ? $_GET['p'] : $_SESSION['id'];
-            $stmt = mysqli_query($conn,"SELECT * FROM regPatients where id='$pID'");
-            if (mysqli_num_rows($stmt) > 0) {
-                $i=0;
-                while($result = mysqli_fetch_array($stmt)) {
+        }}else{ 
             ?>
-        <table>
+            <!DOCTYPE html>
+            <html lang="en">
+            <head>
+                <meta charset="UTF-8">
+                <meta http-equiv="X-UA-Compatible" content="IE=edge">
+                <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js"></script>
+                <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+                <script src="https://kit.fontawesome.com/2751fbc624.js" crossorigin="anonymous"></script>
+                <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+                <link rel="icon" href="favicon.ico" />
+                <link rel="stylesheet" href="style.css">
+                <title>Records of Patients</title>
+                </head>
+                <body class="profileBody">
+                <div class="mainBody" id="patient-records-section">
+                <section style="margin-top: 0;" id="singlePatientRecords">
+                <?php 
+                    include_once 'conn.php';
+                    session_start();
+                    $i=0;
+                    $pID = isset($_GET['p']) ? $_GET['p'] : $_SESSION['id'];
+                    $stmt = mysqli_query($conn,"SELECT * FROM regPatients where id='$pID'");
+                    if (mysqli_num_rows($stmt) > 0) {
+                        $i=0;
+                        while($result = mysqli_fetch_array($stmt)) {
+                    ?>
+            <h2 style="width: 30%; margin-left: 0;"><?php echo $result["firstName"] .' '.$result["lastName"]?></h2>
+            <h4 style="margin-left: 0;"><strong>Contact number:</strong>  <?php echo $result["phoneNumber"] ?></h4>
+
+        <table style="margin-left: 0;">
         <tr>
             <th>Registration Date</th>
             <td><?php
@@ -263,15 +265,11 @@
             
             <td><?php
         if (isset($result['dosage'])) {
-            echo $result['dosage'];
+            // get dosage info
         } else {
             echo "Not under any treatment";
             ?>
-            &nbsp;  &nbsp;  &nbsp;  &nbsp;
-            <!-- link to this patient's treatment records -->
-            <a href="">See history</a>
             <?php
-
         }
     ?></td>
         </tr>
@@ -288,24 +286,26 @@
         $i++;
         ?>
         </table>
-        <?php
-            if(isset($_GET['print'])){
-                ?>
+                </section>
+                </div>
+                </body>
+            </html>
+        <style>
+            .menuBar, .menu{
+                display: none;
+            }
+        </style>
                 <script>
         window.onload(window.print());
         if(window.print()){
             window.location.href = 'dashboard.php?r=1';
         }
         </script>
-                        <?php
-                  
-                }else{
-
-        ?>
-        <button class="records-print-btn" onclick="print1patientRecord()">Print</button>
         <?php
-         }}
+            }
          ?>
+
+
         <script>
     function toPatientCalendar(patientID){
         window.location.href = 'calendar.php?p='+patientID;
@@ -317,7 +317,7 @@ $.ajax({
     method: 'GET',
     success: function(response) {
     // Handle the response and update the HTML content
-    $('#profile-body').html(response);
+    $('#singlePatientRecords').html(response);
     console.log("all good");
     },
     error: function(xhr, status, error) {
@@ -331,7 +331,7 @@ $.ajax({
 setInterval(fetchData, 60000);
 
 function print1patientRecord(){
-    window.location.href = 'single-patient-records.php?print=1';
+    window.location.href = 'single-patient-records.php?print=1&p=' + <?php echo $_GET['p']?>;
 }
 // </script>
      

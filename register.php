@@ -20,6 +20,26 @@
                 <h3>Welcome back</h3>
                 <p>CERA, your healthcare companion</p>
             </div>
+            <?php
+            if(isset($_GET['e'])){
+                echo '<style>
+                .alertDiv 
+                    {
+                        display: block;
+                    }
+                </style>';
+                if($_GET['e'] == 1){  
+                    ?>
+                     <div id="invalidAlert" class="alertDiv">
+                        <p>Invalid password or email address. Please try again</p> 
+                        <div>
+                            <button  class="btn btn-lg btn-danger dialog-box-btn" onclick="logIn2()">x</button>
+                        </div>
+                    </div>
+                    <?php
+                }
+                }}
+            ?>
             <form method="POST" action="controls/processing.php">
                 <input type="text" name="emailAddress" placeholder="Email Address" required/>
                 <div id="pswdDiv">
@@ -30,9 +50,40 @@
                 </div>
                 <input type="submit" value="submit" name="logIn" class="pos-btn"/>
             </form>
-            <?php
-        }
+ <?php
     }else{
+        if(isset($_GET['e'])){
+            echo '<style>
+            .alertDiv 
+                {
+                    display: block;
+                }
+            </style>';
+                if($_GET['e'] == 2){                
+                    ?>
+                     <div class="alertDiv">
+                        <button  class="btn btn-lg btn-danger dialog-box-btn" onclick="register2()">x</button>
+                        <p>Phone number already registered</p>  
+                    </div>
+                       <?php
+                }
+                if($_GET['e'] == 3){   
+                ?>
+                     <div class="alertDiv">
+                        <button  class="btn btn-lg btn-danger dialog-box-btn" onclick="register2()">x</button>
+                        <p>Email address already registered</p> 
+                    </div>
+                    <?php
+                }
+                if($_GET['e'] == 4){   
+                ?>
+                 <div class="alertDiv">
+                    <button  class="btn btn-lg btn-danger dialog-box-btn" onclick="register2()">x</button>
+                    <p>Password must be 8 - 20 characters long and include an uppercase letter, a number, and a symbol. Password must not include spaces.</p>  
+                </div>
+                <?php
+                }
+            }
         // show registration form
     ?>
         <div class="welcome-msg">
@@ -40,19 +91,19 @@
             <p>Please fill the form below with accurate information as this is imporant for future identification with your doctors.</p>
         </div>
         <form method="POST" action="controls/processing.php" id="reg-form">
-            <input type="text" name="firstName" placeholder="First name" required/>
-            <input type="text" name="lastName" placeholder="Last name" required/>
-            <input type="number" name="age" placeholder="Your age" required/>
-            <select name="gender" required>
+            <input type="text" name="firstName" id="firstName" placeholder="First name" required/>
+            <input type="text" name="lastName" id="lastName" placeholder="Last name" required/>
+            <input type="number" name="age" id="age" placeholder="Your age" required/>
+            <select name="gender" id="gender" required>
                 <option selected disabled> Select gender</option>
                 <option>Female</option>
                 <option>Male</option>
                 <option>Prefer not to say</option>
             </select>
-            <input type="email" name="emailAddress" placeholder="Email Address e.g youremail@gmail.com" required/>
-            <input type="number" name="phoneNumber" placeholder="Phone number e.g 07********" required/>
-            <input type="text" name="address" placeholder="Address" required/>
-            <select name="institution" required>
+            <input type="email" name="emailAddress" id="emailAddress" placeholder="Email Address e.g youremail@gmail.com" required/>
+            <input type="number" name="phoneNumber" id="phoneNumber" placeholder="Phone number e.g 07********" required/>
+            <input type="text" name="address" id="address" placeholder="Address" required/>
+            <select name="institution" id="institution" required>
                 <option selected disabled> Select your hospital</option>
                 <?php
                 include_once 'conn.php';
@@ -91,10 +142,19 @@
             <input type="submit" value="submit" name="register" class="pos-btn"/>
         </form>
     <?php
-    }
+    } 
     ?>
 </body>
 <script>
+
+// try logging in again if the password is invalid
+    function logIn2(){
+        window.location.href = "register.php?login=1";
+    }
+    
+    function register2(){
+        window.location.href = "register.php";
+    }
 
     let showPswd = document.getElementById('showPswd');
     let password = document.getElementById("reg-pw");
@@ -121,7 +181,7 @@ let checker =  document.getElementById('passwordChecker');
 let warnings = document.getElementsByClassName('pswd-warning');
 
 //check for upper case letters
-let poorRegExp = /[a-z]/;
+let poorRegExp = /[A-Z]/;
 
 //check for numbers
 let weakRegExp = /(?=.*?[0-9])/;
@@ -183,33 +243,50 @@ password.oninput = function(){
         warnings[4].style.color = "green";
     }
 }
-// function isPasswordStrong(password) {
-//         // Regular expressions to check for upper case letters, numbers, symbols, and spaces
-//         let upperCaseRegExp = /[A-Z]/;
-//         let numbersRegExp = /(?=.*?[0-9])/;
-//         let symbolsRegExp = /(?=.*?[#?!@$%^&*-])/;
-//         let whitespaceRegExp = /\s/;
+document.getElementById('reg-form').onsubmit = (event) => {
+    let passwordValue = password.value;
 
-//         // Check the password against the regular expressions
-//         return (
-//             password.length >= 8 &&
-//             password.length <= 20 &&
-//             upperCaseRegExp.test(password) &&
-//             numbersRegExp.test(password) &&
-//             symbolsRegExp.test(password) &&
-//             !whitespaceRegExp.test(password)
-//         );
-//     }
+    // Regular expressions to check for upper case letters, numbers, symbols, and spaces
+    let upperCaseRegExp = /[A-Z]/;
+    let numbersRegExp = /(?=.*?[0-9])/;
+    let symbolsRegExp = /(?=.*?[#?!@$%^&*-])/;
+    let whitespaceRegExp = /\s/;
 
-//     // Function to handle form submission
-//     document.getElementById('reg-form').onsubmit = () =>{
-//         let isStrongPassword = isPasswordStrong(password);
+    // Check if the password meets the strength criteria
+    let isStrongPassword = (
+        passwordValue.length >= 8 &&
+        passwordValue.length <= 20 &&
+        upperCaseRegExp.test(passwordValue) &&
+        numbersRegExp.test(passwordValue) &&
+        symbolsRegExp.test(passwordValue) &&
+        !whitespaceRegExp.test(passwordValue)
+    );
 
-//         // If the password is not strong, prevent form submission
-//         if (!isStrongPassword) {
-//             event.preventDefault();
-//             alert('Password must be 8 - 20 characters long and include an uppercase letter, a number, and a symbol. Password must not include spaces.');
-//         }
-//     }
+    // If the password is not strong, prevent form submission and show an alert
+    if (!isStrongPassword) {
+        event.preventDefault();
+        window.location.href = "register.php?e=4";
+    }
+
+
+    // store registration information for one session
+    let name = document.getElementById('firstName').value + ' '+ document.getElementById('lastName').value;
+    let emailAddress = document.getElementById('emailAddress').value;
+    let phoneNumber = document.getElementById('phoneNumber').value;
+    let age = document.getElementById('age').value;
+    let gender = document.getElementById('gender').value;
+    let address = document.getElementById('address').value;
+    let institution = document.getElementById('institution').value;
+
+
+    sessionStorage.setItem("name", name);
+    sessionStorage.setItem("phoneNumber", phoneNumber);
+    sessionStorage.setItem("emailAddress", emailAddress);
+    sessionStorage.setItem("age", age);
+    sessionStorage.setItem("gender", gender);
+    sessionStorage.setItem("address", address);
+    sessionStorage.setItem("institution", institution);
+};
+
 </script>
 </html>

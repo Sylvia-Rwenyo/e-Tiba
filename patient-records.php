@@ -25,13 +25,14 @@
         <div class="records-header">
             <h2>Patients</h2>
             <!-- search functionality to be added -->
-            <?php
-            if($_SESSION["category"] != "patient"){
-                include_once 'patient-progress-search-div.php';
-            }
-            ?>
+            <div class="search-bar" style="width:100%">
+                <form action = "" method = "GET" class = "form-inline" style="width:100%">
+                    <input id="search" name = "keyword" type = "text" placeholder = "Search Patient..." class = "form-control" value = "<?php echo isset($_POST['keyword'])?$_POST['keyword']:''?>"/>
+                    <button class="search-btn" type="submit" name = "search"><i class="fa fa-search"></i></button>
+                </form>
+        `   </div>
             <!-- filter/sort functionality -->
-            <div>
+            <div class="search-indicators">
                 <span id="all-indicator" onclick="sort('all')">All</span>
                 <span id="attended-indicator" onclick="sort('my-dosage')">Attended</span>
                 <span id="atRisk-indicator" onclick="sort('at-risk')">At risk</span>
@@ -124,8 +125,11 @@
         else if(isset($_GET['id'])){
             $requested_patient = $_GET['id'];
             $records = "SELECT * FROM regpatients where id = '$requested_patient'";
-        }
-        else{
+        }else if(isset($_GET['search'])){
+
+            $keyword = $_GET['keyword'];
+            $records = "SELECT * FROM regpatients WHERE emailAddress LIKE '$keyword' OR firstName LIKE '$keyword' OR lastName LIKE '$keyword'";
+        }else{
             echo '
                 <style>
                     #all-indicator{
@@ -139,7 +143,7 @@
         if (mysqli_num_rows($stmt) > 0) {
         $i=0;
         ?>
-        <tr>
+        <tr >
             <th>Full Name</th>
             <th>Email Address</th>
             <th>Phone No.</th>
@@ -152,7 +156,7 @@
     <?php
         while($result = mysqli_fetch_array($stmt)) {
         ?>
-        <tr>
+        <tr id="<?php echo $result['id']?>">
             <td><?php echo $result['firstName'].' '.$result['lastName']?></td>
             <td><?php echo $result['emailAddress']?></td>
             <td><?php echo $result['phoneNumber']?></td>
@@ -183,37 +187,10 @@
         }
         $i++;
     }else{
-        'There are no records of patients matching your selected criteria';
+        '<tr>There are no records of patients matching your selected criteria</tr>';
     }
         ?>
-        </table>
-        <br/><br/>
-        <table>
-        <tr>
-            <th>Full Name</th>
-            <th>Email Address</th>
-            <th>Phone No.</th>
-            <th>Address</th>
-            <th>Condition</th>
-            <th>Doctor Attending</th>
-        </tr> -->
-        <?php
-        // $current_user_id = $_SESSION['id'];
-        // if($_SESSION['category'] == 'doctor'){
-        //     $doct_name = $_SESSION['username'];
-        //     $resultPost = mysqli_query($conn,"SELECT * FROM regpatients WHERE id IN (SELECT patientID FROM appointments  WHERE doctorID = '$current_user_id')");
-        // }
-        // else{
-        //     $institution = $_SESSION['username'];
-        //     $resultPost = mysqli_query($conn,"SELECT * FROM regpatients WHERE id IN (SELECT patientID FROM appointments  WHERE doctorID IN (SELECT id FROM regdoctors WHERE institution = '$institution' and id = '$doct_id'))");
-        //     $mini_query = mysqli_query($conn,"SELECT * FROM regdoctors WHERE id = '$doct_id'");
-        //     while($row = mysqli_fetch_array($mini_query)) {
-        //         $doct_name = $row['firstName'];
-        //     }
-        // }
-        // while($row = mysqli_fetch_array($resultPost)) {
-        ?>
-    
+        </table>    
         </section>
     </div>
 </body>
@@ -236,24 +213,24 @@ function sort(criteria){
         window.location.href = 'patient-records.php?a=d';
     }
 }
-function fetchData() {
-$.ajax({
-    url: 'patient-records.php', // Replace with your server-side script URL
-    method: 'GET',
-    success: function(response) {
-    // Handle the response and update the HTML content
-    $('#patient-records-section').html(response);
-    console.log("all good");
-    },
-    error: function(xhr, status, error) {
-    // Handle errors
-    console.error(error);
-    }
-});
-}
+// function fetchData() {
+// $.ajax({
+//     url: 'patient-records.php', // Replace with your server-side script URL
+//     method: 'GET',
+//     success: function(response) {
+//     // Handle the response and update the HTML content
+//     $('#patient-records').html(response);
+//     console.log("all good");
+//     },
+//     error: function(xhr, status, error) {
+//     // Handle errors
+//     console.error(error);
+//     }
+// });
+// }
 
-// Call the getNewData function periodically to fetch new data
-setInterval(fetchData, 60000);
+// // Call the getNewData function periodically to fetch new data
+// setInterval(fetchData, 60000);
 
 // </script>
     

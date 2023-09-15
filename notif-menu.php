@@ -21,7 +21,7 @@
         // Get the parent directory of the current page
         $parentDir = dirname($_SERVER['REQUEST_URI']);
         $parentDir = dirname($_SERVER['REQUEST_URI']);
-        $parentDirCurrent = str_replace('/work/CERA', '', $parentDir); // Remove trailing slash
+        $parentDirCurrent = preg_replace('/.*CERA\//', '', $parentDir);
     
         if ($parentDirCurrent === '/partners' && strpos($linkName, 'partners/') === 0) {
             $linkName = str_replace('partners/', '', $linkName);
@@ -62,7 +62,7 @@
     }
 ?>
     <span class="menuBar" id="menuBars" onClick="toggleMenu()"><i class="fa-solid fa-bars"></i></span>
-    <span class="menuBar" id="menuX" onClick="toggleMenu()"></span>
+    <span class="menuBar" id="menuX" onClick="toggleMenu()"><i class="fa-solid fa-x"></i></span>
 
     <h1><?php echo headerName()?></h1>
 
@@ -141,25 +141,49 @@
             };
         }
 
-        let menuCount = 0;
-        function toggleMenu(){
-            menuCount += 1;
+    // Retrieve the menu state from local storage
+    const storedMenuState = localStorage.getItem('menuState');
+    let menuCount = parseInt(localStorage.getItem('menuCount')) || 0;
 
-            let openMenu = document.getElementById('menuBars');
-            let closeMenu = document.getElementById('menuX');
-            let dashMenu = document.querySelector(".dash-menu");
-            let mainSection = document.querySelector(".main-section");
+    // Toggle the menu based on the stored state
+    function toggleMenu() {
+        const dashMenu = document.querySelector(".dash-menu");
+        const mainSection = document.querySelector(".main-section");
+        const openMenu = document.getElementById('menuBars');
+        const closeMenu = document.getElementById('menuX');
 
-            if(menuCount%2 == 0){
-                dashMenu.style.display = 'none';
-                openMenu.style.display = 'block';
-                closeMenu.style.display = 'none';
-                mainSection.style.marginLeft = '10%';
-            }else if(menuCount%2 !== 0){
-                dashMenu.style.display = 'block';
-                openMenu.style.display = 'none';
-                closeMenu.style.display = 'block';
-                mainSection.style.marginLeft = '0';
-            }
+        if (menuCount % 2 === 0) {
+            dashMenu.style.display = 'none';
+            openMenu.style.display = 'block';
+            closeMenu.style.display = 'none';
+            mainSection.style.marginLeft = '10%';
+        } else {
+            dashMenu.style.display = 'block';
+            openMenu.style.display = 'none';
+            closeMenu.style.display = 'block';
+            mainSection.style.marginLeft = '0';
         }
-    </script>
+    }
+
+    // Call the toggleMenu() function on page load
+    window.onload = toggleMenu;
+
+    // Function to update the menu count and state in local storage
+    function updateMenuState() {
+        localStorage.setItem('menuCount', menuCount);
+        localStorage.setItem('menuState', (menuCount % 2 === 0) ? 'closed' : 'open');
+    }
+
+    // Attach click event to the menu toggle buttons
+    document.getElementById('menuBars').addEventListener('click', () => {
+        menuCount++;
+        toggleMenu();
+        updateMenuState();
+    });
+
+    document.getElementById('menuX').addEventListener('click', () => {
+        menuCount++;
+        toggleMenu();
+        updateMenuState();
+    });
+</script>
