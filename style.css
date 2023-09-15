@@ -1143,6 +1143,11 @@
 }
 .dropdown, .suggestion{
     display: none;
+    position:absolute;
+    margin-top:7%;
+    margin-left:-7%;
+    width:70%;
+    background-color:white;
 }
 @media screen and (max-width:500px) {
     .search-bar-top, .search-bar {

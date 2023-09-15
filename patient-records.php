@@ -25,11 +25,12 @@
         <div class="records-header">
             <h2>Patients</h2>
             <!-- search functionality to be added -->
-            <div class="search-bar" style="width:100%">
+            <div class="search-bar" style="width:100%;display:flex;flex-direction:column;">
                 <form action = "" method = "GET" class = "form-inline" style="width:100%">
                     <input id="search" name = "keyword" type = "text" placeholder = "Search Patient..." class = "form-control" value = "<?php echo isset($_POST['keyword'])?$_POST['keyword']:''?>"/>
                     <button class="search-btn" type="submit" name = "search"><i class="fa fa-search"></i></button>
                 </form>
+                <div id="suggestion" class="suggestion"></div>
         `   </div>
             <!-- filter/sort functionality -->
             <div class="search-indicators">
@@ -233,4 +234,27 @@ function sort(criteria){
 // setInterval(fetchData, 60000);
 
 // </script>
-    
+<script src="js/jquery-3.3.1.min.js"></script>
+<script src="js/code.jquery.com_jquery-latest.js"></script>
+<script src="js/jquery.timers-1.0.0.js"></script>
+<script type="text/javascript">
+    $(document).ready(function(){
+        //autocomplete 1
+        $("#search").keyup(function(e){
+            var search_query = $(this).val();
+            if(search_query != ""){
+                $.ajax({
+                    url:"suggest-patient-srch.php",
+                    type: "POST",
+                    data: {search: search_query},
+                    success: function($data){
+                        $("#suggestion").fadeIn('fast').html($data);
+                    }
+                });
+            }
+            else{
+                $("#suggestion").fadeOut();
+            }
+        })
+    });
+</script>
