@@ -1,6 +1,5 @@
 <?php
 include_once "../conn.php";
-include_once "openssl-keygen.php";
 // define global variables
 
 // register patients 
@@ -20,7 +19,13 @@ if(isset($_POST['register']))
         $conditionsArr[] = $_POST['condition'][$i];
          }
     $conditions = htmlspecialchars(implode('*', $conditionsArr));
+
     $password = htmlspecialchars($_POST['password']);
+    $SECRETKEY = "";
+    include_once "key.php";
+    //encrypt the password to insert
+    $password = openssl_encrypt($password, "AES-128-ECB", $SECRETKEY);
+    
      $age = htmlspecialchars($_POST['age']);
      $address = htmlspecialchars($_POST['address']);
 	 $gender = htmlspecialchars($_POST['gender']);
