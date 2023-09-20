@@ -813,8 +813,6 @@
     position: sticky;
     transition: top 0.3s ease;
     display: none;
-
-/* add animation transform  */
 }
 
 .dash-menu ul{

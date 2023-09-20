@@ -21,8 +21,7 @@ if(isset($_POST['register']))
     $conditions = htmlspecialchars(implode('*', $conditionsArr));
 
     $password = htmlspecialchars($_POST['password']);
-    $SECRETKEY = "";
-    include_once "key.php";
+    
     //encrypt the password to insert
     $password = openssl_encrypt($password, "AES-128-ECB", $SECRETKEY);
     
@@ -32,8 +31,7 @@ if(isset($_POST['register']))
     $conditions = implode('*', $conditionsArr);	
 
     $password = $_POST['password'];
-    $SECRETKEY = "";
-    include_once "key.php";
+    
     //encrypt the password to insert
     $password = openssl_encrypt($password, "AES-128-ECB", $SECRETKEY);
 
@@ -63,7 +61,7 @@ if(isset($_POST['register']))
      //if sql query is executed...
 	 if (mysqli_query($conn, $sql)) {
         if(!isset($_SESSION['category'])){
-        login($conn);
+        login($conn, $SECRETKEY);
         }else{
             header('location:../dashboard.php');
         }
@@ -95,8 +93,7 @@ if(isset($_POST['reg-partner']))
          }
     $conditions = implode('*', $conditionsArr);
 	$password = $_POST['password'];
-    $SECRETKEY = "";
-    include_once "key.php";
+    
     //encrypt the password to insert
     $password = openssl_encrypt($password, "AES-128-ECB", $SECRETKEY);
 
@@ -108,7 +105,7 @@ if(isset($_POST['reg-partner']))
 
      //if sql query is executed...
 	 if (mysqli_query($conn, $sql)) {
-        login($conn);
+        login($conn,$SECRETKEY);
 			 } else {	
                 //show error
 		echo "Error: " . $sql . "
@@ -147,7 +144,7 @@ if(isset($_POST['add-patient'])){
     //if sql query is executed...
 	 if (mysqli_query($conn, $query)) {
         if(!isset($_SESSION['category'])){
-        login($conn);
+        login($conn,$SECRETKEY);
         }else{
             header('location:../dashboard.php?status=success');
         }
@@ -179,8 +176,7 @@ if(isset($_POST['register-doc'])){
     $years = filter_var($_POST['years'], FILTER_SANITIZE_NUMBER_INT);//years experience
     $password = $_POST['password'];
 
-    $SECRETKEY = "";
-    include_once "key.php";
+    
     //encrypt the password to insert
     $password = openssl_encrypt($password, "AES-128-ECB", $SECRETKEY);
 	 
@@ -197,7 +193,7 @@ if(isset($_POST['register-doc'])){
     //if sql query is executed...
 	 if (mysqli_query($conn, $query)) {
         if(!isset($_SESSION['category'])){
-        login($conn);
+        login($conn,$SECRETKEY);
         }else{
             header('location:doctors-dashboard.php?status=success');
         }
@@ -244,7 +240,7 @@ if(isset($_POST['register-doc-by-partner'])){
     //if sql query is executed...
 	 if (mysqli_query($conn, $query)) {
         if(!isset($_SESSION['category'])){
-        login($conn);
+        login($conn,$SECRETKEY);
         }else{
             header('location:../dashboard.php?status=success');
         }
@@ -368,14 +364,13 @@ if(isset($_POST['dosage-delete'])){
 
 if(isset($_POST['logIn']))
 {
-    login($conn);
+    login($conn,$SECRETKEY);
 }
 
-function login($conn){
+function login($conn,$SECRETKEY){
     //import variables
     session_start();
-    $SECRETKEY = "";
-    include_once "key.php";
+    
     extract($_POST);
     $emailAddress = filter_var($_POST['emailAddress'], FILTER_SANITIZE_EMAIL);
     $password = $_POST["password"];
@@ -488,8 +483,7 @@ if(isset($_POST['update']))
     $emailAddress = filter_var($_POST['emailAddress'], FILTER_SANITIZE_EMAIL);
     
     $password = $_POST['password'];
-    $SECRETKEY = "";
-    include_once "key.php";
+    
     //encrypt the password to insert
     $password = openssl_encrypt($password, "AES-128-ECB", $SECRETKEY);
 
@@ -753,8 +747,7 @@ if(isset($_POST['input-message']))
     //store values submitted in the chat form in variables 
     $message = $conn->real_escape_string($_POST['message']);
     //encrypt messages
-    $SECRETKEY = "";
-    include_once "key.php";
+    
     $message = openssl_encrypt($message, "AES-128-ECB", $SECRETKEY);
 
     $userId = $_SESSION['id'];
@@ -838,8 +831,7 @@ if(isset($_POST['submit-report-or-suggestion']))
     //store values submitted in the chat form in variables 
     $message = $conn->real_escape_string($_POST['message']);
     //encrypt messages
-    $SECRETKEY = "";
-    include_once "key.php";
+    
     $message = openssl_encrypt($message, "AES-128-ECB", $SECRETKEY);
 
     $userId = $_SESSION['id'];

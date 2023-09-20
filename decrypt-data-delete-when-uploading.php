@@ -3,8 +3,8 @@
         <?php
         include_once "conn.php";
         //generate key
-        $SECRETKEY = "";
-        include_once "controls/key.php";
+        
+        
         //enter table name and load in browser to check passwords
         $resultPost = mysqli_query($conn,"SELECT institutionName, password FROM reginstitutions");
         ?>

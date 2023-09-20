@@ -2,8 +2,8 @@
     <?php
     include_once "../conn.php";
     session_start();
-    $SECRETKEY = "";
-    include_once "../controls/key.php";
+    
+    
     $current_user_email = $_SESSION['email'];
     $current_user_category = $_SESSION['category'];
     $sent_to = 0;
