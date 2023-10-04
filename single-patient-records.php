@@ -85,8 +85,11 @@
 <tr>
     <th>Risk level</th>
     <td><?php
-        if (isset($result['status'])) {
-            $status = $result['status'];
+       include 'risk-prediction.php';
+
+       if (isset($riskLevel)) {
+       
+           $status = $riskLevel;
 
             switch ($status) {
                 case 0:
@@ -127,9 +130,28 @@
         <tr>
             <th>Progress</th>
             <td>
-                <?php
-                //  summary of progress and link to progress charts
-                ?>
+            <?php
+        if (isset($riskLevel)) {
+
+            $status = $riskLevel;
+        
+            switch ($status) {
+                case 0:
+                    echo "<span style='width: 100%; padding:0.25em; border-radius: 5px; '>Improving</span>";
+                    break;
+                case 1:
+                    echo "<span  style='width: 100%; padding:0.25em; border-radius: 5px;'>Even</span>";
+                    break;
+                case 2:
+                        echo "<span  style='width: 100%; padding:0.25em; border-radius: 5px;'>Regressing</span>";
+                        break;
+                default:
+                    echo "Determining progress trend";
+                }
+        } else {
+            echo "Progress trend undetermined.";
+        }
+        ?>
             </td>
         </tr>
         </table>
@@ -238,8 +260,11 @@
 <tr>
     <th>Risk level</th>
     <td><?php
-        if (isset($result['status'])) {
-            $status = $result['status'];
+        include 'risk-prediction.php';
+
+        if (isset($riskLevel)) {
+        
+            $status = $riskLevel;
 
             switch ($status) {
                 case 0:
@@ -276,9 +301,28 @@
         <tr>
             <th>Progress</th>
             <td>
-                <?php
-                //  summary of progress and link to progress charts
-                ?>
+            <?php
+        if (isset($riskLevel)) {
+
+            $status = $riskLevel;
+        
+            switch ($status) {
+                case 0:
+                    echo "<span style='width: 100%; padding:0.25em; border-radius: 5px; '>Improving</span>";
+                    break;
+                case 1:
+                    echo "<span  style='width: 100%; padding:0.25em; border-radius: 5px;'>Even</span>";
+                    break;
+                case 2:
+                        echo "<span  style='width: 100%; padding:0.25em; border-radius: 5px;'>Regressing</span>";
+                        break;
+                default:
+                    echo "Determining progress trend";
+                }
+        } else {
+            echo "Progress trend undetermined.";
+        }
+        ?>
             </td>
         </tr>
         <?php

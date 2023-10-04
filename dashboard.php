@@ -191,7 +191,7 @@ $exerciseDataJSON = json_encode($exerciseData);
 </div>
 <div class="input" style="width:80%;">
                 <div class="input-div input-sleep" id="input-sleep" >
-                    <h6>Daily Sleep Log</h6>
+                   
                     <form id="sleep-form" action="controls/processing.php" method="POST">
                         <div>
                             <label>Start time</label>
@@ -201,13 +201,13 @@ $exerciseDataJSON = json_encode($exerciseData);
                             <label>End time</label>
                             <input type="time" name="end-time" />
                         </div>
-                        <button type="submit" name="record-sleep" class="btn btn-primary" style="margin-top:6%;">
+                        <button type="submit" name="record-sleep" class="btn btn-primary" style="margin-top:12%;">
                             <i class="fas fa-check-circle"></i>
                         </button>
                     </form>
                 </div>
                 <div class="input-div input-meals" id="input-meals">
-                    <h6>Daily Meal Log</h6>
+                    
                     <form id="meal-form" action="controls/processing.php" method="POST" >
                         <div>
                             <label>Meal name:</label>
@@ -217,13 +217,13 @@ $exerciseDataJSON = json_encode($exerciseData);
                             <label>Meal time:</label>
                             <input type="time" name="meal-time" />
                         </div>
-                        <button type="submit" name="record-meal" class="btn btn-primary" style="margin-top:6%;">
+                        <button type="submit" name="record-meal" class="btn btn-primary" style="margin-top:10%;">
                             <i class="fas fa-check-circle"></i>
                         </button>
                     </form>
                 </div>
                 <div class="input-div input-exerciseRoutine" id="input-exerciseRoutine">
-                    <h6>Daily Exercise Log</h6>
+                    
                     <form id="exercise-form" action="controls/processing.php" method="POST" >
                         <div>
                             <label>Exercise type:</label>
@@ -284,11 +284,19 @@ $exerciseDataJSON = json_encode($exerciseData);
 <script type="text/javascript">
   // Get references to the canvas element and its context
   var ctx = document.getElementById('dayCharts').getContext('2d');
+// Create a function to format the date labels
+function formatDayLabels(dayLabels) {
+  return dayLabels.map(function(dateLabel) {
+    const dayOfMonth = new Date(dateLabel).toLocaleDateString('en-US', { day: 'numeric' });
+    return dayOfMonth;
+  });
+}
 
-  // Define the data for the chart
-  var data = {
-    labels: <?php echo $dayDataJSON; ?>, // X-axis labels from PHP array
-    datasets: [{
+// Define the data for the chart
+var data = {
+  labels: formatDayLabels(<?php echo $dayDataJSON; ?>), // Format date labels
+  datasets: [
+    {
       label: 'Sleep Percentage',
       data: <?php echo $sleepDataJSON; ?>.map(function(sleep) {
         return (sleep / 8) * 100; // Calculate sleep percentage
@@ -296,7 +304,8 @@ $exerciseDataJSON = json_encode($exerciseData);
       backgroundColor: 'rgba(75, 192, 192, 0.2)',
       borderColor: 'rgba(75, 192, 192, 1)',
       borderWidth: 1,
-    }, {
+    },
+    {
       label: 'Meals Percentage',
       data: <?php echo $mealsDataJSON; ?>.map(function(meals) {
         return (meals / 3) * 100; // Calculate meals percentage
@@ -304,7 +313,8 @@ $exerciseDataJSON = json_encode($exerciseData);
       backgroundColor: 'rgba(255, 99, 132, 0.2)',
       borderColor: 'rgba(255, 99, 132, 1)',
       borderWidth: 1,
-    }, {
+    },
+    {
       label: 'Exercise Percentage',
       data: <?php echo $exerciseDataJSON; ?>.map(function(exercise) {
         return (exercise / 45) * 100; // Calculate exercise percentage
@@ -312,54 +322,50 @@ $exerciseDataJSON = json_encode($exerciseData);
       backgroundColor: 'rgba(54, 162, 235, 0.2)',
       borderColor: 'rgba(54, 162, 235, 1)',
       borderWidth: 1,
-    }]
-  };
-
-  // Define the labels you want to display in the tooltips
-  var labels = <?php echo json_encode($dayData); ?>;
-
-  // Create the chart
-  var myChart = new Chart(ctx, {
-    type: 'bar',
-    data: data,
-    options: {
-      scales: {
-        y: {
-          beginAtZero: true,
-          max: 100, // Set the maximum value of the y-axis to 100
-        }
-      },
-      tooltips: {
-  mode: 'index',
-  intersect: false,
-  callbacks: {
-    title: function (tooltipItems) {
-      // Display the date as the tooltip title
-      return labels[tooltipItems[0].index];
-    },
-    
-    label: function (tooltipItem, data) {
-  var datasetLabel = data.datasets[tooltipItem.datasetIndex].label;
-  var dataType = datasetLabel.split(' ')[0]; // Extract the data type (Sleep, Meals, Exercise)
-  var actualValue = data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index];
-
-  if (dataType === 'Sleep') {
-    return dataType + ': ' + Math.round(actualValue * 8 / 100) + ' hours'; // Display sleep time in hours
-  } else if (dataType === 'Exercise') {
-    return dataType + ': ' + Math.round(actualValue * 45 / 100) + ' minutes'; // Display exercise time in minutes
-  } else {
-    return dataType + ': ' + Math.round(actualValue * 3 / 100); // Display meal numbers without percentage
-  }
-}
-
-  }
-}
-
-  
-
     }
-  });
+  ]
+};
 
+// Create the chart
+var myChart = new Chart(ctx, {
+  type: 'bar',
+  data: data,
+  options: {
+    scales: {
+      y: {
+        beginAtZero: true, // Ensure the y-axis starts from 0
+        max: 100, // Set the maximum value of the y-axis to 100
+      },
+      x:{
+        beginAtZero: true, // Ensure the x-axis starts from 0
+        min: 0
+      }
+    },
+    tooltips: {
+      mode: 'index',
+      intersect: false,
+      callbacks: {
+        title: function (tooltipItems) {
+          // Display the formatted date as the tooltip title
+          return formatDayLabels([labels[tooltipItems[0].index]])[0];
+        },
+        label: function (tooltipItem, data) {
+          var datasetLabel = data.datasets[tooltipItem.datasetIndex].label;
+          var dataType = datasetLabel.split(' ')[0]; // Extract the data type (Sleep, Meals, Exercise)
+          var actualValue = data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index];
+
+          if (dataType === 'Sleep') {
+            return dataType + ': ' + Math.round(actualValue * 8 / 100) + ' hours'; // Display sleep time in hours
+          } else if (dataType === 'Exercise') {
+            return dataType + ': ' + Math.round(actualValue * 45 / 100) + ' minutes'; // Display exercise time in minutes
+          } else {
+            return dataType + ': ' + Math.round(actualValue * 3 / 100); // Display meal numbers without percentage
+          }
+        }
+      }
+    }
+  }
+});
 
 
         function print1patientRecord() {

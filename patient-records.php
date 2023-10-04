@@ -163,7 +163,8 @@
             <td><?php echo $result['address']?></td>
             <td><?php $illness =  explode('*',$result['illness']); for($i=0; $i<count($illness); $i++){echo $illness[$i]. ' ';}?></td>
             <td><?php 
-            $status = $result['status'];
+            include 'risk-prediction.php';            
+                $status = $riskLevel;
 
             switch ($status) {
               case 0:

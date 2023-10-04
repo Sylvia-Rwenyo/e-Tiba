@@ -14,11 +14,12 @@ if(isset($_POST['register']))
 	 $emailAddress = filter_var($_POST['emailAddress'], FILTER_SANITIZE_EMAIL);
      $phoneNumber = htmlspecialchars($_POST['phoneNumber']);
      $institution = htmlspecialchars($_POST['institution']);
-     $conditionsArr= array();
-     for($i=0; $i < count($_POST['condition']); $i++){
-        $conditionsArr[] = $_POST['condition'][$i];
-         }
-    $conditions = implode('*', $conditionsArr);	 $password = $_POST['password'];
+    //  $conditionsArr= array();
+    //  for($i=0; $i < count($_POST['condition']); $i++){
+    //     $conditionsArr[] = $_POST['condition'][$i];
+    //      }
+    // $conditions = implode('*', $conditionsArr);
+     $password = $_POST['password'];
      $age = $_POST['age'];
      $address = htmlspecialchars($_POST['address']);
 	 $gender = htmlspecialchars($_POST['gender']);
@@ -39,8 +40,8 @@ if(isset($_POST['register']))
             </script>';
         }
      //statement to enter values into the registration table in the database
-	 $sql = "INSERT INTO regPatients (firstName, lastName, emailAddress, institution,  password, illness, address, age, gender,phoneNumber )
-	 VALUES ('$firstName','$lastName', '$emailAddress','$institution', '$password', '$conditions', '$address', '$age', '$gender', '$phoneNumber')";
+	 $sql = "INSERT INTO regPatients (firstName, lastName, emailAddress, institution,  password, address, age, gender,phoneNumber )
+	 VALUES ('$firstName','$lastName', '$emailAddress','$institution', '$password', '$address', '$age', '$gender', '$phoneNumber')";
 
      //if sql query is executed...
 	 if (mysqli_query($conn, $sql)) {

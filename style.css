@@ -1,3 +1,8 @@
+/*  all elements */
+*{
+    box-sizing: border-box;
+}
+
 /* home page */
 
 .home, .reg-body, .dash-body, .profileBody{
@@ -529,6 +534,10 @@
     .day-graphs .single-graph span{
         width: 1em;
     }
+    .target-display{
+        padding: 0.25em;
+        margin-bottom: 2%;
+    }
     .single-graph.sleep span, .target-display.sleepLog span{
         background-color: #28a745;
     }
@@ -545,7 +554,7 @@
     height: 30%;
     display: grid;
     grid-template-rows: 20% 20% 20%;
-    row-gap: 10%;
+    row-gap: 2em;
 }
 .single-log-prompt{
     display: grid;
@@ -1018,7 +1027,7 @@
     top: 30%;
     left: 38.5%;
     width: 30%;
-    height: 25%;
+    height: fit-content;
     background-color:rgba(64, 141, 206, 0.8); /* Semi-transparent black overlay */
     z-index: 9999;
     padding: 1em;
