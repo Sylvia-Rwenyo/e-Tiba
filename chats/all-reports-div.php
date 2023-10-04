@@ -1,6 +1,8 @@
 <?php
     include_once "../conn.php";
     session_start();
+    
+    
     $current_user = $_SESSION['id'];
     $current_user_email = $_SESSION['email'];
     $current_user_category = $_SESSION['category'];
@@ -16,7 +18,13 @@
             <span>
                 <a href="reports-messages.php?id=<?php echo $row["id"]; ?>">
                 <p class="conversation_name">From <?php if($current_user_email == $row["emailAddress"]){echo "You";}else{echo $row["emailAddress"];} ?> To <?php if($current_user_email == $row["sent_to"]){echo "You";}else{echo $row["sent_to"];} ?></p>
-                <span class="home-chat-briefs"><?php echo $row["message"]; ?></span>
+                <span class="home-chat-briefs">
+                <?php 
+                    $encryd = $row["message"];
+                    $decryd = openssl_decrypt($encryd, "AES-128-ECB", $SECRETKEY);
+                    echo $decryd;
+                ?>
+                </span>
                 </a>
             </span>                        
         </div>

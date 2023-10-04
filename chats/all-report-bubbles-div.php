@@ -2,6 +2,8 @@
     <?php
     include_once "../conn.php";
     session_start();
+    
+    
     $current_user_email = $_SESSION['email'];
     $current_user_category = $_SESSION['category'];
     $fname_chatting_with = 0;
@@ -22,7 +24,11 @@
             if ($row['readStatus'] == 'read')
             { ?>
                 <div class="message-box receiving">
-                    <p><?php echo $row["message"]; ?></p>
+                    <p><?php 
+                        $encryd = $row["message"];
+                        $decryd = openssl_decrypt($encryd, "AES-128-ECB", $SECRETKEY);
+                        echo $decryd;
+                     ?></p>
                 </div> 
                 <?php
             }
@@ -45,7 +51,11 @@
         {
             ?>
                 <div class="message-box sent">
-                    <p><?php echo $row["message"]; ?></p>
+                    <p><?php 
+                        $encryd = $row["message"];
+                        $decryd = openssl_decrypt($encryd, "AES-128-ECB", $SECRETKEY);
+                        echo $decryd;
+                     ?></p>
                     <!--<div style="display:flex;flex-direction:row;">
                         <form id="message-form"  action="../controls/processing.php?id=<?php //echo $row["id"]; ?>" method="POST" style="<?php // if($row['readStatus'] == 'unread'){echo 'display:block;';}else{echo  'display:none;';}?>">
                             <input type="hidden"  name="sent_to" value="<?php //echo $sent_to;?>"/>    

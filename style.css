@@ -40,22 +40,6 @@
 .menu ul .active-meet{
     border-bottom: 2px solid #408DCE;
 }
-.partners-CTA{
-    font-size: 1em;
-    padding-right: 5%;
-    padding-top: 1%;
-    height: 3%;
-    display: flex;
-    flex-direction: column;
-}
-.partners-CTA a{
-    text-decoration: none;
-    color: black;
-    height: 50%;
-}
-.partners-CTA p{
-    float: right;
-}
 .intro{
     display: flex;
     flex-direction: row;
@@ -91,6 +75,45 @@
     margin-block-start: 1em;
     margin-block-end: 1em;
 }
+#join-us .popuplinks{
+    visibility: hidden;
+    width:200%;
+    background-color: #35b6be;
+    color: #000000;
+    text-align: left;
+    border: none;
+    position: absolute;
+    z-index: 10;
+    margin-left:-58%;
+    margin-top:15%;
+    font-size: 12px;
+    padding-left:10%;
+}
+#join-us .popuplinks::after{
+    position: absolute;
+}
+#join-us .show{
+    visibility: visible;
+    -webkit-animation: fadeIn 1s;
+    animation: fadeIn 1s;
+}
+@-webkit-keyframes fadeIn {
+    from {opacity:0;}
+    to {opacity: 1;}
+}
+@keyframes fadeIn {
+    from {opacity:0;}
+    to {opacity: 1;}
+}
+@media screen and (max-width:600px) {
+    #join-us .popuplinks{
+        width:250px;
+        margin-left:-60%;
+        margin-top:20%;
+        font-size: 12px;
+        padding-left:10%;
+    }
+}
 .CTA{
     display: flex;
     flex-direction: row;
@@ -98,13 +121,16 @@
     justify-content: space-evenly;
     width: 40%;
 }
-.CTA a{
+.CTA a, .CTA #join-us{
     text-decoration: none;
     color: black;
-    width: 30%;
+    width: 45%;
     height: 3em;
 }
-
+.CTA #join-us a{
+    color: #fff;
+    font-size:12px;
+}
 .CTA button{
     width: 100%;
     height: 100%;
@@ -131,7 +157,7 @@
     border: none;
 }
 @media screen and (max-width:990px) {
-    .CTA a{
+    .CTA a, .CTA #join-us{
         width: 30%;
         height: 3.5em;
         font-size: 0.95em;
@@ -169,8 +195,11 @@
         }
 }
 @media screen and (max-width:500px) {
-    .CTA a{
+    .CTA a, .CTA #join-us{
         width: 45%;
+    }
+    .CTA #join-us{
+        height:2.5em;
     }
     .c-phrase h3{
         font-size: 2em;
@@ -793,8 +822,6 @@
     position: sticky;
     transition: top 0.3s ease;
     display: none;
-
-/* add animation transform  */
 }
 
 .dash-menu ul{
@@ -1152,6 +1179,11 @@
 }
 .dropdown, .suggestion{
     display: none;
+    position:absolute;
+    margin-top:7%;
+    margin-left:-7%;
+    width:70%;
+    background-color:white;
 }
 @media screen and (max-width:500px) {
     .search-bar-top, .search-bar {

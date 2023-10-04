@@ -14,12 +14,27 @@ if(isset($_POST['register']))
 	 $emailAddress = filter_var($_POST['emailAddress'], FILTER_SANITIZE_EMAIL);
      $phoneNumber = htmlspecialchars($_POST['phoneNumber']);
      $institution = htmlspecialchars($_POST['institution']);
-    //  $conditionsArr= array();
-    //  for($i=0; $i < count($_POST['condition']); $i++){
-    //     $conditionsArr[] = $_POST['condition'][$i];
-    //      }
-    // $conditions = implode('*', $conditionsArr);
-     $password = $_POST['password'];
+     $conditionsArr= array();
+     for($i=0; $i < count($_POST['condition']); $i++){
+        $conditionsArr[] = $_POST['condition'][$i];
+         }
+    $conditions = htmlspecialchars(implode('*', $conditionsArr));
+
+    $password = htmlspecialchars($_POST['password']);
+    
+    //encrypt the password to insert
+    $password = openssl_encrypt($password, "AES-128-ECB", $SECRETKEY);
+    
+     $age = htmlspecialchars($_POST['age']);
+     $address = htmlspecialchars($_POST['address']);
+	 $gender = htmlspecialchars($_POST['gender']);
+    $conditions = implode('*', $conditionsArr);	
+
+    $password = $_POST['password'];
+    
+    //encrypt the password to insert
+    $password = openssl_encrypt($password, "AES-128-ECB", $SECRETKEY);
+
      $age = $_POST['age'];
      $address = htmlspecialchars($_POST['address']);
 	 $gender = htmlspecialchars($_POST['gender']);
@@ -46,7 +61,7 @@ if(isset($_POST['register']))
      //if sql query is executed...
 	 if (mysqli_query($conn, $sql)) {
         if(!isset($_SESSION['category'])){
-        login($conn);
+        login($conn, $SECRETKEY);
         }else{
             header('location:../dashboard.php');
         }
@@ -78,6 +93,10 @@ if(isset($_POST['reg-partner']))
          }
     $conditions = implode('*', $conditionsArr);
 	$password = $_POST['password'];
+    
+    //encrypt the password to insert
+    $password = openssl_encrypt($password, "AES-128-ECB", $SECRETKEY);
+
     $postalAddress = htmlspecialchars($_POST['postalAddress']);
     
      
@@ -87,7 +106,7 @@ if(isset($_POST['reg-partner']))
 
      //if sql query is executed...
 	 if (mysqli_query($conn, $sql)) {
-        login($conn);
+        login($conn,$SECRETKEY);
 			 } else {	
                 //show error
 		echo "Error: " . $sql . "
@@ -126,7 +145,7 @@ if(isset($_POST['add-patient'])){
     //if sql query is executed...
 	 if (mysqli_query($conn, $query)) {
         if(!isset($_SESSION['category'])){
-        login($conn);
+        login($conn,$SECRETKEY);
         }else{
             header('location:../dashboard.php?status=success');
         }
@@ -158,6 +177,9 @@ if(isset($_POST['register-doc'])){
     $years = filter_var($_POST['years'], FILTER_SANITIZE_NUMBER_INT);//years experience
     $password = $_POST['password'];
 
+    
+    //encrypt the password to insert
+    $password = openssl_encrypt($password, "AES-128-ECB", $SECRETKEY);
 	 
     $sql=mysqli_query($conn,"SELECT * FROM regdoctors where email='$emailAddress' AND phone_number='$phoneNumber'");
     if(mysqli_num_rows($sql)>0)
@@ -172,7 +194,7 @@ if(isset($_POST['register-doc'])){
     //if sql query is executed...
 	 if (mysqli_query($conn, $query)) {
         if(!isset($_SESSION['category'])){
-        login($conn);
+        login($conn,$SECRETKEY);
         }else{
             header('location:doctors-dashboard.php?status=success');
         }
@@ -219,7 +241,7 @@ if(isset($_POST['register-doc-by-partner'])){
     //if sql query is executed...
 	 if (mysqli_query($conn, $query)) {
         if(!isset($_SESSION['category'])){
-        login($conn);
+        login($conn,$SECRETKEY);
         }else{
             header('location:../dashboard.php?status=success');
         }
@@ -343,17 +365,20 @@ if(isset($_POST['dosage-delete'])){
 
 if(isset($_POST['logIn']))
 {
-    login($conn);
+    login($conn,$SECRETKEY);
 }
 
-function login($conn){
+function login($conn,$SECRETKEY){
     //import variables
     session_start();
+    
     extract($_POST);
     $emailAddress = filter_var($_POST['emailAddress'], FILTER_SANITIZE_EMAIL);
     $password = $_POST["password"];
     echo $password .' '. $emailAddress;
     $stmt;
+    //encrypt the password to compare
+    $password = openssl_encrypt($password, "AES-128-ECB", $SECRETKEY);
      //statement to select values from the registration table in the database
     $stmt = "SELECT * FROM regpatients where emailAddress='$emailAddress' and password='$password'";
     $sql=mysqli_query($conn, $stmt);
@@ -457,7 +482,12 @@ if(isset($_POST['update']))
    //store values submitted in the edit profile form in variables
     $id = $_POST['id'];
     $emailAddress = filter_var($_POST['emailAddress'], FILTER_SANITIZE_EMAIL);
+    
     $password = $_POST['password'];
+    
+    //encrypt the password to insert
+    $password = openssl_encrypt($password, "AES-128-ECB", $SECRETKEY);
+
     $profilePhoto = $fileName3;
     $phoneNumber = htmlspecialchars($_POST['phoneNumber']);
     //statement to update values
@@ -717,6 +747,10 @@ if(isset($_POST['input-message']))
     session_start();
     //store values submitted in the chat form in variables 
     $message = $conn->real_escape_string($_POST['message']);
+    //encrypt messages
+    
+    $message = openssl_encrypt($message, "AES-128-ECB", $SECRETKEY);
+
     $userId = $_SESSION['id'];
     $emailAddress = $_SESSION['email'];
     $readStatus = $_POST['readStatus'];
@@ -797,6 +831,10 @@ if(isset($_POST['submit-report-or-suggestion']))
     session_start();
     //store values submitted in the chat form in variables 
     $message = $conn->real_escape_string($_POST['message']);
+    //encrypt messages
+    
+    $message = openssl_encrypt($message, "AES-128-ECB", $SECRETKEY);
+
     $userId = $_SESSION['id'];
     $emailAddress = $_SESSION['email'];
     $readStatus = $_POST['readStatus'];

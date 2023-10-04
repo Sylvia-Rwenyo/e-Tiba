@@ -42,34 +42,6 @@
                             <div id="suggestion" class="suggestion">
 
                             </div>
-                            <div class = "dropdown" id="dropdown">
-                                <div style="position:absolute;">
-                                    <div class = "dropdown-content">
-                                        <div style="word-wrap:break-word;">
-                                            <?php
-                                            if(isset($_GET['search']))
-                                            {
-                                                $bool_value = 1;
-                                                $keyword = $_GET['keyword'];
-                                                $sql = "SELECT id, firstName, emailAddress FROM regpatients WHERE emailAddress LIKE ? or firstName LIKE ?'";
-                                                $stmt = $conn->prepare($sql);
-                                                $stmt->execute([$keyword,$keyword]);
-                                                $sql = $stmt;
-                                                $result = $sql->get_result();
-                                                while($rows = mysqli_fetch_array($result))
-                                                {?>
-                                                    <a href = "dosage-registration-form.php?id=<?php echo $rows['id']; ?>"><h3><?php echo $rows['firstName']?></h3></a>
-                                                    <a href = "dosage-registration-form.php?id=<?php echo $rows['id']; ?>" ><h4><?php echo $rows['emailAddress']?></h4></a>
-                                                    <?php
-                                                }
-                                            }
-                                            else{
-                                                $bool_value = 0;
-                                            } ?>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
                         </div>    
                     </div>
                 </div>
@@ -79,20 +51,6 @@
             <?php include_once "dosage-summary-div.php";?>
         </div>
     </div>
-    <script type="text/JavaScript">
-        function check_search(bool_value){
-            console.log(`Bool Value:${bool_value}`);
-            if(bool_value == 1){
-                document.getElementById("dropdown").style.display="block";
-                document.getElementById("dosage-summary").style.display="none";
-            }
-            else{
-                document.getElementById("dosage-summary").style.display="block";
-                document.getElementById("dropdown").style.display="none";
-            }
-        }
-        
-    </script>
     <script src="../js/jquery-3.3.1.min.js"></script>
     <script src="../js/code.jquery.com_jquery-latest.js"></script>
     <script src="../js/jquery.timers-1.0.0.js"></script>

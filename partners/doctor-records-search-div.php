@@ -3,33 +3,11 @@
         <div class="search-bar">
             <div data-parallax = "scroll">
                 <form action = "" method = "GET" class = "form-inline">
-                    <input id="search" name = "keyword" type = "text" placeholder = "Search Doctor..." class = "form-control" value = "<?php echo isset($_POST['keyword'])?$_POST['keyword']:''?>"/>
+                    <input id="search" name = "keyword" type = "text" placeholder = "Search Doctor By Email or First Name" class = "form-control" value = "<?php echo isset($_POST['keyword'])?$_POST['keyword']:''?>"/>
                     <span class = "input-group-button"><button class="search-btn" type="submit" name = "search"><i class="fa fa-search"></i>search</button></span>
                 </form>
                 <div id="suggestion" class="suggestion">
 
-                </div>
-                <div class = "dropdown">
-                    <div style="position:absolute;">
-                        <div class = "dropdown-content">
-                            <div style="word-wrap:break-word;">
-                                <?php
-                                if(isset($_GET['search']))
-                                {
-                                    $keyword = $_GET['keyword'];
-                                    $sql = "SELECT * FROM regdoctors WHERE emailAddress LIKE '$keyword' OR firstName LIKE '$keyword'";
-                                    
-                                    $result = mysqli_query($conn, $sql) or die(mysqli_error($conn));
-                                    while($rows = mysqli_fetch_array($result))
-                                    {?>
-                                        <a href = "#?id=<?php echo $rows['id']; ?>"><h3><?php echo $rows['firstName']?></h3></a>
-                                        <a href = "#?id=<?php echo $rows['id']; ?>" ><h4><?php echo $rows['emailAddress']?></h4></a>
-                                        <?php
-                                    }
-                                } ?>
-                            </div>
-                        </div>
-                    </div>
                 </div>
             </div>    
         </div>

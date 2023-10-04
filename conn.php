@@ -11,4 +11,5 @@
 	if(!$conn) {
 		die("Error". mysqli_connect_error());
 	}
+	$SECRETKEY = "CeraPass@123456";
 ?>
