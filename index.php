@@ -31,7 +31,7 @@
                         <p>A Partner Hospital</p>
                     </a>
                     <a href="doctors/independent-reg-doc.php">
-                        <p>AIndependent Medical Practitioner</p>
+                        <p>An Independent Medical Practitioner</p>
                     </a>
                 </span>
             </button>

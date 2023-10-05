@@ -152,6 +152,14 @@
                     </p></span>
                     <input  name="id" value="<?php echo $result['id']?>" type="hidden" />
                 </div>
+                <!-- <div class="pw">
+                    <label>Your new password: </label>
+                    <span><input  name="newPassword" value="" placeholder="password" id="password" type="password"/>
+                    <p onclick="pswdDisplay()" id="showPswd" >                    
+                        <i class="fa fa-eye-slash"></i>
+                    </p></span>
+                    <input  name="id" value="<?php echo $result['id']?>" type="hidden" />
+                </div> -->
                 <!-- edit email address -->
                 <div>
                     <label>Your email address: </label>
