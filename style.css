@@ -13,7 +13,7 @@
 }
 .menu{
     width: 100%;
-    margin-top: 2.5%;
+    margin-top: 5%;
     color:black;
     height: 5%;
     background-color: white;
@@ -53,39 +53,41 @@
     width: 100%;
 }
 .c-phrase-section{
-    width: 55%;
-    padding-top: 5%;
+    width: 50%;
+    padding-top: 2.5%;
     margin-left: 2.5%;
 }
 
 .c-phrase{
-    
     text-decoration: solid;
+    margin-bottom: 1em;
 }
 .c-phrase b{
     color: #35b6be;
 }
 .c-phrase h3{
-    font-size: 4em;
+    font-size: 3.75em;
     margin-block-start: 0.2em;
     margin-block-end: 0.2em;
+    line-height: 1.5em;
 }
 .intro p{
-    font-size: 1.75em;
+    font-size: 1.5em;
     margin-block-start: 1em;
     margin-block-end: 1em;
+    line-height: 1.5em;
 }
 #join-us .popuplinks{
     visibility: hidden;
     width:200%;
-    background-color: #35b6be;
+    background-color:rgba(53, 182, 190, 0.8); /* Semi-transparent  overlay */
     color: #000000;
     text-align: left;
     border: none;
     position: absolute;
     z-index: 10;
     margin-left:-58%;
-    margin-top:15%;
+    margin-top:5%;
     font-size: 12px;
     padding-left:10%;
 }
@@ -117,19 +119,27 @@
 .CTA{
     display: flex;
     flex-direction: row;
-    padding-top: 15%;
-    justify-content: space-evenly;
-    width: 40%;
+    padding-top: 20%;
+    justify-content: space-between;
+    width: 35%;
+    margin-left: 5%;
+    margin-right: 5%;
 }
 .CTA a, .CTA #join-us{
     text-decoration: none;
     color: black;
-    width: 45%;
+    width: 35%;
     height: 3em;
+}
+ .CTA #join-us p{
+    color: #fff;
 }
 .CTA #join-us a{
     color: #fff;
     font-size:12px;
+}
+.CTA #join-us a p{
+    padding-left: 1em;
 }
 .CTA button{
     width: 100%;
@@ -304,6 +314,9 @@
 @media screen and (max-width:500px){
     .reg-body .welcome-msg, .reg-body form, .welcome-msg{
         margin-left: 10%;
+    }
+    .reg-body form{
+        width: 80%;
     }
     .alertDiv{
         height: 5em;
@@ -584,6 +597,7 @@
     display: grid;
     grid-template-rows: 20% 20% 20%;
     row-gap: 2em;
+    margin-top: 20%;
 }
 .single-log-prompt{
     display: grid;
@@ -869,7 +883,8 @@
     margin-left: 10%;
 }
 .dash-body .input{
-    margin-top: 2.5%;
+    margin-top: 5%;
+    margin-left: 2.5%;
 }
 .dash-body .input .input-div{
     padding: 1em;
@@ -878,6 +893,9 @@
     display: flex;
     flex-direction: column;
 }
+#input-exerciseRoutine{
+    width: 90%;
+}
 .dash-body .input .input-div form{
     padding: 1em;
     padding-left: 0;
@@ -885,6 +903,7 @@
     display: flex;
     flex-direction: row;
 }
+
 .dash-body .input .input-div form div{
     margin-right: 2.5%;
 }
@@ -926,6 +945,19 @@
 .dash-body .prompts .prompt i{
     size: 3em;
 }
+@media screen and (max-width:600px) {
+    .log-prompts{
+        margin-top: 2.5%;
+    }
+    .dash-body .input .input-div form{
+        display: flex;
+        flex-direction: column;
+    }
+    .dash-body .input .input-div div{
+        width: 100%;
+    }
+}
+
 /* meet-menu */
 .meet-menu{
     margin-top: 0;
@@ -1093,10 +1125,13 @@
     border: none;
 }
 
-/* @media screen and (max-width:500px){
-    .records-print-btn{
-        width: 20%;
-    } */
+@media screen and (max-width:600px) {
+    .overlay{
+        width: 80%;
+        left: 12.5%;
+    }
+}
+
 
 .dialog-box-btn, .records-print-btn{
     background-color: #007bff;

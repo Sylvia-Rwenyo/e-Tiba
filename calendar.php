@@ -185,7 +185,7 @@
                             ?>
                             <div id="noAppointmentAlert" class="overlay">
                                  <p>Please contact your doctor via our messaging service to set an appoinment</p> 
-                                <div>
+                                <div class="overlay-btns">
                                     <button  class="btn btn-lg btn-success confirm" onclick="toChat()">Okay</button>
                                     <button  class="btn btn-lg btn-danger dialog-box-btn" onclick="cancelDialogBox()">Back</button>
                                 </div>
@@ -221,7 +221,7 @@
             <p>You have an appoinment on <?php echo $dateObject->format('m/d/Y')?> at <?php echo $_GET['t']?> with Dr.
             <?php echo ucfirst($row['lastName'])?> of <?php echo ucfirst($row['institution'])?>
             </p>
-            <div>
+            <div class="overlay-btns">
                 <button id="confirmButton" class="btn btn-lg btn-success confirm">Confirm</button>
                 <button  class="btn btn-lg btn-danger dialog-box-btn" onclick="cancelDialogBox()">Back</button>
             </div>
@@ -238,7 +238,7 @@
             <p>You have an appoinment on <?php echo $dateObject->format('m/d/Y')?> at <?php echo $_GET['t']?> with
             <?php echo ucfirst($row['firstName'].' '.$row['lastName'])?> at <?php echo ucfirst($row['institution'])?>
             </p>
-            <div>
+            <div class="overlay-btns">
                 <button id="confirmButton" class="btn btn-lg btn-success confirm">Confirm</button>
                 <button  class="btn btn-lg btn-danger dialog-box-btn" onclick="cancelAppointment()">Cancel</button>
             </div>

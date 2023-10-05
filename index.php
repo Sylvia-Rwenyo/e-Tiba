@@ -16,22 +16,22 @@
     <div class="intro">
         <div class="c-phrase-section">
             <div class="c-phrase">
-                <h3>Mobile Health care made seamless,&nbsp;<b>for you</b></h3>
+                <h3>Mobile Health care made seamless,<br><b>for you</b></h3>
             </div>
-            <p>Let us help you track your health and treatment process</p>
+            <p>Let us help you track your health and treatment progress</p>
         </div>
         <div class="CTA">
             <button class="pos-btn" id="join-us" onclick="popupFunc()" style="position:relative;display:block;cursor:pointer;">Join Us
                 <span class="popuplinks" id="popuplinks">
                     <p style="margin-bottom:-2%;">Select To Join Us As:</p>
                     <a href="register.php">
-                        <p>Patient</p>
+                        <p>A Patient</p>
                     </a>
                     <a href="partners/reg-partner.php"> 
-                        <p>Partner Hospital</p>
+                        <p>A Partner Hospital</p>
                     </a>
                     <a href="doctors/independent-reg-doc.php">
-                        <p>Independent Medical Practitioner</p>
+                        <p>AIndependent Medical Practitioner</p>
                     </a>
                 </span>
             </button>

@@ -172,7 +172,7 @@ $exerciseDataJSON = json_encode($exerciseData);
         <i class="fa fa-arrow-right" onclick="showNextWeek()"></i>
     </span>
     <div class="single-progress-chart">
-        <canvas class="day-graphs" id="dayCharts"></canvas>
+        <canvas class="day-graphs" id="dayCharts" style="height: 370px" height="200"></canvas>
     </div>
    
 <div class="log-prompts" id="log-prompts">
@@ -201,7 +201,7 @@ $exerciseDataJSON = json_encode($exerciseData);
                             <label>End time</label>
                             <input type="time" name="end-time" />
                         </div>
-                        <button type="submit" name="record-sleep" class="btn btn-primary" style="margin-top:12%;">
+                        <button type="submit" name="record-sleep" class="btn btn-primary" style="margin-top:10%;">
                             <i class="fas fa-check-circle"></i>
                         </button>
                     </form>
@@ -237,14 +237,14 @@ $exerciseDataJSON = json_encode($exerciseData);
                             </select>
                         </div>
                         <div>
-                            <label>For how long? (in minutes)</label>
+                            <label>Duration (in minutes)</label>
                             <input type="number" name="exerciseDuration" />
                         </div>
                         <div>
-                            <label>At what time:</label>
+                            <label>Time</label>
                             <input type="time" name="exerciseTime" />
                         </div>
-                        <button type="submit" name="record-physicalActivity" class="btn btn-primary" style="margin-top:13.5%;">
+                        <button type="submit" name="record-physicalActivity" class="btn btn-primary" style="margin-top:4%;">
                             <i class="fas fa-check-circle"></i>
                         </button>
                     </form>
@@ -335,6 +335,7 @@ var myChart = new Chart(ctx, {
       y: {
         beginAtZero: true, // Ensure the y-axis starts from 0
         max: 100, // Set the maximum value of the y-axis to 100
+        min: 0
       },
       x:{
         beginAtZero: true, // Ensure the x-axis starts from 0
