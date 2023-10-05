@@ -158,7 +158,7 @@
                     <p onclick="pswdDisplay()" id="showPswd" >                    
                         <i class="fa fa-eye-slash"></i>
                     </p></span>
-                    <input  name="id" value="<?php echo $result['id']?>" type="hidden" />
+                    <input  name="id" value="" type="hidden" />
                 </div> -->
                 <!-- edit email address -->
                 <div>
