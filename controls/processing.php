@@ -14,11 +14,11 @@ if(isset($_POST['register']))
 	 $emailAddress = filter_var($_POST['emailAddress'], FILTER_SANITIZE_EMAIL);
      $phoneNumber = htmlspecialchars($_POST['phoneNumber']);
      $institution = htmlspecialchars($_POST['institution']);
-     $conditionsArr= array();
+     /*$conditionsArr= array();
      for($i=0; $i < count($_POST['condition']); $i++){
         $conditionsArr[] = $_POST['condition'][$i];
          }
-    $conditions = htmlspecialchars(implode('*', $conditionsArr));
+    $conditions = htmlspecialchars(implode('*', $conditionsArr));*/
 
     $password = htmlspecialchars($_POST['password']);
     
@@ -28,7 +28,6 @@ if(isset($_POST['register']))
      $age = htmlspecialchars($_POST['age']);
      $address = htmlspecialchars($_POST['address']);
 	 $gender = htmlspecialchars($_POST['gender']);
-    $conditions = implode('*', $conditionsArr);	
 
     $password = $_POST['password'];
     
