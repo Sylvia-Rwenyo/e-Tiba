@@ -14,13 +14,7 @@ if(isset($_POST['register']))
 	 $emailAddress = filter_var($_POST['emailAddress'], FILTER_SANITIZE_EMAIL);
      $phoneNumber = htmlspecialchars($_POST['phoneNumber']);
      $institution = htmlspecialchars($_POST['institution']);
-     $conditionsArr= array();
-     for($i=0; $i < count($_POST['condition']); $i++){
-        $conditionsArr[] = $_POST['condition'][$i];
-         }
-    $conditions = htmlspecialchars(implode('*', $conditionsArr));
-
-    $password = htmlspecialchars($_POST['password']);
+     $password = htmlspecialchars($_POST['password']);
     
     //encrypt the password to insert
     $password = openssl_encrypt($password, "AES-128-ECB", $SECRETKEY);
@@ -28,7 +22,6 @@ if(isset($_POST['register']))
      $age = htmlspecialchars($_POST['age']);
      $address = htmlspecialchars($_POST['address']);
 	 $gender = htmlspecialchars($_POST['gender']);
-    $conditions = implode('*', $conditionsArr);	
 
     $password = $_POST['password'];
     
@@ -483,16 +476,15 @@ if(isset($_POST['update']))
     $id = $_POST['id'];
     $emailAddress = filter_var($_POST['emailAddress'], FILTER_SANITIZE_EMAIL);
     
-    $password = $_POST['password'];
-    
+    $oldPassword = $_POST['oldPassword'];
+    $password = $_POST['newPassword'];
     //encrypt the password to insert
-    $password = openssl_encrypt($password, "AES-128-ECB", $SECRETKEY);
+    $newPassword = openssl_encrypt($password, "AES-128-ECB", $SECRETKEY);
 
     $profilePhoto = $fileName3;
     $phoneNumber = htmlspecialchars($_POST['phoneNumber']);
     //statement to update values
     $sql ='';
-    session_start();
     if($_SESSION['category'] == 'patient'){
         
         // check for duplicate entries first
@@ -510,10 +502,25 @@ if(isset($_POST['update']))
             window.location.href = "../settings.php?e=2"
             </script>';
         }
+        $userID = $_SESSION['id'];
+        $oldpw  = '';
+        $sql_g=mysqli_query($conn,"SELECT * FROM regpatients where id='$userID'");
+        if(mysqli_num_rows($sql_g)>0)
+        {
+            $i=0;
+            while($result = mysqli_fetch_array($sql_g)) {
+                $oldpw = openssl_decrypt($result['password'], "AES-128-ECB", $SECRETKEY);
+            }
+            if($oldPassword != $oldpw){
+                echo '<script> 
+                window.location.href = "../settings.php?e=5"
+                </script>';
+            }else{
 
-    $sql .= "UPDATE regPatients SET  emailAddress='$emailAddress', password='$password', 
-                   profilePhoto='$profilePhoto', phoneNumber='$phoneNumber' WHERE id='$id'";
-
+                $sql .= "UPDATE regPatients SET  emailAddress='$emailAddress', password='$newPassword', 
+                            profilePhoto='$profilePhoto', phoneNumber='$phoneNumber' WHERE id='$id'";
+            }
+        }
     }  else if($_SESSION['category'] == 'doctor'){
 
         // check for duplicate entries first
@@ -531,8 +538,24 @@ if(isset($_POST['update']))
             window.location.href = "../settings.php?e=2"
             </script>';
         }
-        $sql .= "UPDATE regDoctors SET  emailAddress='$emailAddress', password='$password', 
+        $userID = $_SESSION['id'];
+        $oldpw  = '';
+        $sql_g=mysqli_query($conn,"SELECT * FROM regDoctors where id='$userID'");
+        if(mysqli_num_rows($sql_g)>0)
+        {
+            $i=0;
+            while($result = mysqli_fetch_array($sql_g)) {
+                $oldpw = openssl_decrypt($result['password'], "AES-128-ECB", $SECRETKEY);
+            }
+            if($oldPassword != $oldpw){
+                echo '<script> 
+                window.location.href = "../settings.php?e=5"
+                </script>';
+            }else{
+              $sql .= "UPDATE regDoctors SET  emailAddress='$emailAddress', password='$password', 
                        profilePhoto='$profilePhoto', phoneNumber='$phoneNumber' WHERE id='$id'";
+            }
+        }
 
     }  else if($_SESSION['category'] == 'hospital'){
 
@@ -551,9 +574,24 @@ if(isset($_POST['update']))
              window.location.href = "../settings.php?e=2"
              </script>';
          }
-
-        $sql .= "UPDATE regDoctors SET  emailAddress='$emailAddress', password='$password', 
+         $userID = $_SESSION['id'];
+        $oldpw  = '';
+        $sql_g=mysqli_query($conn,"SELECT * FROM reginstitutions where id='$userID'");
+        if(mysqli_num_rows($sql_g)>0)
+        {
+            $i=0;
+            while($result = mysqli_fetch_array($sql_g)) {
+                $oldpw = openssl_decrypt($result['password'], "AES-128-ECB", $SECRETKEY);
+            }
+            if($oldPassword != $oldpw){
+                echo '<script> 
+                window.location.href = "../settings.php?e=5"
+                </script>';
+            }else{
+                $sql .= "UPDATE reginstitutions SET  emailAddress='$emailAddress', password='$password', 
                         profilePhoto='$profilePhoto', phoneNumber='$phoneNumber' WHERE id='$id'";
+            }
+        }
     }
     // if sql query is executed and database connection is established
     if (mysqli_query($conn, $sql)) {

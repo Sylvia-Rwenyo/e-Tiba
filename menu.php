@@ -7,7 +7,7 @@
     <link rel="icon" href="favicon.ico" />
     <link rel="stylesheet" href="style.css"></link>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-    <title>CERA</title>
+    <title>e-Tiba</title>
 </head>
 <body>
     <?php 
@@ -15,6 +15,7 @@
     if(isset($_SESSION['loggedIN'])){
         ?>
     <div class="menu">
+        <img src="images/logo (5).png" alt="e-Tiba logo"/>
         <ul>
             <li><a href="dashboard.php">Home</a></li>
             <li><a href="about-us.php">About Us</a></li>
@@ -26,6 +27,7 @@
        }else{
     ?>
     <div class="menu">
+        <img src="images/logo (5).png" alt="e-Tiba logo"/>
         <ul>
             <li><a href="register.php?login=1">Log In</a></li>
             <li><a href="about-us.php">About Us</a></li>

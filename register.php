@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="style.css"></link>
     <link rel="icon" href="favicon.ico" />
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">    <title>Join CERA</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">    <title>Join e-Tiba</title>
     <script src="https://use.fontawesome.com/1d95bf24b3.js"></script>
 </head>
 <body class="reg-body">
@@ -18,7 +18,7 @@
             ?>
             <div class="welcome-msg">
                 <h3>Welcome back</h3>
-                <p>CERA, your healthcare companion</p>
+                <p>e-Tiba, your healthcare companion</p>
             </div>
             <?php
             if(isset($_GET['e'])){
@@ -31,10 +31,10 @@
                 if($_GET['e'] == 1){  
                     ?>
                      <div id="invalidAlert" class="alertDiv">
-                        <p>Invalid password or email address. Please try again</p> 
                         <div>
                             <button  class="btn btn-lg btn-danger dialog-box-btn" onclick="logIn2()">x</button>
                         </div>
+                        <p>Invalid password or email address. Please try again</p> 
                     </div>
                     <?php
                 }
@@ -87,7 +87,7 @@
         // show registration form
     ?>
         <div class="welcome-msg">
-            <h3>Welcome to CERA</h3>
+            <h3>Welcome to e-Tiba</h3>
             <p>Please fill the form below with accurate information as this is imporant for future identification with your doctors.</p>
         </div>
         <form method="POST" action="controls/processing.php" id="reg-form">

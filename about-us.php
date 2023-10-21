@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="style.css"></link>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-    <title>About CERA</title>
+    <title>About e-Tiba</title>
 </head>
 <body class="home">
   <?php include_once "menu.php" ?>
@@ -22,7 +22,7 @@
       <div class="banner">
         <div class="video-description" id="video-description" style="position:relative">
           <video width="100%" height="100%" style="border:1px 1px 1px" controls>
-              <source src="images/CERA.mp4" type="video/mp4"/>
+              <source src="images/e-Tiba.mp4" type="video/mp4"/>
               Your browser does not support video tag
           </video><br/>
         </div>
@@ -38,14 +38,14 @@
       </div>
   </div>
   <div id="transcript" style="position:relative" class="transcript">
-    <p><strong>Cera</strong>, an all encompassing app for full cancer care. It will enable oncologists and healthcare 
+    <p><strong>e-Tiba</strong>, an all encompassing app for full cancer care. It will enable oncologists and healthcare 
       providers to work together with the patient to coordinate their care and ensure they receive the appropriate 
       treatment in the comfort of their homes. The app ensures remote access to oncologists ,monitoring of treatment,
       adherence to medication, early detection of side effects and treatment failure ,offers education on their 
       conditions and preserves the patient’s mental health.
       This mobile and web application that will be installed in healthcare facilities as well as the patient’s phone 
       to facilitate connection between cancer patients and cancer specialists.</p>
-    <h3>Through Cera...</h3>
+    <h3>Through e-Tiba...</h3>
     <ul>
       <li>
         The oncologists can set up appointments with the patients where treatment is prescribed. The patient will receive reminders for follow-up.

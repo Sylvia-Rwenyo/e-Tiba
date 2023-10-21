@@ -35,7 +35,7 @@ include_once 'dash-menu.php'
     height: '80%',
   },
 });
-      callFrame.join({ url: 'https://cera-beta.daily.co/NGlSp1Ls8us1AhRwTi67'});
+      callFrame.join({ url: 'https://e-Tiba-beta.daily.co/NGlSp1Ls8us1AhRwTi67'});
 </script>
 <!-- </section> -->
 <!-- </div> -->

@@ -81,12 +81,26 @@
                 $i=0;
                 while($result = mysqli_fetch_array($records)) {
                     if(isset($_GET['e'])){
-                        echo '<style>
-                        .alertDiv 
+                        echo "<style>
+                        .alertDiv
+                            {
+                                display: block;
+                                margin-left: 2.5%;
+                                height: 4em
+                            }
+                        #editingProfile
                             {
                                 display: block;
                             }
-                        </style>';
+                        </style>
+                        <script>
+                            let profileDivs = document.getElementsByClassName('profile');
+                            for(let i= 0; i < profileDivs.length; i++){
+                                profileDivs[i].style.display = 'none';
+                            }
+                        </script>
+                        ";
+                        
                             if($_GET['e'] == 2){                
                                 ?>
                                  <div class="alertDiv">
@@ -111,6 +125,14 @@
                             </div>
                             <?php
                             }
+                            if($_GET['e'] == 5){   
+                                ?>
+                                 <div class="alertDiv">
+                                    <button  class="btn btn-lg btn-danger dialog-box-btn" onclick="register2()">x</button>
+                                    <p>The current password entry is incorrect, try again</p>  
+                                </div>
+                                <?php
+                                }
                         }
         ?>
         <!-- show form for editing user info -->
@@ -146,20 +168,20 @@
                     </div>
                 <div class="pw">
                     <label>Your current password: </label>
-                    <span><input  name="password" value="<?php echo $result['password']?>" placeholder="password" id="password" type="password"/>
+                    <span><input  name="oldPassword"  placeholder="current password" id="password" type="password"/>
                     <p onclick="pswdDisplay()" id="showPswd" >                    
                         <i class="fa fa-eye-slash"></i>
                     </p></span>
                     <input  name="id" value="<?php echo $result['id']?>" type="hidden" />
                 </div>
-                <!-- <div class="pw">
+                <div class="pw">
                     <label>Your new password: </label>
-                    <span><input  name="newPassword" value="" placeholder="password" id="password" type="password"/>
+                    <span><input  name="newPassword" value="" placeholder="new password" id="newPassword" type="password"/>
                     <p onclick="pswdDisplay()" id="showPswd" >                    
                         <i class="fa fa-eye-slash"></i>
                     </p></span>
                     <input  name="id" value="" type="hidden" />
-                </div> -->
+                </div>
                 <!-- edit email address -->
                 <div>
                     <label>Your email address: </label>

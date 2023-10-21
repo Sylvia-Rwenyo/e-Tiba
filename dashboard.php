@@ -37,7 +37,7 @@ if (!isset($_SESSION["loggedIN"])) {
             <div class="welcome-msg">
                 <h3><?php
                 // php echo $_SESSION["username"]
-                ?>, thank you for choosing CERA</h3>
+                ?>, thank you for choosing e-Tiba</h3>
                 <p>Your healthcare care companion.</p>
             </div>
         </div> -->

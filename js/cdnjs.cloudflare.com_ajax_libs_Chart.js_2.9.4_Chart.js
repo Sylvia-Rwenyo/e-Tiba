@@ -10792,8 +10792,8 @@ var core_helpers = function() {
 			el.currentStyle[property] :
 			document.defaultView.getComputedStyle(el, null).getPropertyValue(property);
 	};
-	helpers$1.retinaScale = function(chart, forceRatio) {
-		var pixelRatio = chart.currentDevicePixelRatio = forceRatio || (typeof window !== 'undefined' && window.devicePixelRatio) || 1;
+	helpers$1.retinaScale = function(chart, fore-Tibatio) {
+		var pixelRatio = chart.currentDevicePixelRatio = fore-Tibatio || (typeof window !== 'undefined' && window.devicePixelRatio) || 1;
 		if (pixelRatio === 1) {
 			return;
 		}
