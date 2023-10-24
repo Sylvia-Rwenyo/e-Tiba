@@ -242,7 +242,7 @@
 
         //remove dialog box
         function register2(){
-        window.location.href = "settings.php";
+        window.location.href = "user-account.php";
     }
     if(sessionStorage.getItem("editFormState") == true){
             editProfile();
@@ -314,7 +314,7 @@
 //   });
   function fetchData() {
     $.ajax({
-      url: 'settings.php', // Replace with your server-side script URL
+      url: 'user-account.php', // Replace with your server-side script URL
       method: 'GET',
       success: function(response) {
         // Handle the response and update the HTML content

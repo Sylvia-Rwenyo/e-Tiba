@@ -55,7 +55,7 @@
             $headerName = 'Appointments';
         }else if(strpos($currentPage, 'log') || strpos($currentPage, 'record')){
             $headerName = 'Records';
-        }else if($currentPage === 'settings.php'){
+        }else if($currentPage === 'user-account.php'){
             $headerName = 'Profile';
         }
         return $headerName;

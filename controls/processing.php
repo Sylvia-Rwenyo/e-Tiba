@@ -492,14 +492,14 @@ if(isset($_POST['update']))
         if(mysqli_num_rows($sql_e)>0)
         {
             echo '<script> 
-            window.location.href = "../settings.php?e=3"
+            window.location.href = "../user-account.php?e=3"
             </script>';
         }
         $sql_f=mysqli_query($conn,"SELECT * FROM regpatients where phoneNumber='$phoneNumber'");
         if(mysqli_num_rows($sql_f)>0)
         {
             echo '<script> 
-            window.location.href = "../settings.php?e=2"
+            window.location.href = "../user-account.php?e=2"
             </script>';
         }
         $userID = $_SESSION['id'];
@@ -513,7 +513,7 @@ if(isset($_POST['update']))
             }
             if($oldPassword != $oldpw){
                 echo '<script> 
-                window.location.href = "../settings.php?e=5"
+                window.location.href = "../user-account.php?e=5"
                 </script>';
             }else{
 
@@ -528,14 +528,14 @@ if(isset($_POST['update']))
         if(mysqli_num_rows($sql_e)>0)
         {
             echo '<script> 
-            window.location.href = "../settings.php?e=3"
+            window.location.href = "../user-account.php?e=3"
             </script>';
         }
         $sql_f=mysqli_query($conn,"SELECT * FROM regDoctors where phoneNumber='$phoneNumber'");
         if(mysqli_num_rows($sql_f)>0)
         {
             echo '<script> 
-            window.location.href = "../settings.php?e=2"
+            window.location.href = "../user-account.php?e=2"
             </script>';
         }
         $userID = $_SESSION['id'];
@@ -549,7 +549,7 @@ if(isset($_POST['update']))
             }
             if($oldPassword != $oldpw){
                 echo '<script> 
-                window.location.href = "../settings.php?e=5"
+                window.location.href = "../user-account.php?e=5"
                 </script>';
             }else{
               $sql .= "UPDATE regDoctors SET  emailAddress='$emailAddress', password='$password', 
@@ -564,14 +564,14 @@ if(isset($_POST['update']))
          if(mysqli_num_rows($sql_e)>0)
          {
              echo '<script> 
-             window.location.href = "../settings.php?e=3"
+             window.location.href = "../user-account.php?e=3"
              </script>';
          }
          $sql_f=mysqli_query($conn,"SELECT * FROM reginstitutions where phoneNumber='$phoneNumber'");
          if(mysqli_num_rows($sql_f)>0)
          {
              echo '<script> 
-             window.location.href = "../settings.php?e=2"
+             window.location.href = "../user-account.php?e=2"
              </script>';
          }
          $userID = $_SESSION['id'];
@@ -585,7 +585,7 @@ if(isset($_POST['update']))
             }
             if($oldPassword != $oldpw){
                 echo '<script> 
-                window.location.href = "../settings.php?e=5"
+                window.location.href = "../user-account.php?e=5"
                 </script>';
             }else{
                 $sql .= "UPDATE reginstitutions SET  emailAddress='$emailAddress', password='$password', 
@@ -598,7 +598,7 @@ if(isset($_POST['update']))
         // $_SESSION["username"]=$name;
         $_SESSION["email"]=$emailAddress;
         echo ' <script> 
-        window.location.href = "../settings.php";
+        window.location.href = "../user-account.php";
         </script>
         ';
     } else {	
