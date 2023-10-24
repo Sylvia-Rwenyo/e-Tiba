@@ -24,49 +24,49 @@
     <?php
         $current_user_name = $_SESSION['username'];
     ?>
-    <div class="welcome-msg">
-        <h3>Doctor Registration</h3>
-        <h5>Welcome to e-Tiba</h5>
-        <p>Please fill the form below with accurate information as this is imporant for future identification with the platform administrators.</p>
-    </div>
-    <form method="POST" action="../controls/processing.php">
-        <input type="text" name="firstName" placeholder="Doctor first name"/>
-        <input type="text" name="lastName" placeholder="Doctor last name"/>
-         <input type="number" name="years" placeholder="Years in practice"/>
-         <select name="gender">
-            <option selected disabled> Select their gender</option>
-            <option>Female</option>
-            <option>Male</option>
-            <option>Prefer not to say</option>
-        </select>
-        <input type="text" name="emailAddress" placeholder="Email Address"/>
-        <input type="hidden"  name="institution" value="<?php echo $current_user_name;?>"/>
-        <select name="condition[]" multiple required>
-                <option selected disabled> Select specialties</option>
-                <?php
-                include_once '../conn.php';
-                session_start();
-                $id=$_SESSION["id"];
-                 $stmt = "SELECT * FROM reginstitutions WHERE id='$id'";
-                 $sql = mysqli_query($conn, $stmt);
-                 $specialties = array();
-                 if (mysqli_num_rows($sql) > 0) {
-                     while ($row = mysqli_fetch_array($sql)) {
-                        $specialties = explode('*',$row['illnesses']);
-                     }}
-                     ?>
-                    <option><?php echo $specialties[0];?></option>
-                     <?php
-                        for($i = 1; $i<count($specialties); $i++){
-                ?>
-                <option><?php echo $specialties[$i];?></option>
-                <?php
-                }
-                ?>
+        <div class="welcome-msg">
+            <h3>Doctor Registration</h3>
+            <h5>Welcome to e-Tiba</h5>
+            <p>Please fill the form below with accurate information as this is imporant for future identification with the platform administrators.</p>
+        </div>
+        <form method="POST" action="../controls/processing.php">
+            <input type="text" name="firstName" placeholder="Doctor first name"/>
+            <input type="text" name="lastName" placeholder="Doctor last name"/>
+            <input type="number" name="years" placeholder="Years in practice"/>
+            <select name="gender">
+                <option selected disabled> Select their gender</option>
+                <option>Female</option>
+                <option>Male</option>
+                <option>Prefer not to say</option>
             </select>
-        <input type="text" name="phoneNumber" placeholder="Phone Number"/>
-        <input type="text" name="address" placeholder="address"/>
-        <input type="submit" value="submit" name="register-doc-by-partner" class="pos-btn"/>
-    </form>
+            <input type="text" name="emailAddress" placeholder="Email Address"/>
+            <input type="hidden"  name="institution" value="<?php echo $current_user_name;?>"/>
+            <select name="condition[]" multiple required>
+                    <option selected disabled> Select specialties</option>
+                    <?php
+                    include_once '../conn.php';
+                    session_start();
+                    $id=$_SESSION["id"];
+                    $stmt = "SELECT * FROM reginstitutions WHERE id='$id'";
+                    $sql = mysqli_query($conn, $stmt);
+                    $specialties = array();
+                    if (mysqli_num_rows($sql) > 0) {
+                        while ($row = mysqli_fetch_array($sql)) {
+                            $specialties = explode('*',$row['illnesses']);
+                        }}
+                        ?>
+                        <option><?php echo $specialties[0];?></option>
+                        <?php
+                            for($i = 1; $i<count($specialties); $i++){
+                    ?>
+                    <option><?php echo $specialties[$i];?></option>
+                    <?php
+                    }
+                    ?>
+                </select>
+            <input type="text" name="phoneNumber" placeholder="Phone Number"/>
+            <input type="text" name="address" placeholder="address"/>
+            <input type="submit" value="submit" name="register-doc-by-partner" class="pos-btn"/>
+        </form>
 </body>
 </html>

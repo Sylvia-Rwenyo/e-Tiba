@@ -174,8 +174,8 @@ if(isset($_POST['register-doc'])){
     //encrypt the password to insert
     $password = openssl_encrypt($password, "AES-128-ECB", $SECRETKEY);
 	 
-    $sql=mysqli_query($conn,"SELECT * FROM regdoctors where email='$emailAddress' AND phone_number='$phoneNumber'");
-    if(mysqli_num_rows($sql)>0)
+    $sqlp=mysqli_query($conn,"SELECT * FROM regdoctors where emailAddress='$emailAddress' AND phoneNumber='$phoneNumber'");
+    if(mysqli_num_rows($sqlp)>0)
     {
         echo "Doctor Already Registered"; 
         exit;
@@ -408,7 +408,7 @@ function login($conn,$SECRETKEY){
             $_SESSION["id"]=$row['id'];
             $_SESSION["loggedIN"] = true;
             $_SESSION["menuState"] = false;
-            header('location:../dashboard.php');
+            header('location:../partners/doctor-records.php');
         }else{
             echo '<script> 
             window.location.href = "../register.php?login=1&e=1"

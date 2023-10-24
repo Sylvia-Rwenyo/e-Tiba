@@ -180,6 +180,7 @@
                         }
                     </style>';
                 if(!isset($_GET['c'])){
+
                     if(isset($_GET['dID']) && $_SESSION['category'] == 'patient'){
                         if($_GET['dID'] == 0){
                             ?>
@@ -228,6 +229,19 @@
 
         </div>
         <?php
+         if(isset($_GET['w'])){
+            if(stristr('-', $_GET['w']) == true){
+                echo '<style>
+                .overlay 
+                    {
+                        display: none;
+                    }
+                    .calendar{
+                        opacity: 1;
+                    }
+                </style>'; 
+                }
+            }   
                     }}}else{
                         $patientID = $_GET['pID'];
                         $sql = mysqli_query($conn,  "SELECT * FROM regPatients WHERE id='$patientID'");     
