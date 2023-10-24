@@ -16,7 +16,7 @@
         <h3>Welcome to e-Tiba</h3>
         <p>Please fill the form below with accurate information as this is imporant for future identification with the platform administrators.</p>
     </div>
-    <form method="POST" action="../controls/processing.php">
+    <form method="POST" action="../controls/processing.php" id="reg-form">
         <input type="text" name="firstName" placeholder="First name"/>
         <input type="text" name="lastName" placeholder="Last name"/>
          <input type="number" name="years" placeholder="Years in practice"/>
@@ -41,10 +41,129 @@
             <i class="fa fa-eye-slash"></i>
             </span>
         </div>
+        <div id="passwordChecker">
+            <label class="pswd-warning"><i class="fa fa-check"></i>8 -20 characters long</label>
+            <label class="pswd-warning"><i class="fa fa-check"></i>Includes an uppercase letter</label>
+            <label class="pswd-warning"><i class="fa fa-check"></i>Includes a number</label>
+            <label class="pswd-warning"><i class="fa fa-check"></i>Includes a symbol</label>
+            <label class="pswd-warning"><i class="fa fa-check"></i>Does not include spaces</label>
+        </div>
         <input type="hidden"  name="institution" value="<?php session_start(); if(isset($_SESSION['category']))
         {echo $_SESSION['username'];}else{ echo 'none';}
         ?>"/>
         <input type="submit" value="submit" name="register-doc" class="pos-btn"/>
     </form>
 </body>
+<script>
+    let password = document.getElementById("reg-pw");
+
+function pswdDisplay(){
+let showpassword = document.getElementById('showPswd');
+if(password.type == "text"){
+  password.type = "password";
+  showpassword.innerHTML = '<i class="fa fa-eye-slash"></i>';
+}else{
+  password.type = "text";
+  showpassword.innerHTML = "<i class='fa fa-eye'></i>";
+  password.style.border = "none";
+}
+}
+document.getElementById("pswdDiv").onclick = () => {
+document.getElementById("pswdDiv").style.border = '2px solid black';
+}
+
+//password checker functionality for registration form
+//declare the variabes storing the element containing the password and the one containing the text indicating the passwords strength
+let checker =  document.getElementById('passwordChecker');
+let warnings = document.getElementsByClassName('pswd-warning');
+
+//check for upper case letters
+let poorRegExp = /[A-Z]/;
+
+//check for numbers
+let weakRegExp = /(?=.*?[0-9])/;
+
+//check for symbols
+let strongRegExp = /(?=.*?[#?!@$%^&*-])/;
+
+//check for spaces
+let whitespaceRegExp = /^$|\s+/;
+
+// when password is entered
+password.oninput = function(){
+// display div containing warnings
+checker.style.display = 'grid';
+
+//store value of password in variable
+let passwordValue = password.value;
+
+if(passwordValue.length < 8 || passwordValue.length > 20){
+  warnings[0].style.color = "red";
+}else if(passwordValue.length > 8 || passwordValue.length < 20){
+  warnings[0].style.color = "green";
+}
+
+//check for upper case letters in password
+let upperCaseChecker= passwordValue.match(poorRegExp);
+
+if(upperCaseChecker){
+  warnings[1].style.color = "green";
+}
+else if(!upperCaseChecker  && !(passwordValue.length > 8 || passwordValue.length < 20)){
+  warnings[1].style.color = "red";
+}
+
+//check for numbers in password
+let numbersChecker= passwordValue.match(weakRegExp);
+
+if(numbersChecker){
+  warnings[2].style.color = "green";
+}else if(!numbersChecker && !(passwordValue.length > 8 || passwordValue.length < 20)){
+  warnings[2].style.color = "red";
+}
+
+//check for symbols in password
+let symbolsChecker= passwordValue.match(strongRegExp);
+
+if(symbolsChecker){
+  warnings[3].style.color = "green";
+}else if(!symbolsChecker  && !(passwordValue.length > 8 || passwordValue.length < 20)){
+  warnings[3].style.color = "red";
+}
+
+//check for spaces in password
+let whitespaceChecker= passwordValue.match(whitespaceRegExp);
+
+if(whitespaceChecker){
+  warnings[4].style.color = "red";
+}else if(!whitespaceChecker && (passwordValue.length > 8 || passwordValue.length < 20)){
+  warnings[4].style.color = "green";
+}
+}
+document.getElementById('reg-form').onsubmit = (event) => {
+let passwordValue = password.value;
+
+// Regular expressions to check for upper case letters, numbers, symbols, and spaces
+let upperCaseRegExp = /[A-Z]/;
+let numbersRegExp = /(?=.*?[0-9])/;
+let symbolsRegExp = /(?=.*?[#?!@$%^&*-])/;
+let whitespaceRegExp = /\s/;
+
+// Check if the password meets the strength criteria
+let isStrongPassword = (
+  passwordValue.length >= 8 &&
+  passwordValue.length <= 20 &&
+  upperCaseRegExp.test(passwordValue) &&
+  numbersRegExp.test(passwordValue) &&
+  symbolsRegExp.test(passwordValue) &&
+  !whitespaceRegExp.test(passwordValue)
+);
+
+// If the password is not strong, prevent form submission and show an alert
+if (!isStrongPassword) {
+  event.preventDefault();
+  window.location.href = "independent-reg-doc.php?e=4";
+}
+};
+    </script>
 </html>

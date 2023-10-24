@@ -4,13 +4,10 @@
         // determine target page based on user category
         if ($_SESSION['category'] == 'hospital') {
             ?>
-            <!-- trends -->
-            <a href="<?php echo prefixSet('dashboard.php')?>" class="<?php echo isActive('dashboard.php'); ?>"><li><i class="fa-solid fa-chart-line"></i></li></a>
+             <!-- records -->
+             <a href="<?php echo prefixSet('doctor-records.php')?>" class="<?php echo isActive('partners/doctor-records.php'); ?>"><li><i class="fa-solid fa-folder"></i></li></a>
             <!-- add new doctor -->
-            <a href="<?php echo prefixSet('partners/add-doctor.php')?>" class="<?php echo isActive('partners/add-doctor.php'); ?>"><li><i class="fa-solid fa-add"></i></li></a>
-
-            <!-- records -->
-            <a href="<?php echo prefixSet('partners/doctor-records.php')?>" class="<?php echo isActive('partners/doctor-records.php'); ?>"><li><i class="fa-solid fa-folder"></i></li></a>
+            <a href="<?php echo prefixSet('add-doctor.php')?>" class="<?php echo isActive('partners/add-doctor.php'); ?>"><li><i class="fa-solid fa-add"></i></li></a>
             <!-- settings -->
             <a href="<?php echo prefixSet('settings.php')?>" class="<?php echo isActive('settings.php'); ?>"><li><i class="fa-solid fa-gears"></i></li></a>
 
