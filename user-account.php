@@ -11,7 +11,7 @@
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <link rel="icon" href="favicon.ico" />
         <link rel="stylesheet" href="style.css">
-        <title>Edit Your profile</title>
+        <title>Your profile</title>
     </head>
     <body class="profileBody" id="profileBody" >
         <div class="header">
@@ -40,6 +40,7 @@
         ?>
         <section class="main-section">
             <div class="profile">
+                <h2>My profile info</h2>
                 <div class="intro">
                     <img src="<?php if($result['profilePhoto'] == ''){
                         echo 'Images/user.png';} else{
@@ -65,7 +66,7 @@
                      echo 'Add phone number';} else{ echo $result['phoneNumber'];}
                      $i++;
                      }}?></a></p>
-                <p onclick="editProfile()"><i class="fa-solid fa-pencil"></i></p>
+                <p onclick="editProfile()"><i class="fa-solid fa-pencil">Edit Profile</i></p>
             </div>
             </div>
             <?php 
