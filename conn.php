@@ -2,7 +2,7 @@
 	$servername = "localhost";
 	$username = "root";
 	$password = "";
-	$database = "e-Tiba";
+	$database = "nafuu";
 
 	// Create a connection
 	$conn = mysqli_connect($servername,
@@ -11,5 +11,5 @@
 	if(!$conn) {
 		die("Error". mysqli_connect_error());
 	}
-	$SECRETKEY = "e-TibaPass@123456";
+	$SECRETKEY = "nafuuPass@123456";
 ?>

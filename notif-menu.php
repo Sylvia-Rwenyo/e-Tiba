@@ -21,7 +21,7 @@
         // Get the parent directory of the current page
         $parentDir = dirname($_SERVER['REQUEST_URI']);
         $parentDir = dirname($_SERVER['REQUEST_URI']);
-        $parentDirCurrent = preg_replace('/.*e-Tiba\//', '', $parentDir);
+        $parentDirCurrent = preg_replace('/.*nafuu\//', '', $parentDir);
     
         if ($parentDirCurrent === '/partners' && strpos($linkName, 'partners/') === 0) {
             $linkName = str_replace('partners/', '', $linkName);
