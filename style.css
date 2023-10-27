@@ -22,11 +22,11 @@
     justify-content: space-between;
 }
 .menu img{
-    height: 3em;
-    width: 3em;
+    height: 2em;
+    width: 100%;
     margin-left: 5%;
 }
-.home .menu{
+.menu ul{
     padding-top: 1em;
 }
 .menu ul, .dash-nav ul{

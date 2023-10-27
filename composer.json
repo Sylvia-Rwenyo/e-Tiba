@@ -1,0 +1,18 @@
+{
+    "name": "sylvie/nafuu",
+    "description": "health risk prediction",
+    "autoload": {
+        "psr-4": {
+            "Sylvie\\Nafuu\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "SylviaRwenyo",
+            "email": "rwenyosylvia@gmail.com"
+        }
+    ],
+    "require": {
+        "php-ai/php-ml": "^0.10.0"
+    }
+}
