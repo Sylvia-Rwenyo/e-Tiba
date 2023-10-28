@@ -1,6 +1,5 @@
 <?php 
     include_once "conn.php";
-    session_start();
     // check logged in status
     if(!isset($_SESSION["loggedIN"])){
         header('location:index.php');
