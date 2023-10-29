@@ -69,7 +69,7 @@ if (mysqli_num_rows($sql3) > 0) {
         $totalExercise += $exerciseTime;
     }
 
-    $targetExercise = 100;
+    $targetExercise = 60;
     $exercisePercentage = 100 * $exerciseTime / $targetExercise;
 
     // Store exercise data for this day

@@ -316,7 +316,7 @@
             {
             label: 'Exercise Percentage',
             data: <?php echo $exerciseDataJSON; ?>.map(function(exercise) {
-                return (exercise / 45) * 100; // Calculate exercise percentage
+                return (exercise / 60) * 100; // Calculate exercise percentage
             }),
             backgroundColor: 'rgba(54, 162, 235, 0.2)',
             borderColor: 'rgba(54, 162, 235, 1)',
