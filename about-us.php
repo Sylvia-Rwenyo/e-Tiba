@@ -15,14 +15,14 @@
   <div class="intro">
       <div class="c-phrase-section">
           <div class="c-phrase">
-              <h3>Cancer care made seamless,&nbsp;<b>for you</b></h3>
+              <h3>Mobile health care made seamless,&nbsp;<b>for you</b></h3>
           </div>
           <p>Let us help you track your health and treatment process</p>
       </div>
       <div class="banner">
         <div class="video-description" id="video-description" style="position:relative">
           <video width="100%" height="100%" style="border:1px 1px 1px" controls>
-              <source src="images/nafuu.mp4" type="video/mp4"/>
+              <source src="images/Nafuu.mp4" type="video/mp4"/>
               Your browser does not support video tag
           </video><br/>
         </div>
@@ -38,32 +38,32 @@
       </div>
   </div>
   <div id="transcript" style="position:relative" class="transcript">
-    <p><strong>nafuu</strong>, an all encompassing app for full cancer care. It will enable oncologists and healthcare 
+    <p><strong>nafuu</strong>, an all encompassing app for full healthcare. It will enable doctors and healthcare 
       providers to work together with the patient to coordinate their care and ensure they receive the appropriate 
-      treatment in the comfort of their homes. The app ensures remote access to oncologists ,monitoring of treatment,
+      treatment in the comfort of their homes. The web application ensures remote access to doctors ,monitoring of treatment,
       adherence to medication, early detection of side effects and treatment failure ,offers education on their 
       conditions and preserves the patient’s mental health.
       This mobile and web application that will be installed in healthcare facilities as well as the patient’s phone 
-      to facilitate connection between cancer patients and cancer specialists.</p>
+      to facilitate connection between patients and health practicioners.</p>
     <h3>Through nafuu...</h3>
     <ul>
       <li>
-        The oncologists can set up appointments with the patients where treatment is prescribed. The patient will receive reminders for follow-up.
+        The doctors can set up appointments with the patients where treatment is prescribed. The patient will receive reminders for follow-up.
       </li>   
       <li>
-        The patient can view nearby cancer care centres offering treatment where their vitals and test results during chemo can be uploaded.
+        The patient can view nearby healthcare centres offering treatment where their vitals and test results during treatment can be uploaded.
       </li>
     </ul>
     <div class="transcript-small-div">
       <div style="margin:20px;">
         <div class="transcript-mini-div">
           <h4>Electronic Health Records</h4> 
-          <p>The patient’s information such as test results and history are uploaded and made available to the oncologist. </p>
+          <p>The patient’s information such as test results and history are uploaded and made available to the doctor. </p>
         </div>
         
         <div class="transcript-mini-div">
           <h4>Telemedicine</h4>
-          <p>The oncologists can set up appointments with the patients. Patients can communicate with healthcare 
+          <p>The doctors can set up appointments with the patients. Patients can communicate with healthcare 
             providers remotely through secure video calls or messaging. This would enable patients to 
             receive timely care and support without the need to travel to a healthcare facility</p>
         </div>
@@ -80,13 +80,13 @@
         </div>
         <div class="transcript-mini-div">
           <h4>Tele-counselling</h4> 
-          <p>The patient is able to set up meetings with a therapist or a counsellor to improve their mental health. In addition, they can be connected to nearby cancer patients to form support groups.</p>
+          <p>The patient is able to set up meetings with a therapist or a counsellor to improve their mental health. In addition, they can be connected to nearby patients to form support groups.</p>
         
         <ul>
             <li>One on one counselling sessions with therapist</li>
-            <li>Group sessions with therapist and other cancer patients</li>
+            <li>Group sessions with therapist and other</li>
         </ul>
-        <p>Data from the app can be used to add to help in medical research and inform policies concerning cancer patients.</p>
+        <p>Data from the app can be used to add to help in medical research and inform policies concerning patients.</p>
         </div>
       </div>
     </div>

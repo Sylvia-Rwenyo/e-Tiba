@@ -15,7 +15,7 @@
     if(isset($_SESSION['loggedIN'])){
         ?>
     <div class="menu">
-        <img src="images/logo.png" alt="nafuu logo"/>
+        <!-- <img src="images/logo.png" alt="nafuu logo"/> -->
         <ul>
             <li><a href="dashboard.php">Home</a></li>
             <li><a href="about-us.php">About Us</a></li>
@@ -27,7 +27,6 @@
        }else{
     ?>
     <div class="menu">
-        <img src="images/logo.png" alt="nafuu logo"/>
         <ul>
             <li><a href="register.php?login=1">Log In</a></li>
             <li><a href="about-us.php">About Us</a></li>

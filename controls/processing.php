@@ -232,16 +232,12 @@ if(isset($_POST['register-doc-by-partner'])){
          ('$firstName' ,'$lastName' ,'$gender' , '$institution' ,'$emailAddress', '$conditions', '$phoneNumber' ,'$address' ,'$password')";
     }
     //if sql query is executed...
-	 if (mysqli_query($conn, $query)) {
-        if(!isset($_SESSION['category'])){
-        login($conn,$SECRETKEY);
-        }else{
-            header('location:../dashboard.php?status=success');
-        }
-			 } else {	
-                //show error
-		echo "Error: " . $sql . "
-" . mysqli_error($conn);
+    if (mysqli_query($conn, $query)) {
+        header('location:../partners/doctor-records.php?status=success');
+    } else 
+    {	
+        //show error
+		echo "Error: " . $sql . "" . mysqli_error($conn);
 	 }
      //close connection
 	 mysqli_close($conn);
