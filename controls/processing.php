@@ -111,6 +111,9 @@ if(isset($_POST['reg-partner']))
 }
 
 if(isset($_POST['add-patient'])){
+    //create session
+    session_start();
+
     $firstName = htmlspecialchars($_POST['firstName']);
      $lastName = htmlspecialchars($_POST['lastName']);
      $age = $_POST['age'];
@@ -123,32 +126,31 @@ if(isset($_POST['add-patient'])){
      for($i=0; $i < count($_POST['condition']); $i++){
         $conditionsArr[] = $_POST['condition'][$i];
          }
-    $conditions = implode('*', $conditionsArr);    
+    $conditions = implode('*', $conditionsArr);   
+    $password = substr($emailAddress, 0, strpos($emailAddress, "@"));
+    //encrypt the password to insert
+    $password = openssl_encrypt($password, "AES-128-ECB", $SECRETKEY); 
 	 
     $sql=mysqli_query($conn,"SELECT * FROM regpatients where emailAddress='$emailAddress' || phoneNumber='$phoneNumber'");
     if(mysqli_num_rows($sql)>0)
     {
-        echo "User Already Registered"; 
+        echo "Patient Already Registered"; 
         exit;
     }
     else
     {
-        $query="INSERT INTO regpatients(firstName, lastName, age, gender, emailAddress, phoneNumber, address, institution, illness) VALUES ('$firstName' ,'$lastName' ,'$age' ,'$gender' ,'$emailAddress' ,'$phoneNumber' ,'$address' ,'$institution' ,'$conditions')";
+        $query="INSERT INTO regpatients(firstName, password, lastName, age, gender, emailAddress, phoneNumber, address, institution, illness) VALUES ('$firstName', '$password' ,'$lastName' ,'$age' ,'$gender' ,'$emailAddress' ,'$phoneNumber' ,'$address' ,'$institution' ,'$conditions')";
     }
     //if sql query is executed...
-	 if (mysqli_query($conn, $query)) {
-        if(!isset($_SESSION['category'])){
-        login($conn,$SECRETKEY);
-        }else{
-            header('location:../dashboard.php?status=success');
-        }
-			 } else {	
-                //show error
-		echo "Error: " . $sql . "
-" . mysqli_error($conn);
-	 }
-     //close connection
-	 mysqli_close($conn);
+    if (mysqli_query($conn, $query)) {
+        header('location:../patient-records.php?status=success');
+    }
+	else {	
+        //show error
+		echo "Error: " . $sql . "" . mysqli_error($conn);
+    }
+    //close connection
+    mysqli_close($conn);
 }
 
 if(isset($_POST['register-doc'])){
