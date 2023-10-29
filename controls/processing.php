@@ -218,6 +218,8 @@ if(isset($_POST['register-doc-by-partner'])){
     $address = htmlspecialchars($_POST['address']);
     $years = filter_var($_POST['years'], FILTER_SANITIZE_NUMBER_INT);
     $password = substr($emailAddress, 0, strpos($emailAddress, "@"));
+    //encrypt the password to insert
+    $password = openssl_encrypt($password, "AES-128-ECB", $SECRETKEY);
 
 	 
     $sql=mysqli_query($conn,"SELECT * FROM regdoctors where emailAddress='$emailAddress' AND phoneNumber='$phoneNumber'");
