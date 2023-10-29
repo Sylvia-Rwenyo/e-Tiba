@@ -78,6 +78,7 @@
                     }
                 </style>
                 ';
+                $records = "SELECT * FROM regPatients where institution='$username'";
             }else if($_GET['a'] == 'd'){
                 $records = "SELECT * FROM regpatients where id in (SELECT patientID FROM appointments WHERE doctorID = '$id')";
                 echo '
@@ -143,8 +144,8 @@
                 </style>
                 ';
         }
-        $stmt = mysqli_query($conn, $records);
-        if (mysqli_num_rows($stmt) > 0) {
+        $stmt3 = mysqli_query($conn, $records);
+        if (mysqli_num_rows($stmt3) > 0) {
         $i=0;
         ?>
         <tr >
@@ -158,7 +159,7 @@
             <th>calendar</th>
         </tr>
     <?php
-        while($result = mysqli_fetch_array($stmt)) {
+        while($result = mysqli_fetch_array($stmt3)) {
         ?>
         <tr id="<?php echo $result['id']?>">
             <td><?php echo $result['firstName'].' '.$result['lastName']?></td>
@@ -168,7 +169,7 @@
             <td><?php $illness =  explode('*',$result['illness']); for($i=0; $i<count($illness); $i++){echo $illness[$i]. ' ';}?></td>
             <td><?php 
             include 'risk-prediction.php';            
-                $status = $riskLevel;
+                $status = $predictedRiskLevel;
 
             switch ($status) {
               case 0:

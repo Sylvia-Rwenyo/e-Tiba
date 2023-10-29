@@ -1,6 +1,6 @@
 <?php 
     include_once '../conn.php';
-    session_start();
+    @session_start();
     if($_SESSION["loggedIN"] == false)
     {
         echo ' <script> 

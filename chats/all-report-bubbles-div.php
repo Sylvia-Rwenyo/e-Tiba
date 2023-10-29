@@ -1,7 +1,7 @@
 <div class="all_message_mini">
     <?php
     include_once "../conn.php";
-    session_start();
+    @session_start();
     
     
     $current_user_email = $_SESSION['email'];

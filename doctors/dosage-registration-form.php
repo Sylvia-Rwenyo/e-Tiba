@@ -19,7 +19,7 @@
             <div class="dosage_for_title">
                 <?php
                 include_once "../conn.php";
-                session_start();
+                @session_start();
                 if(isset($_GET['id'])){
                     $requested_patient = $_GET['id'];
                 }

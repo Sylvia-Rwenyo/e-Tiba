@@ -6,7 +6,7 @@ include_once "../conn.php";
 if(isset($_POST['register']))
 {	
     //create session
-    session_start();
+    @session_start();
     
     //store values submitted in the signup form in variables
 	 $firstName = htmlspecialchars($_POST['firstName']);
@@ -72,7 +72,7 @@ if(isset($_POST['register']))
 if(isset($_POST['reg-partner']))
 {	
     //create session
-    session_start();
+    @session_start();
     
     //store values submitted in the signup form in variables
 	 $institutionName = htmlspecialchars($_POST['institutionName']);
@@ -153,7 +153,7 @@ if(isset($_POST['add-patient'])){
 
 if(isset($_POST['register-doc'])){
     //create session
-    session_start();
+    @session_start();
 
     $firstName = htmlspecialchars($_POST['firstName']);
     $lastName = htmlspecialchars($_POST['lastName']);
@@ -202,7 +202,7 @@ if(isset($_POST['register-doc'])){
 
 if(isset($_POST['register-doc-by-partner'])){
     //create session
-    session_start();
+    @session_start();
 
     $firstName = htmlspecialchars($_POST['firstName']);
     $lastName = htmlspecialchars($_POST['lastName']);
@@ -363,7 +363,7 @@ if(isset($_POST['logIn']))
 
 function login($conn,$SECRETKEY){
     //import variables
-    session_start();
+    @session_start();
     
     extract($_POST);
     $emailAddress = filter_var($_POST['emailAddress'], FILTER_SANITIZE_EMAIL);
@@ -421,7 +421,7 @@ function login($conn,$SECRETKEY){
 if(isset($_GET['action'])){
     // log out if the user selects "Log Out" on the menu bar
     if($_GET['action']== "logOut"){
-        session_start();
+        @session_start();
         session_unset();
         echo ' <script> 
                     window.location.href = "../index.php"
@@ -430,7 +430,7 @@ if(isset($_GET['action'])){
     }
 
     if($_GET['action'] == "deleteAccount"){
-        session_start();
+        @session_start();
         $id = $_GET['id'];
         $stmt;
         // check the user's category
@@ -471,7 +471,7 @@ if(isset($_POST['update']))
      //move uploaded file
      move_uploaded_file($_FILES["profilePhoto"]["tmp_name"], $targetFilePath3);
      } 
-    session_start();
+    @session_start();
    //store values submitted in the edit profile form in variables
     $id = $_POST['id'];
     $emailAddress = filter_var($_POST['emailAddress'], FILTER_SANITIZE_EMAIL);
@@ -611,7 +611,7 @@ if(isset($_POST['update']))
 // handle data submitted by user
 if (isset($_POST["record-sleep"])) {
     // Start a session
-    session_start();
+    @session_start();
 
     // Get the form values
     $start = $_POST['start-time'];
@@ -646,7 +646,7 @@ if (isset($_POST["record-sleep"])) {
 if(isset($_POST["record-physicalActivity"]))
 {	
     //create session
-    session_start();
+    @session_start();
     
     //store values submitted in the signup form in variables
      $exerciseType = '';
@@ -676,7 +676,7 @@ if(isset($_POST["record-physicalActivity"]))
 if(isset($_POST["record-meal"]))
 {	
     //create session
-    session_start();
+    @session_start();
     
     //store values submitted in the signup form in variables
 	 $mealName = htmlspecialchars($_POST['meal-name']);
@@ -704,7 +704,7 @@ if(isset($_POST["record-meal"]))
 if(isset($_POST["record-medTime"]))
 {	
     //create session
-    session_start();
+    @session_start();
     
     //store values submitted in the  form in variables
 	 $medName = htmlspecialchars($_POST['med-name']);
@@ -732,7 +732,7 @@ if(isset($_POST["record-medTime"]))
 // video chat back end
 
 if (isset($_POST['action']) && $_POST['action'] === 'offer') {
-    session_start();
+    @session_start();
     // Retrieve the offer SDP from the client
     $offerSdp = $_POST['offerSdp'];
 
@@ -750,7 +750,7 @@ if (isset($_POST['action']) && $_POST['action'] === 'offer') {
 }
 
 if (isset($_POST['action']) && $_POST['action'] === 'answer') {
-    session_start();
+    @session_start();
     // Retrieve the answer SDP from the client
     $answerSdp = $_POST['answerSdp'];
 
@@ -765,7 +765,7 @@ if (isset($_POST['action']) && $_POST['action'] === 'answer') {
 }
 
 if (isset($_POST['action']) && $_POST['action'] === 'candidate') {
-    session_start();
+    @session_start();
     // Retrieve the ICE candidate from the client
     $candidate = json_decode($_POST['candidate']);
 
@@ -782,7 +782,7 @@ if (isset($_POST['action']) && $_POST['action'] === 'candidate') {
 if(isset($_POST['input-message']))
 {	
     //create session
-    session_start();
+    @session_start();
     //store values submitted in the chat form in variables 
     $message = $conn->real_escape_string($_POST['message']);
     //encrypt messages
@@ -835,7 +835,7 @@ if(isset($_POST['input-message']))
 
 if(isset($_POST['message-delete'])){
     //create session
-    session_start();
+    @session_start();
     //store values submitted in the chat form in variables
 	$id = $_GET['id'];
     $sent_to = $_POST['sent_to'];
@@ -866,7 +866,7 @@ if(isset($_POST['message-delete'])){
 if(isset($_POST['submit-report-or-suggestion']))
 {	
     //create session
-    session_start();
+    @session_start();
     //store values submitted in the chat form in variables 
     $message = $conn->real_escape_string($_POST['message']);
     //encrypt messages
@@ -939,7 +939,7 @@ if(isset($_POST['submit-report-or-suggestion']))
 if(isset($_GET["a"])){
     if($_GET["a"] == "p"){
         //create session
-        session_start();
+        @session_start();
         
         //store values submitted in the  form in variables
          $doctorID = $_GET['dID'];

@@ -22,10 +22,13 @@
         $parentDir = dirname($_SERVER['REQUEST_URI']);
         $parentDirCurrent = preg_replace('/.*nafuu\//', '', $parentDir);
     
-        if ($parentDirCurrent === '/partners' && strpos($linkName, 'partners/') === 0) {
+        if ($parentDirCurrent === '/partners' && strpos($linkName, 'partners/') === 1) {
             $linkName = str_replace('partners/', '', $linkName);
             return $linkName;
-        } else if ($parentDirCurrent === '/doctors' && strpos($linkName, 'partners/') === 0) {
+        }else if($parentDirCurrent === '/partners' && strpos($linkName, 'partners/') === 0) {
+            $linkName = '../'. $linkName;
+            return $linkName;
+        }else if ($parentDirCurrent === '/doctors' && strpos($linkName, 'partners/') === 0) {
             $linkName = '../' . $linkName;
             return $linkName;
         }else if ($parentDirCurrent === '/partners' && strpos($linkName, 'doctors/') === 0) {

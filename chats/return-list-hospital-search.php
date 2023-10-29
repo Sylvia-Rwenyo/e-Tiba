@@ -1,6 +1,6 @@
 <?php
     include_once '../conn.php';
-    session_start();
+    @session_start();
     $current_user_category = $_SESSION['category'];
     $current_user_email = $_SESSION['email'];
     if(isset($_POST['search']))

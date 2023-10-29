@@ -23,6 +23,7 @@ $totalSleep = 0;
 $sleepTime = 0;
 $mealNumbers = 0;
 $exerciseTime = 0;
+$predictedRiskLevel = 0;
 
 // Fetch and calculate data for each day here
 

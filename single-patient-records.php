@@ -182,7 +182,7 @@
                 <section style="margin-top: 0;" id="singlePatientRecords">
                 <?php 
                     include_once 'conn.php';
-                    session_start();
+                    @session_start();
                     $i=0;
                     $pID = isset($_GET['p']) ? $_GET['p'] : $_SESSION['id'];
                     $stmt = mysqli_query($conn,"SELECT * FROM regPatients where id='$pID'");

@@ -9,7 +9,7 @@
             <!-- add new doctor -->
             <a href="<?php echo prefixSet('add-doctor.php')?>" class="<?php echo isActive('partners/add-doctor.php'); ?>"><li><i class="fa-solid fa-add"></i></li></a>
             <!-- settings -->
-            <a href="../settings.php" class="<?php echo isActive('settings.php'); ?>"><li><i class="fa-solid fa-gears"></i></li></a>
+            <a href="<?php echo prefixSet('settings.php')?>" class="<?php echo isActive('settings.php'); ?>"><li><i class="fa-solid fa-gears"></i></li></a>
 
             <!-- patient-doctor chats -->
             <?php
