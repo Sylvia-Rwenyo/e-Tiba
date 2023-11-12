@@ -27,7 +27,8 @@
         <div class="mainBody" style="height: 100vh">
             <?php
                 if (!isset($_SESSION["loggedIN"])) {
-                    header('location:index.php');
+                    echo '<script> 
+            window.location.href = "index.php"</script>';
                 } else {
                     // Show dashboard menu
                     include_once 'dash-menu.php';

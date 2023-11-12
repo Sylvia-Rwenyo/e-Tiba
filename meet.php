@@ -38,7 +38,7 @@ include_once 'dash-menu.php'
     height: '80%',
   },
 });
-      callFrame.join({ url: 'https://nafuu-beta.daily.co/NGlSp1Ls8us1AhRwTi67'});
+      callFrame.join({ url: 'https://cera-beta.daily.co/v37QpUoCJaxpYHardRSO'});
 </script>
 <!-- </section> -->
 <!-- </div> -->

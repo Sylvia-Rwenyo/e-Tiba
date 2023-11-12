@@ -38,7 +38,9 @@
                 $sql = "UPDATE reports SET readStatus = 'read' WHERE id='$id'";
                 if (mysqli_query($conn, $sql)) 
                 {
-                    header('Location: '.$_SERVER['PHP_SELF']);
+                    echo '<script> 
+                    window.location.href = " '.$_SERVER['PHP_SELF'] .'";
+                    <script>';
                     die;
                 } 
                 else 

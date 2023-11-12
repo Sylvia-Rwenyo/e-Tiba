@@ -243,10 +243,10 @@ INSERT INTO `patientsmeallog` (`userID`, `mealName`, `mealTime`, `entryID`, `rec
 -- --------------------------------------------------------
 
 --
--- Table structure for table `regdoctors`
+-- Table structure for table `regDoctors`
 --
 
-CREATE TABLE `regdoctors` (
+CREATE TABLE `regDoctors` (
   `id` int(11) NOT NULL,
   `firstName` varchar(50) NOT NULL,
   `lastName` varchar(50) NOT NULL,
@@ -262,20 +262,20 @@ CREATE TABLE `regdoctors` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `regdoctors`
+-- Dumping data for table `regDoctors`
 --
 
-INSERT INTO `regdoctors` (`id`, `firstName`, `lastName`, `emailAddress`, `institution`, `password`, `specialty`, `address`, `age`, `gender`, `profilePhoto`, `phoneNumber`) VALUES
+INSERT INTO `regDoctors` (`id`, `firstName`, `lastName`, `emailAddress`, `institution`, `password`, `specialty`, `address`, `age`, `gender`, `profilePhoto`, `phoneNumber`) VALUES
 (1, 'Fredrick', 'Kamau', 'fredric.ngugi@yahoo.com', 'none', 'ULBCXckbvOWLrae3HBB99g==', '', '', 23, 'Female', '', 0),
 (2, 'Morris', 'Muema', 'morris@gmail.com', 'mediheal hospital', 'ntj5NGsbJiWn94OnHNlc8w==', '', '', 25, 'Male', '', 0);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `reginstitutions`
+-- Table structure for table `regInstitutions`
 --
 
-CREATE TABLE `reginstitutions` (
+CREATE TABLE `regInstitutions` (
   `id` int(11) NOT NULL,
   `institutionName` varchar(100) NOT NULL,
   `location` varchar(100) NOT NULL,
@@ -288,10 +288,10 @@ CREATE TABLE `reginstitutions` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `reginstitutions`
+-- Dumping data for table `regInstitutions`
 --
 
-INSERT INTO `reginstitutions` (`id`, `institutionName`, `location`, `emailAddress`, `phoneNumber`, `password`, `illnesses`, `postalAddress`, `profilePhoto`) VALUES
+INSERT INTO `regInstitutions` (`id`, `institutionName`, `location`, `emailAddress`, `phoneNumber`, `password`, `illnesses`, `postalAddress`, `profilePhoto`) VALUES
 (1, 'New Hospital', '234', '234234', '3242', 'TB8MvNoRYKrdyScdWwubgw==', 'Condition B', '2342', ''),
 (2, 'mediheal hospital', 'Eldoret', 'mediheal.hos@gmail.com', '0722222222', 'm97SyqgW1aPhLBeUlcmNhQ==', 'Condition B', '22234-3345', ''),
 (3, 'Hospitali', 'Nairobi', 'hospitali@hospitali.com', '254111111111', 'xHf2LRAW6NbUqZs/3fLc0A==', 'Condition A*Condition C', '13051', '');
@@ -299,10 +299,10 @@ INSERT INTO `reginstitutions` (`id`, `institutionName`, `location`, `emailAddres
 -- --------------------------------------------------------
 
 --
--- Table structure for table `regpatients`
+-- Table structure for table `regPatients`
 --
 
-CREATE TABLE `regpatients` (
+CREATE TABLE `regPatients` (
   `id` int(11) NOT NULL,
   `firstName` varchar(50) NOT NULL,
   `lastName` varchar(50) NOT NULL,
@@ -319,10 +319,10 @@ CREATE TABLE `regpatients` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `regpatients`
+-- Dumping data for table `regPatients`
 --
 
-INSERT INTO `regpatients` (`id`, `firstName`, `lastName`, `emailAddress`, `institution`, `password`, `illness`, `address`, `age`, `gender`, `phoneNumber`, `status`, `profilePhoto`) VALUES
+INSERT INTO `regPatients` (`id`, `firstName`, `lastName`, `emailAddress`, `institution`, `password`, `illness`, `address`, `age`, `gender`, `phoneNumber`, `status`, `profilePhoto`) VALUES
 (6, 'khj', 'jh', '646', 'mediheal hospital', 'BIw6HeLqdkTIjmBI8zeHqg==', 'Array', '456', 56, 'Female', 0, 0, ''),
 (11, 'amsnfc', ' SDNF', 'rtaer', 'mediheal hospital', 'xbytrGCr+Gk6Bd4IHkKU8A==', 'Condition A', '1231', 34, 'Male', 2313, 0, ''),
 (13, 'berclay', 'Sprouts', 'berclaym@gmail.com', 'mediheal hospital', '4XnLuIpnX7JL5i3plnywyg==', 'Condition B', 'Nairobi', 25, 'Male', 722222222, 0, '');
@@ -387,21 +387,21 @@ ALTER TABLE `patientsmeallog`
   ADD PRIMARY KEY (`entryID`);
 
 --
--- Indexes for table `regdoctors`
+-- Indexes for table `regDoctors`
 --
-ALTER TABLE `regdoctors`
+ALTER TABLE `regDoctors`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `reginstitutions`
+-- Indexes for table `regInstitutions`
 --
-ALTER TABLE `reginstitutions`
+ALTER TABLE `regInstitutions`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `regpatients`
+-- Indexes for table `regPatients`
 --
-ALTER TABLE `regpatients`
+ALTER TABLE `regPatients`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `phoneNumber` (`phoneNumber`),
   ADD UNIQUE KEY `emailAddress` (`emailAddress`);
@@ -447,21 +447,21 @@ ALTER TABLE `patientsmeallog`
   MODIFY `entryID` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
--- AUTO_INCREMENT for table `regdoctors`
+-- AUTO_INCREMENT for table `regDoctors`
 --
-ALTER TABLE `regdoctors`
+ALTER TABLE `regDoctors`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
--- AUTO_INCREMENT for table `reginstitutions`
+-- AUTO_INCREMENT for table `regInstitutions`
 --
-ALTER TABLE `reginstitutions`
+ALTER TABLE `regInstitutions`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
--- AUTO_INCREMENT for table `regpatients`
+-- AUTO_INCREMENT for table `regPatients`
 --
-ALTER TABLE `regpatients`
+ALTER TABLE `regPatients`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --

@@ -80,7 +80,7 @@
                 ';
                 $records = "SELECT * FROM regPatients where institution='$username'";
             }else if($_GET['a'] == 'd'){
-                $records = "SELECT * FROM regpatients where id in (SELECT patientID FROM appointments WHERE doctorID = '$id')";
+                $records = "SELECT * FROM regPatients where id in (SELECT patientID FROM appointments WHERE doctorID = '$id')";
                 echo '
                 <style>
                     #attended-indicator{
@@ -91,7 +91,7 @@
                 ';
             }
             else if(isset($_GET['d'])){
-                $records = "SELECT * FROM regpatients where id in (SELECT patientID FROM appointments WHERE doctorID = '$doct_id')";
+                $records = "SELECT * FROM regPatients where id in (SELECT patientID FROM appointments WHERE doctorID = '$doct_id')";
                 echo '
                 <style>
                     #attended-indicator{
@@ -114,7 +114,7 @@
             }
         }
         else if(isset($_GET['d'])){
-            $records = "SELECT * FROM regpatients where id in (SELECT patientID FROM appointments WHERE doctorID = '$doct_id')";
+            $records = "SELECT * FROM regPatients where id in (SELECT patientID FROM appointments WHERE doctorID = '$doct_id')";
             echo '
             <style>
                 #attended-indicator{
@@ -129,11 +129,11 @@
         }
         else if(isset($_GET['id'])){
             $requested_patient = $_GET['id'];
-            $records = "SELECT * FROM regpatients where id = '$requested_patient'";
+            $records = "SELECT * FROM regPatients where id = '$requested_patient'";
         }else if(isset($_GET['search'])){
 
             $keyword = $_GET['keyword'];
-            $records = "SELECT * FROM regpatients WHERE emailAddress LIKE '$keyword' OR firstName LIKE '$keyword' OR lastName LIKE '$keyword'";
+            $records = "SELECT * FROM regPatients WHERE emailAddress LIKE '$keyword' OR firstName LIKE '$keyword' OR lastName LIKE '$keyword'";
         }else{
             echo '
                 <style>

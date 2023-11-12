@@ -6,7 +6,7 @@
         
         
         //enter table name and load in browser to check passwords
-        $resultPost = mysqli_query($conn,"SELECT institutionName, password FROM reginstitutions");
+        $resultPost = mysqli_query($conn,"SELECT institutionName, password FROM regInstitutions");
         ?>
         <style>
             table,th,td{

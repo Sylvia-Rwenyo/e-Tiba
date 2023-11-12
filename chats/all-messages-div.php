@@ -14,13 +14,13 @@
         if(isset($_GET['id'])){
             $requested_patient = $_GET['id'];
         }
-        $query = "SELECT * FROM regpatients WHERE id ='$requested_patient'";
+        $query = "SELECT * FROM regPatients WHERE id ='$requested_patient'";
     }
     elseif($current_user_category == 'patient'){
         if(isset($_GET['id'])){
             $requested_doctor = $_GET['id'];
         }
-        $query = "SELECT * FROM regdoctors WHERE id ='$requested_doctor'";
+        $query = "SELECT * FROM regDoctors WHERE id ='$requested_doctor'";
     }
     $result = mysqli_query($conn, $query) or die(mysqli_error($conn));
     
@@ -59,7 +59,9 @@
                 $sql = "UPDATE chat SET readStatus = 'read' WHERE id='$id'";
                 if (mysqli_query($conn, $sql)) 
                 {
-                    header('Location: '.$_SERVER['PHP_SELF']);
+                    echo '<script> 
+            window.location.href = " '.$_SERVER['PHP_SELF'] .'";
+            <script>';
                     die;
                 } 
                 else 

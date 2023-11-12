@@ -2,7 +2,8 @@
     include_once "conn.php";
     // check logged in status
     if(!isset($_SESSION["loggedIN"])){
-        header('location:index.php');
+        echo '<script> 
+        window.location.href = "index.php</script>';
         }
 
         $id = $_SESSION['id'];
