@@ -87,9 +87,9 @@
     <td><?php
        include 'risk-prediction.php';
 
-       if (isset($riskLevel)) {
+       if (isset($predictedRiskLevel)) {
        
-           $status = $riskLevel;
+           $status = $predictedRiskLevel;
 
             switch ($status) {
                 case 0:
@@ -131,9 +131,9 @@
             <th>Progress</th>
             <td>
             <?php
-        if (isset($riskLevel)) {
+        if (isset($predictedRiskLevel)) {
 
-            $status = $riskLevel;
+            $status = $predictedRiskLevel;
         
             switch ($status) {
                 case 0:
@@ -262,9 +262,9 @@
     <td><?php
         include 'risk-prediction.php';
 
-        if (isset($riskLevel)) {
+        if (isset($predictedRiskLevel)) {
         
-            $status = $riskLevel;
+            $status = $predictedRiskLevel;
 
             switch ($status) {
                 case 0:
@@ -302,9 +302,9 @@
             <th>Progress</th>
             <td>
             <?php
-        if (isset($riskLevel)) {
+        if (isset($predictedRiskLevel)) {
 
-            $status = $riskLevel;
+            $status = $predictedRiskLevel;
         
             switch ($status) {
                 case 0:

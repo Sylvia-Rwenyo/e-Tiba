@@ -379,7 +379,6 @@ function login($conn,$SECRETKEY){
     extract($_POST);
     $emailAddress = filter_var($_POST['emailAddress'], FILTER_SANITIZE_EMAIL);
     $password = $_POST["password"];
-    echo $password .' '. $emailAddress;
     $stmt;
     //encrypt the password to compare
     $password = openssl_encrypt($password, "AES-128-ECB", $SECRETKEY);
