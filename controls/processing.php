@@ -983,4 +983,46 @@ if(isset($_GET["a"])){
          //close connection
          mysqli_close($conn);
     }}
+
+
+    if(isset($_POST["delete-med-record"])){
+        //import variables
+        session_start();
+        $medId = $_GET['id'];
+        $query = "DELETE * FROM medicine WHERE medId='$medId'";
+        if (mysqli_query($conn, $query))
+        {echo "<script>
+            alert(\"Item deleted\");
+            window.location.href='../partners/add-medicine.php';
+            </script>";	
+         } 
+         else 
+         {
+            echo "Error: " . $query . "" . mysqli_error($conn);
+         }
+         mysqli_close($conn);
+    }
+
+    if(isset($_POST['add-med'])){
+        //import variables
+        session_start();
+        $medName = htmlspecialchars($_POST['medName']);
+        $medManufacturer = htmlspecialchars($_POST['manufacturer']);
+        $price = filter_var($_POST['price'], FILTER_SANITIZE_NUMBER_INT);
+        $hospId = $_SESSION["id"];
+        $medAdmin = htmlspecialchars($_POST['administration']);
+    
+        $sql=mysqli_query($conn,"SELECT * FROM medicine WHERE medName='$medName' AND medManufacturer ='$medManufacturer' AND hospId = '$hospId'");
+        if(mysqli_num_rows($sql)>0)
+        {
+            echo "Item Already Exists For This Hospital"; 
+            exit;
+        }
+        else
+        {
+            $query="INSERT INTO medicine (medName, price, hospId, medManufacturer, medAdmin) VALUES ('$medName', '$price', '$hospId', '$medManufacturer', '$medAdmin')";
+            $sql=mysqli_query($conn,$query)or die("Could Not Perform the Query");
+            header ("Location: ../partners/add-medicine.php");
+        }
+    }
 ?>
