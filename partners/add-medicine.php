@@ -42,35 +42,33 @@
         </select>
         <input type="submit" value="submit" name="add-med" id="add-med" class="pos-btn"/>
     </form>
-    <div>
-        <table>
-            <tr>
-                <th>Medicine Name</th>                           
-                <th>Manufacturer Name</th>
-                <th>Method of Administration</th>
-                <th>Price</th>
-                <th><i class="fa fa-trash-o"></i></th>
-            </tr>
-            <?php
-                $sql_query = "SELECT * FROM medicine WHERE hospId = '$current_user_id' ORDER BY medId DESC";
-                $result = mysqli_query($conn, $sql_query) or die(mysqli_error($conn));
-                while($row = mysqli_fetch_array($result))
-                {?>
-                    <tr>
-                        <td><?php echo $row["medName"];?></td>
-                        <td><?php echo $row["medManufacturer"];?></td>
-                        <td><?php echo $row["medAdmin"];?></td>
-                        <td><?php echo $row["price"];?></td> 
-                        <td>
-                            <form id="form"  action="../controls/processing.php?id=<?php echo $row["medId"]; ?>" method="POST">
-                                <button id = "delete-med-record" type="submit" name="delete-med-record"><i class="fa fa-trash-o"></i>Delete</button>
-                            </form>
-                        </td>  
-                    </tr>
-                    <?php
-                }
-          ?>
-        </table>
-    </div>
+    <table style="margin:10%;" id="med-table">
+        <tr>
+            <th>Medicine Name</th>                           
+            <th>Manufacturer Name</th>
+            <th>Method of Administration</th>
+            <th>Price</th>
+            <th><i class="fa fa-trash-o"></i></th>
+        </tr>
+        <?php
+            $sql_query = "SELECT * FROM medicine WHERE hospId = '$current_user_Id' ORDER BY medId DESC";
+            $result = mysqli_query($conn, $sql_query) or die(mysqli_error($conn));
+            while($row = mysqli_fetch_array($result))
+            {?>
+                <tr>
+                    <td><?php echo $row["medName"];?></td>
+                    <td><?php echo $row["medManufacturer"];?></td>
+                    <td><?php echo $row["medAdmin"];?></td>
+                    <td><?php echo $row["price"];?></td> 
+                    <td>
+                        <form id="form"  action="../controls/processing.php?id=<?php echo $row["medId"]; ?>" method="POST">
+                            <button id = "delete-med-record" type="submit" name="delete-med-record"><i class="fa fa-trash-o"></i>Delete</button>
+                        </form>
+                    </td>  
+                </tr>
+                <?php
+            }
+        ?>
+    </table>
 </body>
 </html>
