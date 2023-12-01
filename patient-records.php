@@ -1,3 +1,6 @@
+<?php
+    @session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -75,8 +78,9 @@
                     }
                 </style>
                 ';
+                $records = "SELECT * FROM regPatients where institution='$username'";
             }else if($_GET['a'] == 'd'){
-                $records = "SELECT * FROM regpatients where id in (SELECT patientID FROM appointments WHERE doctorID = '$id')";
+                $records = "SELECT * FROM regPatients where id in (SELECT patientID FROM appointments WHERE doctorID = '$id')";
                 echo '
                 <style>
                     #attended-indicator{
@@ -87,7 +91,7 @@
                 ';
             }
             else if(isset($_GET['d'])){
-                $records = "SELECT * FROM regpatients where id in (SELECT patientID FROM appointments WHERE doctorID = '$doct_id')";
+                $records = "SELECT * FROM regPatients where id in (SELECT patientID FROM appointments WHERE doctorID = '$doct_id')";
                 echo '
                 <style>
                     #attended-indicator{
@@ -110,7 +114,7 @@
             }
         }
         else if(isset($_GET['d'])){
-            $records = "SELECT * FROM regpatients where id in (SELECT patientID FROM appointments WHERE doctorID = '$doct_id')";
+            $records = "SELECT * FROM regPatients where id in (SELECT patientID FROM appointments WHERE doctorID = '$doct_id')";
             echo '
             <style>
                 #attended-indicator{
@@ -125,11 +129,11 @@
         }
         else if(isset($_GET['id'])){
             $requested_patient = $_GET['id'];
-            $records = "SELECT * FROM regpatients where id = '$requested_patient'";
+            $records = "SELECT * FROM regPatients where id = '$requested_patient'";
         }else if(isset($_GET['search'])){
 
             $keyword = $_GET['keyword'];
-            $records = "SELECT * FROM regpatients WHERE emailAddress LIKE '$keyword' OR firstName LIKE '$keyword' OR lastName LIKE '$keyword'";
+            $records = "SELECT * FROM regPatients WHERE emailAddress LIKE '$keyword' OR firstName LIKE '$keyword' OR lastName LIKE '$keyword'";
         }else{
             echo '
                 <style>
@@ -140,8 +144,8 @@
                 </style>
                 ';
         }
-        $stmt = mysqli_query($conn, $records);
-        if (mysqli_num_rows($stmt) > 0) {
+        $stmt3 = mysqli_query($conn, $records);
+        if (mysqli_num_rows($stmt3) > 0) {
         $i=0;
         ?>
         <tr >
@@ -155,7 +159,7 @@
             <th>calendar</th>
         </tr>
     <?php
-        while($result = mysqli_fetch_array($stmt)) {
+        while($result = mysqli_fetch_array($stmt3)) {
         ?>
         <tr id="<?php echo $result['id']?>">
             <td><?php echo $result['firstName'].' '.$result['lastName']?></td>
@@ -165,7 +169,7 @@
             <td><?php $illness =  explode('*',$result['illness']); for($i=0; $i<count($illness); $i++){echo $illness[$i]. ' ';}?></td>
             <td><?php 
             include 'risk-prediction.php';            
-                $status = $riskLevel;
+                $status =$predictedRiskLevel;
 
             switch ($status) {
               case 0:

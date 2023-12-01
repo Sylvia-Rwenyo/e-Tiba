@@ -1,7 +1,7 @@
 <div class="all_message_mini">
     <?php
     include_once "../conn.php";
-    session_start();
+    @session_start();
     
     
     $current_user_email = $_SESSION['email'];
@@ -38,7 +38,9 @@
                 $sql = "UPDATE reports SET readStatus = 'read' WHERE id='$id'";
                 if (mysqli_query($conn, $sql)) 
                 {
-                    header('Location: '.$_SERVER['PHP_SELF']);
+                    echo '<script> 
+                    window.location.href = " '.$_SERVER['PHP_SELF'] .'";
+                    <script>';
                     die;
                 } 
                 else 

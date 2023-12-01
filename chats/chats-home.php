@@ -1,6 +1,6 @@
 <?php 
     include_once '../conn.php';
-    session_start();
+    @session_start();
     if($_SESSION["loggedIN"] == false)
     {
         echo '<script> 
@@ -59,14 +59,14 @@
                                         {
                                             $keyword = $_GET['keyword'];
                                             if($current_user_category == 'doctor'){
-                                                $sql = "SELECT id, firstName, emailAddress FROM regpatients WHERE emailAddress LIKE ? or firstName LIKE ?";
+                                                $sql = "SELECT id, firstName, emailAddress FROM regPatients WHERE emailAddress LIKE ? or firstName LIKE ?";
                                                 $stmt = $conn->prepare($sql);
                                                 $stmt->execute([$keyword,$keyword]);
                                                 $sql = $stmt;
 
                                             }
                                             elseif($current_user_category == 'patient'){
-                                                $sql = "SELECT id, firstName, emailAddress FROM regdoctors WHERE emailAddress LIKE ? or firstName LIKE ?";
+                                                $sql = "SELECT id, firstName, emailAddress FROM regDoctors WHERE emailAddress LIKE ? or firstName LIKE ?";
                                                 $stmt = $conn->prepare($sql);
                                                 $stmt->execute([$keyword,$keyword]);
                                                 $sql = $stmt;

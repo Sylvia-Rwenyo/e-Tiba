@@ -107,7 +107,7 @@
                 <option selected disabled> Select your hospital</option>
                 <?php
                 include_once 'conn.php';
-                 $stmt = "SELECT * FROM reginstitutions ";
+                 $stmt = "SELECT * FROM regInstitutions ";
                  $sql = mysqli_query($conn, $stmt);
                  $specialties = array();
                  if (mysqli_num_rows($sql) > 0) {

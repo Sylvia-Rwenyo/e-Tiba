@@ -1,6 +1,6 @@
 <?php
     include_once "../conn.php";
-    session_start();
+    @session_start();
     
     
     $current_user = $_SESSION['id'];

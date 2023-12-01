@@ -11,7 +11,7 @@
 </head>
 <body>
     <?php 
-    session_start();
+    @session_start();
     if(isset($_SESSION['loggedIN'])){
         ?>
     <div class="menu">
@@ -27,6 +27,7 @@
        }else{
     ?>
     <div class="menu">
+        <!-- <img src="images/logo.png" alt="nafuu logo"/> -->
         <ul>
             <li><a href="register.php?login=1">Log In</a></li>
             <li><a href="about-us.php">About Us</a></li>

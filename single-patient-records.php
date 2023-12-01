@@ -87,9 +87,9 @@
     <td><?php
        include 'risk-prediction.php';
 
-       if (isset($riskLevel)) {
+       if (isset($predictedRiskLevel)) {
        
-           $status = $riskLevel;
+           $status = $predictedRiskLevel;
 
             switch ($status) {
                 case 0:
@@ -131,9 +131,9 @@
             <th>Progress</th>
             <td>
             <?php
-        if (isset($riskLevel)) {
+        if (isset($predictedRiskLevel)) {
 
-            $status = $riskLevel;
+            $status = $predictedRiskLevel;
         
             switch ($status) {
                 case 0:
@@ -182,7 +182,7 @@
                 <section style="margin-top: 0;" id="singlePatientRecords">
                 <?php 
                     include_once 'conn.php';
-                    session_start();
+                    @session_start();
                     $i=0;
                     $pID = isset($_GET['p']) ? $_GET['p'] : $_SESSION['id'];
                     $stmt = mysqli_query($conn,"SELECT * FROM regPatients where id='$pID'");
@@ -262,9 +262,9 @@
     <td><?php
         include 'risk-prediction.php';
 
-        if (isset($riskLevel)) {
+        if (isset($predictedRiskLevel)) {
         
-            $status = $riskLevel;
+            $status = $predictedRiskLevel;
 
             switch ($status) {
                 case 0:
@@ -302,9 +302,9 @@
             <th>Progress</th>
             <td>
             <?php
-        if (isset($riskLevel)) {
+        if (isset($predictedRiskLevel)) {
 
-            $status = $riskLevel;
+            $status = $predictedRiskLevel;
         
             switch ($status) {
                 case 0:

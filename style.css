@@ -17,9 +17,9 @@
     color:black;
     height: 5%;
     background-color: white;
-    display: flex;
+    /* display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: space-between; */
 }
 .menu img{
     height: 2em;

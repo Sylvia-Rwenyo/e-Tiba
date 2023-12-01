@@ -48,7 +48,7 @@
             <label class="pswd-warning"><i class="fa fa-check"></i>Includes a symbol</label>
             <label class="pswd-warning"><i class="fa fa-check"></i>Does not include spaces</label>
         </div>
-        <input type="hidden"  name="institution" value="<?php session_start(); if(isset($_SESSION['category']))
+        <input type="hidden"  name="institution" value="<?php @session_start(); if(isset($_SESSION['category']))
         {echo $_SESSION['username'];}else{ echo 'none';}
         ?>"/>
         <input type="submit" value="submit" name="register-doc" class="pos-btn"/>

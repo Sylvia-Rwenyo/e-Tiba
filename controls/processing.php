@@ -6,7 +6,7 @@ include_once "../conn.php";
 if(isset($_POST['register']))
 {	
     //create session
-    session_start();
+    @session_start();
     
     //store values submitted in the signup form in variables
 	 $firstName = htmlspecialchars($_POST['firstName']);
@@ -33,14 +33,14 @@ if(isset($_POST['register']))
 	 $gender = htmlspecialchars($_POST['gender']);
     
     //  check for duplicate entries first
-     $sql_e=mysqli_query($conn,"SELECT * FROM regpatients where emailAddress='$emailAddress'");
+     $sql_e=mysqli_query($conn,"SELECT * FROM regPatients where emailAddress='$emailAddress'");
         if(mysqli_num_rows($sql_e)>0)
         {
             echo '<script> 
             window.location.href = "../register.php?e=3"
             </script>';
         }
-        $sql_f=mysqli_query($conn,"SELECT * FROM regpatients where phoneNumber='$phoneNumber'");
+        $sql_f=mysqli_query($conn,"SELECT * FROM regPatients where phoneNumber='$phoneNumber'");
         if(mysqli_num_rows($sql_f)>0)
         {
             echo '<script> 
@@ -56,7 +56,9 @@ if(isset($_POST['register']))
         if(!isset($_SESSION['category'])){
         login($conn, $SECRETKEY);
         }else{
-            header('location:../dashboard.php');
+            echo ' <script> 
+                    window.location.href = "../dashboard.php"
+                </script>';
         }
 			 } else {	
                 //show error
@@ -72,7 +74,7 @@ if(isset($_POST['register']))
 if(isset($_POST['reg-partner']))
 {	
     //create session
-    session_start();
+    @session_start();
     
     //store values submitted in the signup form in variables
 	 $institutionName = htmlspecialchars($_POST['institutionName']);
@@ -131,7 +133,7 @@ if(isset($_POST['add-patient'])){
     //encrypt the password to insert
     $password = openssl_encrypt($password, "AES-128-ECB", $SECRETKEY); 
 	 
-    $sql=mysqli_query($conn,"SELECT * FROM regpatients where emailAddress='$emailAddress' || phoneNumber='$phoneNumber'");
+    $sql=mysqli_query($conn,"SELECT * FROM regPatients where emailAddress='$emailAddress' || phoneNumber='$phoneNumber'");
     if(mysqli_num_rows($sql)>0)
     {
         echo "Patient Already Registered"; 
@@ -155,7 +157,7 @@ if(isset($_POST['add-patient'])){
 
 if(isset($_POST['register-doc'])){
     //create session
-    session_start();
+    @session_start();
 
     $firstName = htmlspecialchars($_POST['firstName']);
     $lastName = htmlspecialchars($_POST['lastName']);
@@ -176,7 +178,7 @@ if(isset($_POST['register-doc'])){
     //encrypt the password to insert
     $password = openssl_encrypt($password, "AES-128-ECB", $SECRETKEY);
 	 
-    $sqlp=mysqli_query($conn,"SELECT * FROM regdoctors where emailAddress='$emailAddress' AND phoneNumber='$phoneNumber'");
+    $sqlp=mysqli_query($conn,"SELECT * FROM regDoctors where emailAddress='$emailAddress' AND phoneNumber='$phoneNumber'");
     if(mysqli_num_rows($sqlp)>0)
     {
         echo "Doctor Already Registered"; 
@@ -184,14 +186,17 @@ if(isset($_POST['register-doc'])){
     }
     else
     {
-        $query="INSERT INTO regdoctors(firstName, lastName, gender, emailAddress, institution, specialty, phoneNumber, address, password) VALUES ('$firstName' ,'$lastName' ,'$gender' ,'$emailAddress', '$institution', '$conditions' ,'$phoneNumber' ,'$address' ,'$password')";
+        $query="INSERT INTO regDoctors(firstName, lastName, gender, emailAddress, institution, specialty, phoneNumber, address, password) VALUES ('$firstName' ,'$lastName' ,'$gender' ,'$emailAddress', '$institution', '$conditions' ,'$phoneNumber' ,'$address' ,'$password')";
     }
     //if sql query is executed...
 	 if (mysqli_query($conn, $query)) {
         if(!isset($_SESSION['category'])){
         login($conn,$SECRETKEY);
         }else{
-            header('location:doctors-dashboard.php?status=success');
+            echo ' <script> 
+            window.location.href = "../dashboard.php?status=success"
+        </script>';
+           
         }
 			 } else {	
                 //show error
@@ -204,7 +209,7 @@ if(isset($_POST['register-doc'])){
 
 if(isset($_POST['register-doc-by-partner'])){
     //create session
-    session_start();
+    @session_start();
 
     $firstName = htmlspecialchars($_POST['firstName']);
     $lastName = htmlspecialchars($_POST['lastName']);
@@ -224,7 +229,7 @@ if(isset($_POST['register-doc-by-partner'])){
     $password = openssl_encrypt($password, "AES-128-ECB", $SECRETKEY);
 
 	 
-    $sql=mysqli_query($conn,"SELECT * FROM regdoctors where emailAddress='$emailAddress' AND phoneNumber='$phoneNumber'");
+    $sql=mysqli_query($conn,"SELECT * FROM regDoctors where emailAddress='$emailAddress' AND phoneNumber='$phoneNumber'");
     if(mysqli_num_rows($sql)>0)
     {
         echo "Doctor Already Registered"; 
@@ -232,7 +237,7 @@ if(isset($_POST['register-doc-by-partner'])){
     }
     else
     {
-        $query="INSERT INTO regdoctors(firstName, lastName, gender, institution, emailAddress, specialty, phoneNumber, address, password) VALUES
+        $query="INSERT INTO regDoctors(firstName, lastName, gender, institution, emailAddress, specialty, phoneNumber, address, password) VALUES
          ('$firstName' ,'$lastName' ,'$gender' , '$institution' ,'$emailAddress', '$conditions', '$phoneNumber' ,'$address' ,'$password')";
     }
     //if sql query is executed...
@@ -269,7 +274,9 @@ if(isset($_POST['dosage-registration'])){
     {
         $query="INSERT INTO dosage(attending_doctor_id, attending_doctor_email, attending_doctor_name, patient_id, patientEmail, patientName, dosageName, tablets, times_a_day, number_of_days) VALUES ('$attending_doctor_id', '$attending_doctor_email', '$attending_doctor_name', '$patient_id','$patient_email', '$fname_patient', '$dosageName', '$tablets', '$timesADay', '$numberOfDays')";
         $sql=mysqli_query($conn,$query)or die("Could Not Perform the Query");
-        header ("Location: ../single-patient-records.php?p=$patient_id");
+        echo ' <script> 
+            window.location.href = "../single-patient-records.php?p=$patient_id"
+        </script>';
     }
 }
 
@@ -363,30 +370,34 @@ if(isset($_POST['logIn']))
 
 function login($conn,$SECRETKEY){
     //import variables
-    session_start();
+    @session_start();
     
     extract($_POST);
     $emailAddress = filter_var($_POST['emailAddress'], FILTER_SANITIZE_EMAIL);
     $password = $_POST["password"];
-    echo $password .' '. $emailAddress;
     $stmt;
     //encrypt the password to compare
     $password = openssl_encrypt($password, "AES-128-ECB", $SECRETKEY);
      //statement to select values from the registration table in the database
-    $stmt = "SELECT * FROM regpatients where emailAddress='$emailAddress' and password='$password'";
+    $stmt = "SELECT * FROM regPatients where emailAddress='$emailAddress' and password='$password'";
     $sql=mysqli_query($conn, $stmt);
     $row  = mysqli_fetch_array($sql);
     if(is_array($row)){
-       
+echo ' <script> 
+            window.location.href = "../dashboard.php";
+        </script>';       
             $_SESSION['category'] = 'patient';
             $_SESSION["email"]=$row['emailAddress'];
             $_SESSION["username"] = $row['firstName'];
             $_SESSION["id"]=$row['id'];
             $_SESSION["loggedIN"] = true;
             $_SESSION["menuState"] = false;
-            header('location:../dashboard.php');
+            
+            echo ' <script> 
+            window.location.href = "../dashboard.php";
+        </script>';
     }else{
-        $stmt = "SELECT * FROM regdoctors where emailAddress='$emailAddress' and password='$password'"; 
+        $stmt = "SELECT * FROM regDoctors where emailAddress='$emailAddress' and password='$password'"; 
         $sql=mysqli_query($conn, $stmt);
         $row  = mysqli_fetch_array($sql);
         if(is_array($row)){
@@ -396,9 +407,12 @@ function login($conn,$SECRETKEY){
             $_SESSION["id"]=$row['id'];
             $_SESSION["loggedIN"] = true;
             $_SESSION["menuState"] = false;
-            header('location:../patient-records.php');
+             
+            echo ' <script> 
+            window.location.href = "../patient-records.php";
+        </script>';
         }else{
-        $stmt = "SELECT * FROM reginstitutions where emailAddress='$emailAddress' and password='$password'"; 
+        $stmt = "SELECT * FROM regInstitutions where emailAddress='$emailAddress' and password='$password'"; 
         $sql=mysqli_query($conn, $stmt);
         $row  = mysqli_fetch_array($sql);
         if(is_array($row)){
@@ -408,7 +422,9 @@ function login($conn,$SECRETKEY){
             $_SESSION["id"]=$row['id'];
             $_SESSION["loggedIN"] = true;
             $_SESSION["menuState"] = false;
-            header('location:../partners/doctor-records.php');
+            echo ' <script> 
+            window.location.href = "../partners/doctor-records.php";
+        </script>';
         }else{
             echo '<script> 
             window.location.href = "../register.php?login=1&e=1"
@@ -421,7 +437,7 @@ function login($conn,$SECRETKEY){
 if(isset($_GET['action'])){
     // log out if the user selects "Log Out" on the menu bar
     if($_GET['action']== "logOut"){
-        session_start();
+        @session_start();
         session_unset();
         echo ' <script> 
                     window.location.href = "../index.php"
@@ -430,7 +446,7 @@ if(isset($_GET['action'])){
     }
 
     if($_GET['action'] == "deleteAccount"){
-        session_start();
+        @session_start();
         $id = $_GET['id'];
         $stmt;
         // check the user's category
@@ -471,7 +487,7 @@ if(isset($_POST['update']))
      //move uploaded file
      move_uploaded_file($_FILES["profilePhoto"]["tmp_name"], $targetFilePath3);
      } 
-    session_start();
+    @session_start();
    //store values submitted in the edit profile form in variables
     $id = $_POST['id'];
     $emailAddress = filter_var($_POST['emailAddress'], FILTER_SANITIZE_EMAIL);
@@ -488,14 +504,14 @@ if(isset($_POST['update']))
     if($_SESSION['category'] == 'patient'){
         
         // check for duplicate entries first
-        $sql_e=mysqli_query($conn,"SELECT * FROM regpatients where emailAddress='$emailAddress'");       
+        $sql_e=mysqli_query($conn,"SELECT * FROM regPatients where emailAddress='$emailAddress'");       
         if(mysqli_num_rows($sql_e)>0)
         {
             echo '<script> 
             window.location.href = "../user-account.php?e=3"
             </script>';
         }
-        $sql_f=mysqli_query($conn,"SELECT * FROM regpatients where phoneNumber='$phoneNumber'");
+        $sql_f=mysqli_query($conn,"SELECT * FROM regPatients where phoneNumber='$phoneNumber'");
         if(mysqli_num_rows($sql_f)>0)
         {
             echo '<script> 
@@ -504,7 +520,7 @@ if(isset($_POST['update']))
         }
         $userID = $_SESSION['id'];
         $oldpw  = '';
-        $sql_g=mysqli_query($conn,"SELECT * FROM regpatients where id='$userID'");
+        $sql_g=mysqli_query($conn,"SELECT * FROM regPatients where id='$userID'");
         if(mysqli_num_rows($sql_g)>0)
         {
             $i=0;
@@ -560,14 +576,14 @@ if(isset($_POST['update']))
     }  else if($_SESSION['category'] == 'hospital'){
 
          // check for duplicate entries first
-         $sql_e=mysqli_query($conn,"SELECT * FROM reginstitutions where emailAddress='$emailAddress'");
+         $sql_e=mysqli_query($conn,"SELECT * FROM regInstitutions where emailAddress='$emailAddress'");
          if(mysqli_num_rows($sql_e)>0)
          {
              echo '<script> 
              window.location.href = "../user-account.php?e=3"
              </script>';
          }
-         $sql_f=mysqli_query($conn,"SELECT * FROM reginstitutions where phoneNumber='$phoneNumber'");
+         $sql_f=mysqli_query($conn,"SELECT * FROM regInstitutions where phoneNumber='$phoneNumber'");
          if(mysqli_num_rows($sql_f)>0)
          {
              echo '<script> 
@@ -576,7 +592,7 @@ if(isset($_POST['update']))
          }
          $userID = $_SESSION['id'];
         $oldpw  = '';
-        $sql_g=mysqli_query($conn,"SELECT * FROM reginstitutions where id='$userID'");
+        $sql_g=mysqli_query($conn,"SELECT * FROM regInstitutions where id='$userID'");
         if(mysqli_num_rows($sql_g)>0)
         {
             $i=0;
@@ -588,7 +604,7 @@ if(isset($_POST['update']))
                 window.location.href = "../user-account.php?e=5"
                 </script>';
             }else{
-                $sql .= "UPDATE reginstitutions SET  emailAddress='$emailAddress', password='$password', 
+                $sql .= "UPDATE regInstitutions SET  emailAddress='$emailAddress', password='$password', 
                         profilePhoto='$profilePhoto', phoneNumber='$phoneNumber' WHERE id='$id'";
             }
         }
@@ -611,7 +627,7 @@ if(isset($_POST['update']))
 // handle data submitted by user
 if (isset($_POST["record-sleep"])) {
     // Start a session
-    session_start();
+    @session_start();
 
     // Get the form values
     $start = $_POST['start-time'];
@@ -646,7 +662,7 @@ if (isset($_POST["record-sleep"])) {
 if(isset($_POST["record-physicalActivity"]))
 {	
     //create session
-    session_start();
+    @session_start();
     
     //store values submitted in the signup form in variables
      $exerciseType = '';
@@ -676,7 +692,7 @@ if(isset($_POST["record-physicalActivity"]))
 if(isset($_POST["record-meal"]))
 {	
     //create session
-    session_start();
+    @session_start();
     
     //store values submitted in the signup form in variables
 	 $mealName = htmlspecialchars($_POST['meal-name']);
@@ -684,7 +700,7 @@ if(isset($_POST["record-meal"]))
      $current_date = date('Y-m-d');
      $id = $_SESSION['id'];
      //statement to enter values into the registration table in the database
-	 $sql = "INSERT INTO patientsMealLog (userID, mealName, mealTime, recordDate)
+	 $sql = "INSERT INTO patientsmeallog (userID, mealName, mealTime, recordDate)
 	 VALUES ('$id','$mealName','$mealTime', '$current_date')";
 
      //if sql query is not executed...
@@ -704,7 +720,7 @@ if(isset($_POST["record-meal"]))
 if(isset($_POST["record-medTime"]))
 {	
     //create session
-    session_start();
+    @session_start();
     
     //store values submitted in the  form in variables
 	 $medName = htmlspecialchars($_POST['med-name']);
@@ -732,7 +748,7 @@ if(isset($_POST["record-medTime"]))
 // video chat back end
 
 if (isset($_POST['action']) && $_POST['action'] === 'offer') {
-    session_start();
+    @session_start();
     // Retrieve the offer SDP from the client
     $offerSdp = $_POST['offerSdp'];
 
@@ -750,7 +766,7 @@ if (isset($_POST['action']) && $_POST['action'] === 'offer') {
 }
 
 if (isset($_POST['action']) && $_POST['action'] === 'answer') {
-    session_start();
+    @session_start();
     // Retrieve the answer SDP from the client
     $answerSdp = $_POST['answerSdp'];
 
@@ -765,7 +781,7 @@ if (isset($_POST['action']) && $_POST['action'] === 'answer') {
 }
 
 if (isset($_POST['action']) && $_POST['action'] === 'candidate') {
-    session_start();
+    @session_start();
     // Retrieve the ICE candidate from the client
     $candidate = json_decode($_POST['candidate']);
 
@@ -782,7 +798,7 @@ if (isset($_POST['action']) && $_POST['action'] === 'candidate') {
 if(isset($_POST['input-message']))
 {	
     //create session
-    session_start();
+    @session_start();
     //store values submitted in the chat form in variables 
     $message = $conn->real_escape_string($_POST['message']);
     //encrypt messages
@@ -798,7 +814,7 @@ if(isset($_POST['input-message']))
     $query = 0;
      
     if(($_SESSION['category']) == 'patient'){
-        $query2 = "SELECT id FROM regdoctors WHERE emailAddress ='$sent_to'";
+        $query2 = "SELECT id FROM regDoctors WHERE emailAddress ='$sent_to'";
         $result = mysqli_query($conn, $query2) or die(mysqli_error($conn));
         while($row = mysqli_fetch_array($result))
         {
@@ -809,7 +825,7 @@ if(isset($_POST['input-message']))
         $query = "INSERT INTO chat (chat_identity, message, sender_class, sent_from_id, emailAddress, sent_to_id, sent_to, readStatus) VALUES ('$chat_identity','$message', '$sender_class','$userId', '$emailAddress', '$sent_to_id', '$sent_to', '$readStatus')";
     }
     elseif(($_SESSION['category']) == 'doctor'){
-        $query2 = "SELECT id FROM regpatients WHERE emailAddress ='$sent_to'";
+        $query2 = "SELECT id FROM regPatients WHERE emailAddress ='$sent_to'";
         $result = mysqli_query($conn, $query2) or die(mysqli_error($conn));
         while($row = mysqli_fetch_array($result))
         {
@@ -835,7 +851,7 @@ if(isset($_POST['input-message']))
 
 if(isset($_POST['message-delete'])){
     //create session
-    session_start();
+    @session_start();
     //store values submitted in the chat form in variables
 	$id = $_GET['id'];
     $sent_to = $_POST['sent_to'];
@@ -844,10 +860,10 @@ if(isset($_POST['message-delete'])){
     if (mysqli_query($conn, $sql))
     {
         if(($_SESSION['category']) == 'doctor'){
-            $query2 = "SELECT id FROM regpatients WHERE emailAddress ='$sent_to'";
+            $query2 = "SELECT id FROM regPatients WHERE emailAddress ='$sent_to'";
         }
         elseif(($_SESSION['category']) == 'patient'){
-            $query2 = "SELECT id FROM regdoctors WHERE emailAddress ='$sent_to'";
+            $query2 = "SELECT id FROM regDoctors WHERE emailAddress ='$sent_to'";
         }
         $result = mysqli_query($conn, $query2) or die(mysqli_error($conn));
         while($row = mysqli_fetch_array($result))
@@ -866,7 +882,7 @@ if(isset($_POST['message-delete'])){
 if(isset($_POST['submit-report-or-suggestion']))
 {	
     //create session
-    session_start();
+    @session_start();
     //store values submitted in the chat form in variables 
     $message = $conn->real_escape_string($_POST['message']);
     //encrypt messages
@@ -882,7 +898,7 @@ if(isset($_POST['submit-report-or-suggestion']))
     $query = 0;
      
     if(($_SESSION['category']) == 'patient' || ($_SESSION['category']) == 'doctor'){
-        $query2 = "SELECT id FROM reginstitutions WHERE emailAddress ='$sent_to'";
+        $query2 = "SELECT id FROM regInstitutions WHERE emailAddress ='$sent_to'";
         $result = mysqli_query($conn, $query2) or die(mysqli_error($conn));
         while($row = mysqli_fetch_array($result))
         {
@@ -902,10 +918,10 @@ if(isset($_POST['submit-report-or-suggestion']))
         mysqli_close($conn);
     }
     elseif(($_SESSION['category']) == 'hospital'){
-        $query2 = "SELECT id FROM regpatients WHERE emailAddress ='$sent_to'";
+        $query2 = "SELECT id FROM regPatients WHERE emailAddress ='$sent_to'";
         $result = mysqli_query($conn, $query2) or die(mysqli_error($conn));
         if(mysqli_num_rows($result) == 0){
-            $query2 = "SELECT id FROM regdoctors WHERE emailAddress ='$sent_to'";
+            $query2 = "SELECT id FROM regDoctors WHERE emailAddress ='$sent_to'";
             $result = mysqli_query($conn, $query2) or die(mysqli_error($conn));
             if(mysqli_num_rows($result) == 0){
                 echo "Error, Does not Exist from both patients and doctors records";
@@ -939,7 +955,7 @@ if(isset($_POST['submit-report-or-suggestion']))
 if(isset($_GET["a"])){
     if($_GET["a"] == "p"){
         //create session
-        session_start();
+        @session_start();
         
         //store values submitted in the  form in variables
          $doctorID = $_GET['dID'];

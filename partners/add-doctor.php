@@ -1,6 +1,6 @@
 <?php 
     include_once '../conn.php';
-    session_start();
+    @session_start();
     if($_SESSION["loggedIN"] == false)
     {
         echo ' <script> 
@@ -44,10 +44,8 @@
             <select name="condition[]" multiple required>
                     <option selected disabled> Select specialties</option>
                     <?php
-                    include_once '../conn.php';
-                    session_start();
                     $id=$_SESSION["id"];
-                    $stmt = "SELECT * FROM reginstitutions WHERE id='$id'";
+                    $stmt = "SELECT * FROM regInstitutions WHERE id='$id'";
                     $sql = mysqli_query($conn, $stmt);
                     $specialties = array();
                     if (mysqli_num_rows($sql) > 0) {

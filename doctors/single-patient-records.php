@@ -1,3 +1,6 @@
+<?php
+    @session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -102,9 +105,9 @@
     <td><?php
         include 'risk-prediction.php';
 
-        if (isset($riskLevel)) {
+        if (isset($predictedRiskLevel)) {
         
-            $status = $riskLevel;
+            $status = $predictedRiskLevel;
 
             switch ($status) {
                 case 0:
@@ -146,9 +149,9 @@ if (isset($result['dosage'])) {
             <th>Progress</th>
             <td>
             <?php
-        if (isset($riskLevel)) {
+        if (isset($predictedRiskLevel)) {
 
-            $status = $riskLevel;
+            $status = $predictedRiskLevel;
         
             switch ($status) {
                 case 0:

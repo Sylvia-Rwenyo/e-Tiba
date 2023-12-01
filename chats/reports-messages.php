@@ -1,6 +1,6 @@
 <?php 
     include_once '../conn.php';
-    session_start();
+    @session_start();
     if($_SESSION["loggedIN"] == false)
     {
         echo ' <script> 
@@ -72,7 +72,7 @@
             }
             elseif(isset($_GET['hosp-id'])){
                 $requested_hospital = $_GET['hosp-id'];
-                $query_chat_opener = "SELECT * FROM reginstitutions WHERE id ='$requested_hospital'";
+                $query_chat_opener = "SELECT * FROM regInstitutions WHERE id ='$requested_hospital'";
                 $result_chat_opener = mysqli_query($conn, $query_chat_opener) or die(mysqli_error($conn));
                 while($row = mysqli_fetch_array($result_chat_opener))
                 {

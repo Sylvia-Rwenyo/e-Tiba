@@ -27,7 +27,8 @@
         <div class="mainBody" style="height: 100vh">
             <?php
                 if (!isset($_SESSION["loggedIN"])) {
-                    header('location:index.php');
+                    echo '<script> 
+            window.location.href = "index.php"</script>';
                 } else {
                     // Show dashboard menu
                     include_once 'dash-menu.php';
@@ -316,7 +317,7 @@
             {
             label: 'Exercise Percentage',
             data: <?php echo $exerciseDataJSON; ?>.map(function(exercise) {
-                return (exercise / 45) * 100; // Calculate exercise percentage
+                return (exercise / 60) * 100; // Calculate exercise percentage
             }),
             backgroundColor: 'rgba(54, 162, 235, 0.2)',
             borderColor: 'rgba(54, 162, 235, 1)',

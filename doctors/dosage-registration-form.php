@@ -19,14 +19,14 @@
             <div class="dosage_for_title">
                 <?php
                 include_once "../conn.php";
-                session_start();
+                @session_start();
                 if(isset($_GET['id'])){
                     $requested_patient = $_GET['id'];
                 }
                 $current_user_email = $_SESSION['email'];
                 $patient_email = 0;
                 $fname_patient = 0;
-                $query = "SELECT * FROM regpatients WHERE id ='$requested_patient'";
+                $query = "SELECT * FROM regPatients WHERE id ='$requested_patient'";
                 $result = mysqli_query($conn, $query) or die(mysqli_error($conn));
                 
                 while($row = mysqli_fetch_array($result))
