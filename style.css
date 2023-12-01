@@ -1910,7 +1910,7 @@ table, th, td {
     position: absolute;
     z-index: 10;
     position: absolute;
-    margin-left: -20%;
+    margin-left: -11%;
     width: 110%;
     transition: top 0.3s ease;
 }
