@@ -1895,3 +1895,63 @@ table, th, td {
   }
 }
 
+/*add-med popup styles*/
+#add-med-form-btn{
+    margin-left: 20%;
+}
+#add-med-form-btn .add-med-form form{
+    background-color: rgba(190, 252, 254);
+}
+#add-med-form-btn .add-med-form{
+    visibility: hidden;
+    color: #000000;
+    text-align: left;
+    border: none;
+    position: absolute;
+    z-index: 10;
+    position: absolute;
+    margin-left: -50%;
+    width: 110%;
+    transition: top 0.3s ease;
+}
+@media screen and (max-width:1360px) {
+    #add-med-form-btn .add-med-form{
+        margin-left: -45%;
+        width: 130%;
+    }
+}
+@media screen and (max-width:1099px) {
+    #add-med-form-btn .add-med-form{
+        margin-left: -50%;
+        width: 140%;
+    }
+}
+@media screen and (max-width:799px) {
+    #add-med-form-btn .add-med-form{
+        margin-left: -55%;
+        width: 145%;
+    }
+}
+@media screen and (max-width:699px) {
+    #add-med-form-btn .add-med-form{
+        margin-left: -60%;
+    }
+}
+@media screen and (max-width:499px) {
+    #add-med-form-btn{
+        width:30%;
+    }
+    #add-med-form-btn .add-med-form{
+        margin-left: -50%;
+        width: 110%;
+    }
+}
+#add-med-form-btn .add-med-form::after{
+    position: absolute;
+}
+#add-med-form-btn .show{
+    visibility: visible;
+    -webkit-animation: fadeIn 1s;
+    animation: fadeIn 1s;
+}
+/*add-med popup styles*/
