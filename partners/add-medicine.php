@@ -29,24 +29,26 @@
         <h5>Welcome to nafuu</h5>
         <p>Please fill the form below with accurate information.</p>
     </div>
-    <button id = "add-med-form-btn" type="button" name="add-med-form-btn" class="pos-btn" onclick="popupForm()"><i class="fa-solid fa-add"></i>Add Medicine
-        <span class="add-med-form" id="add-med-form">
-            <form method="POST" action="../controls/processing.php">
-                <input type="text" id="medName" name="medName"  size="30"  placeholder="Enter Medicine Name">
-                <input type="text" id="manufacturer" name="manufacturer"  size="30"  placeholder="Enter Manufacturer">
-                <input type="number" id="price" name="price"  size="30"  placeholder="Enter Price">
-                <select name="administration" id="administration" required>
-                    <option selected disabled>Select Method of Administering The Medicine</option>
-                        <option>Oral tablet</option>
-                        <option>Oral syrup</option>
-                        <option>Oral soluble or solvent</option>
-                        <option>Injection</option>
-                </select>
-                <input type="submit" value="submit" name="add-med" id="add-med" class="pos-btn"/>
-            </form>
-        </span>
-    </button>
-    <table style="margin:10%;" id="med-table">
+    <button id = "add-med-form-btn" type="button" name="add-med-form-btn" class="pos-btn" onclick="popupForm()"><i class="fa-solid fa-add"></i>Add Medicine</button>
+
+    <span class="add-med-form" id="add-med-form">
+        <form method="POST" action="../controls/processing.php">
+            <button type="button" class="close-btn" id="close-btn" onclick = "closeForm()"></button>
+            <input type="text" id="medName" name="medName"  size="30"  placeholder="Enter Medicine Name">
+            <input type="text" id="manufacturer" name="manufacturer"  size="30"  placeholder="Enter Manufacturer">
+            <input type="number" id="price" name="price"  size="30"  placeholder="Enter Price">
+            <select name="administration" id="administration" required>
+                <option selected disabled>Select Method of Administering The Medicine</option>
+                    <option>Oral tablet</option>
+                    <option>Oral syrup</option>
+                    <option>Oral soluble or solvent</option>
+                    <option>Injection</option>
+            </select>
+            <input type="submit" value="submit" name="add-med" id="add-med" class="pos-btn"/>
+        </form>
+    </span>
+
+    <table style="margin:5%; margin-left:20%;" id="med-table">
         <tr>
             <th>Medicine Name</th>                           
             <th>Manufacturer Name</th>
@@ -78,7 +80,11 @@
 <script>
     function popupForm(){
         var popup = document.getElementById("add-med-form");
-        popup.classList.toggle("show");
+        popup.style.display = "block";
+    }
+    function closeForm(){
+        var popup = document.getElementById("add-med-form");
+        popup.style.display = "none";
     }
 </script>
 </html>
