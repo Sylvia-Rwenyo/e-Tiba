@@ -5,9 +5,9 @@
         if ($_SESSION['category'] == 'hospital') {
             ?>
              <!-- records -->
-             <a href="<?php echo prefixSet('partners/doctor-records.php')?>" class="<?php echo isActive('partners/doctor-records.php'); ?>"><li><i class="fa-solid fa-folder"></i></li></a>
+             <a href="<?php echo prefixSet('doctor-records.php')?>" class="<?php echo isActive('doctor-records.php'); ?>"><li><i class="fa-solid fa-folder"></i></li></a>
             <!-- add new doctor -->
-            <a href="<?php echo prefixSet('partners/add-doctor.php')?>" class="<?php echo isActive('partners/add-doctor.php'); ?>"><li><i class="fa-solid fa-add"></i></li></a>
+            <a href="<?php echo prefixSet('add-doctor.php')?>" class="<?php echo isActive('add-doctor.php'); ?>"><li><i class="fa-solid fa-add"></i></li></a>
             <!-- settings -->
             <a href="<?php echo prefixSet('user-account.php')?>" class="<?php echo isActive('user-account.php'); ?>"><li><i class="fa-solid fa-gears"></i></li></a>
 
@@ -16,7 +16,7 @@
         } else if ($_SESSION['category'] == 'doctor') {
             ?>
             <!-- add records -->
-            <a href="<?php echo prefixSet('doctors/add-patient.php')?>" class="<?php echo isActive('doctors/add-patient.php'); ?>"><li><i class="fa fa-plus"></i></li></a>
+            <a href="<?php echo prefixSet('add-patient.php')?>" class="<?php echo isActive('add-patient.php'); ?>"><li><i class="fa fa-plus"></i></li></a>
             <!-- existing records -->
             <a href="<?php echo prefixSet('patient-records.php')?>" class="<?php echo isActive('patient-records.php'); ?>"><li><i class="fa-solid fa-folder"></i></li></a>
             <!-- schedule appointment -->

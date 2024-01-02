@@ -242,7 +242,7 @@ if(isset($_POST['register-doc-by-partner'])){
     }
     //if sql query is executed...
     if (mysqli_query($conn, $query)) {
-        header('location:../partners/doctor-records.php?status=success');
+        header('location:../doctor-records.php?status=success');
     } else 
     {	
         //show error
@@ -332,7 +332,7 @@ if(isset($_POST['dosage-update']))
         {
             $pId = $row['patient_id'];	
         }
-        echo "<script> alert(\"Item updated\");window.location.href='../doctors/dosage-registration.php?id=$pId'; </script>";	 
+        echo "<script> alert(\"Item updated\");window.location.href='../dosage-registration.php?id=$pId'; </script>";	 
     } 
     else 
     {
@@ -352,7 +352,7 @@ if(isset($_POST['dosage-delete'])){
 	 if (mysqli_query($conn, $sql))
 	  {echo "<script>
 		alert(\"Item deleted\");
-		window.location.href='../doctors/dosage-registration.php?id=$pId';
+		window.location.href='../dosage-registration.php?id=$pId';
 		</script>";	
      } 
 	 else 
@@ -423,7 +423,7 @@ echo ' <script>
             $_SESSION["loggedIN"] = true;
             $_SESSION["menuState"] = false;
             echo ' <script> 
-            window.location.href = "../partners/doctor-records.php";
+            window.location.href = "../doctor-records.php";
         </script>';
         }else{
             echo '<script> 
@@ -1009,7 +1009,7 @@ if(isset($_GET["a"])){
         if (mysqli_query($conn, $query))
         {echo "<script>
             alert(\"Item deleted\");
-            window.location.href='../partners/add-medicine.php';
+            window.location.href='../add-medicine.php';
             </script>";	
          } 
          else 
@@ -1038,7 +1038,7 @@ if(isset($_GET["a"])){
         {
             $query="INSERT INTO medicine (medName, price, hospId, medManufacturer, medAdmin) VALUES ('$medName', '$price', '$hospId', '$medManufacturer', '$medAdmin')";
             $sql=mysqli_query($conn,$query)or die("Could Not Perform the Query");
-            header ("Location: ../partners/add-medicine.php");
+            header ("Location: ../add-medicine.php");
         }
     }
 ?>

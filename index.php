@@ -27,10 +27,10 @@
                     <a href="register.php">
                         <p>A Patient</p>
                     </a>
-                    <a href="partners/reg-partner.php"> 
+                    <a href="reg-partner.php"> 
                         <p>A Partner Hospital</p>
                     </a>
-                    <a href="doctors/independent-reg-doc.php">
+                    <a href="independent-reg-doc.php">
                         <p>An Independent Medical Practitioner</p>
                     </a>
                 </span>
