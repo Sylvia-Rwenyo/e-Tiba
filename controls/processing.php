@@ -474,156 +474,6 @@ if(isset($_GET['action'])){
             mysqli_close($conn);
     }
 }
-if(isset($_POST['update']))
-{	 
-     // specify directory for uploading the file
-     $target_dir3 = "Uploads/";
-     $fileName3 = basename($_FILES["profilePhoto"]["name"]);
-     $targetFilePath3 = $target_dir3 . $fileName3;
-     $imageFileType3 = strtolower(pathinfo($targetFilePath3,PATHINFO_EXTENSION));
-
-    //if file input is not empty
-     if(!empty($_FILES["profilePhoto"]["name"])){
-     //move uploaded file
-     move_uploaded_file($_FILES["profilePhoto"]["tmp_name"], $targetFilePath3);
-     } 
-    @session_start();
-   //store values submitted in the edit profile form in variables
-    $id = $_POST['id'];
-    $emailAddress = filter_var($_POST['emailAddress'], FILTER_SANITIZE_EMAIL);
-    
-    $oldPassword = $_POST['oldPassword'];
-    $password = $_POST['newPassword'];
-    //encrypt the password to insert
-    $newPassword = openssl_encrypt($password, "AES-128-ECB", $SECRETKEY);
-
-    $profilePhoto = $fileName3;
-    $phoneNumber = htmlspecialchars($_POST['phoneNumber']);
-    //statement to update values
-    $sql ='';
-    if($_SESSION['category'] == 'patient'){
-        
-        // check for duplicate entries first
-        $sql_e=mysqli_query($conn,"SELECT * FROM regPatients where emailAddress='$emailAddress'");       
-        if(mysqli_num_rows($sql_e)>0)
-        {
-            echo '<script> 
-            window.location.href = "../user-account.php?e=3"
-            </script>';
-        }
-        $sql_f=mysqli_query($conn,"SELECT * FROM regPatients where phoneNumber='$phoneNumber'");
-        if(mysqli_num_rows($sql_f)>0)
-        {
-            echo '<script> 
-            window.location.href = "../user-account.php?e=2"
-            </script>';
-        }
-        $userID = $_SESSION['id'];
-        $oldpw  = '';
-        $sql_g=mysqli_query($conn,"SELECT * FROM regPatients where id='$userID'");
-        if(mysqli_num_rows($sql_g)>0)
-        {
-            $i=0;
-            while($result = mysqli_fetch_array($sql_g)) {
-                $oldpw = openssl_decrypt($result['password'], "AES-128-ECB", $SECRETKEY);
-            }
-            if($oldPassword != $oldpw){
-                echo '<script> 
-                window.location.href = "../user-account.php?e=5"
-                </script>';
-            }else{
-
-                $sql .= "UPDATE regPatients SET  emailAddress='$emailAddress', password='$newPassword', 
-                            profilePhoto='$profilePhoto', phoneNumber='$phoneNumber' WHERE id='$id'";
-            }
-        }
-    }  else if($_SESSION['category'] == 'doctor'){
-
-        // check for duplicate entries first
-        $sql_e=mysqli_query($conn,"SELECT * FROM regDoctors where emailAddress='$emailAddress'");
-        if(mysqli_num_rows($sql_e)>0)
-        {
-            echo '<script> 
-            window.location.href = "../user-account.php?e=3"
-            </script>';
-        }
-        $sql_f=mysqli_query($conn,"SELECT * FROM regDoctors where phoneNumber='$phoneNumber'");
-        if(mysqli_num_rows($sql_f)>0)
-        {
-            echo '<script> 
-            window.location.href = "../user-account.php?e=2"
-            </script>';
-        }
-        $userID = $_SESSION['id'];
-        $oldpw  = '';
-        $sql_g=mysqli_query($conn,"SELECT * FROM regDoctors where id='$userID'");
-        if(mysqli_num_rows($sql_g)>0)
-        {
-            $i=0;
-            while($result = mysqli_fetch_array($sql_g)) {
-                $oldpw = openssl_decrypt($result['password'], "AES-128-ECB", $SECRETKEY);
-            }
-            if($oldPassword != $oldpw){
-                echo '<script> 
-                window.location.href = "../user-account.php?e=5"
-                </script>';
-            }else{
-              $sql .= "UPDATE regDoctors SET  emailAddress='$emailAddress', password='$password', 
-                       profilePhoto='$profilePhoto', phoneNumber='$phoneNumber' WHERE id='$id'";
-            }
-        }
-
-    }  else if($_SESSION['category'] == 'hospital'){
-
-         // check for duplicate entries first
-         $sql_e=mysqli_query($conn,"SELECT * FROM regInstitutions where emailAddress='$emailAddress'");
-         if(mysqli_num_rows($sql_e)>0)
-         {
-             echo '<script> 
-             window.location.href = "../user-account.php?e=3"
-             </script>';
-         }
-         $sql_f=mysqli_query($conn,"SELECT * FROM regInstitutions where phoneNumber='$phoneNumber'");
-         if(mysqli_num_rows($sql_f)>0)
-         {
-             echo '<script> 
-             window.location.href = "../user-account.php?e=2"
-             </script>';
-         }
-         $userID = $_SESSION['id'];
-        $oldpw  = '';
-        $sql_g=mysqli_query($conn,"SELECT * FROM regInstitutions where id='$userID'");
-        if(mysqli_num_rows($sql_g)>0)
-        {
-            $i=0;
-            while($result = mysqli_fetch_array($sql_g)) {
-                $oldpw = openssl_decrypt($result['password'], "AES-128-ECB", $SECRETKEY);
-            }
-            if($oldPassword != $oldpw){
-                echo '<script> 
-                window.location.href = "../user-account.php?e=5"
-                </script>';
-            }else{
-                $sql .= "UPDATE regInstitutions SET  emailAddress='$emailAddress', password='$password', 
-                        profilePhoto='$profilePhoto', phoneNumber='$phoneNumber' WHERE id='$id'";
-            }
-        }
-    }
-    // if sql query is executed and database connection is established
-    if (mysqli_query($conn, $sql)) {
-        // $_SESSION["username"]=$name;
-        $_SESSION["email"]=$emailAddress;
-        echo ' <script> 
-        window.location.href = "../user-account.php";
-        </script>
-        ';
-    } else {	
-    echo "Error: " . $sql . "
-" . mysqli_error($conn);
-    }
-    mysqli_close($conn);
-}
-
 // handle data submitted by user
 if (isset($_POST["record-sleep"])) {
     // Start a session
@@ -1040,5 +890,240 @@ if(isset($_GET["a"])){
             $sql=mysqli_query($conn,$query)or die("Could Not Perform the Query");
             header ("Location: ../add-medicine.php");
         }
+    }
+    if(isset($_POST["first_name"])){
+        //import variables
+        session_start();
+        $userId = $_SESSION["id"];
+        $firstName = htmlspecialchars($_POST['firstName']);
+        if( $_SESSION['category'] == 'patient'){
+            $query="UPDATE regPatients SET firstName = '$firstName' WHERE id= '$userId'";
+        }else if ( $_SESSION['category'] == 'doctor') {
+            $query="UPDATE regDoctors SET firstName = '$firstName' WHERE id= '$userId'";
+        }
+        
+        //if sql query is executed...
+        if (mysqli_query($conn, $query)) {
+            header('location:../user-account.php?status=success');
+        }
+        else {	
+            //show error
+            echo "Error: updating user details " . mysqli_error($conn);
+        }
+        //close connection
+        mysqli_close($conn);
+    }
+    if(isset($_POST["last_name"])){
+        //import variables
+        session_start();
+        $userId = $_SESSION["id"];
+        $lastName = htmlspecialchars($_POST['lastName']);
+        if( $_SESSION['category'] == 'patient'){
+            $query="UPDATE regPatients SET lastName = '$lastName' WHERE id= '$userId'";
+        }else if ( $_SESSION['category'] == 'doctor') {
+            $query="UPDATE regDoctors SET lastName = '$lastName' WHERE id= '$userId'";
+        }
+        //if sql query is executed...
+        if (mysqli_query($conn, $query)) {
+            header('location:../user-account.php?status=success');
+        }
+        else {	
+            //show error
+            echo "Error: updating user details " . mysqli_error($conn);
+        }
+        //close connection
+        mysqli_close($conn);
+    }
+    if(isset($_POST["institution_name"])){
+        //import variables
+        session_start();
+        $userId = $_SESSION["id"];
+        $institutionName = htmlspecialchars($_POST['institutionName']);
+    
+        //check for company in db
+        $query="UPDATE regInstitutions SET institutionName = '$institutionName' WHERE Id = '$userId'";
+        //if sql query is executed...
+        if (mysqli_query($conn, $query)) {
+            header('location:../user-account.php?status=success');
+        }
+        else {	
+            //show error
+            echo "Error: updating user details " . mysqli_error($conn);
+        }
+        //close connection
+        mysqli_close($conn);
+    }
+    if(isset($_POST["email-address"])){
+        //import variables
+        session_start();
+        $userId = $_SESSION["id"];
+        $emailAddress = filter_var($_POST['emailAddress'], FILTER_SANITIZE_EMAIL);
+        if( $_SESSION['category'] == 'patient'){
+            $sql_e=mysqli_query($conn,"SELECT * FROM regPatients where emailAddress='$emailAddress'");       
+            if(mysqli_num_rows($sql_e)>0)
+            {
+                echo '<script> 
+                window.location.href = "../user-account.php?e=3"
+                </script>';
+            }
+            $query="UPDATE regPatients SET emailAddress = '$emailAddress' WHERE id= '$userId'";
+        }else if ( $_SESSION['category'] == 'doctor') {
+            $sql_e=mysqli_query($conn,"SELECT * FROM regDoctors where emailAddress='$emailAddress'");       
+            if(mysqli_num_rows($sql_e)>0)
+            {
+                echo '<script> 
+                window.location.href = "../user-account.php?e=3"
+                </script>';
+            }
+            $query="UPDATE regDoctors SET emailAddress = '$emailAddress' WHERE id= '$userId'";
+        }else if( $_SESSION['category'] == 'hospital') {
+            $sql_e=mysqli_query($conn,"SELECT * FROM regInstitutions where emailAddress='$emailAddress'");       
+            if(mysqli_num_rows($sql_e)>0)
+            {
+                echo '<script> 
+                window.location.href = "../user-account.php?e=3"
+                </script>';
+            }
+            $query="UPDATE regInstitutions SET emailAddress = '$emailAddress' WHERE id= '$userId'";
+        }
+        //if sql query is executed...
+        if (mysqli_query($conn, $query)) {
+            header('location:../user-account.php?status=success');
+        }
+        else {	
+            //show error
+            echo "Error: updating user details " . mysqli_error($conn);
+        }
+        //close connection
+        mysqli_close($conn);
+    }
+    if(isset($_POST["phone-number"])){
+        //import variables
+        session_start();
+        $userId = $_SESSION["id"];
+        $phoneNumber = htmlspecialchars($_POST['phoneNumber']);
+        
+        
+        if( $_SESSION['category'] == 'patient'){
+            //check for duplicate entries
+            $sql_f=mysqli_query($conn,"SELECT * FROM regPatients where phoneNumber='$phoneNumber'");
+            if(mysqli_num_rows($sql_f)>0)
+            {
+                echo '<script> 
+                window.location.href = "../user-account.php?e=2"
+                </script>';
+            }
+            $query="UPDATE regPatients SET phoneNumber = '$phoneNumber' WHERE id= '$userId'";
+        }else if ( $_SESSION['category'] == 'doctor') {
+            $sql_f=mysqli_query($conn,"SELECT * FROM regDoctors where phoneNumber='$phoneNumber'");
+            if(mysqli_num_rows($sql_f)>0)
+            {
+                echo '<script> 
+                window.location.href = "../user-account.php?e=2"
+                </script>';
+            }
+            $query="UPDATE regDoctors SET phoneNumber = '$phoneNumber' WHERE id= '$userId'";
+        }else if( $_SESSION['category'] == 'hospital') {
+            $sql_f=mysqli_query($conn,"SELECT * FROM regInstitutions where phoneNumber='$phoneNumber'");
+            if(mysqli_num_rows($sql_f)>0)
+            {
+                echo '<script> 
+                window.location.href = "../user-account.php?e=2"
+                </script>';
+            }
+            $query="UPDATE regInstitutions SET phoneNumber = '$phoneNumber' WHERE id= '$userId'";
+        }
+        
+        //if sql query is executed...
+        if (mysqli_query($conn, $query)) {
+            header('location:../user-account.php?status=success');
+        }
+        else {	
+            //show error
+            echo "Error: updating user details " . mysqli_error($conn);
+        }
+        //close connection
+        mysqli_close($conn);
+    }
+    //change password
+    if(isset($_POST["new_password"])){
+        //import variables
+        session_start();
+        $userId = $_SESSION["id"];
+        $new_password = $_POST["newpassword"];
+        $old_password = $_POST["oldpassword"];
+        //encrypt the password to compare
+        $password = openssl_encrypt($old_password, "AES-128-ECB", $SECRETKEY);
+        if( $_SESSION['category'] == 'patient'){
+            $sql = "SELECT emailAddress FROM regPatients WHERE id = ? AND password = ?'";
+        }else if ( $_SESSION['category'] == 'doctor') {
+            $sql = "SELECT emailAddress FROM regDoctors WHERE id = ? AND password = ?'";
+        }else if( $_SESSION['category'] == 'hospital') {
+            $sql = "SELECT emailAddress FROM regInstitutions WHERE id = ? AND password = ?'";
+        }
+        
+        $stmt = $conn->prepare($sql);
+        $stmt->execute([$userId,$password]);
+        $result = $stmt->get_result();
+        if(!empty($result))
+        {
+            $stmt;
+            //encrypt the password to update
+            $password = openssl_encrypt($new_password, "AES-128-ECB", $SECRETKEY);
+            if( $_SESSION['category'] == 'patient'){
+                $sql = "UPDATE regPatients SET password = '$password' WHERE id = '$userId'";
+            }else if ( $_SESSION['category'] == 'doctor') {
+                $sql = "UPDATE regDoctors SET password = '$password' WHERE id = '$userId'";
+            }else if( $_SESSION['category'] == 'hospital') {
+                $sql = "UPDATE regInstitutions SET password = '$password' WHERE id = '$userId'";
+            }
+            
+            if (mysqli_query($conn, $sql)) {
+                header('location:../user-account.php?status=success');
+            }
+            else {	
+                //show error
+                echo "Error: updating password ".$sql."". mysqli_error($conn);
+            }
+        }
+        else{
+            echo '<script> 
+                window.location.href = "../user-account.php?e=5"
+                </script>';
+        }
+        //close connection
+        mysqli_close($conn);
+    }
+    
+    if(isset($_POST["image-profile"])){
+        //import variables
+        session_start();
+        $id = $_SESSION["id"];
+        $filename = $_FILES['profile_picture']["name"];
+        $temp_filename = $_FILES['profile_picture']["tmp_name"];
+        $folder = "uploads/". $filename;
+        if( $_SESSION['category'] == 'patient'){
+            $query ="UPDATE regPatients SET profilePhoto = '$filename' WHERE id= '$id'";
+        }else if ( $_SESSION['category'] == 'doctor') {
+            $query ="UPDATE regDoctors SET profilePhoto = '$filename' WHERE id= '$id'";
+        }else if( $_SESSION['category'] == 'hospital') {
+            $query ="UPDATE regInstitutions SET profilePhoto = '$filename' WHERE id= '$id'";
+        }
+        //if sql query is executed...
+        if (mysqli_query($conn, $query)) {
+            if(move_uploaded_file($temp_filename, $folder)){
+                header('location:../user-account.php');
+            }
+            else {	
+                //show error
+                echo "Error: uploading image " . mysqli_error($conn);
+            }
+        }
+        else {	
+            //show error
+            echo "Error: updating user details " . mysqli_error($conn);
+        }
+        //close connection
+        mysqli_close($conn);
     }
 ?>

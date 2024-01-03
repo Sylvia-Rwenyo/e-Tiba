@@ -354,7 +354,7 @@
         padding-right: 1.5%;
     };
 }
-.reg-body form div, #editingProfile  div{
+.reg-body form div{
    display: flex;
    flex-direction: row;
    background-color: white;
@@ -725,11 +725,23 @@
     margin-block-start: 0.5em;
     margin-block-end: 1em;
 }
-#editingProfile div{
-    margin-bottom: 1em;
+#editingProfile  div{
+   display: flex;
+   flex-direction: row;
+   background-color: white;
+   color: black;
+   margin-bottom: 0.1em;
+}
+@media screen and (max-width:950px){
+    #editingProfile  div{
+        display: flex;
+        flex-direction: column;
+    }
+    
 }
 #editingProfile{
     display: none;
+    width:90%;
 }
 #editingProfile span{
     padding: 0.5em;
@@ -754,6 +766,19 @@
 #editingProfile{
     margin-left: 2.5%;
     border-bottom: 2px solid #408DCE;
+}
+#profileBody form input{
+    padding: 0.3em;
+    width: 80%;
+    margin: 0.1em;
+    border: none;
+    border-radius: 5px;
+}
+@media screen and (max-width:650px){
+    #profileBody form input, #profileBody form .pos-btn{
+        margin-left:-10%;
+    }
+    
 }
 #pfpInput{
     width: 3em;
@@ -838,6 +863,8 @@
 .logOut:hover, .deleteAccount h5:hover{
     color:#408DCE;
 }
+
+/*Settings*/
 
 
 /* dashboard menu */
@@ -1389,7 +1416,7 @@
     }
 }
 
-#patient-doc-home-chat form  input , #records-search-container form input, #profileBody form input{
+#patient-doc-home-chat form  input , #records-search-container form input{
     padding: 1em;
     width: 80%;
     margin: 0.5em;

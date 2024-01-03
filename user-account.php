@@ -139,75 +139,11 @@
                                 }
                         }
         ?>
-        <!-- show form for editing user info -->
-                <form action="controls/processing.php" method="POST" enctype="multipart/form-data" id="editingProfile">
-                    <!-- exit editing form -->
-                    <span>
-                        <h4>Edit profile</h4>
-                        <i class="fa fa-arrow-left" onclick="exitForm()"></i>
-                    </span>
-                    <!-- edit photo -->
-                    <div class="intro" id="editPhoto">
-                        <label>Your profile picture: </label>
-                    <img src="<?php if($result['profilePhoto'] == ''){
-                            echo 'Images/user.png';} else{
-                                echo 'Uploads/'. $result['profilePhoto'];} ?>"
-                            alt="profile photo" id="pfp"/>  
-                            <label for="fileInput" id="pfpInput">
-                                Change<i class="fa-solid fa-cloud-arrow-up"></i>
-                                <input type="file" id="fileInput"  name="profilePhoto" id="profilePhoto" />
-                            </label>
-                    </div>
-                <!-- edit name and password -->
-                <div class="name">
-                    <label>Your name: </label>
-                    <input  name="name" value="<?php
-                        if(isset($result['institutionName'])){
-                            echo $result['institutionName'];
-                        }else if(isset($result['firstName']) && isset($result['lastName'])){
-                        echo $result['firstName'] . ' ' . $result['lastName'];
-                        };
-                        ?>"
-                       />
-                    </div>
-                <div class="pw">
-                    <label>Your current password: </label>
-                    <span><input  name="oldPassword"  placeholder="current password" id="password" type="password"/>
-                    <p onclick="pswdDisplay()" id="showPswd" >                    
-                        <i class="fa fa-eye-slash"></i>
-                    </p></span>
-                    <input  name="id" value="<?php echo $result['id']?>" type="hidden" />
-                </div>
-                <div class="pw">
-                    <label>Your new password: </label>
-                    <span><input  name="newPassword" value="" placeholder="new password" id="newPassword" type="password"/>
-                    <p onclick="pswdDisplay()" id="showPswd" >                    
-                        <i class="fa fa-eye-slash"></i>
-                    </p></span>
-                    <input  name="id" value="" type="hidden" />
-                </div>
-                <!-- edit email address -->
-                <div>
-                    <label>Your email address: </label>
-                    <input type="text" name="emailAddress" value="<?php echo $result['emailAddress']?>" />
-                </div>
-                <!-- edit phone number -->
-                <div>
-                    <label>Your phone number: </label>
-                    <?php 
-                    if($result['phoneNumber'] == 0){
-                        echo '<input type="text" placeholder="for example(07********" name="phoneNumber" id="phoneNumber" />';
-                    }else{
-                        ?>
-                    <input type="number" name="phoneNumber" value="<?php echo $result['phoneNumber'];   ?>" />
-                    <?php
-                    }$i++ ;}}
-                ?>
-                </div>
-                <!-- submit form -->
-                <input type="submit" value="Update" name="update" class="pos-btn"/>
-            </form>
-
+        <!-- show forms for editing user info -->
+            <div id="editingProfile"><?php include_once "account-settings.php"?></div>
+            <?php
+                $i++ ;}}
+            ?>
             <!-- 'log out' section -->
             <div class="profile logOut">
             <a href="controls/processing.php?action=logOut"><h5 class="intro">Log Out</h5></a>
