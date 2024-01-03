@@ -78,6 +78,8 @@
     
     <!--change institution-->
     
+    <?php 
+    if( $_SESSION['category'] != 'hospital'){?>
         <form method="POST" action="controls/processing.php" class="profile-mini-form">
             <label>Current Hospital: <?php echo $result["institution"];?></label>
             <div style="display:flex;flex-direction:column;">
@@ -96,9 +98,12 @@
                 }}
                 ?>
             </select>
-                <input name="user_CompanyName" type = "submit" class="pos-btn" value="Update"/>
+                <input name="user_institution" type = "submit" class="pos-btn" value="Update"/>
             </div>
         </form>
+    <?php
+    }
+    ?>
     
     <!--change password-->
     

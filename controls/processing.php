@@ -934,6 +934,27 @@ if(isset($_GET["a"])){
         //close connection
         mysqli_close($conn);
     }
+    if(isset($_POST["user_institution"])){
+        //import variables
+        session_start();
+        $userId = $_SESSION["id"];
+        $institution = htmlspecialchars($_POST['institution']);
+        if( $_SESSION['category'] == 'patient'){
+            $query="UPDATE regPatients SET institution = '$institution' WHERE id= '$userId'";
+        }else if ( $_SESSION['category'] == 'doctor') {
+            $query="UPDATE regDoctors SET institution = '$institution' WHERE id= '$userId'";
+        }
+        //if sql query is executed...
+        if (mysqli_query($conn, $query)) {
+            header('location:../user-account.php?status=success');
+        }
+        else {	
+            //show error
+            echo "Error: updating user details " . mysqli_error($conn);
+        }
+        //close connection
+        mysqli_close($conn);
+    }
     if(isset($_POST["institution_name"])){
         //import variables
         session_start();
