@@ -27,7 +27,7 @@
                 <option>Other</option>
             </select>
             <input type="text" name="emailAddress" placeholder="Patient Email Address" required/>
-            <input type="number" name="phoneNumber" placeholder="Patient phone number" required/>
+            <input type="number" name="phoneNumber" placeholder="Phone: 2547********" required/>
             <input type="text" name="address" placeholder="Patient address" required/>
             <select name="institution" required>
                 <option selected disabled> Select Patient Hospital</option>

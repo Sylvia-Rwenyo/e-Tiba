@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 15, 2023 at 04:04 PM
+-- Generation Time: Jan 03, 2024 at 04:45 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -148,6 +148,28 @@ INSERT INTO `dosage` (`dosageId`, `dosageName`, `patientName`, `patientEmail`, `
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `medicine`
+--
+
+CREATE TABLE `medicine` (
+  `medId` int(11) NOT NULL,
+  `medName` varchar(200) NOT NULL,
+  `medAdmin` varchar(100) NOT NULL,
+  `medManufacturer` varchar(200) NOT NULL,
+  `price` int(11) NOT NULL,
+  `hospId` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `medicine`
+--
+
+INSERT INTO `medicine` (`medId`, `medName`, `medAdmin`, `medManufacturer`, `price`, `hospId`) VALUES
+(1, 'cetrizine', 'Oral tablet', 'glaxosmithkline', 20, 4);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `patientmedlog`
 --
 
@@ -243,10 +265,10 @@ INSERT INTO `patientsmeallog` (`userID`, `mealName`, `mealTime`, `entryID`, `rec
 -- --------------------------------------------------------
 
 --
--- Table structure for table `regDoctors`
+-- Table structure for table `regdoctors`
 --
 
-CREATE TABLE `regDoctors` (
+CREATE TABLE `regdoctors` (
   `id` int(11) NOT NULL,
   `firstName` varchar(50) NOT NULL,
   `lastName` varchar(50) NOT NULL,
@@ -258,24 +280,27 @@ CREATE TABLE `regDoctors` (
   `age` int(11) NOT NULL,
   `gender` varchar(10) NOT NULL,
   `profilePhoto` blob NOT NULL,
-  `phoneNumber` int(14) NOT NULL
+  `phoneNumber` int(14) NOT NULL,
+  `date_registered` datetime NOT NULL DEFAULT current_timestamp(),
+  `date_updated` datetime NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `regDoctors`
+-- Dumping data for table `regdoctors`
 --
 
-INSERT INTO `regDoctors` (`id`, `firstName`, `lastName`, `emailAddress`, `institution`, `password`, `specialty`, `address`, `age`, `gender`, `profilePhoto`, `phoneNumber`) VALUES
-(1, 'Fredrick', 'Kamau', 'fredric.ngugi@yahoo.com', 'none', 'ULBCXckbvOWLrae3HBB99g==', '', '', 23, 'Female', '', 0),
-(2, 'Morris', 'Muema', 'morris@gmail.com', 'mediheal hospital', 'ntj5NGsbJiWn94OnHNlc8w==', '', '', 25, 'Male', '', 0);
+INSERT INTO `regdoctors` (`id`, `firstName`, `lastName`, `emailAddress`, `institution`, `password`, `specialty`, `address`, `age`, `gender`, `profilePhoto`, `phoneNumber`, `date_registered`, `date_updated`) VALUES
+(1, 'Fredrick', 'Kamau', 'fredric.ngugi@yahoo.com', 'none', 'ULBCXckbvOWLrae3HBB99g==', '', '', 23, 'Female', '', 0, '2024-01-03 07:36:37', '2024-01-03 07:36:37'),
+(2, 'Morris', 'Muema', 'morris@gmail.com', 'mediheal hospital', 'ntj5NGsbJiWn94OnHNlc8w==', '', '', 25, 'Male', '', 0, '2024-01-03 07:36:37', '2024-01-03 07:36:37'),
+(4, 'Kevo', 'Kimotho', 'kk@gmail.com', 'none', 'xBy97cakb7/r2gbdah/aNA==', 'Condition A', '', 0, 'Male', '', 722123456, '2024-01-03 07:36:37', '2024-01-03 07:36:37');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `regInstitutions`
+-- Table structure for table `reginstitutions`
 --
 
-CREATE TABLE `regInstitutions` (
+CREATE TABLE `reginstitutions` (
   `id` int(11) NOT NULL,
   `institutionName` varchar(100) NOT NULL,
   `location` varchar(100) NOT NULL,
@@ -284,25 +309,28 @@ CREATE TABLE `regInstitutions` (
   `password` varchar(50) NOT NULL,
   `illnesses` varchar(200) NOT NULL,
   `postalAddress` varchar(200) NOT NULL,
-  `profilePhoto` blob NOT NULL
+  `profilePhoto` blob NOT NULL,
+  `date_registered` datetime NOT NULL DEFAULT current_timestamp(),
+  `date_updated` datetime NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `regInstitutions`
+-- Dumping data for table `reginstitutions`
 --
 
-INSERT INTO `regInstitutions` (`id`, `institutionName`, `location`, `emailAddress`, `phoneNumber`, `password`, `illnesses`, `postalAddress`, `profilePhoto`) VALUES
-(1, 'New Hospital', '234', '234234', '3242', 'TB8MvNoRYKrdyScdWwubgw==', 'Condition B', '2342', ''),
-(2, 'mediheal hospital', 'Eldoret', 'mediheal.hos@gmail.com', '0722222222', 'm97SyqgW1aPhLBeUlcmNhQ==', 'Condition B', '22234-3345', ''),
-(3, 'Hospitali', 'Nairobi', 'hospitali@hospitali.com', '254111111111', 'xHf2LRAW6NbUqZs/3fLc0A==', 'Condition A*Condition C', '13051', '');
+INSERT INTO `reginstitutions` (`id`, `institutionName`, `location`, `emailAddress`, `phoneNumber`, `password`, `illnesses`, `postalAddress`, `profilePhoto`, `date_registered`, `date_updated`) VALUES
+(1, 'New Hospital', '234', '234234', '3242', 'TB8MvNoRYKrdyScdWwubgw==', 'Condition B', '2342', '', '2024-01-03 07:37:23', '2024-01-03 07:37:23'),
+(2, 'mediheal hospital', 'Eldoret', 'mediheal.hos@gmail.com', '0722222222', 'm97SyqgW1aPhLBeUlcmNhQ==', 'Condition B', '22234-3345', '', '2024-01-03 07:37:23', '2024-01-03 07:37:23'),
+(3, 'Hospitali', 'Nairobi', 'hospitali@hospitali.com', '254111111111', 'xHf2LRAW6NbUqZs/3fLc0A==', 'Condition A*Condition C', '13051', '', '2024-01-03 07:37:23', '2024-01-03 07:37:23'),
+(4, 'lidari health', 'Nairobi', 'lidar.hos@gmail.com', '0711222333', 'KvWZbyA/TIOKQVqr9e7c0g==', 'Condition B', '22234-3345', '', '2024-01-03 07:37:23', '2024-01-03 07:37:23');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `regPatients`
+-- Table structure for table `regpatients`
 --
 
-CREATE TABLE `regPatients` (
+CREATE TABLE `regpatients` (
   `id` int(11) NOT NULL,
   `firstName` varchar(50) NOT NULL,
   `lastName` varchar(50) NOT NULL,
@@ -313,19 +341,24 @@ CREATE TABLE `regPatients` (
   `address` varchar(200) NOT NULL,
   `age` int(11) NOT NULL,
   `gender` varchar(10) NOT NULL,
-  `phoneNumber` int(14) NOT NULL,
+  `phoneNumber` int(12) NOT NULL,
   `status` int(11) NOT NULL,
-  `profilePhoto` blob NOT NULL
+  `profilePhoto` blob NOT NULL,
+  `date_registered` datetime NOT NULL DEFAULT current_timestamp(),
+  `date_updated` datetime NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `regPatients`
+-- Dumping data for table `regpatients`
 --
 
-INSERT INTO `regPatients` (`id`, `firstName`, `lastName`, `emailAddress`, `institution`, `password`, `illness`, `address`, `age`, `gender`, `phoneNumber`, `status`, `profilePhoto`) VALUES
-(6, 'khj', 'jh', '646', 'mediheal hospital', 'BIw6HeLqdkTIjmBI8zeHqg==', 'Array', '456', 56, 'Female', 0, 0, ''),
-(11, 'amsnfc', ' SDNF', 'rtaer', 'mediheal hospital', 'xbytrGCr+Gk6Bd4IHkKU8A==', 'Condition A', '1231', 34, 'Male', 2313, 0, ''),
-(13, 'berclay', 'Sprouts', 'berclaym@gmail.com', 'mediheal hospital', '4XnLuIpnX7JL5i3plnywyg==', 'Condition B', 'Nairobi', 25, 'Male', 722222222, 0, '');
+INSERT INTO `regpatients` (`id`, `firstName`, `lastName`, `emailAddress`, `institution`, `password`, `illness`, `address`, `age`, `gender`, `phoneNumber`, `status`, `profilePhoto`, `date_registered`, `date_updated`) VALUES
+(6, 'khj', 'jh', '646', 'mediheal hospital', 'BIw6HeLqdkTIjmBI8zeHqg==', 'Array', '456', 56, 'Female', 0, 0, '', '2023-12-29 21:32:20', '2023-12-29 21:32:20'),
+(11, 'amsnfc', ' SDNF', 'rtaer', 'mediheal hospital', 'xbytrGCr+Gk6Bd4IHkKU8A==', 'Condition A', '1231', 34, 'Male', 2313, 0, '', '2023-12-29 21:32:20', '2023-12-29 21:32:20'),
+(13, 'berclay', 'Sprouts', 'berclaym@gmail.com', 'mediheal hospital', '4XnLuIpnX7JL5i3plnywyg==', 'Condition B', 'Nairobi', 25, 'Male', 722222222, 0, '', '2023-12-29 21:32:20', '2023-12-29 21:32:20'),
+(14, 'Cabbage', 'Sprouts', 'cabbages@gmail.com', 'lidari health', NULL, 'Condition A', 'Utawala', 24, 'Male', 723432222, 0, '', '2023-12-29 21:32:20', '2023-12-29 21:32:20'),
+(15, 'Cabbage', 'Sproutzz', 'cabbages345@gmail.com', 'lidari health', 'TC0KQHALM1h0VThpi3Y5kw==', 'Condition A', 'Utawala', 24, 'Male', 723432223, 0, '', '2023-12-29 21:32:20', '2023-12-29 21:32:20'),
+(16, 'Zazie', 'Beeetz', 'myemail1@gmail.com', 'mediheal hospital', 'CNqVGoppLVIH4uwnS7tCtg==', '', 'Nairobi', 34, 'Female', 2147483647, 0, '', '2024-01-03 11:44:17', '2024-01-03 18:42:17');
 
 -- --------------------------------------------------------
 
@@ -369,6 +402,12 @@ ALTER TABLE `dosage`
   ADD PRIMARY KEY (`dosageId`);
 
 --
+-- Indexes for table `medicine`
+--
+ALTER TABLE `medicine`
+  ADD PRIMARY KEY (`medId`);
+
+--
 -- Indexes for table `patientmedlog`
 --
 ALTER TABLE `patientmedlog`
@@ -387,21 +426,21 @@ ALTER TABLE `patientsmeallog`
   ADD PRIMARY KEY (`entryID`);
 
 --
--- Indexes for table `regDoctors`
+-- Indexes for table `regdoctors`
 --
-ALTER TABLE `regDoctors`
+ALTER TABLE `regdoctors`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `regInstitutions`
+-- Indexes for table `reginstitutions`
 --
-ALTER TABLE `regInstitutions`
+ALTER TABLE `reginstitutions`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `regPatients`
+-- Indexes for table `regpatients`
 --
-ALTER TABLE `regPatients`
+ALTER TABLE `regpatients`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `phoneNumber` (`phoneNumber`),
   ADD UNIQUE KEY `emailAddress` (`emailAddress`);
@@ -429,6 +468,12 @@ ALTER TABLE `dosage`
   MODIFY `dosageId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
+-- AUTO_INCREMENT for table `medicine`
+--
+ALTER TABLE `medicine`
+  MODIFY `medId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
 -- AUTO_INCREMENT for table `patientmedlog`
 --
 ALTER TABLE `patientmedlog`
@@ -447,22 +492,22 @@ ALTER TABLE `patientsmeallog`
   MODIFY `entryID` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
--- AUTO_INCREMENT for table `regDoctors`
+-- AUTO_INCREMENT for table `regdoctors`
 --
-ALTER TABLE `regDoctors`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+ALTER TABLE `regdoctors`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
--- AUTO_INCREMENT for table `regInstitutions`
+-- AUTO_INCREMENT for table `reginstitutions`
 --
-ALTER TABLE `regInstitutions`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+ALTER TABLE `reginstitutions`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
--- AUTO_INCREMENT for table `regPatients`
+-- AUTO_INCREMENT for table `regpatients`
 --
-ALTER TABLE `regPatients`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+ALTER TABLE `regpatients`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT for table `reports`

@@ -101,7 +101,7 @@
                 <option>Prefer not to say</option>
             </select>
             <input type="email" name="emailAddress" id="emailAddress" placeholder="Email Address e.g youremail@gmail.com" required/>
-            <input type="number" name="phoneNumber" id="phoneNumber" placeholder="Phone number e.g 07********" required/>
+            <input type="number" name="phoneNumber" id="phoneNumber" placeholder="Phone: 2547********" required/>
             <input type="text" name="address" id="address" placeholder="Address" required/>
             <select name="institution" id="institution" required>
                 <option selected disabled> Select your hospital</option>

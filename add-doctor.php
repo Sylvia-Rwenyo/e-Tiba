@@ -62,7 +62,7 @@
                     }
                     ?>
                 </select>
-            <input type="text" name="phoneNumber" placeholder="Phone Number"/>
+            <input type="text" name="phoneNumber" placeholder="Phone: 2547********"/>
             <input type="text" name="address" placeholder="address"/>
             <input type="submit" value="submit" name="register-doc-by-partner" class="pos-btn"/>
         </form>

@@ -57,7 +57,7 @@
     <form method="POST" action="controls/processing.php" id="reg-form">
         <input type="text" name="institutionName" id="institutionName" placeholder="Your institution's name" required/>
         <input type="text" name="location" id="location" placeholder="location" required/>
-        <input type="number" name="phoneNumber" id="phoneNumber" placeholder="Phone number" required/>
+        <input type="number" name="phoneNumber" id="phoneNumber" placeholder="Phone: 2547********" required/>
         <input type="text" name="emailAddress" id="emailAddress" placeholder="Email address" required/>
         <input type="text" name="postalAddress" id="postalAddress" placeholder="Postal Address" required/>
         <select name="conditions[]" id="conditions" required multiple>
