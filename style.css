@@ -22,9 +22,130 @@
     justify-content: space-between; */
 }
 .menu img{
-    height: 2em;
-    width: 100%;
-    margin-left: 5%;
+    margin-left: -430%;
+    margin-right:400%;
+    height:50px;
+    width:50px;
+}
+@media screen and (max-width:1480px) {
+    .menu img{
+        margin-left: -400%;
+        margin-right:400%;
+    }
+}
+@media screen and (max-width:1400px) {
+    .menu img{
+        margin-left: -380%;
+        margin-right:380%;
+    }
+}
+@media screen and (max-width:1350px) {
+    .menu img{
+        margin-left: -360%;
+        margin-right:360%;
+    }
+}
+@media screen and (max-width:1280px) {
+    .menu img{
+        margin-left: -340%;
+        margin-right:340%;
+    }
+}
+@media screen and (max-width:1240px) {
+    .menu img{
+        margin-left: -310%;
+        margin-right:310%;
+    }
+}
+@media screen and (max-width:1150px) {
+    .menu img{
+        margin-left: -290%;
+        margin-right:290%;
+    }
+}
+@media screen and (max-width:1090px) {
+    .menu img{
+        margin-left: -260%;
+        margin-right:260%;
+    }
+}
+@media screen and (max-width:1010px) {
+    .menu img{
+        margin-left: -220%;
+        margin-right:200%;
+    }
+}
+@media screen and (max-width:900px) {
+    .menu img{
+        margin-left: -180%;
+        margin-right:180%;
+    }
+}
+@media screen and (max-width:800px) {
+    .menu img{
+        margin-left: -150%;
+        margin-right:150%;
+    }
+}
+@media screen and (max-width:700px) {
+    .menu img{
+        margin-left: -110%;
+        margin-right:110%;
+    }
+}
+@media screen and (max-width:610px) {
+    .menu img{
+        margin-left: -90%;
+        margin-right:90%;
+    }
+}
+@media screen and (max-width:550px) {
+    .menu img{
+        margin-left: -80%;
+        margin-right:80%;
+    }
+}
+@media screen and (max-width:520px) {
+    .menu img{
+        margin-left: -70%;
+        margin-right:70%;
+    }
+}
+@media screen and (max-width:500px) {
+    .menu img{
+        margin-left: -140%;
+        margin-right:140%;
+    }
+}
+@media screen and (max-width:460px) {
+    .menu img{
+        margin-left: -120%;
+        margin-right:90%;
+    }
+}
+@media screen and (max-width:420px) {
+    .menu img{
+        margin-left: -100%;
+        margin-right:90%;
+    }
+}
+@media screen and (max-width:400px) {
+    .menu img{
+        margin-left: -90%;
+        margin-right:90%;
+    }
+}
+@media screen and (max-width:370px) {
+    .menu img{
+        margin-left: -80%;
+        margin-right:80%;
+    }
+}
+@media screen and (max-width:350px) {
+    .menu img{
+        margin-left: -70%;
+        margin-right:70%;
+    }
 }
 .menu ul{
     padding-top: 1em;
