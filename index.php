@@ -39,34 +39,35 @@
         </div>
     </div>
     <div class="intro-info">
-    <div style="margin:4%;">
-        <div class="transcript-mini-div">
-            <h4>Electronic Health Records</h4> 
-            <img src="images/Records.PNG" alt="">
+        <div style="margin:4%;">
+            <div class="transcript-mini-div">
+                <h4>Book an Appointment</h4> 
+                <img src="images/Appointments.PNG" alt="">
+            </div>
+            <div class="transcript-mini-div">
+                <h4>Tele-counselling</h4> 
+                <img src="images/Chat.PNG" alt="">
+                <ul>
+                    <li>One on one counselling sessions with therapist</li>
+                    <li>Group sessions with therapist and other</li>
+                </ul>
+            </div>
+            <div class="transcript-mini-div">
+                <h4>Electronic Health Records</h4> 
+                <img src="images/Records.PNG" alt="">
+            </div>
+            <div class="transcript-mini-div">
+                <h4>Track Your Progress</h4>
+                <img src="images/Dashboard.PNG" alt="">
+            </div>
+            <div class="transcript-mini-div">
+                <h4>Update Your Information</h4> 
+                <img src="images/UpdateProfile.PNG" alt="">
+            </div>
         </div>
-        <div class="transcript-mini-div">
-            <h4>Book an Appointment</h4> 
-            <img src="images/Appointments.PNG" alt="">
-        </div>
-        <div class="transcript-mini-div">
-            <h4>Track Your Progress</h4>
-            <img src="images/Dashboard.PNG" alt="">
-        </div>
-        <div class="transcript-mini-div">
-            <h4>Update Your Information</h4> 
-            <img src="images/UpdateProfile.PNG" alt="">
-        </div>
-        <div class="transcript-mini-div">
-            <h4>Tele-counselling</h4> 
-            <img src="images/Chat.PNG" alt="">
-            <ul>
-                <li>One on one counselling sessions with therapist</li>
-                <li>Group sessions with therapist and other</li>
-            </ul>
-        </div>
-      </div>
     </div>
     <div class="intro-contacts">
+        <h4>Contact Us</h4>
         <a href="#"><img src="images/facebook.jpeg" alt="facebook-link"></a>
         <a href="#"><img src="images/twitter.PNG" alt="twitter-link"></a>
         <a href="#"><img src="images/linkedin.PNG" alt="linkedin-link"></a>
