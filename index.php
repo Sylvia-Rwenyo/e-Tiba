@@ -42,27 +42,24 @@
         <div style="margin:4%;">
             <div class="transcript-mini-div">
                 <h4>Book an Appointment</h4> 
-                <img src="images/Appointments.PNG" alt="">
+                <img src="images/Appointments.PNG" alt="appointments">
             </div>
             <div class="transcript-mini-div">
-                <h4>Tele-counselling</h4> 
-                <img src="images/Chat.PNG" alt="">
-                <ul>
-                    <li>One on one counselling sessions with therapist</li>
-                    <li>Group sessions with therapist and other</li>
-                </ul>
+                <h4>Telemedicine</h4> 
+                <h5>One on one sessions with a doctor through messaging or video call on the app</h5>
+                <img src="images/Chat.PNG" alt="messages page in chat">
             </div>
             <div class="transcript-mini-div">
                 <h4>Electronic Health Records</h4> 
-                <img src="images/Records.PNG" alt="">
+                <img src="images/Records.PNG" alt="patient records">
             </div>
             <div class="transcript-mini-div">
                 <h4>Track Your Progress</h4>
-                <img src="images/Dashboard.PNG" alt="">
+                <img src="images/Dashboard.PNG" alt="progress graph">
             </div>
             <div class="transcript-mini-div">
                 <h4>Update Your Information</h4> 
-                <img src="images/UpdateProfile.PNG" alt="">
+                <img src="images/UpdateProfile.PNG" alt="edit your profile with ease">
             </div>
         </div>
     </div>
