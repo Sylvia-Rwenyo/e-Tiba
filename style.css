@@ -175,6 +175,26 @@
     margin-top: 2.5%;
     margin-left: 2.5%;
 }
+.intro-contacts{
+    display: flex;
+    flex-direction: row;
+    width:90%;
+    padding:3%;
+    margin-left:4%;
+    margin-top:5%;
+    margin-bottom:5%;
+    background-color: #35b6be;
+}
+.intro-contacts img{
+    width:50px;
+    height:50px;
+    margin-left:4%;
+    margin-top: 2.5%;
+    border-radius:50%;
+}
+.intro-contacts a{
+    margin-left:4%;
+}
 .home .banner{
     width: 40%;
 }

@@ -18,7 +18,7 @@
             <div class="c-phrase">
                 <h3>Mobile Health care made seamless,<br><b>for you</b></h3>
             </div>
-            <p>Let us help you track your health and treatment progress</p>
+            <p>Book your video or message consultation appointment, get your prescription and let us help you track your health and treatment progress</p>
         </div>
         <div class="CTA">
             <button class="pos-btn" id="join-us" onclick="popupFunc()" style="position:relative;display:block;cursor:pointer;">Join Us
@@ -37,6 +37,40 @@
             </button>
             <a href="about-us.php"><button class="neg-btn">Learn More</button></a>
         </div>
+    </div>
+    <div class="intro-info">
+    <div style="margin:4%;">
+        <div class="transcript-mini-div">
+            <h4>Electronic Health Records</h4> 
+            <img src="images/Records.PNG" alt="">
+        </div>
+        <div class="transcript-mini-div">
+            <h4>Book an Appointment</h4> 
+            <img src="images/Appointments.PNG" alt="">
+        </div>
+        <div class="transcript-mini-div">
+            <h4>Track Your Progress</h4>
+            <img src="images/Dashboard.PNG" alt="">
+        </div>
+        <div class="transcript-mini-div">
+            <h4>Update Your Information</h4> 
+            <img src="images/UpdateProfile.PNG" alt="">
+        </div>
+        <div class="transcript-mini-div">
+            <h4>Tele-counselling</h4> 
+            <img src="images/Chat.PNG" alt="">
+            <ul>
+                <li>One on one counselling sessions with therapist</li>
+                <li>Group sessions with therapist and other</li>
+            </ul>
+        </div>
+      </div>
+    </div>
+    <div class="intro-contacts">
+        <a href="#"><img src="images/facebook.jpeg" alt="facebook-link"></a>
+        <a href="#"><img src="images/twitter.PNG" alt="twitter-link"></a>
+        <a href="#"><img src="images/linkedin.PNG" alt="linkedin-link"></a>
+        <a href="#"><img src="images/instagram.jpeg" alt="instagram-link"></a>
     </div>
     <script>
         function popupFunc(){
