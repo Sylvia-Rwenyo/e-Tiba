@@ -90,6 +90,7 @@
         </div>
       </div>
     </div>
+    <p>Read our <a href="privacy-policy.php"><i>Privacy Policy</i></a></p>
   </div>
 </body>
 </html>

@@ -51,6 +51,7 @@
         <input type="hidden"  name="institution" value="<?php @session_start(); if(isset($_SESSION['category']))
         {echo $_SESSION['username'];}else{ echo 'none';}
         ?>"/>
+        <p>Our <a href="privacy-policy.php"><i>Privacy Policy</i></a></p>
         <input type="submit" value="submit" name="register-doc" class="pos-btn"/>
     </form>
 </body>

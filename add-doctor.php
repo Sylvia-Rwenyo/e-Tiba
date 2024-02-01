@@ -64,6 +64,7 @@
                 </select>
             <input type="text" name="phoneNumber" placeholder="Phone: 2547********"/>
             <input type="text" name="address" placeholder="address"/>
+            <p>Our <a href="privacy-policy.php"><i>Privacy Policy</i></a></p>
             <input type="submit" value="submit" name="register-doc-by-partner" class="pos-btn"/>
         </form>
 </body>

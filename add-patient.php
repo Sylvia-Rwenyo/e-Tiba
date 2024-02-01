@@ -49,6 +49,7 @@
                 <option>Condition B</option>
                 <option>Condition C</option>
             </select>
+            <p>Our <a href="privacy-policy.php"><i>Privacy Policy</i></a></p>
             <input type="submit" value="submit" name="add-patient" class="pos-btn"/>
     </form>
 </body>
