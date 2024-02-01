@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 15, 2023 at 04:04 PM
+-- Generation Time: Dec 19, 2023 at 07:49 PM
 -- Server version: 10.4.28-MariaDB
--- PHP Version: 8.2.4
+-- PHP Version: 8.0.28
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -179,8 +179,14 @@ CREATE TABLE `patientsexerciselog` (
 --
 
 INSERT INTO `patientsexerciselog` (`recordID`, `userID`, `recordDate`, `exerciseType`, `exerciseDuration`, `exerciseTime`) VALUES
-(0, 28, '2023-08-29 09:31:35', 'Aerobics', 10, '10:30'),
-(0, 28, '2023-08-29 09:31:44', 'Aerobics', 10, '10:30');
+(1, 28, '2023-08-29 09:31:35', 'Aerobics', 10, '10:30'),
+(2, 28, '2023-08-29 09:31:44', 'Aerobics', 10, '10:30'),
+(3, 15, '2023-10-28 19:25:13', 'Dancing', 20, '10:25'),
+(4, 15, '2023-10-28 19:29:47', 'Weight Training', 20, '18:29'),
+(5, 15, '2023-10-28 20:01:30', 'Body Weight Exercises', 30, '15:01'),
+(6, 19, '2023-11-30 14:34:17', 'Weight Training', 30, '15:34'),
+(8, 19, '2023-11-29 14:34:17', 'Weight Training', 30, '15:34'),
+(9, 19, '2023-11-30 14:34:17', 'Weight Training', 30, '15:28');
 
 -- --------------------------------------------------------
 
@@ -207,7 +213,15 @@ INSERT INTO `patientsleeplog` (`userID`, `sleepTime`, `entryID`, `recordDate`) V
 (29, 11, 8, '2023-08-28 05:32:43'),
 (29, 7, 9, '2023-08-28 05:34:34'),
 (29, 7, 10, '2023-08-28 05:34:54'),
-(28, 15, 11, '2023-08-29 09:05:49');
+(28, 15, 11, '2023-08-29 09:05:49'),
+(14, -14, 12, '2023-10-27 09:27:33'),
+(15, 3, 13, '2023-10-28 19:24:40'),
+(15, 9, 14, '2023-10-28 19:28:15'),
+(19, 8, 15, '2023-11-30 14:33:31'),
+(19, 8, 16, '2023-11-29 14:33:31'),
+(19, 8, 17, '2023-11-28 14:33:31'),
+(15, -19, 18, '2023-12-19 18:03:40'),
+(15, 13, 19, '2023-12-19 18:04:35');
 
 -- --------------------------------------------------------
 
@@ -238,15 +252,27 @@ INSERT INTO `patientsmeallog` (`userID`, `mealName`, `mealTime`, `entryID`, `rec
 (28, '', '00:00:00', 8, '0000-00-00'),
 (28, '', '00:00:00', 9, '0000-00-00'),
 (28, 'Mutura', '13:41:00', 10, '2023-08-28'),
-(28, 'Chakula tu', '20:02:00', 11, '2023-08-29');
+(28, 'Chakula tu', '20:02:00', 11, '2023-08-29'),
+(15, 'uji', '19:24:00', 12, '2023-10-28'),
+(15, 'Chai', '10:28:00', 13, '2023-10-28'),
+(15, 'Rice', '12:29:00', 14, '2023-10-28'),
+(19, 'Githeri', '13:33:00', 15, '2023-11-30'),
+(19, 'Githeri', '13:33:00', 16, '2023-11-29'),
+(19, 'Githeri', '13:33:00', 17, '2023-11-28'),
+(19, 'Githeri', '08:33:00', 18, '2023-11-29'),
+(19, 'Githeri', '08:33:00', 19, '2023-11-28'),
+(19, 'Githeri', '11:33:00', 20, '2023-11-29'),
+(19, 'Githeri', '11:33:00', 21, '2023-11-28'),
+(19, 'Githeri', '13:33:00', 22, '2023-11-27'),
+(19, 'Githeri', '06:33:00', 23, '2023-11-27');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `regDoctors`
+-- Table structure for table `regdoctors`
 --
 
-CREATE TABLE `regDoctors` (
+CREATE TABLE `regdoctors` (
   `id` int(11) NOT NULL,
   `firstName` varchar(50) NOT NULL,
   `lastName` varchar(50) NOT NULL,
@@ -262,20 +288,23 @@ CREATE TABLE `regDoctors` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `regDoctors`
+-- Dumping data for table `regdoctors`
 --
 
-INSERT INTO `regDoctors` (`id`, `firstName`, `lastName`, `emailAddress`, `institution`, `password`, `specialty`, `address`, `age`, `gender`, `profilePhoto`, `phoneNumber`) VALUES
+INSERT INTO `regdoctors` (`id`, `firstName`, `lastName`, `emailAddress`, `institution`, `password`, `specialty`, `address`, `age`, `gender`, `profilePhoto`, `phoneNumber`) VALUES
 (1, 'Fredrick', 'Kamau', 'fredric.ngugi@yahoo.com', 'none', 'ULBCXckbvOWLrae3HBB99g==', '', '', 23, 'Female', '', 0),
-(2, 'Morris', 'Muema', 'morris@gmail.com', 'mediheal hospital', 'ntj5NGsbJiWn94OnHNlc8w==', '', '', 25, 'Male', '', 0);
+(2, 'Morris', 'Muema', 'morris@gmail.com', 'mediheal hospital', 'ntj5NGsbJiWn94OnHNlc8w==', '', '', 25, 'Male', '', 0),
+(4, 'New', 'Doc', 'new@doc.com', 'Nafuu Hospital', 'new', 'Condition A*Condition B*Condition C', '12233', 0, 'Male', '', 768686666),
+(5, 'Doc', 'tor', 'doc@tor.com', 'none', 'guZW60cv8dzQD7Js1FF+0A==', 'Condition A*Condition B*Condition C', '12322', 0, 'Male', '', 766666766),
+(6, 'Fredrick', 'Kamau', 'fredric.ngugi@yahoo.com', 'none', 'Z5v8b7iaRizs8FxiIITzxQ==', 'Condition A*Condition B*Condition C', '13051', 0, 'Male', '', 2147483647);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `regInstitutions`
+-- Table structure for table `reginstitutions`
 --
 
-CREATE TABLE `regInstitutions` (
+CREATE TABLE `reginstitutions` (
   `id` int(11) NOT NULL,
   `institutionName` varchar(100) NOT NULL,
   `location` varchar(100) NOT NULL,
@@ -288,21 +317,24 @@ CREATE TABLE `regInstitutions` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `regInstitutions`
+-- Dumping data for table `reginstitutions`
 --
 
-INSERT INTO `regInstitutions` (`id`, `institutionName`, `location`, `emailAddress`, `phoneNumber`, `password`, `illnesses`, `postalAddress`, `profilePhoto`) VALUES
+INSERT INTO `reginstitutions` (`id`, `institutionName`, `location`, `emailAddress`, `phoneNumber`, `password`, `illnesses`, `postalAddress`, `profilePhoto`) VALUES
 (1, 'New Hospital', '234', '234234', '3242', 'TB8MvNoRYKrdyScdWwubgw==', 'Condition B', '2342', ''),
 (2, 'mediheal hospital', 'Eldoret', 'mediheal.hos@gmail.com', '0722222222', 'm97SyqgW1aPhLBeUlcmNhQ==', 'Condition B', '22234-3345', ''),
-(3, 'Hospitali', 'Nairobi', 'hospitali@hospitali.com', '254111111111', 'xHf2LRAW6NbUqZs/3fLc0A==', 'Condition A*Condition C', '13051', '');
+(3, 'Hospitali', 'Nairobi', 'hospitali@hospitali.com', '254111111111', 'xHf2LRAW6NbUqZs/3fLc0A==', 'Condition A*Condition C', '13051', ''),
+(4, 'Hospital', 'Hospital', 'hospitali@hospital.com', '0763543364', 'YohTu/9vNH4b92tMJ+AIog==', 'Condition A*Condition B*Condition C', '31231', ''),
+(5, 'Nafuu Hospital', 'Nairobi', 'nafuu@hospital.com', '0745454444', 'stJkPksTBLkUIXNgFJRp/ZN/yNCkZHKcsG9d/06lwoY=', 'Condition A*Condition B*Condition C', '12233', ''),
+(6, 'institution', 'kenya', 'institution@institution.com', '076565646443', '4+tc7D8bSNf+rE+MalISfA==', 'Condition C', '23423', '');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `regPatients`
+-- Table structure for table `regpatients`
 --
 
-CREATE TABLE `regPatients` (
+CREATE TABLE `regpatients` (
   `id` int(11) NOT NULL,
   `firstName` varchar(50) NOT NULL,
   `lastName` varchar(50) NOT NULL,
@@ -319,13 +351,22 @@ CREATE TABLE `regPatients` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `regPatients`
+-- Dumping data for table `regpatients`
 --
 
-INSERT INTO `regPatients` (`id`, `firstName`, `lastName`, `emailAddress`, `institution`, `password`, `illness`, `address`, `age`, `gender`, `phoneNumber`, `status`, `profilePhoto`) VALUES
+INSERT INTO `regpatients` (`id`, `firstName`, `lastName`, `emailAddress`, `institution`, `password`, `illness`, `address`, `age`, `gender`, `phoneNumber`, `status`, `profilePhoto`) VALUES
 (6, 'khj', 'jh', '646', 'mediheal hospital', 'BIw6HeLqdkTIjmBI8zeHqg==', 'Array', '456', 56, 'Female', 0, 0, ''),
 (11, 'amsnfc', ' SDNF', 'rtaer', 'mediheal hospital', 'xbytrGCr+Gk6Bd4IHkKU8A==', 'Condition A', '1231', 34, 'Male', 2313, 0, ''),
-(13, 'berclay', 'Sprouts', 'berclaym@gmail.com', 'mediheal hospital', '4XnLuIpnX7JL5i3plnywyg==', 'Condition B', 'Nairobi', 25, 'Male', 722222222, 0, '');
+(13, 'berclay', 'Sprouts', 'berclaym@gmail.com', 'mediheal hospital', '4XnLuIpnX7JL5i3plnywyg==', 'Condition B', 'Nairobi', 25, 'Male', 722222222, 0, ''),
+(14, 'Patient', 'User', 'patient@user.com', 'mediheal hospital', 'UUE5/sK9A04FfiwN4V9gGw==', '', '12333', 23, 'Male', 765666444, 0, ''),
+(15, 'First', 'Patient', 'first@patient.com', 'Hospital', 'Z/ZDFdapcU6fnzEozLWvQ093VRvhzlEt68LqEYR9clI=', '', '12312', 30, 'Male', 2147483647, 0, ''),
+(19, 'patientuser', 'userpatient', 'patientuser@userpatient.com', 'Hospital', 'w5+sMmyw0J8THP0Bs53mEA==', '', '34272', 20, 'Male', 782873262, 0, ''),
+(20, 'Lady', 'Lady', 'lady@lady1.com', 'Nafuu Hospital', NULL, 'Condition B', '12313', 23, 'Female', 989888887, 0, ''),
+(21, 'Lady', 'Lady', 'lady@lady2.com', 'Nafuu Hospital', NULL, 'Condition B', '12313', 23, 'Female', 989888087, 0, ''),
+(22, 'Lady', 'Lady', 'lady@lady3.com', 'Nafuu Hospital', NULL, 'Condition B', '12313', 23, 'Female', 989878087, 0, ''),
+(23, 'Lady', 'Lady', 'lady@lady4.com', 'Nafuu Hospital', NULL, 'Condition B', '12313', 23, 'Female', 987878087, 0, ''),
+(24, 'Person', 'Person', 'person@person2.com', 'Hospital', NULL, 'Condition B', '12313', 30, 'Male', 676767888, 0, ''),
+(25, 'Person', 'Person', 'person@person1.com', 'Hospital', NULL, 'Condition B', '12313', 30, 'Male', 676769888, 0, '');
 
 -- --------------------------------------------------------
 
@@ -375,6 +416,12 @@ ALTER TABLE `patientmedlog`
   ADD PRIMARY KEY (`entryID`);
 
 --
+-- Indexes for table `patientsexerciselog`
+--
+ALTER TABLE `patientsexerciselog`
+  ADD PRIMARY KEY (`recordID`);
+
+--
 -- Indexes for table `patientsleeplog`
 --
 ALTER TABLE `patientsleeplog`
@@ -387,21 +434,21 @@ ALTER TABLE `patientsmeallog`
   ADD PRIMARY KEY (`entryID`);
 
 --
--- Indexes for table `regDoctors`
+-- Indexes for table `regdoctors`
 --
-ALTER TABLE `regDoctors`
+ALTER TABLE `regdoctors`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `regInstitutions`
+-- Indexes for table `reginstitutions`
 --
-ALTER TABLE `regInstitutions`
+ALTER TABLE `reginstitutions`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `regPatients`
+-- Indexes for table `regpatients`
 --
-ALTER TABLE `regPatients`
+ALTER TABLE `regpatients`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `phoneNumber` (`phoneNumber`),
   ADD UNIQUE KEY `emailAddress` (`emailAddress`);
@@ -435,34 +482,40 @@ ALTER TABLE `patientmedlog`
   MODIFY `entryID` int(20) NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT for table `patientsexerciselog`
+--
+ALTER TABLE `patientsexerciselog`
+  MODIFY `recordID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+
+--
 -- AUTO_INCREMENT for table `patientsleeplog`
 --
 ALTER TABLE `patientsleeplog`
-  MODIFY `entryID` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `entryID` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT for table `patientsmeallog`
 --
 ALTER TABLE `patientsmeallog`
-  MODIFY `entryID` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `entryID` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
--- AUTO_INCREMENT for table `regDoctors`
+-- AUTO_INCREMENT for table `regdoctors`
 --
-ALTER TABLE `regDoctors`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+ALTER TABLE `regdoctors`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
--- AUTO_INCREMENT for table `regInstitutions`
+-- AUTO_INCREMENT for table `reginstitutions`
 --
-ALTER TABLE `regInstitutions`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+ALTER TABLE `reginstitutions`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
--- AUTO_INCREMENT for table `regPatients`
+-- AUTO_INCREMENT for table `regpatients`
 --
-ALTER TABLE `regPatients`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+ALTER TABLE `regpatients`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- AUTO_INCREMENT for table `reports`

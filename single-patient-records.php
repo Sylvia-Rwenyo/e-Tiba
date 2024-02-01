@@ -101,8 +101,8 @@
                 case 2:
                     echo "<p  style='color:  #59BF7E;>high</p>";
                     break;
-                default:
-                    echo "Determining risk level";
+                case 3:
+                    echo "Insufficient Data for Prediction";
             }
         } else {
             echo "Risk level undetermined.";
@@ -268,16 +268,16 @@
 
             switch ($status) {
                 case 0:
-                  echo "<span style='width: 100%; padding:0.25em; border-radius: 5px; background-color: rgb(255, 255, 10);'>low</span>";
-                  break;
-              case 1:
-                  echo "<span  style='width: 100%; padding:0.25em; border-radius: 5px; background-color: rgb(136, 33, 0);>moderate</span>";
-                  break;
-              case 2:
-                      echo "<span  style='width: 100%; padding:0.25em; border-radius: 5px; background-color:  #59BF7E;>high</span>";
-                      break;
-                default:
-                  echo "Determining risk level";
+                    echo "<p style='color: rgb(200, 200, 10);'>low</p>";
+                    break;
+                case 1:
+                    echo "<p  style='color: rgb(136, 33, 0);>moderate</p>";
+                    break;
+                case 2:
+                    echo "<p  style='color:  #59BF7E;>high</p>";
+                    break;
+                case 3:
+                    echo "Insufficient Data for Prediction";
               }
         } else {
             echo "Risk level undetermined.";

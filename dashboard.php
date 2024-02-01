@@ -33,7 +33,11 @@
                     // Show dashboard menu
                     include_once 'dash-menu.php';
                     $userID = $_SESSION['id'];
-                    ?>
+                    // Get the current date
+                    $today = new DateTime(); // Create a new DateTime object for today's date
+                    $firstDayOfWeek = clone $today;
+                    $firstDayOfWeek->modify('monday this week');
+                ?>
                     <section class="main-section" style="height: 90%">
                         <?php
                         if (isset($_GET['dr'])) {
@@ -45,7 +49,6 @@
 
             <div class="progress-charts">
                 <?php
-                $today = new DateTime(); // Create a new DateTime object for today's date
                 if (isset($_GET['w'])) {
                     $viewWeek = intval($_GET['w']);
                     $week = 'weeks';
@@ -98,48 +101,10 @@
                     $mealNumbers = 0;
                     $exerciseTime = 0;
 
-                    // Fetch and calculate data for each day here
-
-                    // Sleep data
-                    $sql2 = "SELECT * FROM patientsleeplog WHERE userID = '$userID' && DATE(recordDate)='$currentDayString'";
-                    $result2 = mysqli_query($conn, $sql2);
-                    if (mysqli_num_rows($result2) > 0) {
-                        while ($row = mysqli_fetch_array($result2)) {
-                            $sleepTime = $row['sleepTime'];
-                            $totalSleep += $sleepTime;
-                        }
-
-                        $targetSleep = 12;
-                        $sleepPercentage = 100 * $sleepTime / $targetSleep;
-                    }
-
-                    // Meals data
-                    $stmt = "SELECT * FROM patientsmeallog WHERE userID='$userID' AND recordDate='$currentDayString' ";
-                    $sql3 = mysqli_query($conn, $stmt);
-
-                    if (mysqli_num_rows($sql3) > 0) {
-                        while ($row = mysqli_fetch_array($sql3)) {
-                            $mealNumbers += 1;
-                            $totalMeals += $mealNumbers;
-                        }
-
-                        $targetMeals = 3;
-                        $mealsPercentage = 100 * $mealNumbers / $targetMeals;
-                    }
-
-                    // Exercise data
-                    $stmt = "SELECT * FROM patientsexerciselog WHERE userID='$userID' AND DATE(recordDate)='$currentDayString' ";
-                    $sql3 = mysqli_query($conn, $stmt);
-
-                    if (mysqli_num_rows($sql3) > 0) {
-                        while ($row = mysqli_fetch_array($sql3)) {
-                            $exerciseTime = $row['exerciseDuration'];
-                            $totalExercise += $exerciseTime;
-                        }
-
-                        $targetExercise = 100;
-                        $exercisePercentage = 100 * $exerciseTime / $targetExercise;
-                    }
+                    $avgSleep = 0;
+                    $avgMeals = 0;
+                    $avgExercise = 0;
+                    
 
                     // Store data for the current day in arrays
                     $dayData[] = $dateString;
@@ -153,41 +118,107 @@
                 $sleepDataJSON = json_encode($sleepData);
                 $mealsDataJSON = json_encode($mealsData);
                 $exerciseDataJSON = json_encode($exerciseData);
-            ?>
+                
+
+            // Calculate the date 7 days ago
+            $firstDayOfWeekFormatted = $firstDayOfWeek -> format('Y-m-d');
+            $sevenDaysAgo = clone $firstDayOfWeek;
+            $sevenDaysAgo->modify('-7 days');
+            $sevenDaysAgoFormatted = $sevenDaysAgo->format('Y-m-d');
+
+            // SQL query to retrieve sleep data from the last 7 days
+            $sql = "SELECT * FROM patientsleeplog WHERE userID = '$userID' AND DATE(recordDate) BETWEEN '$sevenDaysAgoFormatted' AND '$firstDayOfWeekFormatted'";
+            $result = mysqli_query($conn, $sql);
+
+                // Initialize total sleep time
+                $totalSleep = 0;
+                $daysInLog = 0;
+
+                if (mysqli_num_rows($result) > 0) {
+                    while ($row = mysqli_fetch_array($result)) {
+                        $sleepTime = $row['sleepTime'];
+                        $totalSleep += $sleepTime;
+                        $daysInLog += 1;
+                    }
+
+                    $avgSleep = $totalSleep / $daysInLog; // Calculate average sleep time
+                    $sleepPercentage = $avgSleep/8 * 10;
+                }
+
+                
+                    // Meals data
+                    $stmt = "SELECT DISTINCT DATE(recordDate) as uniqueDate FROM patientsmeallog WHERE userID='$userID' AND DATE(recordDate) BETWEEN '$sevenDaysAgoFormatted' AND '$firstDayOfWeekFormatted' ";
+                    $sql3 = mysqli_query($conn, $stmt);
+
+                    // Initialize counters
+                    $totalDaysLogged = mysqli_num_rows($sql3);
+                    $totalMeals = 0;
+
+
+                    while ($row = mysqli_fetch_array($sql3)) {
+                        $date = $row['uniqueDate'];
+
+                        // Count meals for each day
+                        $stmtMealsPerDay = "SELECT COUNT(*) as mealsCount FROM patientsmeallog WHERE userID='$userID' AND DATE(recordDate) = '$date'";
+                        $resultMealsPerDay = mysqli_query($conn, $stmtMealsPerDay);
+                        $rowMealsPerDay = mysqli_fetch_assoc($resultMealsPerDay);
+
+                        $mealsCount = $rowMealsPerDay['mealsCount'];
+
+                        $totalMeals += $mealsCount;
+                    }
+                        $targetMeals = 3;
+                        $avgMeals = 0; // Default value if $totalDaysLogged is zero
+
+                        if ($totalDaysLogged > 0) {
+                            $avgMeals = ($totalMeals / $targetMeals) / $totalDaysLogged;
+                        }
+                        
+                        $mealsPercentage = 100 * $avgMeals;
+                        
+                    // Exercise data
+                    $stmt = "SELECT * FROM patientsexerciselog WHERE userID='$userID' AND DATE(recordDate) BETWEEN '$sevenDaysAgoFormatted' AND '$firstDayOfWeekFormatted' ";
+                    $sql4 = mysqli_query($conn, $stmt);
+
+                    if (mysqli_num_rows($sql4) > 0) {
+                        while ($row = mysqli_fetch_array($sql4)) {
+                            $exerciseTime = $row['exerciseDuration'];
+                            $totalExercise += $exerciseTime;
+                        }
+
+                        $targetExercise = 90;
+                        $avgExercise = ($exerciseTime / $targetExercise)/mysqli_num_rows($sql4);
+                        $exercisePercentage = (100 * $avgExercise);
+                    }
+
+                ?>
                 <!-- show which week it is -->
                 <span class="week-indicator" style="margin-left: 0;">
                     <i class="fa fa-arrow-left" onclick="showLastWeek()"></i>
-                    <?php echo substr($firstDayOfWeekString, 5, 5) . ' - ' . substr($lastDayOfWeekString, 5, 5); ?>
+                    <?php
+                        echo date('j M', strtotime($firstDayOfWeekString)) . ' - ' . date('j M', strtotime($lastDayOfWeekString));
+                    ?>
                     <i class="fa fa-arrow-right" onclick="showNextWeek()"></i>
                 </span>
-                <!-- progress charts -->
-                <div class="single-progress-chart">
-                    <canvas class="day-graphs" id="dayCharts" style="height: 370px" height="200"></canvas>
-                </div>
-                <!-- prompt user to log data -->
-                <div class="log-prompts" id="log-prompts">
-                    <!-- prompt to log sleep data -->
-                    <div class="single-log-prompt sleepLog" id="rec-sleepPrompt">
-                        <span class="target-display">Daily sleep log<span style="width: <?php echo 60 -  $sleepPercentage; ?>%;"></span></span>
-                        <span class="prompt"><i class="fa-solid fa-circle-plus"></i></span>
-                    </div>
-                    <!-- prompt to log meals data -->
-                    <div class="single-log-prompt mealLog" id="rec-mealsPrompt">
-                        <span class="target-display">Daily meal log<span></span></span> 
-                        <span class="prompt"><i class="fa-solid fa-circle-plus"></i></span>
-                    </div>
-                    <!-- prompt to log exercise data -->
-                    <div class="single-log-prompt exerciseLog" id="rec-exercisePrompt">
-                        <span class="target-display">Daily exercise log<span></span></span>
-                        <span class="prompt"><i class="fa-solid fa-circle-plus"></i></span>
-                    </div>
-                </div>
-                <!-- prompts end -->
+                
 
                 <!-- data input areas -->
-                <div class="input" style="width:80%;">
-                <!-- sleep data input area -->
-                    <div class="input-div input-sleep" id="input-sleep" >
+                <div class="input">
+                    <!-- sleep data input area -->
+                    <div class="input-div input-sleep">
+                        <div class="data-bars">
+                            <span>Average daily sleep</span>
+                            <span class="single-data-bar"><span style="width:<?php echo round($sleepPercentage, 0)?>%;background-color: rgba(75, 192, 192, 0.6);">
+                                <span class="data-txt"  ><?php echo round($avgSleep, 1);?> hours</span>
+                            </span></span>
+                        </div>
+                    <div class="log-prompts" id="log-prompts1"> 
+                        <!-- prompt to log sleep data -->
+                        <div class="single-log-prompt sleepLog" id="rec-sleepPrompt">
+                            <span class="target-display">sleep log</span>
+                            <span class="prompt"><i class="fa-solid fa-circle-plus"></i></span>
+                        </div>
+                    </div>
                         <form id="sleep-form" action="controls/processing.php" method="POST">
                             <div>
                                 <label>Start time</label>
@@ -205,8 +236,21 @@
                     <!-- end sleep data input area -->
 
                     <!-- meals data input area -->
-                    <div class="input-div input-meals" id="input-meals">
-                        <form id="meal-form" action="controls/processing.php" method="POST" >
+                    <div class="input-div input-meals">
+                    <div class="data-bars">
+                            <span>Average daily meals</span>
+                            <span class="single-data-bar"><span style="width:<?php echo $mealsPercentage ?>%; background-color: rgba(255, 99, 132, 0.6);">
+                            <span class="data-txt"><?php echo $avgMeals*3 ;?> meal<?php if( $avgMeals*3 > 1){ echo 's';}?></span>
+                            </span></span>
+                        </div>
+                        <div class="log-prompts" id="log-prompts2">
+                        <!-- prompt to log meals data -->
+                            <div class="single-log-prompt mealLog" id="rec-mealsPrompt">
+                                <span class="target-display">meal log<span></span></span> 
+                                <span class="prompt"><i class="fa-solid fa-circle-plus"></i></span>
+                            </div>
+                        </div>
+                        <form id="meal-form" action="controls/processing.php" method="POST">
                             <div>
                                 <label>Meal name:</label>
                                 <input type="text" name="meal-name" />
@@ -223,8 +267,21 @@
                     <!-- end meals data input area -->
 
                     <!-- exercise data input area -->
-                        <div class="input-div input-exerciseRoutine" id="input-exerciseRoutine">    
-                            <form id="exercise-form" action="controls/processing.php" method="POST" >
+                        <div class="input-div input-exerciseRoutine" > 
+                        <div class="data-bars">
+                            <span>Average daily exercise</span>
+                            <span class="single-data-bar"><span style="width:<?php echo $exercisePercentage ?>%;  background-color: rgba(54, 162, 235, 0.6);">
+                                <span class="data-txt" ><?php echo $avgExercise*90;?> minutes</span>
+                            </span></span>
+                        </div>
+                            <div class="log-prompts" id="log-prompts">
+                            <!-- prompt to log exercise data -->
+                            <div class="single-log-prompt exerciseLog" id="rec-exercisePrompt">
+                                <span class="target-display">exercise log<span></span></span>
+                                <span class="prompt"><i class="fa-solid fa-circle-plus"></i></span>
+                            </div>
+                        </div>   
+                                <form id="exercise-form" action="controls/processing.php" method="POST" >
                                 <div>
                                     <label>Exercise type:</label>
                                     <select multiple name="exerciseType[]" style="color: black;">
@@ -251,7 +308,7 @@
                         </div>
                         <!-- end exercise data input area -->
 
-                        <!-- medication data input area -->
+                        <!-- medication data input area
                         <div class="input-div input-medication" id="input-medication">
                             <form id="meds-form" action="controls/processing.php" method="POST" >
                                 <div>
@@ -267,7 +324,7 @@
                                 </button>
                             </form>
                         </div>
-                        <!-- end medication input area -->
+                        end medication input area -->
                     </div>
                 </section>
             </div>
@@ -275,13 +332,36 @@
     <script src="js/code.jquery.com_jquery-latest.js"></script>
     <!-- Include Chart.js library -->
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.bundle.min.js"></script>
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.bundle.min.js"></script> -->
 
     <!-- Include Chart.js Datalabels plugin -->
-    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0"></script>
+    <!-- <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0"></script> -->
 
 
     <script type="text/javascript">
+         let sleepPrompt = document.getElementById("rec-sleepPrompt");
+        let mealPrompt = document.getElementById("rec-mealsPrompt");
+        let exercisePrompt = document.getElementById("rec-exercisePrompt");
+
+        let inputSleep = document.getElementById('sleep-form');
+        let inputMeals = document.getElementById('meal-form');
+        let inputExercise = document.getElementById('exercise-form');
+
+        let logPrompts = document.getElementById('log-prompts');
+
+
+        sleepPrompt.onclick = () =>{
+            inputSleep.style.display ='flex';
+        }
+        mealPrompt.onclick = () =>{
+            inputMeals.style.display ='flex';
+            }
+
+        exercisePrompt.onclick = () =>{
+            inputExercise.style.display ='flex';
+
+            }
+
         // Get references to the canvas element and its context
         var ctx = document.getElementById('dayCharts').getContext('2d');
         // Create a function to format the date labels
@@ -378,48 +458,7 @@
         function showNextWeek(){
             window.location.href = 'dashboard.php?charts=1&w=' <?php if(isset($_GET['w'])){ echo '+'.  (int)$_GET['w'] + 1; }else { echo '+'. +1;} ?> ;
         }
-        let sleepPrompt = document.getElementById("rec-sleepPrompt");
-        let mealPrompt = document.getElementById("rec-mealsPrompt");
-        let exercisePrompt = document.getElementById("rec-exercisePrompt");
-
-        let inputSleep = document.getElementById('input-sleep');
-        let inputMeals = document.getElementById('input-meals');
-        let inputExercise = document.getElementById('input-exerciseRoutine');
-
-        let logPrompts = document.getElementById('log-prompts');
-
-
-        sleepPrompt.onclick = () =>{
-            inputSleep.style.display ='flex';
-
-            sleepPrompt.style.display ='grid';
-            sleepPrompt.style.height ='100%';
-            mealPrompt.style.display ='none';
-            exercisePrompt.style.display ='none';
-            logPrompts.style.height = '4.5%';
-            logPrompts.style.display = 'block';
-        }
-        mealPrompt.onclick = () =>{
-            inputMeals.style.display ='flex';
-
-            sleepPrompt.style.display ='none';
-            mealPrompt.style.display ='grid';
-            mealPrompt.style.height ='100%';
-            exercisePrompt.style.display ='none';
-            logPrompts.style.height = '4.5%';
-            logPrompts.style.display = 'block';
-            }
-
-        exercisePrompt.onclick = () =>{
-            inputExercise.style.display ='flex';
-
-            sleepPrompt.style.display ='none';
-            mealPrompt.style.display ='none';
-            exercisePrompt.style.display ='grid';
-            exercisePrompt.style.height ='100%';
-            logPrompts.style.height = '4.5%';
-            logPrompts.style.display = 'block';
-            }
+       
         //   function recordMedIntake(){
         //     document.getElementById('input-medication').style.display ='flex';
         //     document.getElementById('prompts').style.display ='none';
