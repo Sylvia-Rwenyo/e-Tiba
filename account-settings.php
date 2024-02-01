@@ -59,7 +59,7 @@
         <form method="POST" action="controls/processing.php" class="profile-mini-form">
             <label>Email: <?php echo $result["emailAddress"];?></label>
             <div class="profile-form-input">
-                <input type="text" name="emailAddress" id="emailAddress"  placeholder="Enter Company Email"><br/>
+                <input type="text" name="emailAddress" id="emailAddress"  placeholder="Enter Email"><br/>
                 <input name="email-address" type = "submit" class="pos-btn" value="Update"/>
             </div>
             
