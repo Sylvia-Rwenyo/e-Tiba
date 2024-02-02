@@ -113,9 +113,7 @@ if(isset($_POST['reg-partner']))
 }
 
 if(isset($_POST['add-patient'])){
-    //create session
     session_start();
-
     $firstName = htmlspecialchars($_POST['firstName']);
      $lastName = htmlspecialchars($_POST['lastName']);
      $age = $_POST['age'];
@@ -169,10 +167,10 @@ if(isset($_POST['register-doc'])){
      for($i=0; $i < count($_POST['conditions']); $i++){
         $conditionsArr[] = $_POST['conditions'][$i];
          }
-    $conditions = implode('*', $conditionsArr);	 $password = $_POST['password'];
+    $conditions = implode('*', $conditionsArr);	 
+    $password = $_POST['password'];
     $address = htmlspecialchars($_POST['address']);
     $years = filter_var($_POST['years'], FILTER_SANITIZE_NUMBER_INT);//years experience
-    $password = $_POST['password'];
 
     
     //encrypt the password to insert

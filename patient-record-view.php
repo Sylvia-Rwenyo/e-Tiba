@@ -120,8 +120,8 @@
                     case 2:
                         echo "<span  style='width: 100%; padding:0.25em; border-radius: 5px; background-color:  #59BF7E;'>high</span>";
                         break;
-                    default:
-                        echo "Determining risk level";
+                    case 3:
+                        echo "Insufficient Data for Prediction";
                 }
             } else {
                 echo "Risk level undetermined.";

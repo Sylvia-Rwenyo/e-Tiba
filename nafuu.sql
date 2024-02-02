@@ -5,7 +5,7 @@
 -- Host: 127.0.0.1
 -- Generation Time: Jan 03, 2024 at 04:45 PM
 -- Server version: 10.4.28-MariaDB
--- PHP Version: 8.2.4
+-- PHP Version: 8.0.28
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -201,8 +201,14 @@ CREATE TABLE `patientsexerciselog` (
 --
 
 INSERT INTO `patientsexerciselog` (`recordID`, `userID`, `recordDate`, `exerciseType`, `exerciseDuration`, `exerciseTime`) VALUES
-(0, 28, '2023-08-29 09:31:35', 'Aerobics', 10, '10:30'),
-(0, 28, '2023-08-29 09:31:44', 'Aerobics', 10, '10:30');
+(1, 28, '2023-08-29 09:31:35', 'Aerobics', 10, '10:30'),
+(2, 28, '2023-08-29 09:31:44', 'Aerobics', 10, '10:30'),
+(3, 15, '2023-10-28 19:25:13', 'Dancing', 20, '10:25'),
+(4, 15, '2023-10-28 19:29:47', 'Weight Training', 20, '18:29'),
+(5, 15, '2023-10-28 20:01:30', 'Body Weight Exercises', 30, '15:01'),
+(6, 19, '2023-11-30 14:34:17', 'Weight Training', 30, '15:34'),
+(8, 19, '2023-11-29 14:34:17', 'Weight Training', 30, '15:34'),
+(9, 19, '2023-11-30 14:34:17', 'Weight Training', 30, '15:28');
 
 -- --------------------------------------------------------
 
@@ -229,7 +235,15 @@ INSERT INTO `patientsleeplog` (`userID`, `sleepTime`, `entryID`, `recordDate`) V
 (29, 11, 8, '2023-08-28 05:32:43'),
 (29, 7, 9, '2023-08-28 05:34:34'),
 (29, 7, 10, '2023-08-28 05:34:54'),
-(28, 15, 11, '2023-08-29 09:05:49');
+(28, 15, 11, '2023-08-29 09:05:49'),
+(14, -14, 12, '2023-10-27 09:27:33'),
+(15, 3, 13, '2023-10-28 19:24:40'),
+(15, 9, 14, '2023-10-28 19:28:15'),
+(19, 8, 15, '2023-11-30 14:33:31'),
+(19, 8, 16, '2023-11-29 14:33:31'),
+(19, 8, 17, '2023-11-28 14:33:31'),
+(15, -19, 18, '2023-12-19 18:03:40'),
+(15, 13, 19, '2023-12-19 18:04:35');
 
 -- --------------------------------------------------------
 
@@ -260,7 +274,19 @@ INSERT INTO `patientsmeallog` (`userID`, `mealName`, `mealTime`, `entryID`, `rec
 (28, '', '00:00:00', 8, '0000-00-00'),
 (28, '', '00:00:00', 9, '0000-00-00'),
 (28, 'Mutura', '13:41:00', 10, '2023-08-28'),
-(28, 'Chakula tu', '20:02:00', 11, '2023-08-29');
+(28, 'Chakula tu', '20:02:00', 11, '2023-08-29'),
+(15, 'uji', '19:24:00', 12, '2023-10-28'),
+(15, 'Chai', '10:28:00', 13, '2023-10-28'),
+(15, 'Rice', '12:29:00', 14, '2023-10-28'),
+(19, 'Githeri', '13:33:00', 15, '2023-11-30'),
+(19, 'Githeri', '13:33:00', 16, '2023-11-29'),
+(19, 'Githeri', '13:33:00', 17, '2023-11-28'),
+(19, 'Githeri', '08:33:00', 18, '2023-11-29'),
+(19, 'Githeri', '08:33:00', 19, '2023-11-28'),
+(19, 'Githeri', '11:33:00', 20, '2023-11-29'),
+(19, 'Githeri', '11:33:00', 21, '2023-11-28'),
+(19, 'Githeri', '13:33:00', 22, '2023-11-27'),
+(19, 'Githeri', '06:33:00', 23, '2023-11-27');
 
 -- --------------------------------------------------------
 
@@ -318,11 +344,13 @@ CREATE TABLE `reginstitutions` (
 -- Dumping data for table `reginstitutions`
 --
 
-INSERT INTO `reginstitutions` (`id`, `institutionName`, `location`, `emailAddress`, `phoneNumber`, `password`, `illnesses`, `postalAddress`, `profilePhoto`, `date_registered`, `date_updated`) VALUES
-(1, 'New Hospital', '234', '234234', '3242', 'TB8MvNoRYKrdyScdWwubgw==', 'Condition B', '2342', '', '2024-01-03 07:37:23', '2024-01-03 07:37:23'),
-(2, 'mediheal hospital', 'Eldoret', 'mediheal.hos@gmail.com', '0722222222', 'm97SyqgW1aPhLBeUlcmNhQ==', 'Condition B', '22234-3345', '', '2024-01-03 07:37:23', '2024-01-03 07:37:23'),
-(3, 'Hospitali', 'Nairobi', 'hospitali@hospitali.com', '254111111111', 'xHf2LRAW6NbUqZs/3fLc0A==', 'Condition A*Condition C', '13051', '', '2024-01-03 07:37:23', '2024-01-03 07:37:23'),
-(4, 'lidari health', 'Nairobi', 'lidar.hos@gmail.com', '0711222333', 'KvWZbyA/TIOKQVqr9e7c0g==', 'Condition B', '22234-3345', '', '2024-01-03 07:37:23', '2024-01-03 07:37:23');
+INSERT INTO `reginstitutions` (`id`, `institutionName`, `location`, `emailAddress`, `phoneNumber`, `password`, `illnesses`, `postalAddress`, `profilePhoto`) VALUES
+(1, 'New Hospital', '234', '234234', '3242', 'TB8MvNoRYKrdyScdWwubgw==', 'Condition B', '2342', ''),
+(2, 'mediheal hospital', 'Eldoret', 'mediheal.hos@gmail.com', '0722222222', 'm97SyqgW1aPhLBeUlcmNhQ==', 'Condition B', '22234-3345', ''),
+(3, 'Hospitali', 'Nairobi', 'hospitali@hospitali.com', '254111111111', 'xHf2LRAW6NbUqZs/3fLc0A==', 'Condition A*Condition C', '13051', ''),
+(4, 'Hospital', 'Hospital', 'hospitali@hospital.com', '0763543364', 'YohTu/9vNH4b92tMJ+AIog==', 'Condition A*Condition B*Condition C', '31231', ''),
+(5, 'Nafuu Hospital', 'Nairobi', 'nafuu@hospital.com', '0745454444', 'stJkPksTBLkUIXNgFJRp/ZN/yNCkZHKcsG9d/06lwoY=', 'Condition A*Condition B*Condition C', '12233', ''),
+(6, 'institution', 'kenya', 'institution@institution.com', '076565646443', '4+tc7D8bSNf+rE+MalISfA==', 'Condition C', '23423', '');
 
 -- --------------------------------------------------------
 
@@ -352,13 +380,19 @@ CREATE TABLE `regpatients` (
 -- Dumping data for table `regpatients`
 --
 
-INSERT INTO `regpatients` (`id`, `firstName`, `lastName`, `emailAddress`, `institution`, `password`, `illness`, `address`, `age`, `gender`, `phoneNumber`, `status`, `profilePhoto`, `date_registered`, `date_updated`) VALUES
-(6, 'khj', 'jh', '646', 'mediheal hospital', 'BIw6HeLqdkTIjmBI8zeHqg==', 'Array', '456', 56, 'Female', 0, 0, '', '2023-12-29 21:32:20', '2023-12-29 21:32:20'),
-(11, 'amsnfc', ' SDNF', 'rtaer', 'mediheal hospital', 'xbytrGCr+Gk6Bd4IHkKU8A==', 'Condition A', '1231', 34, 'Male', 2313, 0, '', '2023-12-29 21:32:20', '2023-12-29 21:32:20'),
-(13, 'berclay', 'Sprouts', 'berclaym@gmail.com', 'mediheal hospital', '4XnLuIpnX7JL5i3plnywyg==', 'Condition B', 'Nairobi', 25, 'Male', 722222222, 0, '', '2023-12-29 21:32:20', '2023-12-29 21:32:20'),
-(14, 'Cabbage', 'Sprouts', 'cabbages@gmail.com', 'lidari health', NULL, 'Condition A', 'Utawala', 24, 'Male', 723432222, 0, '', '2023-12-29 21:32:20', '2023-12-29 21:32:20'),
-(15, 'Cabbage', 'Sproutzz', 'cabbages345@gmail.com', 'lidari health', 'TC0KQHALM1h0VThpi3Y5kw==', 'Condition A', 'Utawala', 24, 'Male', 723432223, 0, '', '2023-12-29 21:32:20', '2023-12-29 21:32:20'),
-(16, 'Zazie', 'Beeetz', 'myemail1@gmail.com', 'mediheal hospital', 'CNqVGoppLVIH4uwnS7tCtg==', '', 'Nairobi', 34, 'Female', 2147483647, 0, '', '2024-01-03 11:44:17', '2024-01-03 18:42:17');
+INSERT INTO `regpatients` (`id`, `firstName`, `lastName`, `emailAddress`, `institution`, `password`, `illness`, `address`, `age`, `gender`, `phoneNumber`, `status`, `profilePhoto`) VALUES
+(6, 'khj', 'jh', '646', 'mediheal hospital', 'BIw6HeLqdkTIjmBI8zeHqg==', 'Array', '456', 56, 'Female', 0, 0, ''),
+(11, 'amsnfc', ' SDNF', 'rtaer', 'mediheal hospital', 'xbytrGCr+Gk6Bd4IHkKU8A==', 'Condition A', '1231', 34, 'Male', 2313, 0, ''),
+(13, 'berclay', 'Sprouts', 'berclaym@gmail.com', 'mediheal hospital', '4XnLuIpnX7JL5i3plnywyg==', 'Condition B', 'Nairobi', 25, 'Male', 722222222, 0, ''),
+(14, 'Patient', 'User', 'patient@user.com', 'mediheal hospital', 'UUE5/sK9A04FfiwN4V9gGw==', '', '12333', 23, 'Male', 765666444, 0, ''),
+(15, 'First', 'Patient', 'first@patient.com', 'Hospital', 'Z/ZDFdapcU6fnzEozLWvQ093VRvhzlEt68LqEYR9clI=', '', '12312', 30, 'Male', 2147483647, 0, ''),
+(19, 'patientuser', 'userpatient', 'patientuser@userpatient.com', 'Hospital', 'w5+sMmyw0J8THP0Bs53mEA==', '', '34272', 20, 'Male', 782873262, 0, ''),
+(20, 'Lady', 'Lady', 'lady@lady1.com', 'Nafuu Hospital', NULL, 'Condition B', '12313', 23, 'Female', 989888887, 0, ''),
+(21, 'Lady', 'Lady', 'lady@lady2.com', 'Nafuu Hospital', NULL, 'Condition B', '12313', 23, 'Female', 989888087, 0, ''),
+(22, 'Lady', 'Lady', 'lady@lady3.com', 'Nafuu Hospital', NULL, 'Condition B', '12313', 23, 'Female', 989878087, 0, ''),
+(23, 'Lady', 'Lady', 'lady@lady4.com', 'Nafuu Hospital', NULL, 'Condition B', '12313', 23, 'Female', 987878087, 0, ''),
+(24, 'Person', 'Person', 'person@person2.com', 'Hospital', NULL, 'Condition B', '12313', 30, 'Male', 676767888, 0, ''),
+(25, 'Person', 'Person', 'person@person1.com', 'Hospital', NULL, 'Condition B', '12313', 30, 'Male', 676769888, 0, '');
 
 -- --------------------------------------------------------
 
@@ -412,6 +446,12 @@ ALTER TABLE `medicine`
 --
 ALTER TABLE `patientmedlog`
   ADD PRIMARY KEY (`entryID`);
+
+--
+-- Indexes for table `patientsexerciselog`
+--
+ALTER TABLE `patientsexerciselog`
+  ADD PRIMARY KEY (`recordID`);
 
 --
 -- Indexes for table `patientsleeplog`
@@ -480,34 +520,40 @@ ALTER TABLE `patientmedlog`
   MODIFY `entryID` int(20) NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT for table `patientsexerciselog`
+--
+ALTER TABLE `patientsexerciselog`
+  MODIFY `recordID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+
+--
 -- AUTO_INCREMENT for table `patientsleeplog`
 --
 ALTER TABLE `patientsleeplog`
-  MODIFY `entryID` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `entryID` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT for table `patientsmeallog`
 --
 ALTER TABLE `patientsmeallog`
-  MODIFY `entryID` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `entryID` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- AUTO_INCREMENT for table `regdoctors`
 --
 ALTER TABLE `regdoctors`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `reginstitutions`
 --
 ALTER TABLE `reginstitutions`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `regpatients`
 --
 ALTER TABLE `regpatients`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- AUTO_INCREMENT for table `reports`

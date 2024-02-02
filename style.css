@@ -734,9 +734,10 @@
 }
 /* dashboard */
 .progress-charts{
-    width: 80%;
-    margin-left: 10%;
-    height: 50%;
+    width: 90%;
+    margin-left: 2.5%;
+    margin-right: 2.5%;
+    height: fit-content;
 }
 .progress-charts .single-progress-chart{
     height: 90%;
@@ -763,30 +764,7 @@
     .single-graph.exercise span, .target-display.exerciseLog span{
         background-color: #0d3a5c;
     }
-.log-prompts{
-    margin-top: 5%;
-    width: 80%;
-    margin-left: 10%;
-    height: 30%;
-    display: grid;
-    grid-template-rows: 20% 20% 20%;
-    row-gap: 2em;
-    margin-top: 20%;
-}
-.single-log-prompt{
-    display: grid;
-    grid-template-columns: 70% 30%;
-    border-radius: 10px;
-}
-.single-log-prompt .target-display{
-    background-color: rgba(204, 204, 204, 0.5);
-}
-.single-log-prompt .target-display span{
-    padding: 0.5em;
-}
-.single-log-prompt .prompt{
-    padding-left: 10%;
-}
+
 .dash-intro{
     display: flex;
     flex-direction: row;
@@ -988,8 +966,7 @@
     padding: 1em;
  }
  .dash-body .input-div{
-    width: 50%;
-    margin-left: 10%;
+    width: 95%;
  }
 .deleteAccount, .logOut{
     padding: 1em;
@@ -1084,8 +1061,12 @@
     margin-left: 10%;
 }
 .dash-body .input{
-    margin-top: 5%;
     margin-left: 2.5%;
+    width: 95%;
+    display: grid;
+    grid-template-columns:33% 33% 33%;
+    column-gap: 5%;
+
 }
 .dash-body .input .input-div{
     padding: 1em;
@@ -1093,16 +1074,17 @@
     margin-top: 3.5%;
     display: flex;
     flex-direction: column;
-}
-#input-exerciseRoutine{
-    width: 90%;
+    width: 100%;
 }
 .dash-body .input .input-div form{
     padding: 1em;
     padding-left: 0;
-    width: 80%;
+    width: 100%;
+    padding-right: 0;
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
+    display: none;
+
 }
 
 .dash-body .input .input-div form div{
@@ -1110,22 +1092,52 @@
 }
 .dash-body .input .input-div form input, .dash-body .input .input-div form button{
     height: 2.5em;
-}
-.dash-body .input .input-div form button{
+} .input-div form button, .input-div form input, .input-div form select,.input-div form label {
     margin-top: 2.5%;
+    width: 100%;
+}
+.input-div form div{
+    margin-top: 5%;
 }
 .sleep-form button{
     margin-top: 1.5%;
 }
 
-.dash-body .input .input-div div{
-    width: 50%;
+.data-bars {
+    width: 100%;
     display: flex;
     flex-direction: column;
+    margin-bottom: 1em;
 }
-.dash-body .input .input-div {
-    display: none;
+
+.single-data-bar {
+    position: relative; /* Add relative positioning to create a containing block */
+    margin-top: 0.5em;
+    width: 100%;
+    border-radius: 4px;
+    height: 1.5em;
+    background-color: white;
+    opacity: 0.5;
+    box-shadow: 0 0 0 2px rgba(169, 169, 169, 0.5);
 }
+
+.single-data-bar span {
+    height: 100%;
+    display: block;
+}
+
+.data-txt {
+    position: absolute;
+    transform: translateX(10%);
+    width: fit-content;
+}
+
+
+/* .dash-body .input .input-div div{
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+} */
 .dash-body .prompts{
     display: flex;
     flex-direction: row;
@@ -1144,8 +1156,35 @@
     height: 45vh;
 }
 .dash-body .prompts .prompt i{
-    size: 3em;
+    size: 2em;
 }
+.log-prompts{
+    margin-top: 2.5%;
+    width: 100%;
+    margin-left: 2.5%;
+    height: 2em;
+    display: grid;
+}
+.single-log-prompt{
+    display: flex;
+    flex-direction: row;
+    border-radius: 10px;
+    width: 80%;
+    background-color: rgba(204, 204, 204, 0.5);
+
+}
+.single-log-prompt .target-display{
+}
+.single-log-prompt .target-display span{
+    padding: 0.5em;
+}
+.single-log-prompt .prompt{
+    padding-top: 4%;
+    padding-left: 10%;
+    padding-right: 10%;
+
+}
+
 @media screen and (max-width:600px) {
     .log-prompts{
         margin-top: 2.5%;
@@ -1957,7 +1996,7 @@
 #doctor-records-section section,#patient-records-section section, #dash-body section{
     display: flex;
     flex-direction: column;
-    margin-top: 2.5%;
+    margin-top: 1.25%;
 }
 #doctor-records-section table, #patient-records-section table{
     width: 80%;
