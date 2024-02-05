@@ -14,9 +14,9 @@
     </div>
 </section>
 
-<script src="../js/jquery-3.3.1.min.js"></script>
-<script src="../js/code.jquery.com_jquery-latest.js"></script>
-<script src="../js/jquery.timers-1.0.0.js"></script>
+<script src="js/jquery-3.3.1.min.js"></script>
+<script src="js/code.jquery.com_jquery-latest.js"></script>
+<script src="js/jquery.timers-1.0.0.js"></script>
 <script type="text/javascript">
     $(document).ready(function(){
         //autocomplete 1

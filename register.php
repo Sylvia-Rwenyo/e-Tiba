@@ -101,7 +101,7 @@
                 <option>Prefer not to say</option>
             </select>
             <input type="email" name="emailAddress" id="emailAddress" placeholder="Email Address e.g youremail@gmail.com" required/>
-            <input type="number" name="phoneNumber" id="phoneNumber" placeholder="Phone number e.g 07********" required/>
+            <input type="number" name="phoneNumber" id="phoneNumber" placeholder="Phone: 2547********" required/>
             <input type="text" name="address" id="address" placeholder="Address" required/>
             <select name="institution" id="institution" required>
                 <option selected disabled> Select your hospital</option>
@@ -139,6 +139,7 @@
                 <label class="pswd-warning"><i class="fa fa-check"></i>Includes a symbol</label>
                 <label class="pswd-warning"><i class="fa fa-check"></i>Does not include spaces</label>
             </div>
+            <p>Our <a href="privacy-policy.php"><i>Privacy Policy</i></a></p>
             <input type="submit" value="submit" name="register" class="pos-btn"/>
         </form>
     <?php

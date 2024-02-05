@@ -23,20 +23,20 @@
         $parentDir = dirname($_SERVER['REQUEST_URI']);
         $parentDirCurrent = preg_replace('/.*nafuu\//', '', $parentDir);
     
-        if ($parentDirCurrent === '/partners' && strpos($linkName, 'partners/') === 1) {
-            $linkName = str_replace('partners/', '', $linkName);
+        if ($parentDirCurrent === '/partners' && strpos($linkName, '') === 1) {
+            $linkName = str_replace('', '', $linkName);
             return $linkName;
-        }else if($parentDirCurrent === '/partners' && strpos($linkName, 'partners/') === 0) {
+        }else if($parentDirCurrent === '/partners' && strpos($linkName, '') === 0) {
             $linkName = '../'. $linkName;
             return $linkName;
-        }else if ($parentDirCurrent === '/doctors' && strpos($linkName, 'partners/') === 0) {
+        }else if ($parentDirCurrent === '/doctors' && strpos($linkName, '') === 0) {
             $linkName = '../' . $linkName;
             return $linkName;
-        }else if ($parentDirCurrent === '/partners' && strpos($linkName, 'doctors/') === 0) {
+        }else if ($parentDirCurrent === '/partners' && strpos($linkName, '') === 0) {
             $linkName = '../' . $linkName;
             return $linkName;
-        }else if ($parentDirCurrent === '/doctors' && strpos($linkName, 'doctors/') === 0) {
-            $linkName = str_replace('doctors/', '', $linkName);
+        }else if ($parentDirCurrent === '/doctors' && strpos($linkName, '') === 0) {
+            $linkName = str_replace('', '', $linkName);
             return $linkName;
         }else if($parentDirCurrent === '/doctors' || $parentDirCurrent === '/partners' && strpos($linkName, '/') === 1){
             $linkName = '../' . $linkName;
@@ -58,7 +58,7 @@
             $headerName = 'Appointments';
         }else if(strpos($currentPage, 'log') || strpos($currentPage, 'record')){
             $headerName = 'Records';
-        }else if($currentPage === 'settings.php'){
+        }else if($currentPage === 'user-account.php'){
             $headerName = 'Profile';
         }
         return $headerName;

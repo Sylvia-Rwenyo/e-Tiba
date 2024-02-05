@@ -46,7 +46,7 @@
             </a>
             </td>   
             <td>
-            <form id="form"  action="../controls/processing.php?id=<?php echo $row["dosageId"]; ?>" method="POST">
+            <form id="form"  action="controls/processing.php?id=<?php echo $row["dosageId"]; ?>" method="POST">
                 <button id = "dosage-delete" type="submit" name="dosage-delete" class="pos-btn"><i class="fa fa-trash-o"></i>Delete</button>
             </form>
             </td>                        

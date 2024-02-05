@@ -22,7 +22,7 @@
       <div class="banner">
         <div class="video-description" id="video-description" style="position:relative">
           <video width="100%" height="100%" style="border:1px 1px 1px" controls>
-              <source src="images/nafuu.mp4" type="video/mp4"/>
+              <source src="images/Nafuu.mp4" type="video/mp4"/>
               Your browser does not support video tag
           </video><br/>
         </div>
@@ -90,6 +90,7 @@
         </div>
       </div>
     </div>
+    <p>Read our <a href="privacy-policy.php"><i>Privacy Policy</i></a></p>
   </div>
 </body>
 </html>

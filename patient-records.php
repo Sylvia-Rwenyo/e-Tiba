@@ -203,7 +203,7 @@
 </html>
 <script>
     function toSinglePatientRecords(patientID){
-        window.location.href = 'doctors/single-patient-records.php?p='+patientID;
+        window.location.href = 'single-patient-records.php?p='+patientID;
     }
     function toPatientCalendar(patientID){
         window.location.href = 'calendar.php?p='+patientID;

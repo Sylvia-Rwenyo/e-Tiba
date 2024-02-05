@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../style.css"></link>
+    <link rel="stylesheet" href="style.css"></link>
     <link rel="icon" href="favicon.ico" />
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">    <title>Join nafuu</title>
@@ -54,10 +54,10 @@
                 }
             }
     ?>
-    <form method="POST" action="../controls/processing.php" id="reg-form">
+    <form method="POST" action="controls/processing.php" id="reg-form">
         <input type="text" name="institutionName" id="institutionName" placeholder="Your institution's name" required/>
         <input type="text" name="location" id="location" placeholder="location" required/>
-        <input type="number" name="phoneNumber" id="phoneNumber" placeholder="Phone number" required/>
+        <input type="number" name="phoneNumber" id="phoneNumber" placeholder="Phone: 2547********" required/>
         <input type="text" name="emailAddress" id="emailAddress" placeholder="Email address" required/>
         <input type="text" name="postalAddress" id="postalAddress" placeholder="Postal Address" required/>
         <select name="conditions[]" id="conditions" required multiple>
@@ -79,6 +79,7 @@
             <label class="pswd-warning"><i class="fa fa-check"></i>Includes a symbol</label>
             <label class="pswd-warning"><i class="fa fa-check"></i>Does not include spaces</label>
         </div>
+        <p>Our <a href="privacy-policy.php"><i>Privacy Policy</i></a></p>
         <input type="submit" value="submit" name="reg-partner" class="pos-btn"/>
     </form>
 </body>

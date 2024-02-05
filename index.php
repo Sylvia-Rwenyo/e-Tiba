@@ -18,7 +18,7 @@
             <div class="c-phrase">
                 <h3>Mobile Health care made seamless,<br><b>for you</b></h3>
             </div>
-            <p>Let us help you track your health and treatment progress</p>
+            <p>Book your video or message consultation appointment, get your prescription and let us help you track your health and treatment progress</p>
         </div>
         <div class="CTA">
             <button class="pos-btn" id="join-us" onclick="popupFunc()" style="position:relative;display:block;cursor:pointer;">Join Us
@@ -27,16 +27,48 @@
                     <a href="register.php">
                         <p>A Patient</p>
                     </a>
-                    <a href="partners/reg-partner.php"> 
+                    <a href="reg-partner.php"> 
                         <p>A Partner Hospital</p>
                     </a>
-                    <a href="doctors/independent-reg-doc.php">
+                    <a href="independent-reg-doc.php">
                         <p>An Independent Medical Practitioner</p>
                     </a>
                 </span>
             </button>
             <a href="about-us.php"><button class="neg-btn">Learn More</button></a>
         </div>
+    </div>
+    <div class="intro-info">
+        <div style="margin:4%;">
+            <div class="transcript-mini-div">
+                <h4>Book an Appointment</h4> 
+                <img src="images/Appointments.PNG" alt="appointments">
+            </div>
+            <div class="transcript-mini-div">
+                <h4>Telemedicine</h4> 
+                <h5>One on one sessions with a doctor through messaging or video call on the app</h5>
+                <img src="images/Chat.PNG" alt="messages page in chat">
+            </div>
+            <div class="transcript-mini-div">
+                <h4>Electronic Health Records</h4> 
+                <img src="images/Records.PNG" alt="patient records">
+            </div>
+            <div class="transcript-mini-div">
+                <h4>Track Your Progress</h4>
+                <img src="images/Dashboard.PNG" alt="progress graph">
+            </div>
+            <div class="transcript-mini-div">
+                <h4>Update Your Information</h4> 
+                <img src="images/UpdateProfile.PNG" alt="edit your profile with ease">
+            </div>
+        </div>
+    </div>
+    <div class="intro-contacts">
+        <h4>Contact Us</h4>
+        <a href="#"><img src="images/facebook.jpeg" alt="facebook-link"></a>
+        <a href="#"><img src="images/twitter.PNG" alt="twitter-link"></a>
+        <a href="#"><img src="images/linkedin.PNG" alt="linkedin-link"></a>
+        <a href="#"><img src="images/instagram.jpeg" alt="instagram-link"></a>
     </div>
     <script>
         function popupFunc(){

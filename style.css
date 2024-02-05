@@ -5,7 +5,7 @@
 
 /* home page */
 
-.home, .reg-body, .dash-body, .profileBody{
+.home, .reg-body, .dash-body, .profileBody, .privacy-policy-body{
     display: flex;
     flex-direction: column;
     background-color: rgba(190, 252, 254, 0.25);
@@ -22,9 +22,130 @@
     justify-content: space-between; */
 }
 .menu img{
-    height: 2em;
-    width: 100%;
-    margin-left: 5%;
+    margin-left: -430%;
+    margin-right:400%;
+    height:50px;
+    width:50px;
+}
+@media screen and (max-width:1480px) {
+    .menu img{
+        margin-left: -400%;
+        margin-right:400%;
+    }
+}
+@media screen and (max-width:1400px) {
+    .menu img{
+        margin-left: -380%;
+        margin-right:380%;
+    }
+}
+@media screen and (max-width:1350px) {
+    .menu img{
+        margin-left: -360%;
+        margin-right:360%;
+    }
+}
+@media screen and (max-width:1280px) {
+    .menu img{
+        margin-left: -340%;
+        margin-right:340%;
+    }
+}
+@media screen and (max-width:1240px) {
+    .menu img{
+        margin-left: -310%;
+        margin-right:310%;
+    }
+}
+@media screen and (max-width:1150px) {
+    .menu img{
+        margin-left: -290%;
+        margin-right:290%;
+    }
+}
+@media screen and (max-width:1090px) {
+    .menu img{
+        margin-left: -260%;
+        margin-right:260%;
+    }
+}
+@media screen and (max-width:1010px) {
+    .menu img{
+        margin-left: -220%;
+        margin-right:200%;
+    }
+}
+@media screen and (max-width:900px) {
+    .menu img{
+        margin-left: -180%;
+        margin-right:180%;
+    }
+}
+@media screen and (max-width:800px) {
+    .menu img{
+        margin-left: -150%;
+        margin-right:150%;
+    }
+}
+@media screen and (max-width:700px) {
+    .menu img{
+        margin-left: -110%;
+        margin-right:110%;
+    }
+}
+@media screen and (max-width:610px) {
+    .menu img{
+        margin-left: -90%;
+        margin-right:90%;
+    }
+}
+@media screen and (max-width:550px) {
+    .menu img{
+        margin-left: -80%;
+        margin-right:80%;
+    }
+}
+@media screen and (max-width:520px) {
+    .menu img{
+        margin-left: -70%;
+        margin-right:70%;
+    }
+}
+@media screen and (max-width:500px) {
+    .menu img{
+        margin-left: -140%;
+        margin-right:140%;
+    }
+}
+@media screen and (max-width:460px) {
+    .menu img{
+        margin-left: -120%;
+        margin-right:90%;
+    }
+}
+@media screen and (max-width:420px) {
+    .menu img{
+        margin-left: -100%;
+        margin-right:90%;
+    }
+}
+@media screen and (max-width:400px) {
+    .menu img{
+        margin-left: -90%;
+        margin-right:90%;
+    }
+}
+@media screen and (max-width:370px) {
+    .menu img{
+        margin-left: -80%;
+        margin-right:80%;
+    }
+}
+@media screen and (max-width:350px) {
+    .menu img{
+        margin-left: -70%;
+        margin-right:70%;
+    }
 }
 .menu ul{
     padding-top: 1em;
@@ -53,6 +174,47 @@
     flex-direction: row;
     margin-top: 2.5%;
     margin-left: 2.5%;
+}
+.intro-contacts{
+    display: flex;
+    flex-direction: row;
+    width:90%;
+    padding:3%;
+    margin-left:4%;
+    margin-top:5%;
+    margin-bottom:5%;
+    background-color: #35b6be;
+}
+.intro-contacts img{
+    width:50px;
+    height:50px;
+    margin-left:4%;
+    margin-top: 2.5%;
+    border-radius:50%;
+}
+.intro-contacts a{
+    margin-left:4%;
+}
+.intro-info{
+    width:90%;
+    margin-left:4%;
+    margin-top:5%;
+    margin-bottom:5%;
+    background-color: #fff;
+    color:#35b6be;
+}
+.intro-info img{
+    width:98%;
+    height:70%;
+    margin-top:2%;
+    margin-bottom:2%;
+    border:4px solid #fff;
+}
+.privacy-policy-body{
+    margin:4%;
+}
+.privacy-policy-body h1, h2{
+    margin:4%;
 }
 .home .banner{
     width: 40%;
@@ -354,7 +516,7 @@
         padding-right: 1.5%;
     };
 }
-.reg-body form div, #editingProfile  div{
+.reg-body form div{
    display: flex;
    flex-direction: row;
    background-color: white;
@@ -703,11 +865,23 @@
     margin-block-start: 0.5em;
     margin-block-end: 1em;
 }
-#editingProfile div{
-    margin-bottom: 1em;
+#editingProfile  div{
+   display: flex;
+   flex-direction: row;
+   background-color: white;
+   color: black;
+   margin-bottom: 0.1em;
+}
+@media screen and (max-width:950px){
+    #editingProfile  div{
+        display: flex;
+        flex-direction: column;
+    }
+    
 }
 #editingProfile{
     display: none;
+    width:90%;
 }
 #editingProfile span{
     padding: 0.5em;
@@ -732,6 +906,19 @@
 #editingProfile{
     margin-left: 2.5%;
     border-bottom: 2px solid #408DCE;
+}
+#profileBody form input{
+    padding: 0.3em;
+    width: 80%;
+    margin: 0.1em;
+    border: none;
+    border-radius: 5px;
+}
+@media screen and (max-width:650px){
+    #profileBody form input, #profileBody form .pos-btn{
+        margin-left:-10%;
+    }
+    
 }
 #pfpInput{
     width: 3em;
@@ -815,6 +1002,8 @@
 .logOut:hover, .deleteAccount h5:hover{
     color:#408DCE;
 }
+
+/*Settings*/
 
 
 /* dashboard menu */
@@ -1428,7 +1617,7 @@
     }
 }
 
-#patient-doc-home-chat form  input , #records-search-container form input, #profileBody form input{
+#patient-doc-home-chat form  input , #records-search-container form input{
     padding: 1em;
     width: 80%;
     margin: 0.5em;
@@ -1934,3 +2123,77 @@ table, th, td {
   }
 }
 
+/*add-med popup styles*/
+#add-med-form-btn{
+    margin-left: 20%;
+}
+.add-med-form form{
+    background-color: rgba(190, 252, 254);
+}
+.add-med-form{
+    display: none;
+    color: #000000;
+    text-align: left;
+    border: none;
+    position: absolute;
+    z-index: 10;
+    position: absolute;
+    margin-left: -11%;
+    width: 110%;
+    transition: top 0.3s ease;
+}
+.add-med-form .close-btn{
+    width:30px;
+    height: 30px;
+    border:none;
+    background-image:url("images/menuBarOpen.PNG");
+    background-size:100%;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    margin-left: 96%;
+}
+@media screen and (max-width:1200px){
+    .add-med-form .close-btn{
+        margin-left: 95%;
+    }
+}
+@media screen and (max-width:899px){
+    .add-med-form .close-btn{
+        margin-left: 90%;
+    }
+}
+
+@media screen and (max-width:1360px) {
+    .add-med-form{
+        margin-left: -15%;
+        width: 130%;
+    }
+}
+@media screen and (max-width:1099px) {
+    .add-med-form{
+        margin-left: -20%;
+        width: 130%;
+    }
+}
+@media screen and (max-width:799px) {
+    .add-med-form{
+        margin-left: -20%;
+        width: 120%;
+    }
+}
+@media screen and (max-width:699px) {
+    .add-med-form{
+        margin-left: -20%;
+    }
+}
+@media screen and (max-width:499px) {
+    #add-med-form-btn{
+        width:30%;
+    }
+    .add-med-form{
+        margin-left: -10%;
+        width: 110%;
+    }
+}
+/*add-med popup styles*/
