@@ -342,8 +342,6 @@
 @media screen and (max-width:990px) {
     .CTA a, .CTA #join-us{
         width: 30%;
-        height: 3.5em;
-        font-size: 0.95em;
     }
     .CTA{
         width: 80%;
