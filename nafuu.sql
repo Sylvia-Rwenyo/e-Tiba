@@ -344,13 +344,11 @@ CREATE TABLE `reginstitutions` (
 -- Dumping data for table `reginstitutions`
 --
 
-INSERT INTO `reginstitutions` (`id`, `institutionName`, `location`, `emailAddress`, `phoneNumber`, `password`, `illnesses`, `postalAddress`, `profilePhoto`) VALUES
-(1, 'New Hospital', '234', '234234', '3242', 'TB8MvNoRYKrdyScdWwubgw==', 'Condition B', '2342', ''),
-(2, 'mediheal hospital', 'Eldoret', 'mediheal.hos@gmail.com', '0722222222', 'm97SyqgW1aPhLBeUlcmNhQ==', 'Condition B', '22234-3345', ''),
-(3, 'Hospitali', 'Nairobi', 'hospitali@hospitali.com', '254111111111', 'xHf2LRAW6NbUqZs/3fLc0A==', 'Condition A*Condition C', '13051', ''),
-(4, 'Hospital', 'Hospital', 'hospitali@hospital.com', '0763543364', 'YohTu/9vNH4b92tMJ+AIog==', 'Condition A*Condition B*Condition C', '31231', ''),
-(5, 'Nafuu Hospital', 'Nairobi', 'nafuu@hospital.com', '0745454444', 'stJkPksTBLkUIXNgFJRp/ZN/yNCkZHKcsG9d/06lwoY=', 'Condition A*Condition B*Condition C', '12233', ''),
-(6, 'institution', 'kenya', 'institution@institution.com', '076565646443', '4+tc7D8bSNf+rE+MalISfA==', 'Condition C', '23423', '');
+INSERT INTO `reginstitutions` (`id`, `institutionName`, `location`, `emailAddress`, `phoneNumber`, `password`, `illnesses`, `postalAddress`, `profilePhoto`, `date_registered`, `date_updated`) VALUES
+(1, 'New Hospital', '234', '234234', '3242', 'TB8MvNoRYKrdyScdWwubgw==', 'Condition B', '2342', '', '2024-01-03 07:37:23', '2024-01-03 07:37:23'),
+(2, 'mediheal hospital', 'Eldoret', 'mediheal.hos@gmail.com', '0722222222', 'm97SyqgW1aPhLBeUlcmNhQ==', 'Condition B', '22234-3345', '', '2024-01-03 07:37:23', '2024-01-03 07:37:23'),
+(3, 'Hospitali', 'Nairobi', 'hospitali@hospitali.com', '254111111111', 'xHf2LRAW6NbUqZs/3fLc0A==', 'Condition A*Condition C', '13051', '', '2024-01-03 07:37:23', '2024-01-03 07:37:23'),
+(4, 'lidari health', 'Nairobi', 'lidar.hos@gmail.com', '0711222333', 'KvWZbyA/TIOKQVqr9e7c0g==', 'Condition B', '22234-3345', '', '2024-01-03 07:37:23', '2024-01-03 07:37:23');
 
 -- --------------------------------------------------------
 

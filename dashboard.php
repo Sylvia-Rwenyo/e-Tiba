@@ -49,27 +49,29 @@
 
             <div class="progress-charts">
                 <?php
-                if (isset($_GET['w'])) {
-                    $viewWeek = intval($_GET['w']);
-                    $week = 'weeks';
-                    if ($viewWeek == -1 || $viewWeek == +1) {
-                        $week = 'week';
-                    }
-                    // Clone the current date object and modify it to a week before or a week after appropriately
-                    $firstDayOfWeek = clone $today;
-                    $firstDayOfWeek->modify('monday this week');
-                    $weekOperation = $viewWeek . ' ' . $week;
-                    $firstDayOfWeek->modify($weekOperation); // Go back or ahead by a week
-
-                    if ($viewWeek == 0) {
-                        $firstDayOfWeek = clone $today;
-                        $firstDayOfWeek->modify('monday this week');
-                    }
+            // Check if 'w' is set in the URL parameters
+            if (isset($_GET['w'])) {
+                $viewWeek = intval($_GET['w']);
+                
+                // Determine the week operation based on the value of 'w'
+                if ($viewWeek < 0) {
+                    $weekOperation = abs($viewWeek) == 1 ? 'last week' : abs($viewWeek) . ' weeks ago';
+                } elseif ($viewWeek > 0) {
+                    $weekOperation = $viewWeek == 1 ? 'next week' : $viewWeek . ' weeks later';
                 } else {
-                    // Default behavior: show the current week
-                    $firstDayOfWeek = clone $today;
-                    $firstDayOfWeek->modify('monday this week');
+                    $weekOperation = 'this week';
                 }
+
+                // Clone the current date object and modify it accordingly
+                $firstDayOfWeek = clone $today;
+                $firstDayOfWeek->modify("monday $weekOperation");
+
+            } else {
+                // Default behavior: show the current week
+                $firstDayOfWeek = clone $today;
+                $firstDayOfWeek->modify('monday this week');
+            }
+
 
                 $firstDayOfWeekString = $firstDayOfWeek->format('Y-m-d'); // Convert the DateTime object to a string
                 $lastDayOfWeek = clone $firstDayOfWeek; // Clone the first day of the week object
@@ -103,8 +105,7 @@
 
                     $avgSleep = 0;
                     $avgMeals = 0;
-                    $avgExercise = 0;
-                    
+                    $avgExercise = 0;                    
 
                     // Store data for the current day in arrays
                     $dayData[] = $dateString;
@@ -208,7 +209,7 @@
                     <div class="input-div input-sleep">
                         <div class="data-bars">
                             <span>Average daily sleep</span>
-                            <span class="single-data-bar"><span style="width:<?php echo round($sleepPercentage, 0)?>%;background-color: rgba(75, 192, 192, 0.6);">
+                            <span class="single-data-bar"><span style="width:<?php echo round($avgSleep/8 * 100, 0)?>%;background-color: rgba(75, 192, 192, 0.6);">
                                 <span class="data-txt"  ><?php echo round($avgSleep, 1);?> hours</span>
                             </span></span>
                         </div>

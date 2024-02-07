@@ -161,7 +161,7 @@
                 <?php
             }
             $i++;
-        }}else{ 
+        }else{ 
             ?>
             <!DOCTYPE html>
             <html lang="en">
@@ -334,26 +334,15 @@ if (isset($result['dosage'])) {
         $i++;
         ?>
         </table>
-                </section>
-                </div>
-                </body>
-            </html>
-        <style>
-            .menuBar, .menu{
-                display: none;
-            }
-        </style>
-                <script>
-        window.onload(window.print());
-        if(window.print()){
-            window.location.href = 'dashboard.php?r=1';
+        <button class="records-print-btn" onclick="print1patientRecord()">Download</button>
+
+        </section>
+    </div>
+</body>
+</html>
+<?php
         }
-        </script>
-        <?php
-            }
-         ?>
-
-
+?>
 <script>
   
     function toPatientCalendar(patientID){
