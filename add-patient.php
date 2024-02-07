@@ -50,7 +50,20 @@
                 <option>Condition C</option>
             </select>
             <p>Our <a href="privacy-policy.php"><i>Privacy Policy</i></a></p>
+            <label class="check-box-container">I have read the privacy policy
+                <input type="checkbox" id="checkbox"/>
+                <span class="checkmark"></span>
+            </label>
             <input type="submit" value="submit" name="add-patient" class="pos-btn"/>
     </form>
 </body>
+<script>
+    const privacy_checkbox = document.getElementById('checkbox');
+    const submit_btn = document.getElementById('submit-btn');
+
+    const toggleBtnState = function(event){
+        submit_btn.disabled = !event.target.checked;
+    }
+    privacy_checkbox.addEventListener('change', toggleBtnState)
+</script>
 </html>

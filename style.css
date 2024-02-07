@@ -408,6 +408,28 @@
         font-size: 0.75em;
     }
 }
+.check-box-container{
+    display: block;
+    position: relative;
+    padding-left: 35px;
+    margin-bottom: 12px;
+    cursor: pointer;
+    font-size: 22px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    user-select: none;
+}
+.check-box-container input{
+    cursor: pointer;
+    height: 25px;
+    width: 25px;
+}
+.checkmark{
+    top: 0;
+    left: 0;
+    height: 25px;
+    width: 25px;
+}
 /* registration page */
 
 .welcome-msg{

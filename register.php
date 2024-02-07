@@ -140,7 +140,11 @@
                 <label class="pswd-warning"><i class="fa fa-check"></i>Does not include spaces</label>
             </div>
             <p>Our <a href="privacy-policy.php"><i>Privacy Policy</i></a></p>
-            <input type="submit" value="submit" name="register" class="pos-btn"/>
+            <label class="check-box-container">I have read the privacy policy
+                <input type="checkbox" id="checkbox"/>
+                <span class="checkmark"></span>
+            </label>
+            <input type="submit" value="submit" name="register" class="pos-btn" id="submit-btn" disabled/>
         </form>
     <?php
     } 
@@ -289,5 +293,12 @@ document.getElementById('reg-form').onsubmit = (event) => {
     sessionStorage.setItem("institution", institution);
 };
 
+const privacy_checkbox = document.getElementById('checkbox');
+const submit_btn = document.getElementById('submit-btn');
+
+const toggleBtnState = function(event){
+    submit_btn.disabled = !event.target.checked;
+}
+privacy_checkbox.addEventListener('change', toggleBtnState)
 </script>
 </html>

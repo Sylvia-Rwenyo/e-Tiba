@@ -65,7 +65,20 @@
             <input type="text" name="phoneNumber" placeholder="Phone: 2547********"/>
             <input type="text" name="address" placeholder="address"/>
             <p>Our <a href="privacy-policy.php"><i>Privacy Policy</i></a></p>
+            <label class="check-box-container">I have read the privacy policy
+                <input type="checkbox" id="checkbox"/>
+                <span class="checkmark"></span>
+            </label>
             <input type="submit" value="submit" name="register-doc-by-partner" class="pos-btn"/>
         </form>
 </body>
+<script>
+const privacy_checkbox = document.getElementById('checkbox');
+const submit_btn = document.getElementById('submit-btn');
+
+const toggleBtnState = function(event){
+    submit_btn.disabled = !event.target.checked;
+}
+privacy_checkbox.addEventListener('change', toggleBtnState)
+</script>
 </html>
