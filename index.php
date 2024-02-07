@@ -18,7 +18,7 @@
             <div class="c-phrase">
                 <h3>Mobile Health care made seamless,<br><b>for you</b></h3>
             </div>
-            <p>Make an appointment. Get treated. Track your progress</p>
+            <p>Make an appointment . Get treated . Track your progress</p>
         </div>
         <div class="CTA">
             <button class="pos-btn" id="join-us" onclick="popupFunc()" style="position:relative;display:block;cursor:pointer;">Join Us
@@ -46,7 +46,7 @@
         </div>
         <div class="services-mini-div">
             <h4>Track Your Progress</h4>
-            <img src="images/Dashboard.PNG" alt="progress graph">
+            <img src="images/Dashbrd.PNG" alt="progress graph">
         </div>
         <div class="services-mini-div">
             <h4>Electronic Health Records</h4> 
