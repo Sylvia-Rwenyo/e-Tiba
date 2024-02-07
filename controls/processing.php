@@ -431,7 +431,7 @@ echo ' <script>
             window.location.href = "../register.php?login=1&e=1"
         </script>';
          }
-}
+    }
     }
 }
 

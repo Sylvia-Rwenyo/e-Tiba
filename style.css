@@ -211,10 +211,10 @@
     border:4px solid #fff;
 }
 .privacy-policy-body{
-    margin:4%;
+    margin:3%;
 }
 .privacy-policy-body h1, h2{
-    margin:4%;
+    margin:3%;
 }
 .home .banner{
     width: 40%;
@@ -246,6 +246,29 @@
     margin-block-start: 1em;
     margin-block-end: 1em;
     line-height: 1.5em;
+}
+.services-mini-div {
+    background-color: aliceblue;
+    border: 5px solid aliceblue;
+    margin: 20px;
+}
+
+.services-mini-div:hover {
+    border: 5px solid rgba(53, 182, 190, 0.8);
+    color:black;
+}
+.services-mini-div h4{
+    margin: 2%;
+    font-size: 30px;
+}
+.services-mini-div h5{
+    margin: 2%;
+    font-size: 20px;
+}
+@media screen and (max-width:500px) {
+    .services-mini-div {
+        margin: 5%;
+    }
 }
 #join-us .popuplinks{
     visibility: hidden;
