@@ -196,12 +196,19 @@
     margin-left:4%;
 }
 .intro-info{
+    display: flex;
+    flex-direction: row;
     width:90%;
     margin-left:4%;
     margin-top:5%;
     margin-bottom:5%;
     background-color: #fff;
     color:#35b6be;
+}
+@media screen and (max-width:900px){
+    .intro-info{
+        flex-direction: column;
+    }
 }
 .intro-info img{
     width:98%;
