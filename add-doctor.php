@@ -64,8 +64,7 @@
                 </select>
             <input type="text" name="phoneNumber" placeholder="Phone: 2547********"/>
             <input type="text" name="address" placeholder="address"/>
-            <p>Our <a href="privacy-policy.php"><i>Privacy Policy</i></a></p>
-            <label class="check-box-container">I have read the privacy policy
+            <label class="check-box-container">I have read the <a href="privacy-policy.php"><i>Privacy Policy</i></a>
                 <input type="checkbox" id="checkbox"/>
                 <span class="checkmark"></span>
             </label>

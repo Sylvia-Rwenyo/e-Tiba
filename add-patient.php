@@ -49,8 +49,7 @@
                 <option>Condition B</option>
                 <option>Condition C</option>
             </select>
-            <p>Our <a href="privacy-policy.php"><i>Privacy Policy</i></a></p>
-            <label class="check-box-container">I have read the privacy policy
+            <label class="check-box-container">I have read the <a href="privacy-policy.php"><i>Privacy Policy</i></a>
                 <input type="checkbox" id="checkbox"/>
                 <span class="checkmark"></span>
             </label>
