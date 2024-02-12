@@ -53,7 +53,7 @@
                 <input type="checkbox" id="checkbox"/>
                 <span class="checkmark"></span>
             </label>
-            <input type="submit" value="submit" name="add-patient" class="pos-btn"/>
+            <input type="submit" value="submit" name="add-patient" class="pos-btn" id="submit-btn" disabled/>
     </form>
 </body>
 <script>
