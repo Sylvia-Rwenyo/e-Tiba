@@ -191,6 +191,7 @@
     margin-left:4%;
     margin-top: 2.5%;
     border-radius:50%;
+    filter:drop-shadow(3px 3px 3px #e2ebf0) opacity(90%);
 }
 .intro-contacts a{
     margin-left:4%;
