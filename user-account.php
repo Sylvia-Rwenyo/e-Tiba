@@ -61,16 +61,15 @@
                     </div>
                 </div>
                 <div class="contactInfo">
-                <p><a href='mailto:<?php echo $result['emailAddress']?>'><i class="fa-solid fa-envelope"></i>&nbsp;&nbsp;&nbsp;<?php echo $result['emailAddress']?></a></p>
-                <p><a <?php if($result['phoneNumber'] == 0){
-                    echo 'onclick="editProfile()"';} else{ echo 'href="tel:'. $result['phoneNumber'].'"';}?>>
-                    <i class="fa-solid fa-phone"></i>&nbsp;&nbsp;&nbsp;
-                    <?php if($result['phoneNumber'] == 0){
-                     echo 'Add phone number';} else{ echo $result['phoneNumber'];}
-                     $i++;
-                     }}?></a></p>
-                <p onclick="editProfile()"><i class="fa-solid fa-pencil">Edit Profile</i></p>
-            </div>
+                    <p><a href='mailto:<?php echo $result['emailAddress']?>'><i class="fa-solid fa-envelope"></i>&nbsp;&nbsp;&nbsp;<?php echo $result['emailAddress']?></a></p>
+                    <p><a <?php if($result['phoneNumber'] == 0){
+                        echo 'onclick="editProfile()"';} else{ echo 'href="tel:'. $result['phoneNumber'].'"';}?>>
+                        <i class="fa-solid fa-phone"></i>&nbsp;&nbsp;&nbsp;<?php if($result['phoneNumber'] == 0){
+                        echo 'Add phone number';} else{ echo $result['phoneNumber'];}
+                        $i++;
+                        }}?></a></p>
+                    <p onclick="editProfile()"><i class="fa-solid fa-pencil"></i>Edit Profile</p>
+                </div>
             </div>
             <?php 
             $records;
