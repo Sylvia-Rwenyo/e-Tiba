@@ -90,7 +90,7 @@
         </div>
       </div>
     </div>
-    <p>Read our <a href="privacy-policy.php"><i>Privacy Policy</i></a></p>
+    <p>Read our <a href="privacy-policy.php"><i>Privacy Policy</i></a> to understand more about the data we collect and how we use this data.</p>
   </div>
 </body>
 </html>
