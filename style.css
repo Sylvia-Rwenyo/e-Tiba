@@ -645,41 +645,54 @@
 #transcript{
     display: block;
 }
-#buttonStyleTranscript {
-    color:black;
-    width:fit-content;
-    height:fit-content;
-    border:none;
-    padding: 10px;
-    background-color:#fbfac2;
-    border-radius:20px;
-}
-.btn-cancel {
-    color:white;
-    width:fit-content;
-    height:fit-content;
-    border:none;
-    padding: 10px;
-    background-color:red;
-    border-radius:40px;
-}
-.btn-cancel-trasncript{
-    color:white;
-    width:fit-content;
-    height:fit-content;
-    border:none;
-    padding: 10px;
-    background-color:red;
-    border-radius:20px;
-}
 .intro .banner .video-description {
     text-align: center;
     margin-top: 20%;
+}
+@media screen and (max-width:700px) {
+    .intro .banner .video-description {
+        width: 600px;
+        margin-left: 20px;
+    }
+}
+@media screen and (max-width:650px) {
+    .intro .banner .video-description {
+        width: 600px;
+        margin-left: 10px;
+    }
+}
+@media screen and (max-width:640px) {
+    .intro .banner .video-description {
+        width: 500px;
+        margin-left:30px;
+    }
+}
+@media screen and (max-width:550px) {
+    .intro .banner .video-description {
+        width: 500px;
+        margin-left: 15px;
+    }
+}
+@media screen and (max-width:530px) {
+    .intro .banner .video-description {
+        width: 450px;
+    }
 }
 @media screen and (max-width:500px) {
     .intro .banner .video-description {
         width: 400px;
     }
+}
+@media screen and (max-width:450px) {
+    .intro .banner .video-description {
+        width: 350px;
+    }
+}
+#video-description {
+    background-size:cover;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
 }
 .transcript {
     text-align: center;
@@ -704,13 +717,12 @@
     background-color: white;
     margin: 20px;
 }
-@media screen and (max-width:500px) {
+@media screen and (max-width:670px) {
     .transcript-small-div {
         display:flex;
         flex-direction: column;
         padding:2%;
         background-color: white;
-        margin: 2%;
     }
 }
 
@@ -760,12 +772,6 @@
     .transcript ul {
         margin-left: 5%;
     }
-}
-#video-description {
-    background-size:cover;
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
 }
 .button-links {
     text-decoration: none;

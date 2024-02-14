@@ -144,7 +144,7 @@
                 <input type="checkbox" id="checkbox"/>
                 <span class="checkmark"></span>
             </label>
-            <input type="submit" value="submit" name="register" class="pos-btn" id="submit-btn" disabled/>
+            <input type="submit" value="submit" name="register" class="pos-btn" id="register" disabled/>
         </form>
     <?php
     } 
@@ -294,7 +294,7 @@ document.getElementById('reg-form').onsubmit = (event) => {
 };
 
 const privacy_checkbox = document.getElementById('checkbox');
-const submit_btn = document.getElementById('submit-btn');
+const submit_btn = document.getElementById('register');
 
 const toggleBtnState = function(event){
     submit_btn.disabled = !event.target.checked;
