@@ -7,13 +7,9 @@
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"></script>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
-        <script src="https://kit.fontawesome.com/2751fbc624.js" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
         <link rel="icon" href="favicon.ico" />
-        <link rel="stylesheet" href="style.css">
-        <script src="js/cdnjs.cloudflare.com_ajax_libs_Chart.js_2.9.4_Chart.js"></script>
+        <link rel="stylesheet" href="style.css">    
         <title>Your dashboard</title>
     </head>
     <body class="dash-body" id="dash-body">
@@ -94,7 +90,7 @@
 
                 while ($currentDayString <= $lastDayOfWeekString) {
                     $dayName = $currentDay->format('l');
-                    $dateString = $currentDay->format('m/d/Y');
+                    $dateString = $currentDay->format('d');
                     $currentDay->modify('+1 day');
                     $currentDayString = $currentDay->format('Y-m-d');
 
@@ -108,20 +104,16 @@
                     $avgExercise = 0;                    
 
                     // Store data for the current day in arrays
-                    $dayData[] = $dateString;
-                    $sleepData[] = $sleepTime;
-                    $mealsData[] = $mealNumbers;
-                    $exerciseData[] = $exerciseTime;
+                    $dayData[$dateString] = array(
+                        'date' => $dateString,
+                        'sleepTime' => $sleepTime,
+                        'mealNumbers' => $mealNumbers,
+                        'exerciseTime' => $exerciseTime
+                    );
                 }
 
-                // Convert PHP arrays to JavaScript arrays
-                $dayDataJSON = json_encode($dayData);
-                $sleepDataJSON = json_encode($sleepData);
-                $mealsDataJSON = json_encode($mealsData);
-                $exerciseDataJSON = json_encode($exerciseData);
-                
-
             // Calculate the date 7 days ago
+            $firstDayOfWeek = clone $today;
             $firstDayOfWeekFormatted = $firstDayOfWeek -> format('Y-m-d');
             $sevenDaysAgo = clone $firstDayOfWeek;
             $sevenDaysAgo->modify('-7 days');
@@ -134,18 +126,22 @@
                 // Initialize total sleep time
                 $totalSleep = 0;
                 $daysInLog = 0;
+                $sleepTime = 0;
 
                 if (mysqli_num_rows($result) > 0) {
                     while ($row = mysqli_fetch_array($result)) {
                         $sleepTime = $row['sleepTime'];
                         $totalSleep += $sleepTime;
                         $daysInLog += 1;
+                        $recordDate = new DateTime($row['recordDate']);
+                        $dateString = $recordDate->format('d');
+                        // Update sleep data for the current day
+                        $dayData[$dateString]['sleepTime'] = intval($sleepTime);
                     }
 
-                    $avgSleep = $totalSleep / $daysInLog; // Calculate average sleep time
-                    $sleepPercentage = $avgSleep/8 * 10;
+                    $avgSleep = $totalSleep / $daysInLog;
+                    $sleepPercentage = $avgSleep / 8 * 10; // Calculate sleep percentage
                 }
-
                 
                     // Meals data
                     $stmt = "SELECT DISTINCT DATE(recordDate) as uniqueDate FROM patientsmeallog WHERE userID='$userID' AND DATE(recordDate) BETWEEN '$sevenDaysAgoFormatted' AND '$firstDayOfWeekFormatted' ";
@@ -160,41 +156,56 @@
                         $date = $row['uniqueDate'];
 
                         // Count meals for each day
-                        $stmtMealsPerDay = "SELECT COUNT(*) as mealsCount FROM patientsmeallog WHERE userID='$userID' AND DATE(recordDate) = '$date'";
+                        $stmtMealsPerDay = "SELECT DATE(recordDate) as recordDate, COUNT(*) as mealsCount FROM patientsmeallog WHERE userID='$userID' AND DATE(recordDate) = '$date' GROUP BY DATE(recordDate)";
                         $resultMealsPerDay = mysqli_query($conn, $stmtMealsPerDay);
                         $rowMealsPerDay = mysqli_fetch_assoc($resultMealsPerDay);
 
                         $mealsCount = $rowMealsPerDay['mealsCount'];
 
                         $totalMeals += $mealsCount;
+                        $recordDate = new DateTime($rowMealsPerDay['recordDate']);
+                        $dateString = $recordDate->format('d');
+                        // Update meals data for the current day
+                        $dayData[$dateString]['mealNumbers'] = intval($totalMeals);
                     }
                         $targetMeals = 3;
                         $avgMeals = 0; // Default value if $totalDaysLogged is zero
 
                         if ($totalDaysLogged > 0) {
-                            $avgMeals = ($totalMeals / $targetMeals) / $totalDaysLogged;
+                            $avgMeals = $totalMeals / $targetMeals / $totalDaysLogged;
                         }
+
+                        $mealsData[] = $totalMeals;
                         
-                        $mealsPercentage = 100 * $avgMeals;
+                        $mealsPercentage = 100 * $avgMeals; // Calculate meals percentage
                         
                     // Exercise data
                     $stmt = "SELECT * FROM patientsexerciselog WHERE userID='$userID' AND DATE(recordDate) BETWEEN '$sevenDaysAgoFormatted' AND '$firstDayOfWeekFormatted' ";
                     $sql4 = mysqli_query($conn, $stmt);
 
+                    $exerciseTime = 0;
+
                     if (mysqli_num_rows($sql4) > 0) {
                         while ($row = mysqli_fetch_array($sql4)) {
                             $exerciseTime = $row['exerciseDuration'];
                             $totalExercise += $exerciseTime;
+                            $exerciseData[] = $exerciseTime;
+                            $recordDate = new DateTime($row['recordDate']);
+                            $dateString = $recordDate->format('d');
+                            // Update exercise data for the current day
+                            $dayData[$dateString]['exerciseTime'] = intval($exerciseTime);
                         }
 
                         $targetExercise = 90;
-                        $avgExercise = ($exerciseTime / $targetExercise)/mysqli_num_rows($sql4);
-                        $exercisePercentage = (100 * $avgExercise);
+                        $avgExercise = $totalExercise / $targetExercise / mysqli_num_rows($sql4);
+                        $exercisePercentage = 100 * $avgExercise; // Calculate exercise percentage
                     }
 
+                    //convert data to JSON
+                    $dayDataJSON = json_encode(array_values($dayData));
                 ?>
                 <!-- show which week it is -->
-                <span class="week-indicator" style="margin-left: 0;">
+                <span class="week-indicator" style="margin-left: 2.5%;">
                     <i class="fa fa-arrow-left" onclick="showLastWeek()"></i>
                     <?php
                         echo date('j M', strtotime($firstDayOfWeekString)) . ' - ' . date('j M', strtotime($lastDayOfWeekString));
@@ -327,20 +338,120 @@
                         </div>
                         end medication input area -->
                     </div>
+                    <div style="margin-top: 3em">
+                        <h5 style="margin-bottom: 1em; text-align: center">Your Progress towards Lifestyle Targets</h5>
+                        <canvas id="dayCharts"></canvas>
+                    </div>
                 </section>
             </div>
-    <script src="js/jquery-3.3.1.min.js"></script>
-    <script src="js/code.jquery.com_jquery-latest.js"></script>
-    <!-- Include Chart.js library -->
+<script src="js/jquery-3.3.1.min.js"></script>
+<script src="js/code.jquery.com_jquery-latest.js"></script>
+<script src="js/cdnjs.cloudflare.com_ajax_libs_Chart.js_2.9.4_Chart.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://kit.fontawesome.com/2751fbc624.js" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0"></script>
+<script type="text/javascript">
+    // Get references to the canvas element and its context
+    var ctx = document.getElementById('dayCharts').getContext('2d');
 
-    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.bundle.min.js"></script> -->
+    <?php
+        $data = array_values($dayData); // Get the values of $dayData array
+        $sleepDataJSON = json_encode(array_map(function($day) {
+            return isset($day['sleepTime']) ? intval($day['sleepTime']) : null; // Convert to integer or null
+        }, $data));
 
-    <!-- Include Chart.js Datalabels plugin -->
-    <!-- <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0"></script> -->
+        $mealsDataJSON = json_encode(array_map(function($day) {
+            return isset($day['mealNumbers']) ? intval($day['mealNumbers']) : null; // Convert to integer or null
+        }, $data));
+
+        $exerciseDataJSON = json_encode(array_map(function($day) {
+            return isset($day['exerciseTime']) ? intval($day['exerciseTime']) : null; // Convert to integer or null
+        }, $data));
+    ?>
 
 
-    <script type="text/javascript">
-         let sleepPrompt = document.getElementById("rec-sleepPrompt");
+
+  // Define the data for the chart
+  var data = {
+    labels: <?php echo json_encode(array_keys($dayData)); ?>, // X-axis labels from PHP array
+    datasets: [{
+      label: 'Sleep',
+      data: <?php echo $sleepDataJSON; ?>.map(function(sleep) {
+        return (sleep / 8) * 100; // Calculate sleep percentage
+      }),
+      backgroundColor: 'rgba(75, 192, 192, 0.2)',
+      borderColor: 'rgba(75, 192, 192, 1)',
+      borderWidth: 1,
+    }, {
+      label: 'Meals',
+      data: <?php echo $mealsDataJSON; ?>.map(function(meals) {
+        return (meals / 3) * 100; // Calculate meals percentage
+      }),
+      backgroundColor: 'rgba(255, 99, 132, 0.2)',
+      borderColor: 'rgba(255, 99, 132, 1)',
+      borderWidth: 1,
+    }, {
+      label: 'Exercise',
+      data: <?php echo $exerciseDataJSON; ?>.map(function(exercise) {
+        return (exercise / 45) * 100; // Calculate exercise percentage
+      }),
+      backgroundColor: 'rgba(54, 162, 235, 0.2)',
+      borderColor: 'rgba(54, 162, 235, 1)',
+      borderWidth: 1,
+    }]
+  };
+
+  // Define the labels you want to display in the tooltips
+  var labels = <?php echo json_encode(array_keys($dayData)); ?>;
+
+  // Create the chart
+var myChart = new Chart(ctx, {
+  type: 'bar',
+  data: data,
+  options: {
+    scales: {
+      y: {
+        beginAtZero: true,
+        ticks: {
+          callback: function(value, index, values) {
+            if (value === 100) {
+              return 'Target'; // Show value at 100
+            } else {
+              return ''; // Hide other values
+            }
+          }
+        }
+      }
+    },
+    tooltips: {
+      mode: 'index',
+      intersect: false,
+      callbacks: {
+        title: function (tooltipItems) {
+          // Display the date as the tooltip title
+          return labels[tooltipItems[0].index];
+        },
+        label: function (tooltipItem, data) {
+          var datasetLabel = data.datasets[tooltipItem.datasetIndex].label;
+          var dataType = datasetLabel.split(' ')[0]; // Extract the data type (Sleep, Meals, Exercise)
+          var actualValue = data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index];
+
+          if (dataType === 'Sleep') {
+            return dataType + ': ' + Math.round(actualValue * 8 / 100) + ' hours'; // Display sleep time in hours
+          } else if (dataType === 'Exercise') {
+            return dataType + ': ' + Math.round(actualValue * 45 / 100) + ' minutes'; // Display exercise time in minutes
+          } else {
+            return dataType + ': ' + Math.round(actualValue * 3 / 100); // Display meal numbers without percentage
+          }
+        }
+      }
+    }
+  }
+});
+
+  let sleepPrompt = document.getElementById("rec-sleepPrompt");
         let mealPrompt = document.getElementById("rec-mealsPrompt");
         let exercisePrompt = document.getElementById("rec-exercisePrompt");
 
@@ -362,93 +473,6 @@
             inputExercise.style.display ='flex';
 
             }
-
-        // Get references to the canvas element and its context
-        var ctx = document.getElementById('dayCharts').getContext('2d');
-        // Create a function to format the date labels
-        function formatDayLabels(dayLabels) {
-        return dayLabels.map(function(dateLabel) {
-            const dayOfMonth = new Date(dateLabel).toLocaleDateString('en-US', { day: 'numeric' });
-            return dayOfMonth;
-        });
-        }
-
-        // Define the data for the chart
-        var data = {
-        labels: formatDayLabels(<?php echo $dayDataJSON; ?>), // Format date labels
-        datasets: [
-            {
-            label: 'Sleep Percentage',
-            data: <?php echo $sleepDataJSON; ?>.map(function(sleep) {
-                return (sleep / 8) * 100; // Calculate sleep percentage
-            }),
-            backgroundColor: 'rgba(75, 192, 192, 0.2)',
-            borderColor: 'rgba(75, 192, 192, 1)',
-            borderWidth: 1,
-            },
-            {
-            label: 'Meals Percentage',
-            data: <?php echo $mealsDataJSON; ?>.map(function(meals) {
-                return (meals / 3) * 100; // Calculate meals percentage
-            }),
-            backgroundColor: 'rgba(255, 99, 132, 0.2)',
-            borderColor: 'rgba(255, 99, 132, 1)',
-            borderWidth: 1,
-            },
-            {
-            label: 'Exercise Percentage',
-            data: <?php echo $exerciseDataJSON; ?>.map(function(exercise) {
-                return (exercise / 60) * 100; // Calculate exercise percentage
-            }),
-            backgroundColor: 'rgba(54, 162, 235, 0.2)',
-            borderColor: 'rgba(54, 162, 235, 1)',
-            borderWidth: 1,
-            }
-        ]
-        };
-
-        // Create the chart
-        var myChart = new Chart(ctx, {
-        type: 'bar',
-        data: data,
-        options: {
-            scales: {
-            y: {
-                beginAtZero: true, // Ensure the y-axis starts from 0
-                max: 100, // Set the maximum value of the y-axis to 100
-                min: 0
-            },
-            x:{
-                beginAtZero: true, // Ensure the x-axis starts from 0
-                min: 0
-            }
-            },
-            tooltips: {
-            mode: 'index',
-            intersect: false,
-            callbacks: {
-                title: function (tooltipItems) {
-                // Display the formatted date as the tooltip title
-                return formatDayLabels([labels[tooltipItems[0].index]])[0];
-                },
-                label: function (tooltipItem, data) {
-                var datasetLabel = data.datasets[tooltipItem.datasetIndex].label;
-                var dataType = datasetLabel.split(' ')[0]; // Extract the data type (Sleep, Meals, Exercise)
-                var actualValue = data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index];
-
-                if (dataType === 'Sleep') {
-                    return dataType + ': ' + Math.round(actualValue * 8 / 100) + ' hours'; // Display sleep time in hours
-                } else if (dataType === 'Exercise') {
-                    return dataType + ': ' + Math.round(actualValue * 45 / 100) + ' minutes'; // Display exercise time in minutes
-                } else {
-                    return dataType + ': ' + Math.round(actualValue * 3 / 100); // Display meal numbers without percentage
-                }
-                }
-            }
-            }
-        }
-        });
-
 
         function print1patientRecord() {
             window.location.href = 'single-patient-records.php?print=1';

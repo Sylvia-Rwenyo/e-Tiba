@@ -4,3 +4,5 @@ some icons e.g phone-hangup, notes are pro on font awesome
 
 get hosting
 
+Sample credentials for user (patient) log in - mail : marie@curie.com and pw : MariePw123*
+

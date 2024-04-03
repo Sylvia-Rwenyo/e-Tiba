@@ -69,7 +69,7 @@
                      echo 'Add phone number';} else{ echo $result['phoneNumber'];}
                      $i++;
                      }}?></a></p>
-                <p onclick="editProfile()"><i class="fa-solid fa-pencil">Edit Profile</i></p>
+                <p onclick="editProfile()"><i class="fa-solid fa-pencil"></i>Edit Profile</p>
             </div>
             </div>
             <?php 

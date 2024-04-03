@@ -161,7 +161,7 @@
                 <?php
             }
             $i++;
-        }else{ 
+        }}else{ 
             ?>
             <!DOCTYPE html>
             <html lang="en">

@@ -30,9 +30,9 @@
                     <a href="reg-partner.php"> 
                         <p>A Partner Hospital</p>
                     </a>
-                    <a href="independent-reg-doc.php">
+                    <!-- <a href="independent-reg-doc.php">
                         <p>An Independent Medical Practitioner</p>
-                    </a>
+                    </a> -->
                 </span>
             </button>
             <a href="about-us.php"><button class="neg-btn">Learn More</button></a>
