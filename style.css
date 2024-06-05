@@ -630,10 +630,17 @@
     margin-left: 40%;
 }
 @media screen and (max-width:500px){
-    .reg-body .pos-btn, #editingProfile .pos-btn, #dosage-reg .pos-btn{
+    .reg-body .pos-btn, #editingProfile .pos-btn, #dosage-reg .pos-btn {
         width: 5em;
         margin-left: 30%;
         font-size: 1em;
+    }
+    .CTA .neg-btn{
+        width: 6.5em;
+        height: fit-content;
+        margin-left: 5%;
+        font-size: 1.8em;
+        padding: 4.5%;
     }
 }
 #editingProfile .pos-btn{
