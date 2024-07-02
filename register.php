@@ -104,21 +104,25 @@
             <input type="email" name="emailAddress" id="emailAddress" placeholder="Email Address e.g youremail@gmail.com" required/>
             <input type="number" name="phoneNumber" id="phoneNumber" placeholder="Phone: 2547********" required/>
             <input type="text" name="address" id="address" placeholder="Address" required/>
-            <select name="institution" id="institution" required>
-                <option selected disabled> Select your hospital</option>
+            <!-- <select name="institution" id="institution" required>
+                <option selected disabled> Select your hospital</option> -->
                 <?php
-                include_once 'conn.php';
-                 $stmt = "SELECT * FROM regInstitutions ";
-                 $sql = mysqli_query($conn, $stmt);
-                 $specialties = array();
-                 if (mysqli_num_rows($sql) > 0) {
-                     while ($row = mysqli_fetch_array($sql)) {
+                // include_once 'conn.php';
+                //  $stmt = "SELECT * FROM regInstitutions ";
+                //  $sql = mysqli_query($conn, $stmt);
+                //  $specialties = array();
+                //  if (mysqli_num_rows($sql) > 0) {
+                //      while ($row = mysqli_fetch_array($sql)) {
                      ?>
-                    <option><?php echo $row['institutionName'];?></option>
+                    <!-- <option> -->
+                        <?php 
+                    // echo $row['institutionName'];
+                    ?>
+                    <!-- </option> -->
                 <?php
-                }}
+                // }}
                 ?>
-            </select>
+            <!-- </select> -->
             <!--
                 condition will be determined by the doctor    
             <select name="condition[]" multiple required>

@@ -12,9 +12,9 @@ if(isset($_POST['register']))
 	 $firstName = htmlspecialchars($_POST['firstName']);
      $lastName = htmlspecialchars($_POST['lastName']);
 	 $emailAddress = filter_var($_POST['emailAddress'], FILTER_SANITIZE_EMAIL);
-     echo $_POST['phoneNumber'];
+    //  echo $_POST['phoneNumber'];
      $phoneNumber = htmlspecialchars($_POST['phoneNumber']);
-     $institution = htmlspecialchars($_POST['institution']);
+    //  $institution = htmlspecialchars($_POST['institution']);
      $password = htmlspecialchars($_POST['password']);
     
     //encrypt the password to insert
@@ -49,8 +49,8 @@ if(isset($_POST['register']))
             </script>';
         }
      //statement to enter values into the registration table in the database
-	 $sql = "INSERT INTO regPatients (firstName, lastName, emailAddress, institution,  password, address, age, gender, phoneNumber )
-	 VALUES ('$firstName','$lastName', '$emailAddress','$institution', '$password', '$address', '$age', '$gender', '$phoneNumber')";
+	 $sql = "INSERT INTO regPatients (firstName, lastName, emailAddress,  password, address, age, gender, phoneNumber )
+	 VALUES ('$firstName','$lastName', '$emailAddress', '$password', '$address', '$age', '$gender', '$phoneNumber')";
 
      //if sql query is executed...
 	 if (mysqli_query($conn, $sql)) {
