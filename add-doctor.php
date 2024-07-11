@@ -45,7 +45,7 @@
                     <option selected disabled> Select specialties</option>
                     <?php
                     $id=$_SESSION["id"];
-                    $stmt = "SELECT * FROM regInstitutions WHERE id='$id'";
+                    $stmt = "SELECT * FROM reginstitutions WHERE id='$id'";
                     $sql = mysqli_query($conn, $stmt);
                     $specialties = array();
                     if (mysqli_num_rows($sql) > 0) {

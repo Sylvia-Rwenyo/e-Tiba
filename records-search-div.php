@@ -25,7 +25,7 @@
                                     {
                                         $bool_value = 1;
                                         $keyword = $_GET['keyword'];
-                                        $sql = "SELECT id, firstName, emailAddress FROM regPatients WHERE emailAddress LIKE ? or firstName LIKE ?'";
+                                        $sql = "SELECT id, firstName, emailAddress FROM regpatients WHERE emailAddress LIKE ? or firstName LIKE ?'";
                                         $stmt = $conn->prepare($sql);
                                         $stmt->execute([$keyword,$keyword]);
                                         $sql = $stmt;

@@ -34,7 +34,7 @@
                         <div>
                             <button  class="btn btn-lg btn-danger dialog-box-btn" onclick="logIn2()">x</button>
                         </div>
-                        <p>Invalid password or email address. Please try again</p> 
+                        <p>Invalid password or email address. Please try again!</p> 
                     </div>
                     <?php
                 }
@@ -63,24 +63,24 @@
                     ?>
                      <div class="alertDiv">
                         <button  class="btn btn-lg btn-danger dialog-box-btn" onclick="register2()">x</button>
-                        <p>Phone number already registered</p>  
+                        <p>Phone number already registered!</p>  
                     </div>
                        <?php
                 }
                 if($_GET['e'] == 3){   
                 ?>
-                     <div class="alertDiv">
+                    <div class="alertDiv">
                         <button  class="btn btn-lg btn-danger dialog-box-btn" onclick="register2()">x</button>
-                        <p>Email address already registered</p> 
+                        <p>Email address already registered!</p> 
                     </div>
                     <?php
                 }
                 if($_GET['e'] == 4){   
                 ?>
-                 <div class="alertDiv">
-                    <button  class="btn btn-lg btn-danger dialog-box-btn" onclick="register2()">x</button>
-                    <p>Password must be 8 - 20 characters long and include an uppercase letter, a number, and a symbol. Password must not include spaces.</p>  
-                </div>
+                    <div class="alertDiv">
+                        <button  class="btn btn-lg btn-danger dialog-box-btn" onclick="register2()">x</button>
+                        <p>Password format incorrect!</p>  
+                    </div>
                 <?php
                 }
             }
@@ -88,26 +88,20 @@
     ?>
         <div class="welcome-msg">
             <h3>Welcome to nafuu</h3>
-            <p>Please fill the form below with accurate information as this is imporant for future identification with your doctors.</p>
+            <!--<p>Please read our <a href="privacy-policy.php"><i>Privacy Policy</i></a> before signing up to know how your information will be used.</p>-->
         </div>
         <form method="POST" action="controls/processing.php" id="reg-form">
-            <input type="text" name="firstName" id="firstName" placeholder="First name" required/>
-            <input type="text" name="lastName" id="lastName" placeholder="Last name" required/>
-            <input type="number" name="age" id="age" placeholder="Your age" required/>
-            <select name="gender" id="gender" required>
-                <option selected disabled> Select gender</option>
-                <option>Female</option>
-                <option>Male</option>
-                <option>Prefer not to say</option>
-            </select>
-            <input type="email" name="emailAddress" id="emailAddress" placeholder="Email Address e.g youremail@gmail.com" required/>
-            <input type="number" name="phoneNumber" id="phoneNumber" placeholder="Phone: 2547********" required/>
-            <input type="text" name="address" id="address" placeholder="Address" required/>
-            <select name="institution" id="institution" required>
+            <label for="fullName">Enter your full names</label>
+            <input type="text" name="fullName" id="fullName" placeholder="your name" required/>
+            <!--<input type="number" name="age" id="age" placeholder="Your age" required/>-->
+            <label for="emailAddress">Enter your email</label>
+            <input type="email" name="emailAddress" id="emailAddress" placeholder="youremail@gmail.com" required/>
+            <!--<input type="number" name="phoneNumber" id="phoneNumber" placeholder="Phone: 2547********" required/>-->
+            <!--<select name="institution" id="institution" required>
                 <option selected disabled> Select your hospital</option>
                 <?php
                 include_once 'conn.php';
-                 $stmt = "SELECT * FROM regInstitutions ";
+                 $stmt = "SELECT * FROM reginstitutions ";
                  $sql = mysqli_query($conn, $stmt);
                  $specialties = array();
                  if (mysqli_num_rows($sql) > 0) {
@@ -117,15 +111,8 @@
                 <?php
                 }}
                 ?>
-            </select>
-            <!--
-                condition will be determined by the doctor    
-            <select name="condition[]" multiple required>
-                <option selected disabled> Select your condition</option>
-                <option>Condition A</option>
-                <option>Condition B</option>
-                <option>Condition C</option>
-            </select> -->
+            </select>-->
+            <label for="password">Setup your password</label>
             <div id="pswdDiv">
                 <input type="password" id="reg-pw"  name="password" placeholder="password" required/>
                 <span id="showPswd" onclick="pswdDisplay()">
@@ -274,7 +261,7 @@ document.getElementById('reg-form').onsubmit = (event) => {
     }
 
 
-    // store registration information for one session
+    store registration information for one session
     let name = document.getElementById('firstName').value + ' '+ document.getElementById('lastName').value;
     let emailAddress = document.getElementById('emailAddress').value;
     let phoneNumber = document.getElementById('phoneNumber').value;

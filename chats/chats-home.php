@@ -59,7 +59,7 @@
                                         {
                                             $keyword = $_GET['keyword'];
                                             if($current_user_category == 'doctor'){
-                                                $sql = "SELECT id, firstName, emailAddress FROM regPatients WHERE emailAddress LIKE ? or firstName LIKE ?";
+                                                $sql = "SELECT id, firstName, emailAddress FROM regpatients WHERE emailAddress LIKE ? or firstName LIKE ?";
                                                 $stmt = $conn->prepare($sql);
                                                 $stmt->execute([$keyword,$keyword]);
                                                 $sql = $stmt;

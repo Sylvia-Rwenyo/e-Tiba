@@ -29,7 +29,7 @@
         <?php
         $i = 0;
         $pID = isset($_GET['p']) ? $_GET['p'] : $_SESSION['id'];
-        $stmt3 = mysqli_query($conn, "SELECT * FROM regPatients where id = '$pID' ") or die(mysqli_error($conn));
+        $stmt3 = mysqli_query($conn, "SELECT * FROM regpatients where id = '$pID' ") or die(mysqli_error($conn));
         if ($stmt3) {
             if (mysqli_num_rows($stmt3) > 0) {
                 $i = 0;

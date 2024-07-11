@@ -28,7 +28,7 @@
             <?php
             $i=0;
             $pID = isset($_GET['p']) ? $_GET['p'] : $_SESSION['id'];
-            $stmt = mysqli_query($conn,"SELECT * FROM regPatients where id='$pID'");
+            $stmt = mysqli_query($conn,"SELECT * FROM regpatients where id='$pID'");
             if (mysqli_num_rows($stmt) > 0) {
                 $i=0;
                 while($result = mysqli_fetch_array($stmt)) {
