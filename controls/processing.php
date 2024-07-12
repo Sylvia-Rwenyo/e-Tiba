@@ -12,7 +12,7 @@ if(isset($_POST['register']))
 	 $fullName = htmlspecialchars($_POST['fullName']);
      list($firstName, $lastName) = explode(' ',$fullName, 2);
 	 $emailAddress = filter_var($_POST['emailAddress'], FILTER_SANITIZE_EMAIL);
-     echo $_POST['phoneNumber'];
+     //echo $_POST['phoneNumber'];
      //$phoneNumber = htmlspecialchars($_POST['phoneNumber']);
      //$institution = htmlspecialchars($_POST['institution']);
      $password = htmlspecialchars($_POST['password']);

@@ -83,6 +83,14 @@
                     </div>
                 <?php
                 }
+                if($_GET['e'] == 5){   
+                    ?>
+                        <div class="alertDiv">
+                            <button  class="btn btn-lg btn-danger dialog-box-btn" onclick="register2()">x</button>
+                            <p>Name should have more than one word!</p>  
+                        </div>
+                    <?php
+                    }
             }
         // show registration form
     ?>
@@ -151,7 +159,7 @@
     let showPswd = document.getElementById('showPswd');
     let password = document.getElementById("reg-pw");
     
-    function pswdDisplay(){
+function pswdDisplay(){
     if(password.type == "text"){
         password.type = "password";
         showPswd.innerHTML = '<i class="fa fa-eye-slash"></i>';
@@ -235,7 +243,16 @@ password.oninput = function(){
         warnings[4].style.color = "green";
     }
 }
+
 document.getElementById('reg-form').onsubmit = (event) => {
+    let fullNameValue = document.getElementById("fullName").value;
+    let wordCount = fullNameValue.trim().split(/\s+/).length;
+    //if name entered has less than two words, stop operation
+    if (wordCount < 2){
+        event.preventDefault();
+        window.location.href = "register.php?e=5";
+    }
+
     let passwordValue = password.value;
 
     // Regular expressions to check for upper case letters, numbers, symbols, and spaces
@@ -261,23 +278,23 @@ document.getElementById('reg-form').onsubmit = (event) => {
     }
 
 
-    store registration information for one session
-    let name = document.getElementById('firstName').value + ' '+ document.getElementById('lastName').value;
+    //store registration information for one session
+    let name = document.getElementById('fullName').value ;
     let emailAddress = document.getElementById('emailAddress').value;
-    let phoneNumber = document.getElementById('phoneNumber').value;
-    let age = document.getElementById('age').value;
-    let gender = document.getElementById('gender').value;
-    let address = document.getElementById('address').value;
-    let institution = document.getElementById('institution').value;
+    //let phoneNumber = document.getElementById('phoneNumber').value;
+    //let age = document.getElementById('age').value;
+    //let gender = document.getElementById('gender').value;
+    //let address = document.getElementById('address').value;
+    //let institution = document.getElementById('institution').value;
 
 
     sessionStorage.setItem("name", name);
-    sessionStorage.setItem("phoneNumber", phoneNumber);
+    //sessionStorage.setItem("phoneNumber", phoneNumber);
     sessionStorage.setItem("emailAddress", emailAddress);
-    sessionStorage.setItem("age", age);
-    sessionStorage.setItem("gender", gender);
-    sessionStorage.setItem("address", address);
-    sessionStorage.setItem("institution", institution);
+    //sessionStorage.setItem("age", age);
+    //sessionStorage.setItem("gender", gender);
+    //sessionStorage.setItem("address", address);
+    //sessionStorage.setItem("institution", institution);
 };
 
 const privacy_checkbox = document.getElementById('checkbox');
