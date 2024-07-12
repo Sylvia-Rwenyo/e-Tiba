@@ -36,7 +36,7 @@
                 while ($result = mysqli_fetch_array($stmt3)) {
                     ?>
                     <h2 style="width: 30%; margin-left: 0;"><?php echo $result["firstName"] . ' ' . $result["lastName"] ?></h2>
-                    <h4 style="margin-left: 0;"><strong>Contact number:</strong> <?php echo $result["phoneNumber"] ?></h4>
+                    <!--<h4 style="margin-left: 0;"><strong>Contact number:</strong> <?php echo $result["phoneNumber"] ?></h4>-->
                     <table style="margin-left: 0;">
                         <tr>
                             <th>Registration Date</th>
