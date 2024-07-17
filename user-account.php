@@ -30,11 +30,11 @@
                 $id = $_SESSION['id'];
                 $stmt ='';
                 if( $_SESSION['category'] == 'patient'){
-                $stmt .="SELECT * FROM  regPatients where id='$id'";
+                $stmt .="SELECT * FROM  regpatients where id='$id'";
                 }else if ( $_SESSION['category'] == 'doctor') {
-                $stmt .="SELECT * FROM regDoctors where id='$id'";
+                $stmt .="SELECT * FROM regdoctors where id='$id'";
             }else if( $_SESSION['category'] == 'hospital') {
-                $stmt .="SELECT * FROM regInstitutions where id='$id'";
+                $stmt .="SELECT * FROM reginstitutions where id='$id'";
             }
             $records = mysqli_query($conn, $stmt);
              if(mysqli_num_rows($records) > 0){
@@ -75,11 +75,11 @@
             <?php 
             $records;
             if( $_SESSION['category'] == 'patient'){
-                $records = mysqli_query($conn,"SELECT * FROM  regPatients where id='$id'");
+                $records = mysqli_query($conn,"SELECT * FROM  regpatients where id='$id'");
                 }else if ( $_SESSION['category'] == 'doctor') {
-                $records = mysqli_query($conn,"SELECT * FROM regDoctors where id='$id'");
+                $records = mysqli_query($conn,"SELECT * FROM regdoctors where id='$id'");
                 }else if( $_SESSION['category'] == 'hospital') {
-                $records = mysqli_query($conn,"SELECT * FROM regInstitutions where id='$id'");
+                $records = mysqli_query($conn,"SELECT * FROM reginstitutions where id='$id'");
                 }  
                 if (mysqli_num_rows($records) > 0) {
                 $i=0;

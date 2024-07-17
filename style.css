@@ -432,7 +432,7 @@
 .check-box-container{
     display: block;
     position: relative;
-    padding-left: 35px;
+    /* padding-left: 35px; */
     margin-bottom: 12px;
     cursor: pointer;
     font-size: 22px;
@@ -519,11 +519,18 @@
     border-radius: 5px;
 }
 .reg-body form div input{
-    /* margin-left: 0.5em;
-    margin-right: 0.5em; */
     width: 90%;
     margin: 0;
     border: none;
+}
+#patient-names{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    background: transparent;
+}
+#patient-names input{
+    width: 47.5%;
 }
 .reg-body form div span{
     padding-top: 0.75em;
@@ -601,7 +608,7 @@
     margin-right: 5%;
 }
 
-.reg-body form div input:focus, #editingProfile div input:focus{
+.reg-body form div input:focus, #patient-names input:focus, #editingProfile div input:focus{
     outline: none;
 }
 .reg-body .pos-btn, #editingProfile .pos-btn, #dosage-reg .pos-btn{
@@ -609,7 +616,7 @@
     height: 2em;
     border-radius: 5px;
     padding: 0;
-    margin-left: 40%;
+    margin-left: 30%;
 }
 @media screen and (max-width:500px){
     .reg-body .pos-btn, #editingProfile .pos-btn, #dosage-reg .pos-btn{

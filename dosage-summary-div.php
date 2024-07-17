@@ -7,7 +7,7 @@
         else{
             echo "<style>.dosage_records {display:none}</style>";
         }
-        $resultPost = mysqli_query($conn,"SELECT * FROM regPatients  WHERE id = '$pID'");
+        $resultPost = mysqli_query($conn,"SELECT * FROM regpatients  WHERE id = '$pID'");
         while($row = mysqli_fetch_array($resultPost)) {
             $firstName = $row['firstName'];
         }
