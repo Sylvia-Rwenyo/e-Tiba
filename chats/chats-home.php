@@ -66,7 +66,7 @@
 
                                             }
                                             elseif($current_user_category == 'patient'){
-                                                $sql = "SELECT id, firstName, emailAddress FROM regDoctors WHERE emailAddress LIKE ? or firstName LIKE ?";
+                                                $sql = "SELECT id, firstName, emailAddress FROM regdoctors WHERE emailAddress LIKE ? or firstName LIKE ?";
                                                 $stmt = $conn->prepare($sql);
                                                 $stmt->execute([$keyword,$keyword]);
                                                 $sql = $stmt;

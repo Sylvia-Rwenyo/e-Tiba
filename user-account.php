@@ -32,7 +32,7 @@
                 if( $_SESSION['category'] == 'patient'){
                 $stmt .="SELECT * FROM  regpatients where id='$id'";
                 }else if ( $_SESSION['category'] == 'doctor') {
-                $stmt .="SELECT * FROM regDoctors where id='$id'";
+                $stmt .="SELECT * FROM regdoctors where id='$id'";
             }else if( $_SESSION['category'] == 'hospital') {
                 $stmt .="SELECT * FROM reginstitutions where id='$id'";
             }
@@ -76,7 +76,7 @@
             if( $_SESSION['category'] == 'patient'){
                 $records = mysqli_query($conn,"SELECT * FROM  regpatients where id='$id'");
                 }else if ( $_SESSION['category'] == 'doctor') {
-                $records = mysqli_query($conn,"SELECT * FROM regDoctors where id='$id'");
+                $records = mysqli_query($conn,"SELECT * FROM regdoctors where id='$id'");
                 }else if( $_SESSION['category'] == 'hospital') {
                 $records = mysqli_query($conn,"SELECT * FROM reginstitutions where id='$id'");
                 }  

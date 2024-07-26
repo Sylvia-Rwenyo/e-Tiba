@@ -7,7 +7,8 @@
     <link rel="stylesheet" href="style.css"></link>
     <link rel="icon" href="favicon.ico" />
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">    <title>Join nafuu</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">   
+    <title>Welcome to Nafuu</title>
     <script src="https://use.fontawesome.com/1d95bf24b3.js"></script>
 </head>
 <body class="reg-body">
@@ -40,6 +41,7 @@
                 }
                 }}
             ?>
+            
             <form method="POST" action="controls/processing.php">
                 <input type="text" name="emailAddress" placeholder="Email Address" required/>
                 <div id="pswdDiv">
@@ -59,14 +61,6 @@
                     display: block;
                 }
             </style>';
-                if($_GET['e'] == 2){                
-                    ?>
-                     <div class="alertDiv">
-                        <button  class="btn btn-lg btn-danger dialog-box-btn" onclick="register2()">x</button>
-                        <p>Phone number already registered!</p>  
-                    </div>
-                       <?php
-                }
                 if($_GET['e'] == 3){   
                 ?>
                     <div class="alertDiv">
@@ -96,31 +90,14 @@
     ?>
         <div class="welcome-msg">
             <h3>Welcome to nafuu</h3>
-            <!--<p>Please read our <a href="privacy-policy.php"><i>Privacy Policy</i></a> before signing up to know how your information will be used.</p>-->
+            <p>Please fill the form below with genuine information.</p>
         </div>
         <form method="POST" action="controls/processing.php" id="reg-form">
-            <label for="fullName">Enter your full names</label>
-            <input type="text" name="fullName" id="fullName" placeholder="your name" required/>
-            <!--<input type="number" name="age" id="age" placeholder="Your age" required/>-->
-            <label for="emailAddress">Enter your email</label>
-            <input type="email" name="emailAddress" id="emailAddress" placeholder="youremail@gmail.com" required/>
-            <!--<input type="number" name="phoneNumber" id="phoneNumber" placeholder="Phone: 2547********" required/>-->
-            <!--<select name="institution" id="institution" required>
-                <option selected disabled> Select your hospital</option>
-                <?php
-                include_once 'conn.php';
-                 $stmt = "SELECT * FROM reginstitutions ";
-                 $sql = mysqli_query($conn, $stmt);
-                 $specialties = array();
-                 if (mysqli_num_rows($sql) > 0) {
-                     while ($row = mysqli_fetch_array($sql)) {
-                     ?>
-                    <option><?php echo $row['institutionName'];?></option>
-                <?php
-                }}
-                ?>
-            </select>-->
-            <label for="password">Setup your password</label>
+            <div id="patient-names">
+                <input type="text" name="firstName" id="firstName" placeholder="First name" required/>
+                <input type="text" name="lastName" id="lastName" placeholder="Last name" required/>
+            </div>
+            <input type="email" name="emailAddress" id="emailAddress" placeholder="Email Address e.g youremail@gmail.com" required/>
             <div id="pswdDiv">
                 <input type="password" id="reg-pw"  name="password" placeholder="password" required/>
                 <span id="showPswd" onclick="pswdDisplay()">
@@ -135,11 +112,12 @@
                 <label class="pswd-warning"><i class="fa fa-check"></i>Does not include spaces</label>
             </div>
             <label class="check-box-container">
-                I have read the <a href="privacy-policy.php"><i>Privacy Policy</i></a>
                 <input type="checkbox" id="checkbox"/>
                 <span class="checkmark"></span>
+                I have read and agree to the <a href="privacy-policy.php"><i>privacy policy</i></a>
             </label>
-            <input type="submit" value="submit" name="register" class="pos-btn" id="register" disabled/>
+
+            <input type="submit" value="submit" name="register" class="pos-btn" id="submit-btn" disabled/>
         </form>
     <?php
     } 
@@ -281,20 +259,10 @@ document.getElementById('reg-form').onsubmit = (event) => {
     //store registration information for one session
     let name = document.getElementById('fullName').value ;
     let emailAddress = document.getElementById('emailAddress').value;
-    //let phoneNumber = document.getElementById('phoneNumber').value;
-    //let age = document.getElementById('age').value;
-    //let gender = document.getElementById('gender').value;
-    //let address = document.getElementById('address').value;
-    //let institution = document.getElementById('institution').value;
 
 
     sessionStorage.setItem("name", name);
-    //sessionStorage.setItem("phoneNumber", phoneNumber);
     sessionStorage.setItem("emailAddress", emailAddress);
-    //sessionStorage.setItem("age", age);
-    //sessionStorage.setItem("gender", gender);
-    //sessionStorage.setItem("address", address);
-    //sessionStorage.setItem("institution", institution);
 };
 
 const privacy_checkbox = document.getElementById('checkbox');

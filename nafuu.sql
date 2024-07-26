@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 03, 2024 at 04:45 PM
--- Server version: 10.4.28-MariaDB
--- PHP Version: 8.0.28
+-- Generation Time: Apr 03, 2024 at 01:34 PM
+-- Server version: 10.4.32-MariaDB
+-- PHP Version: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -367,7 +367,7 @@ CREATE TABLE `regpatients` (
   `address` varchar(200) NOT NULL,
   `age` int(11) NOT NULL,
   `gender` varchar(10) NOT NULL,
-  `phoneNumber` int(12) NOT NULL,
+  `phoneNumber` varchar(12) NOT NULL,
   `status` int(11) NOT NULL,
   `profilePhoto` blob NOT NULL,
   `date_registered` datetime NOT NULL DEFAULT current_timestamp(),
@@ -378,19 +378,20 @@ CREATE TABLE `regpatients` (
 -- Dumping data for table `regpatients`
 --
 
-INSERT INTO `regpatients` (`id`, `firstName`, `lastName`, `emailAddress`, `institution`, `password`, `illness`, `address`, `age`, `gender`, `phoneNumber`, `status`, `profilePhoto`) VALUES
-(6, 'khj', 'jh', '646', 'mediheal hospital', 'BIw6HeLqdkTIjmBI8zeHqg==', 'Array', '456', 56, 'Female', 0, 0, ''),
-(11, 'amsnfc', ' SDNF', 'rtaer', 'mediheal hospital', 'xbytrGCr+Gk6Bd4IHkKU8A==', 'Condition A', '1231', 34, 'Male', 2313, 0, ''),
-(13, 'berclay', 'Sprouts', 'berclaym@gmail.com', 'mediheal hospital', '4XnLuIpnX7JL5i3plnywyg==', 'Condition B', 'Nairobi', 25, 'Male', 722222222, 0, ''),
-(14, 'Patient', 'User', 'patient@user.com', 'mediheal hospital', 'UUE5/sK9A04FfiwN4V9gGw==', '', '12333', 23, 'Male', 765666444, 0, ''),
-(15, 'First', 'Patient', 'first@patient.com', 'Hospital', 'Z/ZDFdapcU6fnzEozLWvQ093VRvhzlEt68LqEYR9clI=', '', '12312', 30, 'Male', 2147483647, 0, ''),
-(19, 'patientuser', 'userpatient', 'patientuser@userpatient.com', 'Hospital', 'w5+sMmyw0J8THP0Bs53mEA==', '', '34272', 20, 'Male', 782873262, 0, ''),
-(20, 'Lady', 'Lady', 'lady@lady1.com', 'Nafuu Hospital', NULL, 'Condition B', '12313', 23, 'Female', 989888887, 0, ''),
-(21, 'Lady', 'Lady', 'lady@lady2.com', 'Nafuu Hospital', NULL, 'Condition B', '12313', 23, 'Female', 989888087, 0, ''),
-(22, 'Lady', 'Lady', 'lady@lady3.com', 'Nafuu Hospital', NULL, 'Condition B', '12313', 23, 'Female', 989878087, 0, ''),
-(23, 'Lady', 'Lady', 'lady@lady4.com', 'Nafuu Hospital', NULL, 'Condition B', '12313', 23, 'Female', 987878087, 0, ''),
-(24, 'Person', 'Person', 'person@person2.com', 'Hospital', NULL, 'Condition B', '12313', 30, 'Male', 676767888, 0, ''),
-(25, 'Person', 'Person', 'person@person1.com', 'Hospital', NULL, 'Condition B', '12313', 30, 'Male', 676769888, 0, '');
+INSERT INTO `regpatients` (`id`, `firstName`, `lastName`, `emailAddress`, `institution`, `password`, `illness`, `address`, `age`, `gender`, `phoneNumber`, `status`, `profilePhoto`, `date_registered`, `date_updated`) VALUES
+(6, 'khj', 'jh', '646', 'mediheal hospital', 'BIw6HeLqdkTIjmBI8zeHqg==', 'Array', '456', 56, 'Female', '0', 0, '', '2024-04-03 11:26:22', '2024-04-03 11:26:22'),
+(11, 'amsnfc', ' SDNF', 'rtaer', 'mediheal hospital', 'xbytrGCr+Gk6Bd4IHkKU8A==', 'Condition A', '1231', 34, 'Male', '2313', 0, '', '2024-04-03 11:26:22', '2024-04-03 11:26:22'),
+(13, 'berclay', 'Sprouts', 'berclaym@gmail.com', 'mediheal hospital', '4XnLuIpnX7JL5i3plnywyg==', 'Condition B', 'Nairobi', 25, 'Male', '722222222', 0, '', '2024-04-03 11:26:22', '2024-04-03 11:26:22'),
+(14, 'Patient', 'User', 'patient@user.com', 'mediheal hospital', 'UUE5/sK9A04FfiwN4V9gGw==', '', '12333', 23, 'Male', '765666444', 0, '', '2024-04-03 11:26:22', '2024-04-03 11:26:22'),
+(15, 'First', 'Patient', 'first@patient.com', 'Hospital', 'Z/ZDFdapcU6fnzEozLWvQ093VRvhzlEt68LqEYR9clI=', '', '12312', 30, 'Male', '2147483647', 0, '', '2024-04-03 11:26:22', '2024-04-03 11:26:22'),
+(19, 'patientuser', 'userpatient', 'patientuser@userpatient.com', 'Hospital', 'w5+sMmyw0J8THP0Bs53mEA==', '', '34272', 20, 'Male', '782873262', 0, '', '2024-04-03 11:26:22', '2024-04-03 11:26:22'),
+(20, 'Lady', 'Lady', 'lady@lady1.com', 'Nafuu Hospital', NULL, 'Condition B', '12313', 23, 'Female', '989888887', 0, '', '2024-04-03 11:26:22', '2024-04-03 11:26:22'),
+(21, 'Lady', 'Lady', 'lady@lady2.com', 'Nafuu Hospital', NULL, 'Condition B', '12313', 23, 'Female', '989888087', 0, '', '2024-04-03 11:26:22', '2024-04-03 11:26:22'),
+(22, 'Lady', 'Lady', 'lady@lady3.com', 'Nafuu Hospital', NULL, 'Condition B', '12313', 23, 'Female', '989878087', 0, '', '2024-04-03 11:26:22', '2024-04-03 11:26:22'),
+(23, 'Lady', 'Lady', 'lady@lady4.com', 'Nafuu Hospital', NULL, 'Condition B', '12313', 23, 'Female', '987878087', 0, '', '2024-04-03 11:26:22', '2024-04-03 11:26:22'),
+(24, 'Person', 'Person', 'person@person2.com', 'Hospital', NULL, 'Condition B', '12313', 30, 'Male', '676767888', 0, '', '2024-04-03 11:26:22', '2024-04-03 11:26:22'),
+(25, 'Person', 'Person', 'person@person1.com', 'Hospital', NULL, 'Condition B', '12313', 30, 'Male', '676769888', 0, '', '2024-04-03 11:26:22', '2024-04-03 11:26:22'),
+(27, 'Marie', 'Curie', 'marie@curie.com', 'New Hospital', 'ioNmNr3RoHqrmOlPkW7ABA==', '', '12345', 24, 'Female', '254667889009', 0, '', '2024-04-03 14:33:50', '2024-04-03 14:33:50');
 
 -- --------------------------------------------------------
 
@@ -551,7 +552,7 @@ ALTER TABLE `reginstitutions`
 -- AUTO_INCREMENT for table `regpatients`
 --
 ALTER TABLE `regpatients`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 
 --
 -- AUTO_INCREMENT for table `reports`

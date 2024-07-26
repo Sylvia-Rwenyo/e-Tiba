@@ -51,7 +51,7 @@
                 if(isset($_GET['id'])){
                     $requested_doctor = $_GET['id'];
                 }
-                $query = "SELECT * FROM regDoctors WHERE id ='$requested_doctor'";
+                $query = "SELECT * FROM regdoctors WHERE id ='$requested_doctor'";
             }
             
             $result = mysqli_query($conn, $query) or die(mysqli_error($conn));
