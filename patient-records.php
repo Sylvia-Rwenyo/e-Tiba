@@ -54,7 +54,7 @@
             $institutionName = '';
             $records = '';
             if($_SESSION['category'] == 'doctor'){
-                $institutionName = mysqli_query($conn,"SELECT institution FROM regDoctors where id='$id'");
+                $institutionName = mysqli_query($conn,"SELECT institution FROM regdoctors where id='$id'");
                 if (mysqli_num_rows($institutionName) > 0) {
                     $i=0;
                     while($result = mysqli_fetch_array($institutionName)) {

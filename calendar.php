@@ -215,7 +215,7 @@
             $dateObject = DateTime::createFromFormat('Y-m-d', $dateString);
             if($_SESSION['category'] !== 'doctor'){
                 $doctorID = $_GET['dID'];
-                $sql = mysqli_query($conn,  "SELECT * FROM regDoctors WHERE id='$doctorID'");     
+                $sql = mysqli_query($conn,  "SELECT * FROM regdoctors WHERE id='$doctorID'");     
                 if (mysqli_num_rows($sql) > 0) {
                     while ($row = mysqli_fetch_array($sql)) {
                    

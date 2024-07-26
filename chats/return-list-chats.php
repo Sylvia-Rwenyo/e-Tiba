@@ -11,7 +11,7 @@
             $sql = "SELECT id, firstName, emailAddress FROM regpatients WHERE emailAddress LIKE '%{$keyword}%' or firstName LIKE '%{$keyword}%'";
         }
         elseif($current_user_category == 'patient'){
-            $sql = "SELECT id, firstName, emailAddress FROM regDoctors WHERE emailAddress LIKE '%{$keyword}%' or firstName LIKE '%{$keyword}%'";
+            $sql = "SELECT id, firstName, emailAddress FROM regdoctors WHERE emailAddress LIKE '%{$keyword}%' or firstName LIKE '%{$keyword}%'";
         }
         $result = mysqli_query($conn, $sql) or die(mysqli_error($conn));?>
         <ul class='list-group' style='margin-top:-15px;'>

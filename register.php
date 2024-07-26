@@ -41,6 +41,7 @@
                 }
                 }}
             ?>
+            
             <form method="POST" action="controls/processing.php">
                 <input type="text" name="emailAddress" placeholder="Email Address" required/>
                 <div id="pswdDiv">
@@ -60,14 +61,6 @@
                     display: block;
                 }
             </style>';
-                if($_GET['e'] == 2){                
-                    ?>
-                     <div class="alertDiv">
-                        <button  class="btn btn-lg btn-danger dialog-box-btn" onclick="register2()">x</button>
-                        <p>Phone number already registered!</p>  
-                    </div>
-                       <?php
-                }
                 if($_GET['e'] == 3){   
                 ?>
                     <div class="alertDiv">
@@ -97,48 +90,14 @@
     ?>
         <div class="welcome-msg">
             <h3>Welcome to nafuu</h3>
-            <!--<p>Please read our <a href="privacy-policy.php"><i>Privacy Policy</i></a> before signing up to know how your information will be used.</p>-->
+            <p>Please fill the form below with genuine information.</p>
         </div>
         <form method="POST" action="controls/processing.php" id="reg-form">
-            <input type="text" name="firstName" id="firstName" placeholder="First name" required/>
-            <input type="text" name="lastName" id="lastName" placeholder="Last name" required/>
-            <input type="number" name="age" id="age" placeholder="Your age" required/>
-            <select name="gender" id="gender" required>
-                <option selected disabled> Select gender</option>
-                <option>Female</option>
-                <option>Male</option>
-                <option>Prefer not to say</option>
-            </select>
+            <div id="patient-names">
+                <input type="text" name="firstName" id="firstName" placeholder="First name" required/>
+                <input type="text" name="lastName" id="lastName" placeholder="Last name" required/>
+            </div>
             <input type="email" name="emailAddress" id="emailAddress" placeholder="Email Address e.g youremail@gmail.com" required/>
-            <input type="number" name="phoneNumber" id="phoneNumber" placeholder="Phone: 2547********" required/>
-            <input type="text" name="address" id="address" placeholder="Address" required/>
-            <!-- <select name="institution" id="institution" required>
-                <option selected disabled> Select your hospital</option> -->
-                <?php
-                // include_once 'conn.php';
-                //  $stmt = "SELECT * FROM regInstitutions ";
-                //  $sql = mysqli_query($conn, $stmt);
-                //  $specialties = array();
-                //  if (mysqli_num_rows($sql) > 0) {
-                //      while ($row = mysqli_fetch_array($sql)) {
-                     ?>
-                    <!-- <option> -->
-                        <?php 
-                    // echo $row['institutionName'];
-                    ?>
-                    <!-- </option> -->
-                <?php
-                // }}
-                ?>
-            <!-- </select> -->
-            <!--
-                condition will be determined by the doctor    
-            <select name="condition[]" multiple required>
-                <option selected disabled> Select your condition</option>
-                <option>Condition A</option>
-                <option>Condition B</option>
-                <option>Condition C</option>
-            </select> -->
             <div id="pswdDiv">
                 <input type="password" id="reg-pw"  name="password" placeholder="password" required/>
                 <span id="showPswd" onclick="pswdDisplay()">
@@ -153,11 +112,12 @@
                 <label class="pswd-warning"><i class="fa fa-check"></i>Does not include spaces</label>
             </div>
             <label class="check-box-container">
-                I have read the <a href="privacy-policy.php"><i>Privacy Policy</i></a>
                 <input type="checkbox" id="checkbox"/>
                 <span class="checkmark"></span>
+                I have read and agree to the <a href="privacy-policy.php"><i>privacy policy</i></a>
             </label>
-            <input type="submit" value="submit" name="register" class="pos-btn" id="register" disabled/>
+
+            <input type="submit" value="submit" name="register" class="pos-btn" id="submit-btn" disabled/>
         </form>
     <?php
     } 
@@ -299,20 +259,10 @@ document.getElementById('reg-form').onsubmit = (event) => {
     //store registration information for one session
     let name = document.getElementById('fullName').value ;
     let emailAddress = document.getElementById('emailAddress').value;
-    //let phoneNumber = document.getElementById('phoneNumber').value;
-    //let age = document.getElementById('age').value;
-    //let gender = document.getElementById('gender').value;
-    //let address = document.getElementById('address').value;
-    //let institution = document.getElementById('institution').value;
 
 
     sessionStorage.setItem("name", name);
-    //sessionStorage.setItem("phoneNumber", phoneNumber);
     sessionStorage.setItem("emailAddress", emailAddress);
-    //sessionStorage.setItem("age", age);
-    //sessionStorage.setItem("gender", gender);
-    //sessionStorage.setItem("address", address);
-    //sessionStorage.setItem("institution", institution);
 };
 
 const privacy_checkbox = document.getElementById('checkbox');

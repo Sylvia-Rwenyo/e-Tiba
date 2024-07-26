@@ -78,11 +78,11 @@
         <?php
         if(isset($_GET['id'])){
             $requested_patient = $_GET['id'];
-            $records = "SELECT * FROM regDoctors where id = '$requested_patient'";
+            $records = "SELECT * FROM regdoctors where id = '$requested_patient'";
         }
         else{
             $username = $_SESSION['username'];
-            $records = mysqli_query($conn,"SELECT * FROM regDoctors where institution='$username'");
+            $records = mysqli_query($conn,"SELECT * FROM regdoctors where institution='$username'");
         }
         if (mysqli_num_rows($records) > 0) {
         $i=0;
