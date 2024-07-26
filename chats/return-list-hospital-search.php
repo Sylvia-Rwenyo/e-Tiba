@@ -6,7 +6,7 @@
     if(isset($_POST['search']))
     {
         $keyword = $_POST['search'];
-        $sql = "SELECT id, institutionName, emailAddress FROM regInstitutions WHERE emailAddress LIKE '%{$keyword}%' or institutionName LIKE '%{$keyword}%'";
+        $sql = "SELECT id, institutionName, emailAddress FROM reginstitutions WHERE emailAddress LIKE '%{$keyword}%' or institutionName LIKE '%{$keyword}%'";
         $result = mysqli_query($conn, $sql) or die(mysqli_error($conn));?>
         <ul class='list-group' style='margin-top:-15px;'>
         <?php 

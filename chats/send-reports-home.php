@@ -51,7 +51,7 @@
                                         if(isset($_GET['search']))
                                         {
                                             $keyword = $_GET['keyword'];
-                                            $sql = "SELECT * FROM regInstitutions WHERE emailAddress LIKE '$keyword' or institutionName LIKE '$keyword'";
+                                            $sql = "SELECT * FROM reginstitutions WHERE emailAddress LIKE '$keyword' or institutionName LIKE '$keyword'";
                                             
                                             $result = mysqli_query($conn, $sql) or die(mysqli_error($conn));
                                             while($rows = mysqli_fetch_array($result))

@@ -29,14 +29,14 @@
         <?php
         $i = 0;
         $pID = isset($_GET['p']) ? $_GET['p'] : $_SESSION['id'];
-        $stmt3 = mysqli_query($conn, "SELECT * FROM regPatients where id = '$pID' ") or die(mysqli_error($conn));
+        $stmt3 = mysqli_query($conn, "SELECT * FROM regpatients where id = '$pID' ") or die(mysqli_error($conn));
         if ($stmt3) {
             if (mysqli_num_rows($stmt3) > 0) {
                 $i = 0;
                 while ($result = mysqli_fetch_array($stmt3)) {
                     ?>
                     <h2 style="width: 30%; margin-left: 0;"><?php echo $result["firstName"] . ' ' . $result["lastName"] ?></h2>
-                    <h4 style="margin-left: 0;"><strong>Contact number:</strong> <?php echo $result["phoneNumber"] ?></h4>
+                    <!--<h4 style="margin-left: 0;"><strong>Contact number:</strong> <?php echo $result["phoneNumber"] ?></h4>-->
                     <table style="margin-left: 0;">
                         <tr>
                             <th>Registration Date</th>

@@ -247,7 +247,7 @@
             }   
                     }}}else{
                         $patientID = $_GET['pID'];
-                        $sql = mysqli_query($conn,  "SELECT * FROM regPatients WHERE id='$patientID'");     
+                        $sql = mysqli_query($conn,  "SELECT * FROM regpatients WHERE id='$patientID'");     
                         if (mysqli_num_rows($sql) > 0) {
                             while ($row = mysqli_fetch_array($sql)) {
                         ?>

@@ -8,7 +8,7 @@
         $keyword = $_POST['search'];
 
         if($current_user_category == 'doctor'){
-            $sql = "SELECT id, firstName, emailAddress FROM regPatients WHERE emailAddress LIKE '%{$keyword}%' or firstName LIKE '%{$keyword}%'";
+            $sql = "SELECT id, firstName, emailAddress FROM regpatients WHERE emailAddress LIKE '%{$keyword}%' or firstName LIKE '%{$keyword}%'";
         }
         elseif($current_user_category == 'patient'){
             $sql = "SELECT id, firstName, emailAddress FROM regDoctors WHERE emailAddress LIKE '%{$keyword}%' or firstName LIKE '%{$keyword}%'";

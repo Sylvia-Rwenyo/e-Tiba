@@ -191,17 +191,25 @@
     margin-left:4%;
     margin-top: 2.5%;
     border-radius:50%;
+    filter:drop-shadow(3px 3px 3px #e2ebf0) opacity(90%);
 }
 .intro-contacts a{
     margin-left:4%;
 }
 .intro-info{
+    display: flex;
+    flex-direction: row;
     width:90%;
     margin-left:4%;
     margin-top:5%;
     margin-bottom:5%;
     background-color: #fff;
     color:#35b6be;
+}
+@media screen and (max-width:900px){
+    .intro-info{
+        flex-direction: column;
+    }
 }
 .intro-info img{
     width:98%;
@@ -268,6 +276,15 @@
 @media screen and (max-width:500px) {
     .services-mini-div {
         margin: 5%;
+        font-size: 10px;
+    }
+    .services-mini-div h4{
+        margin: 1%;
+        font-size: 20px;
+    }
+    .services-mini-div h5{
+        margin: 1%;
+        font-size: 10px;
     }
 }
 #join-us .popuplinks{
@@ -433,6 +450,7 @@
     display: block;
     position: relative;
     padding-left: 35px;
+    margin-top: 18px;
     margin-bottom: 12px;
     cursor: pointer;
     font-size: 22px;
@@ -464,14 +482,12 @@
 }
 .alertDiv{
     display: none; /* Start with the overlay hidden */
-    margin-left: 20%;
-    width: 60%;
+    margin: 5%;
+    width: 95%;
     height: fit-content;
     background-color:rgba(64, 141, 206, 0.8); /* Semi-transparent black overlay */
-    z-index: 9999;
     padding: 1em;
-    font-size: 1.25em;
-    margin-top: 2.5%;
+    font-size: 1em;
 }
 
 .alertDiv a{
@@ -612,10 +628,17 @@
     margin-left: 40%;
 }
 @media screen and (max-width:500px){
-    .reg-body .pos-btn, #editingProfile .pos-btn, #dosage-reg .pos-btn{
+    .reg-body .pos-btn, #editingProfile .pos-btn, #dosage-reg .pos-btn {
         width: 5em;
         margin-left: 30%;
         font-size: 1em;
+    }
+    .CTA .neg-btn{
+        width: 6.5em;
+        height: fit-content;
+        margin-left: 5%;
+        font-size: 1.8em;
+        padding: 4.5%;
     }
 }
 #editingProfile .pos-btn{
@@ -636,41 +659,54 @@
 #transcript{
     display: block;
 }
-#buttonStyleTranscript {
-    color:black;
-    width:fit-content;
-    height:fit-content;
-    border:none;
-    padding: 10px;
-    background-color:#fbfac2;
-    border-radius:20px;
-}
-.btn-cancel {
-    color:white;
-    width:fit-content;
-    height:fit-content;
-    border:none;
-    padding: 10px;
-    background-color:red;
-    border-radius:40px;
-}
-.btn-cancel-trasncript{
-    color:white;
-    width:fit-content;
-    height:fit-content;
-    border:none;
-    padding: 10px;
-    background-color:red;
-    border-radius:20px;
-}
 .intro .banner .video-description {
     text-align: center;
     margin-top: 20%;
+}
+@media screen and (max-width:700px) {
+    .intro .banner .video-description {
+        width: 600px;
+        margin-left: 20px;
+    }
+}
+@media screen and (max-width:650px) {
+    .intro .banner .video-description {
+        width: 600px;
+        margin-left: 10px;
+    }
+}
+@media screen and (max-width:640px) {
+    .intro .banner .video-description {
+        width: 500px;
+        margin-left:30px;
+    }
+}
+@media screen and (max-width:550px) {
+    .intro .banner .video-description {
+        width: 500px;
+        margin-left: 15px;
+    }
+}
+@media screen and (max-width:530px) {
+    .intro .banner .video-description {
+        width: 450px;
+    }
 }
 @media screen and (max-width:500px) {
     .intro .banner .video-description {
         width: 400px;
     }
+}
+@media screen and (max-width:450px) {
+    .intro .banner .video-description {
+        width: 350px;
+    }
+}
+#video-description {
+    background-size:cover;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
 }
 .transcript {
     text-align: center;
@@ -695,13 +731,12 @@
     background-color: white;
     margin: 20px;
 }
-@media screen and (max-width:500px) {
+@media screen and (max-width:670px) {
     .transcript-small-div {
         display:flex;
         flex-direction: column;
         padding:2%;
         background-color: white;
-        margin: 2%;
     }
 }
 
@@ -751,12 +786,6 @@
     .transcript ul {
         margin-left: 5%;
     }
-}
-#video-description {
-    background-size:cover;
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
 }
 .button-links {
     text-decoration: none;

@@ -45,7 +45,7 @@
                     <option selected disabled> Select specialties</option>
                     <?php
                     $id=$_SESSION["id"];
-                    $stmt = "SELECT * FROM regInstitutions WHERE id='$id'";
+                    $stmt = "SELECT * FROM reginstitutions WHERE id='$id'";
                     $sql = mysqli_query($conn, $stmt);
                     $specialties = array();
                     if (mysqli_num_rows($sql) > 0) {
@@ -64,12 +64,11 @@
                 </select>
             <input type="text" name="phoneNumber" placeholder="Phone: 2547********"/>
             <input type="text" name="address" placeholder="address"/>
-            <p>Our <a href="privacy-policy.php"><i>Privacy Policy</i></a></p>
-            <label class="check-box-container">I have read the privacy policy
+            <label class="check-box-container">I have read the <a href="privacy-policy.php"><i>Privacy Policy</i></a>
                 <input type="checkbox" id="checkbox"/>
                 <span class="checkmark"></span>
             </label>
-            <input type="submit" value="submit" name="register-doc-by-partner" class="pos-btn"/>
+            <input type="submit" value="submit" name="register-doc-by-partner" class="pos-btn" id="submit-btn" disabled/>
         </form>
 </body>
 <script>

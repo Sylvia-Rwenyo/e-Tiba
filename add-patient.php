@@ -33,7 +33,7 @@
                 <option selected disabled> Select Patient Hospital</option>
                 <?php
                 include_once 'conn.php';
-                 $stmt = "SELECT * FROM regInstitutions ";
+                 $stmt = "SELECT * FROM reginstitutions ";
                  $sql = mysqli_query($conn, $stmt);
                  if (mysqli_num_rows($sql) > 0) {
                      while ($row = mysqli_fetch_array($sql)) {
@@ -49,12 +49,11 @@
                 <option>Condition B</option>
                 <option>Condition C</option>
             </select>
-            <p>Our <a href="privacy-policy.php"><i>Privacy Policy</i></a></p>
-            <label class="check-box-container">I have read the privacy policy
+            <label class="check-box-container">I have read the <a href="privacy-policy.php"><i>Privacy Policy</i></a>
                 <input type="checkbox" id="checkbox"/>
                 <span class="checkmark"></span>
             </label>
-            <input type="submit" value="submit" name="add-patient" class="pos-btn"/>
+            <input type="submit" value="submit" name="add-patient" class="pos-btn" id="submit-btn" disabled/>
     </form>
 </body>
 <script>

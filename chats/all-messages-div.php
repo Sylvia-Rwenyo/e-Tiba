@@ -14,7 +14,7 @@
         if(isset($_GET['id'])){
             $requested_patient = $_GET['id'];
         }
-        $query = "SELECT * FROM regPatients WHERE id ='$requested_patient'";
+        $query = "SELECT * FROM regpatients WHERE id ='$requested_patient'";
     }
     elseif($current_user_category == 'patient'){
         if(isset($_GET['id'])){

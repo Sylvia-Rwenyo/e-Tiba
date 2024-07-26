@@ -35,7 +35,7 @@
                         <div>
                             <button  class="btn btn-lg btn-danger dialog-box-btn" onclick="logIn2()">x</button>
                         </div>
-                        <p>Invalid password or email address. Please try again</p> 
+                        <p>Invalid password or email address. Please try again!</p> 
                     </div>
                     <?php
                 }
@@ -64,32 +64,40 @@
                     ?>
                      <div class="alertDiv">
                         <button  class="btn btn-lg btn-danger dialog-box-btn" onclick="register2()">x</button>
-                        <p>Phone number already registered</p>  
+                        <p>Phone number already registered!</p>  
                     </div>
                        <?php
                 }
                 if($_GET['e'] == 3){   
                 ?>
-                     <div class="alertDiv">
+                    <div class="alertDiv">
                         <button  class="btn btn-lg btn-danger dialog-box-btn" onclick="register2()">x</button>
-                        <p>Email address already registered</p> 
+                        <p>Email address already registered!</p> 
                     </div>
                     <?php
                 }
                 if($_GET['e'] == 4){   
                 ?>
-                 <div class="alertDiv">
-                    <button  class="btn btn-lg btn-danger dialog-box-btn" onclick="register2()">x</button>
-                    <p>Password must be 8 - 20 characters long and include an uppercase letter, a number, and a symbol. Password must not include spaces.</p>  
-                </div>
+                    <div class="alertDiv">
+                        <button  class="btn btn-lg btn-danger dialog-box-btn" onclick="register2()">x</button>
+                        <p>Password format incorrect!</p>  
+                    </div>
                 <?php
                 }
+                if($_GET['e'] == 5){   
+                    ?>
+                        <div class="alertDiv">
+                            <button  class="btn btn-lg btn-danger dialog-box-btn" onclick="register2()">x</button>
+                            <p>Name should have more than one word!</p>  
+                        </div>
+                    <?php
+                    }
             }
         // show registration form
     ?>
         <div class="welcome-msg">
             <h3>Welcome to nafuu</h3>
-            <p>Please fill the form below with accurate information as this is imporant for future identification with your doctors.</p>
+            <!--<p>Please read our <a href="privacy-policy.php"><i>Privacy Policy</i></a> before signing up to know how your information will be used.</p>-->
         </div>
         <form method="POST" action="controls/processing.php" id="reg-form">
             <input type="text" name="firstName" id="firstName" placeholder="First name" required/>
@@ -144,12 +152,12 @@
                 <label class="pswd-warning"><i class="fa fa-check"></i>Includes a symbol</label>
                 <label class="pswd-warning"><i class="fa fa-check"></i>Does not include spaces</label>
             </div>
-            <p>Our <a href="privacy-policy.php"><i>Privacy Policy</i></a></p>
-            <label class="check-box-container">I have read the privacy policy
+            <label class="check-box-container">
+                I have read the <a href="privacy-policy.php"><i>Privacy Policy</i></a>
                 <input type="checkbox" id="checkbox"/>
                 <span class="checkmark"></span>
             </label>
-            <input type="submit" value="submit" name="register" class="pos-btn" id="submit-btn" disabled/>
+            <input type="submit" value="submit" name="register" class="pos-btn" id="register" disabled/>
         </form>
     <?php
     } 
@@ -169,7 +177,7 @@
     let showPswd = document.getElementById('showPswd');
     let password = document.getElementById("reg-pw");
     
-    function pswdDisplay(){
+function pswdDisplay(){
     if(password.type == "text"){
         password.type = "password";
         showPswd.innerHTML = '<i class="fa fa-eye-slash"></i>';
@@ -253,7 +261,16 @@ password.oninput = function(){
         warnings[4].style.color = "green";
     }
 }
+
 document.getElementById('reg-form').onsubmit = (event) => {
+    let fullNameValue = document.getElementById("fullName").value;
+    let wordCount = fullNameValue.trim().split(/\s+/).length;
+    //if name entered has less than two words, stop operation
+    if (wordCount < 2){
+        event.preventDefault();
+        window.location.href = "register.php?e=5";
+    }
+
     let passwordValue = password.value;
 
     // Regular expressions to check for upper case letters, numbers, symbols, and spaces
@@ -279,27 +296,27 @@ document.getElementById('reg-form').onsubmit = (event) => {
     }
 
 
-    // store registration information for one session
-    let name = document.getElementById('firstName').value + ' '+ document.getElementById('lastName').value;
+    //store registration information for one session
+    let name = document.getElementById('fullName').value ;
     let emailAddress = document.getElementById('emailAddress').value;
-    let phoneNumber = document.getElementById('phoneNumber').value;
-    let age = document.getElementById('age').value;
-    let gender = document.getElementById('gender').value;
-    let address = document.getElementById('address').value;
-    let institution = document.getElementById('institution').value;
+    //let phoneNumber = document.getElementById('phoneNumber').value;
+    //let age = document.getElementById('age').value;
+    //let gender = document.getElementById('gender').value;
+    //let address = document.getElementById('address').value;
+    //let institution = document.getElementById('institution').value;
 
 
     sessionStorage.setItem("name", name);
-    sessionStorage.setItem("phoneNumber", phoneNumber);
+    //sessionStorage.setItem("phoneNumber", phoneNumber);
     sessionStorage.setItem("emailAddress", emailAddress);
-    sessionStorage.setItem("age", age);
-    sessionStorage.setItem("gender", gender);
-    sessionStorage.setItem("address", address);
-    sessionStorage.setItem("institution", institution);
+    //sessionStorage.setItem("age", age);
+    //sessionStorage.setItem("gender", gender);
+    //sessionStorage.setItem("address", address);
+    //sessionStorage.setItem("institution", institution);
 };
 
 const privacy_checkbox = document.getElementById('checkbox');
-const submit_btn = document.getElementById('submit-btn');
+const submit_btn = document.getElementById('register');
 
 const toggleBtnState = function(event){
     submit_btn.disabled = !event.target.checked;

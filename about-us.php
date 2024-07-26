@@ -55,7 +55,7 @@
       </li>
     </ul>
     <div class="transcript-small-div">
-      <div style="margin:20px;">
+      <div>
         <div class="transcript-mini-div">
           <h4>Electronic Health Records</h4> 
           <p>The patient’s information such as test results and history are uploaded and made available to the doctor. </p>
@@ -90,7 +90,7 @@
         </div>
       </div>
     </div>
-    <p>Read our <a href="privacy-policy.php"><i>Privacy Policy</i></a></p>
+    <p>Read our <a href="privacy-policy.php"><i>Privacy Policy</i></a> to understand more about the data we collect and how we use this data.</p>
   </div>
 </body>
 </html>

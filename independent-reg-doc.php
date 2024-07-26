@@ -51,12 +51,11 @@
         <input type="hidden"  name="institution" value="<?php @session_start(); if(isset($_SESSION['category']))
         {echo $_SESSION['username'];}else{ echo 'none';}
         ?>"/>
-        <p>Our <a href="privacy-policy.php"><i>Privacy Policy</i></a></p>
-        <label class="check-box-container">I have read the privacy policy
+        <label class="check-box-container">I have read the <a href="privacy-policy.php"><i>Privacy Policy</i></a>
             <input type="checkbox" id="checkbox"/>
             <span class="checkmark"></span>
         </label>
-        <input type="submit" value="submit" name="register-doc" class="pos-btn"/>
+        <input type="submit" value="submit" name="register-doc" class="pos-btn" id="submit-btn" disabled/>
     </form>
 </body>
 <script>

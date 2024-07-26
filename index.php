@@ -40,8 +40,7 @@
     </div>
     <div class="intro-info">
         <div class="services-mini-div">
-            <h4>Telemedicine</h4> 
-            <h5>One on one sessions with a doctor through messaging or video call on the app</h5>
+            <h4>Telemedicine (messaging or video call sessions)</h4> 
             <img src="images/Chat.PNG" alt="messages page in chat">
         </div>
         <div class="services-mini-div">
