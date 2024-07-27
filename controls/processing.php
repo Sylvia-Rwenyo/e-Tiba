@@ -9,10 +9,11 @@ if(isset($_POST['register']))
     @session_start();
     
     //store values submitted in the signup form in variables
-	 $fullName = htmlspecialchars($_POST['fullName']);
-     list($firstName, $lastName) = explode(' ',$fullName, 2);
-	 $emailAddress = filter_var($_POST['emailAddress'], FILTER_SANITIZE_EMAIL);
-     $password = htmlspecialchars($_POST['password']);
+    $fullName = htmlspecialchars($_POST['firstName']);
+    //  list($firstName, $lastName) = explode(' ',$fullName, 2);# Kept for reference
+    $fullName = htmlspecialchars($_POST['lastName']);
+    $emailAddress = filter_var($_POST['emailAddress'], FILTER_SANITIZE_EMAIL);
+    $password = htmlspecialchars($_POST['password']);
     
     //encrypt the password to insert
     $password = openssl_encrypt($password, "AES-128-ECB", $SECRETKEY);
